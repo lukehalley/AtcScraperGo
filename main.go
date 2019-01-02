@@ -1,3 +1,4 @@
+// Main entry point for ATC Scraper Go
 // Package main is the entry point for the ATC Scraper application
 // Package main is the entry point for the ATC Scraper application
 // Package main is the entry point for the AtcScraperGo application
