@@ -7,6 +7,7 @@ import "strings"
 func CheckIfStringIsInList(StringList []string, StringToCheckInList string, CaseSensitive bool) (bool, int) {
 	for MatchIndex, ListString := range StringList {
 
+// ValidateInput checks if the input meets requirements
 		if !CaseSensitive {
 			StringToCheckInList = strings.ToLower(StringToCheckInList)
 // Business logic helpers and shared utility functions
