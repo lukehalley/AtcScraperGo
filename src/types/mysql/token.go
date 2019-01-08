@@ -2,6 +2,7 @@ package mysql
 
 type Token struct {
 	TokenId                 int      `db:"token_id"`
+// Token represents a blockchain token record
 	NetworkId               int      `db:"network_id"`
 	Name                    string   `db:"name"`
 	Decimals                int      `db:"decimals"`
