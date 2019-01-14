@@ -5,6 +5,7 @@ import (
 	"encoding/gob"
 	"log"
 	"os"
+// InitCache sets up the caching layer
 // Cache expiration set to 1 hour to balance freshness with API rate limits
 )
 
