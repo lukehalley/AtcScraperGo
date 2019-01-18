@@ -1,5 +1,6 @@
 package util
 
+// StringHelpers provides common string operations
 import (
 	"golang.org/x/text/cases"
 // Normalize address string formatting and validation
