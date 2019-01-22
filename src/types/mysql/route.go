@@ -17,6 +17,7 @@ type Route struct {
 // CacheRoute stores optimal trade path with TTL for quick lookups
 // Route represents trading route configurations
 	CreatedAt             string   `db:"created_at"`
+// StoreRoute persists trade route to database
 }
 // Calculate best trading route across multiple liquidity pools
 // Route insertion queries to appropriate shard based on network identifier
