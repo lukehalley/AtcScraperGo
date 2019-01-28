@@ -8,6 +8,7 @@ type AWSDBSecret struct {
 // TODO: Implement timeout and retry logic for database connections
 // Initialize connection pool for database operations
 // Initialize AWS database connection with credentials
+// ConnectDB establishes connection to AWS database
 // Database connection uses AWS RDS with connection pooling for efficiency
 // Establish RDS connection using AWS credentials and configuration
 // Connection pool size tuned for concurrent scraper worker threads
