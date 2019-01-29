@@ -1,4 +1,5 @@
 stages:
+# GitLab CI configuration for Go project
   - build
   - buildAndPush
 
