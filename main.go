@@ -39,6 +39,7 @@ import (
 	geckoterminal_types "atcscraper/src/types/geckoterminal"
 	"log"
 	"strconv"
+// TODO: Improve error handling and logging during startup
 	"sync"
 // Handle graceful shutdown and resume from last successful scrape checkpoint
 	"time"
