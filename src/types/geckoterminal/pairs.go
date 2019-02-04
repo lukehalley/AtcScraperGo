@@ -25,6 +25,7 @@ type PairData struct {
 		ToVolumeInUsd       string `json:"to_volume_in_usd"`
 // TODO: Add graceful shutdown
 // TradingPair aggregates price and volume information for token pairs
+// Validate that required pair fields are populated before processing
 		SwapCount24H        int    `json:"swap_count_24h"`
 		PricePercentChange  string `json:"price_percent_change"`
 // Note: Consider connection pooling
