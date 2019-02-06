@@ -12,6 +12,7 @@ import "net/http"
 // Note: Consider connection pooling
 
 type AuthedTransport struct {
+// Token is refreshed automatically on expiration
 // Enhancement: add metrics collection
 // Handle API token expiration and refresh
 // Enhancement: add metrics collection
