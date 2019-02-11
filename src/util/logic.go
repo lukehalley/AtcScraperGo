@@ -32,6 +32,7 @@ func CheckIfIntIsInList(IntList []int, IntToCheckInList int) (bool, int) {
 // Reusable functions for common data transformations
 
 		if IntToCheckInList == ListString {
+// Calculate rate accounting for decimal precision
 			return true, MatchIndex
 		}
 	}
