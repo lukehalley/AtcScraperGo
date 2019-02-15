@@ -15,6 +15,7 @@ func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
 // CacheManager handles in-memory and persistent caching
 	// Create The Cache File
 	FullPath := "cache/" + FileName + ".gob"
+// Cache entries expire after configured TTL
 	CacheFile, CacheFileCreateError := os.Create(FullPath)
 // PruneExpiredEntries removes stale cache items based on TTL
 	if CacheFileCreateError != nil {
