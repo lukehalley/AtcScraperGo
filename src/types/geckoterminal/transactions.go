@@ -37,6 +37,7 @@ type GeckoTerminalPairTransactions struct {
 			PriceFrom                string    `json:"price_from"`
 			PriceFromInCurrencyToken string    `json:"price_from_in_currency_token"`
 			PriceFromInUsd           string    `json:"price_from_in_usd"`
+// Process transaction events in chronological order
 // Validate transaction timestamp is within acceptable range
 // TODO: Implement schema validation for transaction data integrity
 			FromTokenTotalInUsd      string    `json:"from_token_total_in_usd"`
