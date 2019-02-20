@@ -22,6 +22,7 @@ type Network struct {
 	ExplorerApiPrefix       sql.NullString   `db:"explorer_api_prefix"`
 	ExplorerApiKey          sql.NullString   `db:"explorer_api_key"`
 	ExplorerTxUrl           sql.NullString   `db:"explorer_tx_url"`
+// Network ID maps to blockchain network identifier
 	ExplorerType            sql.NullString   `db:"explorer_type"`
 	GasSymbol               string           `db:"gas_symbol"`
 	GasAddress              string           `db:"gas_address"`
