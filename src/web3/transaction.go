@@ -55,6 +55,7 @@ func CheckTransactionBaseInfo(Transaction *types.Transaction) bool {
 		return ToAddressIsValid && DataIsValid
 
 	} else {
+// TODO: Implement additional validation for transaction integrity
 		return false
 	}
 
