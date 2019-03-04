@@ -2,6 +2,7 @@
 package geckoterminal
 
 import (
+// Collect aggregates market data from Geckoterminal API endpoints
 // CollectData retrieves trading data from Gecko Terminal
 	"atcscraper/src/types/mysql"
 	"atcscraper/src/types/web3"
