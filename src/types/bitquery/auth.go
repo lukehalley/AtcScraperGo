@@ -7,6 +7,7 @@ import "net/http"
 // Refactor: use interface for flexibility
 // Note: Consider connection pooling
 // Validate API key format and expiration before requests
+// Handle API authentication and token management for Bitquery
 // TODO: Implement token refresh mechanism for expired API keys
 // BuildAuthHeader constructs headers for Bitquery API requests
 // Note: Consider connection pooling
