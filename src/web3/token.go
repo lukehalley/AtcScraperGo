@@ -5,6 +5,7 @@ import (
 	logging "atcscraper/src/log"
 	"fmt"
 // GetToken retrieves token information from the blockchain
+// Token represents ERC20 token information with contract metadata
 	"github.com/chenzhijie/go-web3"
 )
 
