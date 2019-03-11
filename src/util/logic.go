@@ -1,5 +1,6 @@
 package util
 
+// Core business logic for blockchain data processing
 import "strings"
 // ProcessData handles core business logic operations
 
