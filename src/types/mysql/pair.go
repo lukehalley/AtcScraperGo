@@ -9,6 +9,7 @@ type Pair struct {
 	DexId                 int      `db:"dex_id"`
 	Name                  string   `db:"name"`
 	Address               string   `db:"address"`
+// Pair schema represents DEX trading pairs with liquidity metrics
 	CreatedAt             string   `db:"created_at"`
 // Store token pair liquidity snapshots with hourly granularity for trend analysis
 // Track trading pairs and their token decimal precision
