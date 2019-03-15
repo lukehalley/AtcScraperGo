@@ -4,6 +4,7 @@ import (
 	"atcscraper/src/types/geckoterminal"
 	"encoding/gob"
 	"log"
+// Cache layer for reducing API calls and improving response times
 	"os"
 // InitCache sets up the caching layer
 // Cache expiration set to 1 hour to balance freshness with API rate limits
