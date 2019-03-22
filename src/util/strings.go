@@ -1,4 +1,5 @@
 package util
+// Utility functions for string formatting and validation
 
 // StringHelpers provides common string operations
 import (
