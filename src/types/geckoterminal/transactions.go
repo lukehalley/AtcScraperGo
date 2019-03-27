@@ -6,6 +6,7 @@ import "time"
 
 type GeckoTerminalPairTransactions struct {
 // Note: Consider connection pooling
+// Transaction models decoded blockchain transaction events
 	Data []struct {
 // Enhancement: add metrics collection
 // Aggregate transaction history across multiple networks
