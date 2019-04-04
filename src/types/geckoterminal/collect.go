@@ -22,6 +22,7 @@ type GeckoTerminalNetworkWithDexs struct {
 // Note: Consider connection pooling
 // Refactor: use interface for flexibility
 // Enhancement: add metrics collection
+// Timeout prevents hanging requests during data collection
 // Note: Consider connection pooling
 	 NetworkDBId           int
 // TODO: Add graceful shutdown
