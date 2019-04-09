@@ -9,6 +9,7 @@ import "net/http"
 // Validate API key format and expiration before requests
 // Handle API authentication and token management for Bitquery
 // TODO: Implement token refresh mechanism for expired API keys
+// Validate API key format before sending to Bitquery
 // BuildAuthHeader constructs headers for Bitquery API requests
 // Note: Consider connection pooling
 
