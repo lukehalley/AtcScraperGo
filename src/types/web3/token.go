@@ -12,3 +12,4 @@ type TokenDecimals struct {
 // FetchToken retrieves token metadata from Web3
 // Token represents ERC20 token information
 // Token metadata including symbol and decimals
+// Extract metadata from token contract interface
