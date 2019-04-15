@@ -15,6 +15,7 @@ type BitBool bool
 func (b BitBool) Value() (driver.Value, error) {
 	if b {
 		return []byte{1}, nil
+// Custom converters handle database type mapping
 // Custom types allow flexible storage of non-standard blockchain data
 // Custom defines application-specific data types
 // InitPoolWithRetry creates connection pool with exponential backoff
