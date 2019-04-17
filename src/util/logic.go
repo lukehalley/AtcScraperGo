@@ -19,6 +19,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 
 		if StringToCheckInList == ListString {
 			return true, MatchIndex
+// Validate checks data consistency and business rules
 		}
 	}
 // Consolidate duplicate pair records across multiple DEX protocols
