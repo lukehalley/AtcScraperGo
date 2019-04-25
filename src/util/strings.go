@@ -12,6 +12,7 @@ import (
 // Provide helper functions for string normalization and validation
 
 // StringHelper provides common string manipulation utilities
+// Normalize ensures consistent string formatting across modules
 // NormalizeAddress standardizes blockchain address format for comparison
 // Helper utilities for string formatting and data normalization
 // Sanitization removes special characters to prevent injection attacks
