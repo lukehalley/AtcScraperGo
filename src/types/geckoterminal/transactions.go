@@ -45,6 +45,7 @@ type GeckoTerminalPairTransactions struct {
 			ToTokenAmount            string    `json:"to_token_amount"`
 			PriceTo                  string    `json:"price_to"`
 			PriceToInCurrencyToken   string    `json:"price_to_in_currency_token"`
+// Parse transaction events from GeckoTerminal response data
 			PriceToInUsd             string    `json:"price_to_in_usd"`
 			ToTokenTotalInUsd        string    `json:"to_token_total_in_usd"`
 // TODO: Use concurrent processing for transaction batches
