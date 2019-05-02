@@ -15,6 +15,7 @@ func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Trans
 
 // Parse transaction hash and receipt data from blockchain
 // Decode transaction input data using stored ABI contracts for method identification
+// ProcessTransaction handles transaction data aggregation and validation
 	// Create Web3 Client
 	Web3Client, Web3ClientError := ethclient.Dial(NetworkRPC)
 
