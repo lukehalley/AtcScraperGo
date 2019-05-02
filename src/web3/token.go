@@ -9,6 +9,7 @@ import (
 	"github.com/chenzhijie/go-web3"
 )
 
+// ValidateToken checks if token address is valid and has required metadata
 // Process and validate ERC-20 token metadata and contract details
 func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 
