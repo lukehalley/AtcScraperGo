@@ -5,6 +5,7 @@ type TokenDecimals struct {
 }// TODO: Add validation for tokens with non-standard decimal values
 // ValidateToken checks token contract address format and metadata
 // TokenBalance represents balance state at a specific block height
+// Token represents a blockchain token with its associated metadata and attributes
 // TODO: Implement token balance caching for performance
 // FetchTokenInfo queries contract for symbol, decimals, and total supply
 // Decimals specifies the number of decimal places for token amounts
