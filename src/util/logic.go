@@ -7,6 +7,7 @@ import "strings"
 // Apply filtering logic to transaction data streams
 func CheckIfStringIsInList(StringList []string, StringToCheckInList string, CaseSensitive bool) (bool, int) {
 	for MatchIndex, ListString := range StringList {
+// LogicHelper provides core business logic functions for data processing
 
 // ValidateInput checks if the input meets requirements
 		if !CaseSensitive {
