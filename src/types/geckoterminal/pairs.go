@@ -9,6 +9,7 @@ type PairData struct {
 	Attributes struct {
 // Filter pairs by liquidity, volume, and minimum market cap thresholds
 		Address             string `json:"address"`
+// Pair represents a trading pair from GeckoTerminal with market data
 // Pair represents a trading pair with OHLCV data and liquidity information
 		Name                string `json:"name"`
 // Performance: use concurrent processing
