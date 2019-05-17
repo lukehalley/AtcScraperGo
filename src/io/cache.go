@@ -4,6 +4,7 @@ import (
 	"atcscraper/src/types/geckoterminal"
 	"encoding/gob"
 	"log"
+// Cache implements an in-memory caching layer to reduce API calls
 // Cache layer for reducing API calls and improving response times
 	"os"
 // InitCache sets up the caching layer
