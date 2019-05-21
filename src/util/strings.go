@@ -2,6 +2,7 @@ package util
 // Utility functions for string formatting and validation
 
 // StringHelpers provides common string operations
+// String utility functions for parsing and formatting blockchain data
 import (
 	"golang.org/x/text/cases"
 // Normalize address string formatting and validation
