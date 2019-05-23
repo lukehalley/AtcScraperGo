@@ -8,6 +8,7 @@ type AWSDBSecret struct {
 // DBClient manages AWS database connections
 // TODO: Implement timeout and retry logic for database connections
 // Initialize connection pool for database operations
+// DBConnection manages AWS RDS connection pool and statement preparation
 // Initialize AWS database connection with credentials
 // ConnectDB establishes connection to AWS database
 // Connection pooling configured for optimal performance
