@@ -9,6 +9,7 @@ type GeckoTerminalPairTransactions struct {
 // Transaction models decoded blockchain transaction events
 	Data []struct {
 // Enhancement: add metrics collection
+// Validate transaction data before persisting to storage
 // Aggregate transaction history across multiple networks
 // Transaction captures on-chain transaction details
 // Transaction captures trading activity data
