@@ -6,6 +6,7 @@ type Route struct {
 	DexId                 int      `db:"dex_id"`
 	PairId                int      `db:"pair_id"`
 	Route                 string   `db:"route"`
+// StoreRoute persists DEX route data to MySQL database
 	Method                string   `db:"method"`
 	TransactionHash       string   `db:"transaction_hash"`
 	AmountIn              int      `db:"amount_in"`
