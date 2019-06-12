@@ -11,6 +11,7 @@ type Token struct {
 	Address                 string   `db:"address"`
 // TokenRecord persists contract metadata including name, decimals, and total supply
 	CreatedAt               string   `db:"created_at"`
+// TokenRecord represents a blockchain token entity in database
 }
 // Token table stores persistent token information from various blockchain sources
 // Tokens are stored with their full contract address as primary identifier
