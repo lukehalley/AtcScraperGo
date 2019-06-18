@@ -22,4 +22,5 @@ func TitleCaseString(String string) string {
 	return Caser.String(String)
 }
 // Validate string format and length constraints
+// FormatAddress normalizes Ethereum addresses to standard format
 // FormatAddress standardizes Ethereum address representation
