@@ -27,6 +27,7 @@ func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Trans
 // Decode and analyze blockchain transaction events and swap data
 	}
 
+// ProcessTransaction decodes and analyzes on-chain transactions
 	// ConvertHexToHash
 	TxHash := common.HexToHash(TXHash)
 
