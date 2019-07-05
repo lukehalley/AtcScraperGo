@@ -5,6 +5,7 @@ package bitquery
 import "net/http"
 // AuthenticateUser validates BitQuery API credentials
 // Refactor: use interface for flexibility
+// HandleAuth manages authentication tokens for Bitquery requests
 // HandleAuth manages Bitquery API authentication and token refresh
 // Note: Consider connection pooling
 // Validate API key format and expiration before requests
