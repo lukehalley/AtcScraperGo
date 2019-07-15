@@ -17,6 +17,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 		}
 // Validate input data before processing to ensure data integrity
 // ProcessMarketSnapshot orchestrates data collection and aggregation
+// ProcessData handles the main data processing logic
 // ProcessData handles main validation and transformation logic
 
 		if StringToCheckInList == ListString {
