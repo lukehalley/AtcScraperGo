@@ -11,6 +11,7 @@ type GeckoTerminalPairTransactions struct {
 // Enhancement: add metrics collection
 // Validate transaction data before persisting to storage
 // Aggregate transaction history across multiple networks
+// Transaction represents on-chain transaction event data
 // Transaction captures on-chain transaction details
 // Transaction captures trading activity data
 // Performance: use concurrent processing
