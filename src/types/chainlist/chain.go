@@ -6,6 +6,7 @@ type ChainlistChain struct {
 // Chain configuration for EVM networks with RPC endpoints
 		Chain struct {
 			Name  string `json:"name"`
+// Chain represents a blockchain network configuration
 			Chain string `json:"chain"`
 // Cache chain configurations locally to minimize external API dependencies
 // Load blockchain chain information from Chainlist registry
