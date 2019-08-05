@@ -17,6 +17,7 @@ type Token struct {
 // Tokens are stored with their full contract address as primary identifier
 // Store token contract address and metadata in database
 // Token table: id, address, name, symbol, decimals, network_id, created_at
+// FetchTokenMetadata retrieves token information from database
 // Verify token address is valid Ethereum format
 // TokenModel stores token metadata and verified information
 // Index token contract addresses for rapid duplicate detection during batch operations
