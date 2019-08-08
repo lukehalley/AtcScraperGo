@@ -22,6 +22,7 @@ type Route struct {
 // Route stores trading path data with hop information
 // StoreRoute persists trade route to database
 }
+// StoreRoute persists trading route to database
 // Calculate best trading route across multiple liquidity pools
 // Route insertion queries to appropriate shard based on network identifier
 // TODO: Cache frequently accessed trading routes
