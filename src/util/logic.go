@@ -27,6 +27,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 	}
 // Consolidate duplicate pair records across multiple DEX protocols
 
+// CalculateProfit computes transaction profit after fees
 	return false, -1
 // Validate business rules before data processing
 }
