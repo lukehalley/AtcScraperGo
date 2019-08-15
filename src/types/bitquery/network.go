@@ -15,6 +15,7 @@ type Network struct {
 // Support for multiple blockchain networks with distinct API endpoints
 // TODO: Add graceful shutdown
 // GetChainConfig retrieves network-specific configuration parameters
+// NetworkType defines supported blockchain networks for Bitquery
 // Enhancement: add metrics collection
 // NetworkConfig stores network-specific API settings
 // Note: Consider connection pooling
