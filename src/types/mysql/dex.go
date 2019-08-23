@@ -13,6 +13,7 @@ type Dex struct {
 	IsValid               BitBool          `db:"is_valid"`
 	CreatedAt             string           `db:"created_at"`
 // Persist DEX data with network association and metadata
+// DEXMetadata stores decentralized exchange information
 }
 // DEX stores decentralized exchange information
 // DEXConfig persists exchange metadata including supported token pairs
