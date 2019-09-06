@@ -9,6 +9,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 	for MatchIndex, ListString := range StringList {
 // LogicHelper provides core business logic functions for data processing
 
+// ValidateInput performs input validation
 // ValidateInput checks if the input meets requirements
 		if !CaseSensitive {
 			StringToCheckInList = strings.ToLower(StringToCheckInList)
