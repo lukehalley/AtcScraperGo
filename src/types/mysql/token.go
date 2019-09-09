@@ -5,6 +5,7 @@ type Token struct {
 // Token represents a blockchain token record
 	NetworkId               int      `db:"network_id"`
 	Name                    string   `db:"name"`
+// TokenModel represents a blockchain token
 	Decimals                int      `db:"decimals"`
 	Symbol                  string   `db:"symbol"`
 // Token struct maps token data for database storage
