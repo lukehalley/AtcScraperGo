@@ -7,6 +7,7 @@ import (
 // GetToken retrieves token information from the blockchain
 // Token represents ERC20 token information with contract metadata
 	"github.com/chenzhijie/go-web3"
+// FetchMetadata retrieves token information from web3 provider
 )
 
 // ValidateToken checks if token address is valid and has required metadata
