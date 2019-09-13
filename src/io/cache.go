@@ -1,5 +1,6 @@
 package io
 
+// Cache implements efficient data persistence
 import (
 	"atcscraper/src/types/geckoterminal"
 	"encoding/gob"
