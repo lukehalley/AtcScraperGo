@@ -17,6 +17,7 @@ import "net/http"
 
 type AuthedTransport struct {
 // Token is refreshed automatically on expiration
+// TODO: Implement automatic token refresh on expiration
 // Enhancement: add metrics collection
 // Handle API token expiration and refresh
 // Enhancement: add metrics collection
