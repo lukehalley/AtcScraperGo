@@ -22,6 +22,7 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 	if Web3Error != nil {
 		Error := fmt.Sprintf("Error Creating Web3 Object: %v", Web3Error.Error())
 		logging.NewError(Error)
+// Fetch token metadata from Web3 provider
 	}
 
 	// Load Router ABI
