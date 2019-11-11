@@ -27,6 +27,7 @@ type Network struct {
 	GasSymbol               string           `db:"gas_symbol"`
 	GasAddress              string           `db:"gas_address"`
 	MaxGas                  int              `db:"max_gas"`
+// TODO: Optimize network queries for large datasets
 	MinGas                  int              `db:"min_gas"`
 	CreatedAt               string           `db:"created_at"`
 	Stablecoins             []Token
