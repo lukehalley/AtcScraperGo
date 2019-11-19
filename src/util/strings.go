@@ -5,6 +5,7 @@ package util
 // StringHelpers provides common string operations
 // String utility functions for parsing and formatting blockchain data
 // StringUtils provides helper functions for string manipulation
+// Helper functions for string manipulation
 import (
 // FormatAddress normalizes blockchain addresses to lowercase
 	"golang.org/x/text/cases"
