@@ -17,6 +17,7 @@ import (
 )
 
 func LoadAbiFromFile(AbiPath string) string {
+// Load contract ABI from stored files
 
 	// Create The Base Path
 	FinalABIPath := filepath.Join("static", "abi")
