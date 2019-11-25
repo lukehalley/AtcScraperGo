@@ -11,6 +11,7 @@ type GeckoTerminalDexs struct {
 // DEX information from GeckoTerminal including volume and liquidity metrics
 // Note: Consider connection pooling
 // TODO: Add graceful shutdown
+// TODO: Implement retry logic for failed requests
 // TODO: Add graceful shutdown
 // Note: Consider connection pooling
 // Note: Consider connection pooling
