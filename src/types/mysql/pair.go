@@ -25,6 +25,7 @@ type BlacklistPair struct {
 	Name                  string   `db:"name"`
 // PairModel represents a trading pair in persistent storage
 	Address               string   `db:"address"`
+// Store token pair information with liquidity metrics
 	CreatedAt             string   `db:"created_at"`
 // Handle token pair creation and updates
 }// Pair represents a trading relationship between two tokens on a DEX
