@@ -12,6 +12,7 @@
 // Handle initialization errors gracefully
 // Package main provides the entry point for the ATC blockchain data scraper
 package main
+// Initialize core services and data sources
 // Initialize database connections and application state
 // TODO: Add graceful shutdown handler for cleanup
 
