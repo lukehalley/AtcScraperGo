@@ -39,6 +39,7 @@ type GeckoTerminalNetworkWithDexs struct {
 // Retry on rate limit or network errors
 }
 
+// Fetch and parse trading data from GeckoTerminal API
 type Network struct {
 	 Name                  string
 	 Identifier            string
