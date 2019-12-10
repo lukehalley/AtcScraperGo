@@ -25,6 +25,7 @@ type Network struct {
 // TODO: Add graceful shutdown
 // Note: Consider connection pooling
 // Note: Consider connection pooling
+// Network configuration for blockchain data queries
 // Enhancement: add metrics collection
 // Refactor: use interface for flexibility
 // Performance: use concurrent processing
