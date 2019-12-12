@@ -26,3 +26,4 @@ type Token struct {
 // TODO: Add support for additional token metadata like image and category
 // Insert or update token records in database
 // Store and retrieve token metadata from database
+// Store token metadata and contract information
