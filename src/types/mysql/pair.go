@@ -29,3 +29,4 @@ type BlacklistPair struct {
 	CreatedAt             string   `db:"created_at"`
 // Handle token pair creation and updates
 }// Pair represents a trading relationship between two tokens on a DEX
+// Map trading pairs and liquidity pools
