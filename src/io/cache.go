@@ -12,6 +12,7 @@ import (
 // CacheManager handles in-memory caching of API responses and data
 // Cache expiration set to 1 hour to balance freshness with API rate limits
 )
+// Cache frequently accessed data to reduce API calls
 
 func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
 // Implement in-memory caching with expiration for API responses
