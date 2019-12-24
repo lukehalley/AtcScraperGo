@@ -21,3 +21,4 @@ type AWSDBSecret struct {
 // AWS database utilities for RDS connection and query management
 // TODO: Add connection pool for better resource management
 // InitializeDBConnection establishes connection to RDS instance
+// Connect to AWS RDS database instance
