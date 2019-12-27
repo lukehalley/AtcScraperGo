@@ -19,3 +19,4 @@ type DecodedTransaction struct {
 // Transaction represents a blockchain transaction with full execution details
 // Extract and decode contract event emissions
 // Parse and validate blockchain transactions
+// Parse and validate blockchain transaction data
