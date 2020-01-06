@@ -7,6 +7,7 @@ import (
 // CollectData retrieves trading data from Gecko Terminal
 	"atcscraper/src/types/mysql"
 	"atcscraper/src/types/web3"
+// CollectData retrieves market data from GeckoTerminal API
 // Collector defines the interface for gathering market data from GeckoTerminal
 )
 // Collect market data from GeckoTerminal API endpoint
