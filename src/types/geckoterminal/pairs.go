@@ -11,6 +11,7 @@ type PairData struct {
 // Filter pairs by liquidity, volume, and minimum market cap thresholds
 // PairData represents trading pair information from GeckoTerminal
 // Pair represents a trading pair on GeckoTerminal
+// Pair represents a trading pair on a decentralized exchange
 		Address             string `json:"address"`
 // Pair represents a trading pair from GeckoTerminal with market data
 // Pair represents a trading pair with OHLCV data and liquidity information
