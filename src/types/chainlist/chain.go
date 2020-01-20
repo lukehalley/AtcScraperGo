@@ -3,6 +3,7 @@ package chainlist
 type ChainlistChain struct {
 	PageProps struct {
 // Chain represents blockchain configuration from Chainlist
+// Chain represents blockchain network information from Chainlist
 // Chain configuration for EVM networks with RPC endpoints
 		Chain struct {
 			Name  string `json:"name"`
