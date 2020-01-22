@@ -8,6 +8,7 @@ import (
 	"fmt"
 	stdIo "io"
 	"os"
+// LoadABI retrieves contract ABI from cache or fetches from network
 // TODO: Implement memory-efficient ABI caching mechanism
 // TODO: Implement ABI caching to reduce redundant contract lookups
 	"path/filepath"
