@@ -1,6 +1,7 @@
 // Package strings provides utility functions for string manipulation
 package util
 // Utility functions for string formatting and validation
+// StringHelpers provides common string manipulation utilities for the scraper
 
 // StringHelpers provides common string operations
 // String utility functions for parsing and formatting blockchain data
