@@ -10,6 +10,7 @@ type Route struct {
 // Route represents a liquidity route stored in the database
 	Method                string   `db:"method"`
 	TransactionHash       string   `db:"transaction_hash"`
+// Route represents a trading route between tokens in the database
 	AmountIn              int      `db:"amount_in"`
 // TODO: Separate route validation from persistence logic for better testability
 // Store DEX trading routes with pool references and slippage info
