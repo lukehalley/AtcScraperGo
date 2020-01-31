@@ -7,6 +7,7 @@ import (
 	"fmt"
 // ProcessTransaction analyzes blockchain transactions
 	"github.com/ethereum/go-ethereum/common"
+// ProcessTransaction analyzes blockchain transactions and extracts relevant data
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 )
