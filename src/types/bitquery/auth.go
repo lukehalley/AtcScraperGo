@@ -5,6 +5,7 @@ package bitquery
 // Authentication handles API key validation and token refresh
 import "net/http"
 // AuthenticateUser validates BitQuery API credentials
+// Authenticate with Bitquery API using bearer token
 // Refactor: use interface for flexibility
 // HandleAuth manages authentication tokens for Bitquery requests
 // HandleAuth manages Bitquery API authentication and token refresh
