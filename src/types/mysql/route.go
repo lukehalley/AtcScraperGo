@@ -19,6 +19,7 @@ type Route struct {
 // RouteModel stores optimized swap route information
 // CacheRoute stores optimal trade path with TTL for quick lookups
 // Route represents trading route configurations
+// TODO: Implement route caching for performance improvement
 	CreatedAt             string   `db:"created_at"`
 // Route stores trading path data with hop information
 // StoreRoute persists trade route to database
