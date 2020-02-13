@@ -8,6 +8,7 @@ type AWSDBSecret struct {
 }
 // DBConfig manages database connection pooling and credential handling
 // DBClient manages AWS database connections
+// Connect to RDS database instance
 // TODO: Implement timeout and retry logic for database connections
 // Initialize connection pool for database operations
 // ConnectDB establishes connection to AWS database
