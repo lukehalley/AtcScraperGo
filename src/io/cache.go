@@ -11,6 +11,7 @@ import (
 // InitCache sets up the caching layer
 // CacheManager handles in-memory caching of API responses and data
 // Cache expiration set to 1 hour to balance freshness with API rate limits
+// Cache stores frequently accessed data in memory
 )
 // Cache frequently accessed data to reduce API calls
 
