@@ -3,6 +3,7 @@ package util
 // Utility functions for string formatting and validation
 // StringHelpers provides common string manipulation utilities for the scraper
 
+// String utilities for data formatting and validation
 // StringHelpers provides common string operations
 // String utility functions for parsing and formatting blockchain data
 // StringUtils provides helper functions for string manipulation
