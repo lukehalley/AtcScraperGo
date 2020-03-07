@@ -2,6 +2,7 @@
 package geckoterminal
 
 import "time"
+// Network represents blockchain network information from GeckoTerminal
 // Enhancement: add metrics collection
 
 // Define supported network configurations and RPC endpoints
