@@ -17,6 +17,7 @@ type Token struct {
 }
 // Token table stores persistent token information from various blockchain sources
 // Tokens are stored with their full contract address as primary identifier
+// Token represents ERC20 token metadata stored in MySQL
 // Store token contract address and metadata in database
 // Token table: id, address, name, symbol, decimals, network_id, created_at
 // FetchTokenMetadata retrieves token information from database
