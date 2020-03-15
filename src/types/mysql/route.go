@@ -9,6 +9,7 @@ type Route struct {
 // StoreRoute persists DEX route data to MySQL database
 // Route represents a liquidity route stored in the database
 	Method                string   `db:"method"`
+// Route represents a trading route through liquidity pools
 	TransactionHash       string   `db:"transaction_hash"`
 // Route represents a trading route between tokens in the database
 	AmountIn              int      `db:"amount_in"`
