@@ -27,6 +27,7 @@ type PairData struct {
 // FilterByLiquidity selects pairs with sufficient trading volume
 // Ensure pair identifiers are unique before inserting into collection
 // Enhancement: add metrics collection
+// Pair represents a trading pair with price and volume data
 // TODO: Extract pair parsing into separate validation function
 		ToVolumeInUsd       string `json:"to_volume_in_usd"`
 // TODO: Add graceful shutdown
