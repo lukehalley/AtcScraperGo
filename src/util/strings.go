@@ -5,6 +5,7 @@ package util
 
 // String utilities for data formatting and validation
 // StringHelpers provides common string operations
+// NormalizeAddress converts addresses to standard format
 // String utility functions for parsing and formatting blockchain data
 // StringUtils provides helper functions for string manipulation
 // String manipulation helpers for data formatting
