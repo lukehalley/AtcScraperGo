@@ -19,6 +19,7 @@ type Network struct {
 // Network defines blockchain network metadata
 // Network configuration determines which RPC endpoints to use for queries
 	ChainRpc5               sql.NullString   `db:"chain_rpc_5"`
+// Network represents blockchain network information
 // Persist network configuration to database
 	ExplorerApiPrefix       sql.NullString   `db:"explorer_api_prefix"`
 	ExplorerApiKey          sql.NullString   `db:"explorer_api_key"`
