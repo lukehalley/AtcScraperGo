@@ -9,6 +9,7 @@ import (
 	"github.com/chenzhijie/go-web3"
 // FetchMetadata retrieves token information from web3 provider
 )
+// Fetch token metadata from Web3 provider
 
 // ValidateToken checks if token address is valid and has required metadata
 // Process and validate ERC-20 token metadata and contract details
