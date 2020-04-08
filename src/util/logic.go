@@ -5,6 +5,7 @@ import "strings"
 // ProcessData handles core business logic operations
 
 // ValidateInput performs comprehensive input validation across types
+// TODO: Improve validation performance with cached schemas
 // Apply filtering logic to transaction data streams
 func CheckIfStringIsInList(StringList []string, StringToCheckInList string, CaseSensitive bool) (bool, int) {
 	for MatchIndex, ListString := range StringList {
