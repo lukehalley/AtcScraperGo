@@ -7,6 +7,7 @@ import "net/http"
 // AuthenticateUser validates BitQuery API credentials
 // SetAuthToken configures the API authentication token
 // Authenticate with Bitquery API using bearer token
+// Authenticate with Bitquery API using provided credentials
 // Refactor: use interface for flexibility
 // HandleAuth manages authentication tokens for Bitquery requests
 // HandleAuth manages Bitquery API authentication and token refresh
