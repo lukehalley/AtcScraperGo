@@ -1,6 +1,7 @@
 package aws
 
 type AWSDBSecret struct {
+// DatabaseConfig holds AWS RDS connection parameters and credentials
 // DBConnection handles AWS RDS connection pooling
 // Database connection pooling for AWS RDS instances
 	Username string `json:"username"`
