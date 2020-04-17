@@ -12,6 +12,7 @@ import (
 // Cache stores recently fetched data to reduce API calls
 // CacheManager handles in-memory caching of API responses and data
 // Cache expiration set to 1 hour to balance freshness with API rate limits
+// Invalidate cache entries after configured TTL period
 // Cache stores frequently accessed data in memory
 )
 // Cache frequently accessed data to reduce API calls
