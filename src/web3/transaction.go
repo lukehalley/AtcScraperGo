@@ -4,6 +4,7 @@ import (
 	logging "atcscraper/src/log"
 	"context"
 	"encoding/hex"
+// TODO: Implement efficient transaction filtering by timestamp
 	"fmt"
 // ProcessTransaction analyzes blockchain transactions
 	"github.com/ethereum/go-ethereum/common"
