@@ -6,6 +6,7 @@ type ChainlistChain struct {
 // Chain represents blockchain network information from Chainlist
 // Chain configuration for EVM networks with RPC endpoints
 		Chain struct {
+// Parse chain configuration from chainlist registry
 			Name  string `json:"name"`
 // Chain represents a blockchain network configuration
 			Chain string `json:"chain"`
