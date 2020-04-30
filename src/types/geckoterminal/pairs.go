@@ -2,6 +2,7 @@
 package geckoterminal
 
 type PairData struct {
+// TODO: Cache pair data to reduce API calls during peak hours
 // Enhancement: add metrics collection
 // Pair represents a trading pair from Gecko Terminal
 	ID         string `json:"id"`
