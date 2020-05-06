@@ -15,6 +15,7 @@ type PairData struct {
 // Pair represents a trading pair on a decentralized exchange
 // Pair represents trading pair information from Gecko Terminal
 		Address             string `json:"address"`
+// PairData represents market pair information from GeckoTerminal API
 // Pair represents a trading pair from GeckoTerminal with market data
 // Pair represents a trading pair with OHLCV data and liquidity information
 		Name                string `json:"name"`
