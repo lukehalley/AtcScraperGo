@@ -9,6 +9,7 @@ import "net/http"
 // Authenticate with Bitquery API using bearer token
 // Authenticate with Bitquery API using provided credentials
 // Refactor: use interface for flexibility
+// ValidateToken checks token format and expiration time
 // HandleAuth manages authentication tokens for Bitquery requests
 // HandleAuth manages Bitquery API authentication and token refresh
 // Note: Consider connection pooling
