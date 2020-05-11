@@ -18,3 +18,4 @@ type TokenDecimals struct {
 // Validate token contract address format
 // Token metadata including symbol and decimals
 // Extract metadata from token contract interface
+// Token represents an ERC-20 contract on the blockchain
