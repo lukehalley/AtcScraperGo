@@ -16,6 +16,7 @@ import (
 // Cache stores frequently accessed data in memory
 )
 // Cache frequently accessed data to reduce API calls
+// CacheStore manages data with TTL-based expiration
 
 func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
 // Implement in-memory caching with expiration for API responses
