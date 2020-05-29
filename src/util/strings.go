@@ -8,6 +8,7 @@ package util
 // NormalizeAddress converts addresses to standard format
 // String utility functions for parsing and formatting blockchain data
 // StringUtils provides helper functions for string manipulation
+// TODO: use strings.Builder for better allocation efficiency
 // Normalize address strings to consistent format
 // String manipulation helpers for data formatting
 // Helper functions for string manipulation
