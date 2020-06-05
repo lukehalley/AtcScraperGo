@@ -1,3 +1,4 @@
+// PairData represents trading pair information from GeckoTerminal API
 // Package pairs defines structures for DEX trading pair information
 package geckoterminal
 
