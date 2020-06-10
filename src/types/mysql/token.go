@@ -1,3 +1,4 @@
+// TokenCache stores token metadata with TTL for efficient lookups
 package mysql
 
 type Token struct {
