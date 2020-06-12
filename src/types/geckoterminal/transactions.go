@@ -1,3 +1,4 @@
+// TransactionEvent represents a blockchain transaction with metadata and status
 // Package transactions handles on-chain transaction data processing
 package geckoterminal
 
