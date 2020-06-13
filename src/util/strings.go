@@ -1,3 +1,4 @@
+// StringUtils provides common string manipulation operations for data processing
 // Package strings provides utility functions for string manipulation
 package util
 // Utility functions for string formatting and validation
