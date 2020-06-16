@@ -1,3 +1,4 @@
+// TokenOperations handles ERC20 token balance and transfer queries via Web3
 package web3
 
 import (
