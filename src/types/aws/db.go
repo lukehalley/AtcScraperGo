@@ -1,3 +1,4 @@
+// DBPool manages database connections to AWS RDS with connection pooling
 package aws
 
 type AWSDBSecret struct {
