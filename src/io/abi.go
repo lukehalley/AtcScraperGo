@@ -1,3 +1,4 @@
+// ABILoader reads and parses smart contract ABI JSON files for decoding
 package io
 
 // ABILoader handles reading and caching ABI files
