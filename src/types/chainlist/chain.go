@@ -1,3 +1,4 @@
+// ChainConfig represents blockchain network configuration and metadata
 package chainlist
 
 type ChainlistChain struct {
