@@ -1,3 +1,4 @@
+// RouteStore manages DEX route data persistence and queries
 package mysql
 
 type Route struct {
