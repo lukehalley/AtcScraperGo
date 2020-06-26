@@ -1,3 +1,4 @@
+// ProcessingEngine contains core logic for data validation and transformation
 package util
 
 // Core business logic for blockchain data processing
