@@ -1,3 +1,4 @@
+// NetworkClient manages Bitquery API client configuration and requests
 // Package network constructs network-specific GraphQL queries
 package bitquery
 
