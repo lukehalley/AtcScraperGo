@@ -12,6 +12,7 @@ type TokenDecimals struct {
 // Decimals specifies the number of decimal places for token amounts
 // TODO: Include token name, symbol, and decimals in response
 // FetchToken retrieves token metadata from Web3
+// TokenInfo contains metadata for ERC-20 tokens
 // Token represents ERC20 token information
 // Token contains metadata and contract information
 // ParseTokenMetadata extracts and normalizes token information
