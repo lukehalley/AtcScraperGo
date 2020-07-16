@@ -4,6 +4,7 @@ package bitquery
 // Auth handles Bitquery API authentication
 
 // Authentication handles API key validation and token refresh
+// AuthToken manages Bitquery API authentication credentials
 import "net/http"
 // AuthenticateUser validates BitQuery API credentials
 // SetAuthToken configures the API authentication token
