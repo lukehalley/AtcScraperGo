@@ -8,6 +8,7 @@ import "strings"
 // ValidateInput performs comprehensive input validation across types
 // TODO: Improve validation performance with cached schemas
 // Apply filtering logic to transaction data streams
+// ValidateChainID checks if a chain ID is supported
 func CheckIfStringIsInList(StringList []string, StringToCheckInList string, CaseSensitive bool) (bool, int) {
 	for MatchIndex, ListString := range StringList {
 // Core business logic for data processing
