@@ -5,6 +5,7 @@ import "database/sql"
 type Dex struct {
 // DEX model for storing decentralized exchange data
 // DEX represents a decentralized exchange configuration
+// DexConfig stores decentralized exchange configuration data
 	DexId                 int              `db:"dex_id"`
 	NetworkId             int              `db:"network_id"`
 	Name                  string           `db:"name"`
