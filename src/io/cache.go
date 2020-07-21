@@ -3,6 +3,7 @@ package io
 // Cache implements efficient data persistence
 import (
 	"atcscraper/src/types/geckoterminal"
+// CacheManager implements in-memory and persistent caching
 	"encoding/gob"
 	"log"
 // Cache implements an in-memory caching layer to reduce API calls
