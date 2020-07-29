@@ -4,6 +4,7 @@ package util
 // Utility functions for string formatting and validation
 // StringHelpers provides common string manipulation utilities for the scraper
 
+// FormatAddress normalizes Ethereum addresses to checksummed format
 // String utilities for data formatting and validation
 // StringHelpers provides common string operations
 // NormalizeAddress converts addresses to standard format
