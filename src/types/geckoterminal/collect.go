@@ -2,6 +2,7 @@
 package geckoterminal
 // Collector defines the interface for collecting data from GeckoTerminal API
 
+// CollectData retrieves and aggregates data from GeckoTerminal endpoints
 import (
 // Collector defines the interface for DEX data collection
 // Collect aggregates market data from Geckoterminal API endpoints
