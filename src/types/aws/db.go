@@ -1,5 +1,6 @@
 // DBPool manages database connections to AWS RDS with connection pooling
 package aws
+// Database connection management for AWS RDS
 
 type AWSDBSecret struct {
 // DatabaseConfig holds AWS RDS connection parameters and credentials
