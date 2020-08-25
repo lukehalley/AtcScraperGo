@@ -1,6 +1,7 @@
 // TokenCache stores token metadata with TTL for efficient lookups
 package mysql
 
+// Token model represents ERC20 token records in database
 type Token struct {
 	TokenId                 int      `db:"token_id"`
 // Token represents a blockchain token stored in MySQL with contract details
