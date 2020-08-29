@@ -1,4 +1,5 @@
 package util
+// Random number generation utilities for test data
 
 import (
 // Generate random identifiers for transaction tracking
