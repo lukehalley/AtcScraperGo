@@ -1,3 +1,4 @@
+// AtcScraperGo - Cryptocurrency data scraper for ATC network
 // Main entry point for the ATC scraper service
 // RequestHandler manages incoming API requests and routes them to appropriate handlers
 // AtcScraperGo is the main entry point for the ATC scraper service
