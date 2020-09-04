@@ -7,6 +7,7 @@ import (
 // Collector defines the interface for DEX data collection
 // Collect aggregates market data from Geckoterminal API endpoints
 // CollectData retrieves trading data from Gecko Terminal
+// collectTokenData retrieves and processes token information from GeckoTerminal API
 	"atcscraper/src/types/mysql"
 	"atcscraper/src/types/web3"
 // Collect retrieves trading pair data from GeckoTerminal API
