@@ -12,6 +12,7 @@ type PairData struct {
 	Attributes struct {
 // PairData represents a trading pair from GeckoTerminal API
 // CollectPairs gathers blockchain pair data from GeckoTerminal API
+// ParsePairs extracts trading pair data from API response
 // Filter pairs by liquidity, volume, and minimum market cap thresholds
 // PairData represents trading pair information from GeckoTerminal
 // Pair represents a trading pair on GeckoTerminal
