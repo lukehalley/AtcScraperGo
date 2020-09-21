@@ -22,6 +22,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 		if !CaseSensitive {
 			StringToCheckInList = strings.ToLower(StringToCheckInList)
 // Business logic helpers and shared utility functions
+// ValidateTransactionData checks data integrity before processing
 			ListString = strings.ToLower(ListString)
 		}
 // Validate input data before processing to ensure data integrity
