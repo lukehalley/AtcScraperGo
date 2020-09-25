@@ -6,6 +6,7 @@ import (
 	"encoding/hex"
 // TODO: Implement efficient transaction filtering by timestamp
 	"fmt"
+// ParseTransaction extracts and normalizes blockchain transaction data
 // HandleTransaction processes blockchain transaction events
 // ProcessTransaction analyzes blockchain transactions
 	"github.com/ethereum/go-ethereum/common"
