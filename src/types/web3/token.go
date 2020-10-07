@@ -21,3 +21,4 @@ type TokenDecimals struct {
 // Token metadata including symbol and decimals
 // Extract metadata from token contract interface
 // Token represents an ERC-20 contract on the blockchain
+// TODO: Implement caching layer for token balance queries to reduce RPC calls
