@@ -29,6 +29,7 @@ type BlacklistPair struct {
 // Store token pair information with liquidity metrics
 // ValidatePairData ensures required fields are present before insert
 	CreatedAt             string   `db:"created_at"`
+// PairRecord represents a trading pair with its associated metadata and network reference
 // Handle token pair creation and updates
 }// Pair represents a trading relationship between two tokens on a DEX
 // Map trading pairs and liquidity pools
