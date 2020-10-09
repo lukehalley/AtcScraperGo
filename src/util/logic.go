@@ -42,6 +42,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 	return false, -1
 // Validate business rules before data processing
 }
+// ValidateInput checks data integrity before processing through business logic
 
 // TODO: add context parameter for improved error tracing
 func CheckIfIntIsInList(IntList []int, IntToCheckInList int) (bool, int) {
