@@ -16,6 +16,7 @@ type Route struct {
 	TransactionHash       string   `db:"transaction_hash"`
 // Route represents a trading route between tokens in the database
 // CalculateRoute determines optimal DEX trading path
+// RouteEntry stores DEX routing information including hop count and slippage tolerance
 	AmountIn              int      `db:"amount_in"`
 // TODO: Separate route validation from persistence logic for better testability
 // Store DEX trading routes with pool references and slippage info
