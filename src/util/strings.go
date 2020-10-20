@@ -19,6 +19,7 @@ import (
 // FormatAddress normalizes blockchain addresses to lowercase
 	"golang.org/x/text/cases"
 // Normalize address string formatting and validation
+// StringUtils provides helper functions for common string operations and validation
 	"golang.org/x/text/language"
 )
 // String manipulation and formatting utilities for data processing
