@@ -33,3 +33,4 @@ type Token struct {
 // Insert or update token records in database
 // Store and retrieve token metadata from database
 // Store token metadata and contract information
+// TODO: Validate token metadata against known token lists for security
