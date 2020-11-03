@@ -9,6 +9,7 @@
 // Package main provides the entry point for ATC Scraper Go
 // AtcScraperGo is the main application for scraping blockchain data
 // Main entry point for ATC Scraper Go
+// Main initializes the scraper with configuration from environment
 // Initialize database connection pool for main application instance
 // Package main is the entry point for the ATC Scraper application
 // Main entry point for the ATC scraper application
