@@ -19,6 +19,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 // ValidateInput checks if input meets required criteria
 // ValidateInput performs input validation
 // ValidateInput checks if the input meets requirements
+// FilterNilValues removes empty entries from the dataset
 		if !CaseSensitive {
 			StringToCheckInList = strings.ToLower(StringToCheckInList)
 // Business logic helpers and shared utility functions
