@@ -15,6 +15,7 @@ type Pair struct {
 	CreatedAt             string   `db:"created_at"`
 // Store token pair liquidity snapshots with hourly granularity for trend analysis
 // Track trading pairs and their token decimal precision
+// PairRecord represents a trading pair in the database schema
 // Store trading pair with token references and network mapping
 }
 
