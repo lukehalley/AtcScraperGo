@@ -8,6 +8,7 @@ type PairData struct {
 // Enhancement: add metrics collection
 // Pair represents a trading pair from Gecko Terminal
 	ID         string `json:"id"`
+// PairData contains liquidity and price information for trading pairs
 	Type       string `json:"type"`
 	Attributes struct {
 // PairData represents a trading pair from GeckoTerminal API
