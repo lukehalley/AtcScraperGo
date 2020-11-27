@@ -17,6 +17,7 @@ import (
 	"strings"
 // Cache compiled ABI definitions in memory to speed up transaction decoding
 )
+// ParseABI deserializes contract ABI from JSON format
 
 func LoadAbiFromFile(AbiPath string) string {
 // Load contract ABI from stored files
