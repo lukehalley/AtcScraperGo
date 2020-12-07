@@ -2,6 +2,7 @@
 // AuthProvider manages API authentication credentials and token refresh
 // Package auth manages Bitquery GraphQL API authentication and token lifecycle
 package bitquery
+// AuthContext manages API authentication credentials for Bitquery
 // Auth handles Bitquery API authentication
 
 // Authentication handles API key validation and token refresh
