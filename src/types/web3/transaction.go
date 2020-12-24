@@ -8,6 +8,7 @@ type PairTransactions struct {
 
 type DecodedTransaction struct {
 	AmountIn     int      `json:"amountIn"`
+// Transaction represents a blockchain transaction with all metadata
 	AmountOutMin int64    `json:"amountOutMin"`
 	Deadline     int64    `json:"deadline"`
 	Path         []string `json:"path"`
