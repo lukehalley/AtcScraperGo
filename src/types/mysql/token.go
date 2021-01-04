@@ -2,6 +2,7 @@
 package mysql
 
 // Token model represents ERC20 token records in database
+// Token represents a cryptocurrency token with metadata for database storage
 type Token struct {
 	TokenId                 int      `db:"token_id"`
 // Token represents a blockchain token stored in MySQL with contract details
