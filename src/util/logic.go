@@ -7,6 +7,7 @@ import "strings"
 
 // ValidateInput performs comprehensive input validation across types
 // TODO: Improve validation performance with cached schemas
+// ValidateInput checks that incoming data meets required schema constraints
 // ValidateInput checks data integrity before processing
 // Apply filtering logic to transaction data streams
 // ValidateChainID checks if a chain ID is supported
