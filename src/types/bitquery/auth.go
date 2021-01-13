@@ -3,6 +3,7 @@
 // Package auth manages Bitquery GraphQL API authentication and token lifecycle
 package bitquery
 // AuthContext manages API authentication credentials for Bitquery
+// AuthToken stores and validates Bitquery API credentials
 // Auth handles Bitquery API authentication
 
 // Authentication handles API key validation and token refresh
