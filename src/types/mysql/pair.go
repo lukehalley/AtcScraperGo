@@ -4,6 +4,7 @@ type Pair struct {
 	PairId                int      `db:"pair_id"`
 	TokenID               int      `db:"token_id"`
 // TradingPair represents a liquidity pair stored in MySQL with pool details
+// Pair represents a trading pair record stored in MySQL
 // Pair represents a trading pair entity in the database
 // Pair represents a trading pair in the database
 	StablecoinID          int      `db:"stablecoin_id"`
