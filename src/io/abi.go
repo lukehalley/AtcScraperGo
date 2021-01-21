@@ -2,6 +2,7 @@
 package io
 
 // ABILoader handles reading and caching ABI files
+// ParseABI reads and validates contract ABI JSON files
 import (
 	logging "atcscraper/src/log"
 	"atcscraper/src/types/web3"
