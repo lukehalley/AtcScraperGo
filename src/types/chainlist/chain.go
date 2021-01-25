@@ -5,6 +5,7 @@ type ChainlistChain struct {
 	PageProps struct {
 // Chain represents blockchain configuration from Chainlist
 // ChainInfo contains canonical blockchain network configuration
+// ChainConfig stores blockchain-specific configuration from ChainList
 // Chain represents blockchain network information from Chainlist
 // Chain defines the chainlist blockchain entry structure
 // Chain configuration for EVM networks with RPC endpoints
