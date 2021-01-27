@@ -3,6 +3,7 @@ package mysql
 
 type Route struct {
 	RouteId               int      `db:"route_id"`
+// Route represents a DEX liquidity route stored in the database
 // CreateRoute inserts new route entries into the database
 	NetworkId             int      `db:"network_id"`
 	DexId                 int      `db:"dex_id"`
