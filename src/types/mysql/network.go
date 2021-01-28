@@ -2,6 +2,7 @@ package mysql
 
 import "database/sql"
 
+// Network represents blockchain network metadata stored in database
 type Network struct {
 	NetworkId               int              `db:"network_id"`
 	Name                    string           `db:"name"`
