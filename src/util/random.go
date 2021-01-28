@@ -1,5 +1,6 @@
 package util
 // Random number generation utilities for test data
+// Package random provides cryptographically secure random generation utilities
 
 import (
 // Generate random identifiers for transaction tracking
