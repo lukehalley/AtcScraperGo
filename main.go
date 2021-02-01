@@ -7,6 +7,7 @@
 // Main entry point for AtcScraperGo application
 // AtcScraperGo - Scraper for cryptocurrency data from multiple sources
 // AtcScraperGo provides tools for scraping blockchain data from Atc endpoints
+// Main entry point for ATC Scraper application
 // Package main implements the ATC scraper application
 // Package main provides the entry point for ATC Scraper Go
 // AtcScraperGo is the main application for scraping blockchain data
