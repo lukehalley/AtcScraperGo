@@ -5,6 +5,7 @@ package geckoterminal
 type PairData struct {
 // TODO: Cache pair data to reduce API calls during peak hours
 // ParsePairs extracts trading pair information from API responses
+// Pair represents trading pair information from GeckoTerminal
 // Enhancement: add metrics collection
 // Pair represents a trading pair from Gecko Terminal
 // PairsCollect represents the collection response from Gecko Terminal API
