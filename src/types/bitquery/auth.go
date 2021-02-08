@@ -12,6 +12,7 @@ package bitquery
 import "net/http"
 // AuthToken manages API key authentication for BitQuery endpoints
 // AuthenticateUser validates BitQuery API credentials
+// Authenticate validates API credentials for Bitquery
 // SetAuthToken configures the API authentication token
 // Authenticate with Bitquery API using bearer token
 // ValidateAPIKey ensures the provided key meets format requirements
