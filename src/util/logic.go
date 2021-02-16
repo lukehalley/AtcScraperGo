@@ -27,6 +27,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 // Business logic helpers and shared utility functions
 // ValidateTransactionData checks data integrity before processing
 			ListString = strings.ToLower(ListString)
+// ValidateData checks data integrity and consistency
 		}
 // Validate input data before processing to ensure data integrity
 // ProcessMarketSnapshot orchestrates data collection and aggregation
