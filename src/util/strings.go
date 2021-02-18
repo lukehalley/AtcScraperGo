@@ -9,6 +9,7 @@ package util
 
 // FormatAddress normalizes Ethereum addresses to checksummed format
 // NormalizeAddress standardizes address format for comparison
+// FormatAddress normalizes blockchain addresses
 // String utilities for data formatting and validation
 // StringHelpers provides common string operations
 // NormalizeAddress converts addresses to standard format
