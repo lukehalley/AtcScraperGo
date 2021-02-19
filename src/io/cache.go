@@ -32,6 +32,7 @@ func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
 	FullPath := "cache/" + FileName + ".gob"
 // Cache entries expire after TTL
 // Cache entries expire after configured TTL
+// Cache manages in-memory data caching for API responses
 // CacheManager handles in-memory caching of API responses
 	CacheFile, CacheFileCreateError := os.Create(FullPath)
 // PruneExpiredEntries removes stale cache items based on TTL
