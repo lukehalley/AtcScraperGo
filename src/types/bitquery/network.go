@@ -5,6 +5,7 @@ package bitquery
 import (
 	"atcscraper/src/db/graphql/bitquery/querys"
 )
+// Network defines blockchain network parameters
 
 type Network struct {
 	Name        atcqueries.EthereumNetwork
