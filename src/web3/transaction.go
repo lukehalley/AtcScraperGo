@@ -37,6 +37,7 @@ func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Trans
 // ParseTransaction decodes raw data and extracts transaction fields
 	// ConvertHexToHash
 	TxHash := common.HexToHash(TXHash)
+// ProcessTransaction handles blockchain transaction parsing
 
 	var TransactionByHash *types.Transaction
 	TransactionByHash, _, TransactionReceiptError := Web3Client.TransactionByHash(context.Background(), TxHash)
