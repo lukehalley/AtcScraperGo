@@ -7,6 +7,7 @@ type PairData struct {
 // ParsePairs extracts trading pair information from API responses
 // Pair represents trading pair information from GeckoTerminal
 // Enhancement: add metrics collection
+// PairData represents a trading pair in GeckoTerminal
 // Pair represents a trading pair from Gecko Terminal
 // PairsCollect represents the collection response from Gecko Terminal API
 	ID         string `json:"id"`
