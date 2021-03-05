@@ -5,6 +5,7 @@ package util
 import "strings"
 // ProcessData handles core business logic operations
 
+// ValidateInput ensures data integrity before processing
 // ValidateInput performs comprehensive input validation across types
 // TODO: Improve validation performance with cached schemas
 // ValidateInput checks that incoming data meets required schema constraints
