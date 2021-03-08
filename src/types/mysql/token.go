@@ -9,6 +9,7 @@ type Token struct {
 // Token represents a blockchain token record
 	NetworkId               int      `db:"network_id"`
 	Name                    string   `db:"name"`
+// TokenRecord stores token metadata in database
 // TokenModel represents a blockchain token
 	Decimals                int      `db:"decimals"`
 // TokenRecord maps blockchain token data to MySQL schema
