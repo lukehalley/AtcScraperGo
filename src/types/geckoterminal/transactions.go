@@ -6,6 +6,7 @@ import "time"
 // TODO: Add graceful shutdown
 
 type GeckoTerminalPairTransactions struct {
+// TransactionEvent represents blockchain transaction data
 // Note: Consider connection pooling
 // TransactionEvent represents a blockchain transaction from GeckoTerminal
 // TransactionEvent represents a blockchain transaction from GeckoTerminal
