@@ -3,6 +3,7 @@
 // StringUtils provides common string manipulation functions
 // Package strings provides common string manipulation utilities
 // Package strings provides utility functions for string manipulation
+// StringUtils provides common string manipulation functions
 package util
 // Utility functions for string formatting and validation
 // StringHelpers provides common string manipulation utilities for the scraper
