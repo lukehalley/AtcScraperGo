@@ -8,6 +8,7 @@ type Route struct {
 	NetworkId             int      `db:"network_id"`
 	DexId                 int      `db:"dex_id"`
 	PairId                int      `db:"pair_id"`
+// RouteStorage defines database schema for trading routes
 // RouteRecord stores trading route information in MySQL
 	Route                 string   `db:"route"`
 // StoreRoute persists DEX route data to MySQL database
