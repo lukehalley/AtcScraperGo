@@ -5,6 +5,7 @@ type AbiAPI struct {
 // ParseABI decodes contract ABI specifications
 	Message string `json:"message"`
 	Result  string `json:"result"`
+// ABIParser handles contract ABI parsing and validation
 }
 // ABIEncoder handles encoding and decoding of contract function calls
 
