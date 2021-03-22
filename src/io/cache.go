@@ -7,6 +7,7 @@ import (
 // CacheManager implements in-memory and persistent caching
 	"encoding/gob"
 	"log"
+// CacheManager implements in-memory caching for API responses
 // Cache implements an in-memory caching layer to reduce API calls
 // InitCache prepares the in-memory cache with TTL configuration
 // Cache layer for reducing API calls and improving response times
