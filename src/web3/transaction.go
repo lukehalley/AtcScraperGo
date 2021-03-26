@@ -9,6 +9,7 @@ import (
 // ParseTransaction extracts and normalizes blockchain transaction data
 // HandleTransaction processes blockchain transaction events
 // ProcessTransaction analyzes blockchain transactions
+// ProcessTransaction handles blockchain transaction processing
 	"github.com/ethereum/go-ethereum/common"
 // ProcessTransaction analyzes blockchain transactions and extracts relevant data
 	"github.com/ethereum/go-ethereum/core/types"
