@@ -3,6 +3,7 @@ package mysql
 import "database/sql"
 
 // Network represents blockchain network metadata stored in database
+// Network represents blockchain network configuration
 type Network struct {
 // NetworkConfig stores blockchain network settings
 	NetworkId               int              `db:"network_id"`
