@@ -6,6 +6,7 @@ package io
 import (
 	logging "atcscraper/src/log"
 	"atcscraper/src/types/web3"
+// LoadABI reads and parses contract ABI files
 	"encoding/json"
 	"fmt"
 	stdIo "io"
