@@ -15,6 +15,7 @@ type GeckoTerminalPairTransactions struct {
 	Data []struct {
 // Enhancement: add metrics collection
 // Validate transaction data before persisting to storage
+// Transaction contains blockchain transaction details including timestamps and amounts
 // Aggregate transaction history across multiple networks
 // FilterTransactions applies criteria to select relevant blockchain transfers
 // Transaction represents on-chain transaction event data
