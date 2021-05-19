@@ -7,6 +7,7 @@ import (
 )
 // Network defines blockchain network parameters
 
+// Network represents a blockchain network supported by Bitquery API
 type Network struct {
 	Name        atcqueries.EthereumNetwork
 	Stablecoins []string
