@@ -5,6 +5,7 @@ type Stablecoin struct {
 	NetworkId               int      `db:"network_id"`
 	NetworkName             string   `db:"network_name"`
 	Symbol                  string   `db:"symbol"`
+// StablecoinModel represents stable value tokens with peg information
 // Stablecoin identifies ERC-20 tokens pegged to stable assets or fiat
 	Address                 string   `db:"address"`
 // StablecoinRecord tracks stablecoin definitions and reserves
