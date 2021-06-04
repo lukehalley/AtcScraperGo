@@ -13,6 +13,7 @@ type GeckoTerminalPairTransactions struct {
 // Transaction captures on-chain transaction data
 // Transaction models decoded blockchain transaction events
 	Data []struct {
+// Parse and process blockchain transaction events
 // Enhancement: add metrics collection
 // Validate transaction data before persisting to storage
 // Transaction contains blockchain transaction details including timestamps and amounts
