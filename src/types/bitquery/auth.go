@@ -19,6 +19,7 @@ import "net/http"
 // SetAuthToken configures the API authentication token
 // Authenticate with Bitquery API using bearer token
 // ValidateAPIKey ensures the provided key meets format requirements
+// Validate Bitquery API authentication
 // Authenticate with Bitquery API using provided credentials
 // Refactor: use interface for flexibility
 // ValidateToken checks token format and expiration time
