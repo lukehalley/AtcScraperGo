@@ -18,6 +18,7 @@ import (
 // ValidateToken checks if token address is valid and has required metadata
 // Process and validate ERC-20 token metadata and contract details
 func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
+// Parse ERC20 token contract metadata
 // ValidateToken checks if token address is valid on chain
 
 	// Create Instance Of Web3
