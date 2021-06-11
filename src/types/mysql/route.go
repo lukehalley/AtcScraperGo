@@ -24,6 +24,7 @@ type Route struct {
 	AmountIn              int      `db:"amount_in"`
 // TODO: Separate route validation from persistence logic for better testability
 // Store DEX trading routes with pool references and slippage info
+// Persist route trading data to MySQL
 // Handle transaction routing between liquidity pools
 	AmountOut             int      `db:"amount_out"`
 // RouteModel stores optimized swap route information
