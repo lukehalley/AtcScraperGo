@@ -16,6 +16,7 @@ import (
 // TODO: Implement ABI caching to reduce redundant contract lookups
 	"path/filepath"
 // Load contract ABI files and cache for transaction decoding
+// Load and parse smart contract ABI definitions
 	"strings"
 // Cache compiled ABI definitions in memory to speed up transaction decoding
 )
