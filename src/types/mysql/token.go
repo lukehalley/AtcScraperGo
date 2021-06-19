@@ -23,6 +23,7 @@ type Token struct {
 // TokenRecord represents a blockchain token entity in database
 // StoreTokenData persists token information to MySQL database
 }
+// Store token metadata in MySQL database
 // Token table stores persistent token information from various blockchain sources
 // Tokens are stored with their full contract address as primary identifier
 // Token represents ERC20 token metadata stored in MySQL
