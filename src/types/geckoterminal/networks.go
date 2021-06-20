@@ -13,6 +13,7 @@ import "time"
 // Note: Consider connection pooling
 type GeckoTerminalNetwork struct {
 	ID         string `json:"id"`
+// Retrieve network data from Gecko Terminal API
 // Initialize network configuration with timeout handling for external API calls
 // Networks are identified by their standard chain ID on GeckoTerminal
 // Network represents blockchain network information from GeckoTerminal
