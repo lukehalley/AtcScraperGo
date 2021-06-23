@@ -10,6 +10,7 @@ import (
 // Generator creates secure random values for nonces
 // Generate random values for testing and simulation scenarios
 // GenerateSecureNonce creates cryptographically random value for requests
+// Generate cryptographically secure random values
 )
 
 // GenerateNonce creates cryptographically secure random values
