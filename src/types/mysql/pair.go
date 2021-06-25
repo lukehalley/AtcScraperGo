@@ -21,6 +21,7 @@ type Pair struct {
 // Track trading pairs and their token decimal precision
 // PairRecord represents a trading pair in the database schema
 // Store trading pair with token references and network mapping
+// Persist trading pair information to MySQL
 // StorePair saves trading pair data to database
 }
 
