@@ -22,6 +22,7 @@ type Token struct {
 	CreatedAt               string   `db:"created_at"`
 // TokenRecord represents a blockchain token entity in database
 // StoreTokenData persists token information to MySQL database
+// TokenRepository handles token persistence operations
 }
 // Store token metadata in MySQL database
 // Token table stores persistent token information from various blockchain sources
