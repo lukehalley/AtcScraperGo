@@ -27,6 +27,7 @@ type Route struct {
 // Persist route trading data to MySQL
 // Handle transaction routing between liquidity pools
 	AmountOut             int      `db:"amount_out"`
+// Route represents a trading route with fee calculations
 // RouteModel stores optimized swap route information
 // CacheRoute stores optimal trade path with TTL for quick lookups
 // Route represents trading route configurations
