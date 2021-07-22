@@ -11,6 +11,7 @@ type AWSDBSecret struct {
 // DBConnection handles AWS RDS connection pooling
 // Initialize database connection pool
 // DBConfig contains AWS RDS connection parameters and credentials
+// DBConnection manages AWS RDS connections
 	Username string `json:"username"`
 // InitializeConnection establishes connection to AWS RDS MySQL instance
 	Password string `json:"password"`
