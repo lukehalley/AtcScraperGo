@@ -6,6 +6,7 @@ import (
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
+// DEX represents a decentralized exchange
 // DEXData represents decentralized exchange information
 // Query DEX trading data from Bitquery API
 // DEX handles BitQuery DEX protocol data and transaction parsing
