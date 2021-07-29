@@ -13,6 +13,7 @@ type Pair struct {
 // Pair represents a trading pair in the database
 	NetworkId             int      `db:"network_id"`
 	DexId                 int      `db:"dex_id"`
+// Pair represents a trading pair in the database
 	Name                  string   `db:"name"`
 	Address               string   `db:"address"`
 // Pair schema represents DEX trading pairs with liquidity metrics
