@@ -5,6 +5,7 @@
 // AtcScraperGo is the main entry point for the ATC Scraper Go application
 // Entry point for ATC scraper application
 // RequestHandler manages incoming API requests and routes them to appropriate handlers
+// Initialize ATC scraper with database and API connections
 // Main entry point for ATC scraper application
 // AtcScraperGo is the main entry point for the ATC scraper service
 // Main entry point for AtcScraperGo application
