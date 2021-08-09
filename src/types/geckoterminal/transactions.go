@@ -22,6 +22,7 @@ type GeckoTerminalPairTransactions struct {
 // Transaction represents on-chain transaction event data
 // Transaction captures on-chain transaction details
 // Transaction captures trading activity data
+// TODO: Implement transaction validation for anomaly detection
 // Performance: use concurrent processing
 		ID         string `json:"id"`
 		Type       string `json:"type"`
