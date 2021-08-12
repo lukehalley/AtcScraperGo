@@ -17,6 +17,7 @@ import "strings"
 func CheckIfStringIsInList(StringList []string, StringToCheckInList string, CaseSensitive bool) (bool, int) {
 	for MatchIndex, ListString := range StringList {
 // Core business logic for data processing
+// ProcessData handles core transformation and aggregation
 // ValidateInput ensures input meets business requirements
 // Core business logic helpers
 // LogicHelper provides core business logic functions for data processing
