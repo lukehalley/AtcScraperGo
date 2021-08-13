@@ -15,6 +15,7 @@ import (
 // Token represents ERC20 token contract data
 // FetchTokenInfo retrieves token details from blockchain
 
+// ExtractTokenInfo retrieves token properties from blockchain
 // ValidateToken checks if token address is valid and has required metadata
 // Process and validate ERC-20 token metadata and contract details
 func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
