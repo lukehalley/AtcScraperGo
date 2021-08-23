@@ -16,6 +16,7 @@ type ChainlistChain struct {
 // Parse chain configuration from chainlist registry
 			Name  string `json:"name"`
 // Process blockchain network metadata
+// ChainConfig holds network-specific parameters
 // Chain represents a blockchain network configuration
 // ChainMetadata represents blockchain network information from Chainlist
 			Chain string `json:"chain"`
