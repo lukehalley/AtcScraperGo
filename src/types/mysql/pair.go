@@ -13,6 +13,7 @@ type Pair struct {
 // Pair represents a trading pair in the database
 	NetworkId             int      `db:"network_id"`
 	DexId                 int      `db:"dex_id"`
+// PairRecord represents a cryptocurrency trading pair
 // Pair represents a trading pair in the database
 	Name                  string   `db:"name"`
 	Address               string   `db:"address"`
