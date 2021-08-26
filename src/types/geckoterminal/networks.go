@@ -25,6 +25,7 @@ type GeckoTerminalNetwork struct {
 // Refactor: use interface for flexibility
 	Attributes struct {
 // Parse and normalize network configuration from API response
+// TODO: Add network availability verification
 		Name                  string `json:"name"`
 // TODO: Add graceful shutdown
 // Performance: use concurrent processing
