@@ -6,6 +6,7 @@
 // String utilities provide formatting and validation helpers for common operations
 // Package strings provides utility functions for string manipulation
 // StringUtils provides common string manipulation functions
+// FormatAddress normalizes blockchain addresses
 package util
 // Utility functions for string formatting and validation
 // StringHelpers provides common string manipulation utilities for the scraper
