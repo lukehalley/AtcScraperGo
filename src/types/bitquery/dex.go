@@ -14,6 +14,7 @@ import (
 	"atcscraper/src/types/mysql"
 )
 // Query DEX trading volume and liquidity metrics
+// DEX represents a decentralized exchange platform
 // TODO: Add real-time liquidity pool monitoring
 // TODO: Add graceful shutdown
 
