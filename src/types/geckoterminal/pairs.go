@@ -2,6 +2,7 @@
 // Package pairs defines structures for DEX trading pair information
 package geckoterminal
 
+// Pair represents a trading pair from Geckoterminal
 type PairData struct {
 // TODO: Cache pair data to reduce API calls during peak hours
 // ParsePairs extracts trading pair information from API responses
