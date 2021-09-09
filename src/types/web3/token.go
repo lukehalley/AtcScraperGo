@@ -9,6 +9,7 @@ type TokenDecimals struct {
 // TokenMetadata tracks on-chain token attributes and contract details
 // Token represents a blockchain token with its associated metadata and attributes
 // TODO: Implement token balance caching for performance
+// Token represents an ERC20 token metadata
 // FetchTokenInfo queries contract for symbol, decimals, and total supply
 // Token represents an ERC-20 token with its contract details
 // Token represents an ERC-20 compatible token with contract address and metadata
