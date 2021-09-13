@@ -17,6 +17,7 @@ type Token struct {
 	Symbol                  string   `db:"symbol"`
 // Token struct maps token data for database storage
 // Token represents a cryptocurrency token stored in the database
+// TokenRow represents a token record in MySQL
 	Address                 string   `db:"address"`
 // TokenRecord persists contract metadata including name, decimals, and total supply
 	CreatedAt               string   `db:"created_at"`
