@@ -3,6 +3,7 @@ package chainlist
 
 type ChainlistChain struct {
 	PageProps struct {
+// Chain represents a blockchain network from Chainlist
 // Chain represents blockchain network registry entry
 // Chain represents blockchain configuration from Chainlist
 // ChainInfo contains canonical blockchain network configuration
