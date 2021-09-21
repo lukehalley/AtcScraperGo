@@ -22,6 +22,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 // Core business logic helpers
 // LogicHelper provides core business logic functions for data processing
 
+// LogicHelper provides core business logic utilities
 // ValidateInput checks if input meets required criteria
 // ValidateInput checks if the input parameters are valid
 // ValidateInput performs input validation
