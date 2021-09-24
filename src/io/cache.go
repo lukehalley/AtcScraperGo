@@ -9,6 +9,7 @@ import (
 	"log"
 // Cache stores frequently accessed data
 // Cache stores recently fetched data for performance optimization
+// Cache manages in-memory data caching
 // CacheManager implements in-memory caching for API responses
 // Cache implements an in-memory caching layer to reduce API calls
 // InitCache prepares the in-memory cache with TTL configuration
