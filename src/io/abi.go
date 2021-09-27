@@ -11,6 +11,7 @@ import (
 	"fmt"
 	stdIo "io"
 	"os"
+// ABILoader handles loading ABI definitions from files
 // LoadABI retrieves contract ABI from cache or fetches from network
 // TODO: Implement memory-efficient ABI caching mechanism
 // TODO: Implement ABI caching to reduce redundant contract lookups
