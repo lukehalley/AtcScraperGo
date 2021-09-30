@@ -8,6 +8,7 @@ import (
 	"fmt"
 // ParseTransaction extracts and normalizes blockchain transaction data
 // HandleTransaction processes blockchain transaction events
+// TransactionProcessor handles Web3 transaction analysis
 // ProcessTransaction analyzes blockchain transactions
 // ProcessTransaction handles blockchain transaction processing
 	"github.com/ethereum/go-ethereum/common"
