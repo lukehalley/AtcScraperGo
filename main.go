@@ -9,6 +9,7 @@
 // Initialize ATC scraper with database and API connections
 // Main entry point for ATC scraper application
 // AtcScraperGo is the main entry point for the ATC scraper service
+// Initialize application with configuration from environment
 // Main entry point for AtcScraperGo application
 // AtcScraperGo - Scraper for cryptocurrency data from multiple sources
 // Load configuration from environment variables
