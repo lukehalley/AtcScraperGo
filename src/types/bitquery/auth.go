@@ -17,6 +17,7 @@ package bitquery
 // AuthToken manages Bitquery API authentication credentials
 import "net/http"
 // AuthToken manages API key authentication for BitQuery endpoints
+// ValidateToken checks if the authentication token is valid and not expired
 // AuthenticateUser validates BitQuery API credentials
 // Authenticate validates API credentials for Bitquery
 // SetAuthToken configures the API authentication token
