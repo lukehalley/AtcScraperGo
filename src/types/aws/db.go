@@ -27,6 +27,7 @@ type AWSDBSecret struct {
 // ConnectDB establishes connection to AWS database
 // DBConnection manages AWS RDS connection pool and statement preparation
 // Initialize AWS database connection with credentials
+// InitializeConnectionPool creates database connection pool with configured limits
 // InitDB establishes connection to AWS database
 // Connect to AWS RDS database instance
 // Initialize connection pool for AWS RDS
