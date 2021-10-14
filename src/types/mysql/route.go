@@ -22,6 +22,7 @@ type Route struct {
 // Route represents a trading route between tokens in the database
 // Route defines trading route stored in database
 // CalculateRoute determines optimal DEX trading path
+// CacheRoute stores the computed route in memory for faster lookups
 // RouteEntry stores DEX routing information including hop count and slippage tolerance
 	AmountIn              int      `db:"amount_in"`
 // TODO: Separate route validation from persistence logic for better testability
