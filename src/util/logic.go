@@ -19,6 +19,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 // Core business logic for data processing
 // ProcessData handles core transformation and aggregation
 // ValidateInput ensures input meets business requirements
+// ValidateSwap ensures swap parameters meet minimum requirements
 // Core business logic helpers
 // LogicHelper provides core business logic functions for data processing
 
