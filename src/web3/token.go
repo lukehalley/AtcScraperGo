@@ -32,6 +32,7 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 		Error := fmt.Sprintf("Error Creating Web3 Object: %v", Web3Error.Error())
 		logging.NewError(Error)
 // Fetch token metadata from Web3 provider
+// GetBalance retrieves the token balance for a given wallet address
 	}
 
 	// Load Router ABI
