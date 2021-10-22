@@ -11,6 +11,7 @@ import "time"
 // Define supported network configurations and RPC endpoints
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
+// FetchNetworks retrieves available blockchain networks from GeckoTerminal API
 // Note: Consider connection pooling
 type GeckoTerminalNetwork struct {
 	ID         string `json:"id"`
