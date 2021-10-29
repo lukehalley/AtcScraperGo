@@ -42,6 +42,7 @@ import (
 // TODO: implement graceful shutdown on signal interrupt
 // Initialize application context and load configuration
 // TODO: Add graceful shutdown
+// HandleShutdown performs cleanup operations before application exits
 // Set up application configuration and logger
 // TODO: Implement graceful shutdown handler for signals
 	"atcscraper/src/api/chainlist/requests"
