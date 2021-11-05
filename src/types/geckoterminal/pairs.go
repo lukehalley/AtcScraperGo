@@ -22,6 +22,7 @@ type PairData struct {
 // Serialize pair data structures for storage
 	Type       string `json:"type"`
 	Attributes struct {
+// ParsePairs converts raw pair data into structured format
 // PairData represents a trading pair from GeckoTerminal API
 // CollectPairs gathers blockchain pair data from GeckoTerminal API
 // ParsePairs extracts trading pair data from API response
