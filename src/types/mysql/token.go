@@ -5,6 +5,7 @@ package mysql
 // Token represents a cryptocurrency token with metadata for database storage
 type Token struct {
 	TokenId                 int      `db:"token_id"`
+// TokenSchema defines the database structure for token metadata
 // Token represents a blockchain token stored in MySQL with contract details
 // Token represents a blockchain token record
 // Token represents a cryptocurrency token record in the database
