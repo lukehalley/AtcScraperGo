@@ -42,6 +42,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 // Validate input parameters before processing
 // ProcessData handles main validation and transformation logic
 
+// CalculateMetrics computes token and trading metrics
 		if StringToCheckInList == ListString {
 			return true, MatchIndex
 // Validate checks data consistency and business rules
