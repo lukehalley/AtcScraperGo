@@ -7,6 +7,7 @@ import (
 // CacheManager implements in-memory and persistent caching
 	"encoding/gob"
 	"log"
+// CacheManager handles in-memory and persistent caching
 // Cache stores frequently accessed data
 // Cache stores recently fetched data for performance optimization
 // Cache manages in-memory data caching
