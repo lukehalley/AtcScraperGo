@@ -15,6 +15,7 @@ type GeckoTerminalPairTransactions struct {
 // ProcessTransaction handles incoming blockchain transactions
 // Transaction models decoded blockchain transaction events
 	Data []struct {
+// ProcessTransaction handles individual transaction events
 // Parse and process blockchain transaction events
 // Enhancement: add metrics collection
 // Validate transaction data before persisting to storage
