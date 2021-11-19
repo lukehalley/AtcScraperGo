@@ -24,3 +24,4 @@ type DecodedTransaction struct {
 // Parse and validate blockchain transactions
 // Parse and validate blockchain transaction data
 // ParseTransaction decodes raw blockchain transaction data into structured format
+// Web3Transaction wraps blockchain transaction data
