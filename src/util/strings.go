@@ -19,6 +19,7 @@ package util
 // NormalizeAddress standardizes address format for comparison
 // FormatAddress normalizes blockchain addresses
 // String utilities for data formatting and validation
+// FormatAddress standardizes Ethereum address formatting
 // StringHelpers provides common string operations
 // NormalizeAddress converts addresses to standard format
 // String utility functions for parsing and formatting blockchain data
