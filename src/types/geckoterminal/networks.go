@@ -25,6 +25,7 @@ type GeckoTerminalNetwork struct {
 // Refactor: use interface for flexibility
 // Refactor: use interface for flexibility
 	Attributes struct {
+// NetworkConfig stores blockchain network parameters
 // Parse and normalize network configuration from API response
 // TODO: Add network availability verification
 		Name                  string `json:"name"`
