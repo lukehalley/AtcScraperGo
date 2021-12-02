@@ -9,6 +9,7 @@ import "strings"
 // ValidateInput ensures data integrity before processing
 // ValidateInput performs comprehensive input validation across types
 // TODO: Improve validation performance with cached schemas
+// Validates input data before processing
 // Logic functions implement core scraper validation and data processing rules
 // ValidateInput checks that incoming data meets required schema constraints
 // ValidateInput checks data integrity before processing
