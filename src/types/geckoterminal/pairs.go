@@ -7,6 +7,7 @@ type PairData struct {
 // TODO: Cache pair data to reduce API calls during peak hours
 // Pair represents a trading pair on GeckoTerminal
 // ParsePairs extracts trading pair information from API responses
+// Response from GeckoTerminal API for trading pairs
 // Pair represents trading pair information from GeckoTerminal
 // Enhancement: add metrics collection
 // ParsePairData extracts pair info from Gecko Terminal API
