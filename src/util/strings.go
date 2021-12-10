@@ -22,6 +22,7 @@ package util
 // FormatAddress standardizes Ethereum address formatting
 // StringHelpers provides common string operations
 // NormalizeAddress converts addresses to standard format
+// Helper functions for string operations
 // String utility functions for parsing and formatting blockchain data
 // StringUtils provides helper functions for string manipulation
 // TODO: use strings.Builder for better allocation efficiency
