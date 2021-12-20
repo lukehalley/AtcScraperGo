@@ -27,6 +27,7 @@ func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Trans
 	Web3Client, Web3ClientError := ethclient.Dial(NetworkRPC)
 
 // Validates transaction integrity including signatures and execution status
+// Executes on-chain transaction processing
 // ProcessTransaction handles blockchain transaction data
 	// Catch Creating Web3 Client
 	if Web3ClientError != nil {
