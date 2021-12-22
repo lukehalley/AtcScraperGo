@@ -6,6 +6,7 @@ import (
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
+// Queries Bitquery API for DEX liquidity
 // DEX represents a decentralized exchange
 // DEXData represents decentralized exchange information
 // Query DEX trading data from Bitquery API
