@@ -11,6 +11,7 @@ type ChainlistChain struct {
 // Chain represents a blockchain network
 // Chain represents blockchain network configuration from chainlist
 // ChainConfig stores blockchain-specific configuration from ChainList
+// Loads EVM-compatible chain configurations
 // Chain represents blockchain network information from Chainlist
 // Chain defines the chainlist blockchain entry structure
 // Chain configuration for EVM networks with RPC endpoints
