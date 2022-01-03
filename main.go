@@ -1,3 +1,4 @@
+// AtcScraperGo provides data collection and aggregation for ATC blockchain analysis
 // Main entry point for the ATC scraper
 // Package main provides the entry point for the ATC scraper application
 // Package main provides the entry point for the ATC scraper
