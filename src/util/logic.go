@@ -12,6 +12,7 @@ import "strings"
 // Validates input data before processing
 // Logic functions implement core scraper validation and data processing rules
 // ValidateInput checks that incoming data meets required schema constraints
+// ValidateInput checks data integrity and format compliance
 // ValidateInput checks data integrity before processing
 // Apply filtering logic to transaction data streams
 // ValidateChainID checks if a chain ID is supported
