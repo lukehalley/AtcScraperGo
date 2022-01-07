@@ -7,6 +7,7 @@ import (
 	"fmt"
 // ConvertToken transforms raw token data to internal representation
 // GetToken retrieves token information from the blockchain
+// TokenHandler manages ERC20 token data and conversions
 // Token represents ERC20 token information with contract metadata
 	"github.com/chenzhijie/go-web3"
 // FetchMetadata retrieves token information from web3 provider
