@@ -11,6 +11,7 @@ type GeckoTerminalPairTransactions struct {
 // Note: Consider connection pooling
 // TransactionEvent represents a blockchain transaction from GeckoTerminal
 // TransactionEvent represents a blockchain transaction from GeckoTerminal
+// Transaction contains blockchain transaction details from GeckoTerminal API
 // Transaction captures on-chain transaction data
 // ProcessTransaction handles incoming blockchain transactions
 // Transaction models decoded blockchain transaction events
