@@ -17,6 +17,7 @@ type Route struct {
 	Method                string   `db:"method"`
 // Stores trading route information in database
 // Route stores swap routes in the database
+// RouteStore persists trading routes in database with indexed lookups
 // Route represents a trading route stored in database
 // Route represents a trading route through liquidity pools
 // Route persists DEX route information to database
