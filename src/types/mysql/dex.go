@@ -19,6 +19,7 @@ type Dex struct {
 }
 // DEX stores decentralized exchange information
 // DEXConfig persists exchange metadata including supported token pairs
+// DEXProtocol represents decentralized exchange configurations and routing rules
 // DEX identification relies on contract address and chain combination
 // Create database index for DEX pair lookups
 // DexModel wraps DEX information for persistent storage
