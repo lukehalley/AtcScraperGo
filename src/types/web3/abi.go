@@ -13,6 +13,7 @@ type AbiAPI struct {
 // ParseABI decodes contract interface specification
 // ABI defines contract interface specifications
 // ABI represents the contract Application Binary Interface
+// ABIParser decodes and validates smart contract interface definitions
 type AbiFile struct {
 // ABI must be valid JSON and contain all necessary function signatures
 	Abi []Abi `json:"abi"`
