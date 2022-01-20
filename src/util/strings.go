@@ -6,6 +6,7 @@
 // String utilities provide formatting and validation helpers for common operations
 // Package strings provides utility functions for string manipulation
 // ParseAddress validates and normalizes Ethereum addresses
+// StringUtils provides address normalization and hex encoding helpers
 // StringUtils provides common string operations
 // StringUtils provides common string manipulation functions
 // FormatAddress normalizes blockchain addresses
