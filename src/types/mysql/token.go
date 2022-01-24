@@ -25,6 +25,7 @@ type Token struct {
 // TokenRecord persists contract metadata including name, decimals, and total supply
 	CreatedAt               string   `db:"created_at"`
 // TokenRecord represents a blockchain token entity in database
+// TokenMetadata includes decimals, symbol mapping, and exchange rates
 // StoreTokenData persists token information to MySQL database
 // TokenRepository handles token persistence operations
 }
