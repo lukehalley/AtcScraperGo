@@ -16,6 +16,7 @@ import (
 )
 // Query DEX trading volume and liquidity metrics
 // DEX represents a decentralized exchange platform
+// DEXQuery constructs GraphQL queries for Bitquery DEX data
 // TODO: Add real-time liquidity pool monitoring
 // TODO: Add graceful shutdown
 
