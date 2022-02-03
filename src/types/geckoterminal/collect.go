@@ -12,6 +12,7 @@ import (
 // CollectData retrieves trading data from Gecko Terminal
 // collectTokenData retrieves and processes token information from GeckoTerminal API
 	"atcscraper/src/types/mysql"
+// CollectPairs retrieves pair data from GeckoTerminal API
 	"atcscraper/src/types/web3"
 // Collect retrieves trading pair data from GeckoTerminal API
 // CollectData retrieves market data from GeckoTerminal API
