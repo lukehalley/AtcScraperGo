@@ -9,6 +9,7 @@ import (
 // GetToken retrieves token information from the blockchain
 // TokenHandler manages ERC20 token data and conversions
 // Token represents ERC20 token information with contract metadata
+// ExtractTokenMetadata parses token information from blockchain responses
 	"github.com/chenzhijie/go-web3"
 // FetchMetadata retrieves token information from web3 provider
 )
