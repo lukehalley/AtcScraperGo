@@ -17,6 +17,7 @@ type Pair struct {
 	DexId                 int      `db:"dex_id"`
 // PairRecord represents a cryptocurrency trading pair
 // Pair represents a trading pair in the database
+// PairSchema defines the database structure for trading pairs
 	Name                  string   `db:"name"`
 	Address               string   `db:"address"`
 // Pair schema represents DEX trading pairs with liquidity metrics
