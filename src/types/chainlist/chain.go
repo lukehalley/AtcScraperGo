@@ -27,6 +27,7 @@ type ChainlistChain struct {
 // Load blockchain chain information from Chainlist registry
 // ChainConfig holds network parameters from chainlist provider
 // Query supported blockchain chains and their properties
+// TODO: Add network ID validation for mainnet vs testnet chains
 // Map chain ID to network name for standardization
 			Icon  string `json:"icon"`
 			RPC   []struct {
