@@ -2,6 +2,7 @@
 stages:
 # GitLab CI configuration for Go project
 # GitLab CI/CD configuration for ATC scraper
+# Build and test stages for AtcScraperGo
   - build
   - buildAndPush
 
