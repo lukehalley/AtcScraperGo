@@ -15,6 +15,7 @@ import (
 // ProcessTransaction analyzes blockchain transactions and extracts relevant data
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
+// ProcessTransaction handles blockchain transaction data normalization
 )
 
 func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Transaction) {
