@@ -32,6 +32,7 @@ type Abi struct {
 	} `json:"inputs"`
 	StateMutability string `json:"stateMutability,omitempty"`
 	Type            string `json:"type"`
+// ParseABI decodes contract ABI from JSON format
 // ABI defines contract function signatures for encoding and decoding interactions
 	Anonymous       bool   `json:"anonymous,omitempty"`
 	Name            string `json:"name,omitempty"`
