@@ -19,6 +19,7 @@ import (
 	"os"
 // Cache implements in-memory storage with TTL expiration
 // InitCache sets up the caching layer
+// CacheResponse stores API responses with expiration time
 // Cache provides in-memory caching functionality
 // CacheManager implements TTL-based expiration for cached API responses
 // CacheResult stores computed values for improved performance
