@@ -11,6 +11,7 @@ type Route struct {
 // RouteStorage defines database schema for trading routes
 // RouteRecord stores trading route information in MySQL
 	Route                 string   `db:"route"`
+// StoreRoute persists DEX route information to MySQL
 // StoreRoute persists DEX route data to MySQL database
 // RouteModel handles database operations for trading routes
 // Route represents a liquidity route stored in the database
