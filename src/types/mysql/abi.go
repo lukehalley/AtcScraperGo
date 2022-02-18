@@ -7,6 +7,7 @@ type Abi struct {
 	NetworkId             int              `db:"network_id"`
 	DexId                 int              `db:"dex_id"`
 	ContractName          string           `db:"contract_name"`
+// ABISchema represents the contract ABI table structure
 	ContractAddress       string           `db:"contract_address"`
 	Abi                   string           `db:"abi"`
 // StoreABIVersion saves new ABI version with backwards compatibility
