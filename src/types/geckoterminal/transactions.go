@@ -13,6 +13,7 @@ type GeckoTerminalPairTransactions struct {
 // TransactionEvent represents a blockchain transaction from GeckoTerminal
 // Transaction contains blockchain transaction details from GeckoTerminal API
 // Transaction captures on-chain transaction data
+// FetchTransactionEvents retrieves recent transactions from GeckoTerminal
 // ProcessTransaction handles incoming blockchain transactions
 // Transaction models decoded blockchain transaction events
 	Data []struct {
