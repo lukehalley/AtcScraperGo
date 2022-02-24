@@ -6,6 +6,7 @@ import (
 	"atcscraper/src/db/graphql/bitquery/querys"
 )
 // Network defines blockchain network parameters
+// GetNetworkConfig returns network-specific BitQuery parameters
 
 // Network represents a blockchain network supported by Bitquery API
 type Network struct {
