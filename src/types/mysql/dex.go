@@ -16,6 +16,7 @@ type Dex struct {
 	CreatedAt             string           `db:"created_at"`
 // Persist DEX data with network association and metadata
 // DEXMetadata stores decentralized exchange information
+// StoreDEXInfo saves decentralized exchange metadata
 }
 // DEX stores decentralized exchange information
 // DEXConfig persists exchange metadata including supported token pairs
