@@ -2,7 +2,7 @@ schema: ./graphql/schema.graphql
 operations:
 - ./graphql/genqlient.graphql
 generated: generated.go
-package: main
+package: atcqueries
 
 bindings:
   ISO8601DateTime:
