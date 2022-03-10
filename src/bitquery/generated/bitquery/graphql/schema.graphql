@@ -4485,6 +4485,13 @@ enum EosTransfersMeasureable {
   currency_address
 }
 
+type Utility {
+
+  """Trades on Ethereum DEX Smart Contracts"""
+  activePeriod(apiKey: String): BitqueryAccountInfo!
+
+}
+
 """Ethereum Chain"""
 type Ethereum {
   """Basic information about address ( or smart contract )"""
@@ -5499,6 +5506,19 @@ input EthereumDexTradeFilter {
   price: [AmountSelector!]
   priceAsymmetry: [FloatSelector!]
   tradeAmountUsd: [FloatSelector!]
+}
+
+"""Bitquery Account Info"""
+type BitqueryAccountInfo {
+  pointsRemaining: String
+  points: String
+  isPaid: Boolean
+  isPointsConsumed: Boolean
+  isSpent: Boolean
+  isBlocked: Boolean
+  starts: Date
+  ends: Date
+  billingDay: Int
 }
 
 """Trades on DEX smart contracts"""
@@ -8426,6 +8446,10 @@ type Query {
 
   """Tron Mainnet Dataset"""
   tron: Tron
+
+  """Utility Dataset"""
+  utilities: Utility
+
 }
 
 """Limits, Ordering, Constraints"""

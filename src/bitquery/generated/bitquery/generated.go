@@ -34,6 +34,117 @@ const (
 	EthereumNetworkMatic EthereumNetwork = "matic"
 )
 
+// GetBitQueryAccountDetailsResponse is returned by GetBitQueryAccountDetails on success.
+type GetBitQueryAccountDetailsResponse struct {
+	// Utility Dataset
+	Utilities GetBitQueryAccountDetailsUtilitiesUtility `json:"utilities"`
+}
+
+// GetUtilities returns GetBitQueryAccountDetailsResponse.Utilities, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsResponse) GetUtilities() GetBitQueryAccountDetailsUtilitiesUtility {
+	return v.Utilities
+}
+
+// GetBitQueryAccountDetailsUtilitiesUtility includes the requested fields of the GraphQL type Utility.
+type GetBitQueryAccountDetailsUtilitiesUtility struct {
+	// Trades on Ethereum DEX Smart Contracts
+	ActivePeriod GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo `json:"activePeriod"`
+}
+
+// GetActivePeriod returns GetBitQueryAccountDetailsUtilitiesUtility.ActivePeriod, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsUtilitiesUtility) GetActivePeriod() GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo {
+	return v.ActivePeriod
+}
+
+// GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo includes the requested fields of the GraphQL type BitqueryAccountInfo.
+// The GraphQL type's documentation follows.
+//
+// Bitquery Account Info
+type GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo struct {
+	PointsRemaining  string                                                                             `json:"pointsRemaining"`
+	Points           string                                                                             `json:"points"`
+	IsPaid           bool                                                                               `json:"isPaid"`
+	IsPointsConsumed bool                                                                               `json:"isPointsConsumed"`
+	IsSpent          bool                                                                               `json:"isSpent"`
+	IsBlocked        bool                                                                               `json:"isBlocked"`
+	Starts           GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfoStartsDate `json:"starts"`
+	Ends             GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfoEndsDate   `json:"ends"`
+	BillingDay       int                                                                                `json:"billingDay"`
+}
+
+// GetPointsRemaining returns GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo.PointsRemaining, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo) GetPointsRemaining() string {
+	return v.PointsRemaining
+}
+
+// GetPoints returns GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo.Points, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo) GetPoints() string {
+	return v.Points
+}
+
+// GetIsPaid returns GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo.IsPaid, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo) GetIsPaid() bool {
+	return v.IsPaid
+}
+
+// GetIsPointsConsumed returns GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo.IsPointsConsumed, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo) GetIsPointsConsumed() bool {
+	return v.IsPointsConsumed
+}
+
+// GetIsSpent returns GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo.IsSpent, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo) GetIsSpent() bool {
+	return v.IsSpent
+}
+
+// GetIsBlocked returns GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo.IsBlocked, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo) GetIsBlocked() bool {
+	return v.IsBlocked
+}
+
+// GetStarts returns GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo.Starts, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo) GetStarts() GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfoStartsDate {
+	return v.Starts
+}
+
+// GetEnds returns GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo.Ends, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo) GetEnds() GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfoEndsDate {
+	return v.Ends
+}
+
+// GetBillingDay returns GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo.BillingDay, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfo) GetBillingDay() int {
+	return v.BillingDay
+}
+
+// GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfoEndsDate includes the requested fields of the GraphQL type Date.
+// The GraphQL type's documentation follows.
+//
+// Date
+type GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfoEndsDate struct {
+	// String date representation with default format as YYYY-MM-DD
+	Date string `json:"date"`
+}
+
+// GetDate returns GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfoEndsDate.Date, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfoEndsDate) GetDate() string {
+	return v.Date
+}
+
+// GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfoStartsDate includes the requested fields of the GraphQL type Date.
+// The GraphQL type's documentation follows.
+//
+// Date
+type GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfoStartsDate struct {
+	// String date representation with default format as YYYY-MM-DD
+	Date string `json:"date"`
+}
+
+// GetDate returns GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfoStartsDate.Date, and is useful for accessing the field via an interface.
+func (v *GetBitQueryAccountDetailsUtilitiesUtilityActivePeriodBitqueryAccountInfoStartsDate) GetDate() string {
+	return v.Date
+}
+
 // GetPairCreatedByFactoryEthereum includes the requested fields of the GraphQL type Ethereum.
 // The GraphQL type's documentation follows.
 //
@@ -285,6 +396,14 @@ func (v *GetTopNDexsForNetworkResponse) GetEthereum() GetTopNDexsForNetworkEther
 	return v.Ethereum
 }
 
+// __GetBitQueryAccountDetailsInput is used internally by genqlient
+type __GetBitQueryAccountDetailsInput struct {
+	ApiKey string `json:"apiKey"`
+}
+
+// GetApiKey returns __GetBitQueryAccountDetailsInput.ApiKey, and is useful for accessing the field via an interface.
+func (v *__GetBitQueryAccountDetailsInput) GetApiKey() string { return v.ApiKey }
+
 // __GetPairCreatedByFactoryInput is used internally by genqlient
 type __GetPairCreatedByFactoryInput struct {
 	Network        EthereumNetwork `json:"network"`
@@ -342,6 +461,52 @@ func (v *__GetTopNDexsForNetworkInput) GetOffset() int { return v.Offset }
 
 // GetFrom returns __GetTopNDexsForNetworkInput.From, and is useful for accessing the field via an interface.
 func (v *__GetTopNDexsForNetworkInput) GetFrom() time.Time { return v.From }
+
+func GetBitQueryAccountDetails(
+	ctx context.Context,
+	client graphql.Client,
+	apiKey string,
+) (*GetBitQueryAccountDetailsResponse, error) {
+	req := &graphql.Request{
+		OpName: "GetBitQueryAccountDetails",
+		Query: `
+query GetBitQueryAccountDetails ($apiKey: String!) {
+	utilities {
+		activePeriod(apiKey: $apiKey) {
+			pointsRemaining
+			points
+			isPaid
+			isPointsConsumed
+			isSpent
+			isBlocked
+			starts {
+				date
+			}
+			ends {
+				date
+			}
+			billingDay
+		}
+	}
+}
+`,
+		Variables: &__GetBitQueryAccountDetailsInput{
+			ApiKey: apiKey,
+		},
+	}
+	var err error
+
+	var data GetBitQueryAccountDetailsResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
 
 func GetPairCreatedByFactory(
 	ctx context.Context,
