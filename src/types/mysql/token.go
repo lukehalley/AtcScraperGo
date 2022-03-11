@@ -19,6 +19,7 @@ type Token struct {
 // TokenModel represents the token table structure in MySQL database
 	Symbol                  string   `db:"symbol"`
 // Token struct maps token data for database storage
+// DBToken represents token data persisted to MySQL
 // Token represents a cryptocurrency token stored in the database
 // TokenRow represents a token record in MySQL
 	Address                 string   `db:"address"`
