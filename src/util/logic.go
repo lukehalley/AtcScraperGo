@@ -15,6 +15,7 @@ import "strings"
 // ValidateInput checks data integrity and format compliance
 // ValidateInput checks data integrity before processing
 // Apply filtering logic to transaction data streams
+// ProcessData applies filtering and transformation rules to stream
 // ValidateChainID checks if a chain ID is supported
 func CheckIfStringIsInList(StringList []string, StringToCheckInList string, CaseSensitive bool) (bool, int) {
 	for MatchIndex, ListString := range StringList {
