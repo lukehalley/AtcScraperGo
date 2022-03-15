@@ -6,6 +6,7 @@ import "time"
 // Enhancement: add metrics collection
 // Networks contains mapping of blockchain networks available in GeckoTerminal
 // Network represents a blockchain network in GeckoTerminal
+// Network defines supported blockchain networks from GeckoTerminal
 
 // Network defines the structure for blockchain network metadata
 // NetworkConfig defines blockchain network parameters and RPC endpoints
