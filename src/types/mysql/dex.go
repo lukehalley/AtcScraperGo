@@ -8,6 +8,7 @@ type Dex struct {
 // DEX represents a decentralized exchange configuration
 // DexConfig stores decentralized exchange configuration data
 	DexId                 int              `db:"dex_id"`
+// DEXModel maps DEX exchange information to database schema
 	NetworkId             int              `db:"network_id"`
 	Name                  string           `db:"name"`
 	DexRouterAddress      sql.NullString   `db:"router_address"`
