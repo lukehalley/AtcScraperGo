@@ -371,91 +371,91 @@ func (v *GetPairCreatedByFactoryResponse) GetEthereum() GetPairCreatedByFactoryE
 	return v.Ethereum
 }
 
-// GetRouterAddressFromPairBaseCurrencyEthereum includes the requested fields of the GraphQL type Ethereum.
+// GetRouterAddressFromPairBaseCurrencysEthereum includes the requested fields of the GraphQL type Ethereum.
 // The GraphQL type's documentation follows.
 //
 // Ethereum Chain
-type GetRouterAddressFromPairBaseCurrencyEthereum struct {
+type GetRouterAddressFromPairBaseCurrencysEthereum struct {
 	// Trades on Ethereum DEX Smart Contracts
-	DexTrades []GetRouterAddressFromPairBaseCurrencyEthereumDexTrades `json:"dexTrades"`
+	DexTrades []GetRouterAddressFromPairBaseCurrencysEthereumDexTrades `json:"dexTrades"`
 }
 
-// GetDexTrades returns GetRouterAddressFromPairBaseCurrencyEthereum.DexTrades, and is useful for accessing the field via an interface.
-func (v *GetRouterAddressFromPairBaseCurrencyEthereum) GetDexTrades() []GetRouterAddressFromPairBaseCurrencyEthereumDexTrades {
+// GetDexTrades returns GetRouterAddressFromPairBaseCurrencysEthereum.DexTrades, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencysEthereum) GetDexTrades() []GetRouterAddressFromPairBaseCurrencysEthereumDexTrades {
 	return v.DexTrades
 }
 
-// GetRouterAddressFromPairBaseCurrencyEthereumDexTrades includes the requested fields of the GraphQL type EthereumDexTrades.
+// GetRouterAddressFromPairBaseCurrencysEthereumDexTrades includes the requested fields of the GraphQL type EthereumDexTrades.
 // The GraphQL type's documentation follows.
 //
 // Trades on DEX smart contracts
-type GetRouterAddressFromPairBaseCurrencyEthereumDexTrades struct {
+type GetRouterAddressFromPairBaseCurrencysEthereumDexTrades struct {
 	// Block in the blockchain
-	Block GetRouterAddressFromPairBaseCurrencyEthereumDexTradesBlockBlockExtended `json:"block"`
+	Block GetRouterAddressFromPairBaseCurrencysEthereumDexTradesBlockBlockExtended `json:"block"`
 	// Transaction of DexTrade
-	Transaction GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtended `json:"transaction"`
+	Transaction GetRouterAddressFromPairBaseCurrencysEthereumDexTradesTransactionEthereumTransactionInfoExtended `json:"transaction"`
 }
 
-// GetBlock returns GetRouterAddressFromPairBaseCurrencyEthereumDexTrades.Block, and is useful for accessing the field via an interface.
-func (v *GetRouterAddressFromPairBaseCurrencyEthereumDexTrades) GetBlock() GetRouterAddressFromPairBaseCurrencyEthereumDexTradesBlockBlockExtended {
+// GetBlock returns GetRouterAddressFromPairBaseCurrencysEthereumDexTrades.Block, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencysEthereumDexTrades) GetBlock() GetRouterAddressFromPairBaseCurrencysEthereumDexTradesBlockBlockExtended {
 	return v.Block
 }
 
-// GetTransaction returns GetRouterAddressFromPairBaseCurrencyEthereumDexTrades.Transaction, and is useful for accessing the field via an interface.
-func (v *GetRouterAddressFromPairBaseCurrencyEthereumDexTrades) GetTransaction() GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtended {
+// GetTransaction returns GetRouterAddressFromPairBaseCurrencysEthereumDexTrades.Transaction, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencysEthereumDexTrades) GetTransaction() GetRouterAddressFromPairBaseCurrencysEthereumDexTradesTransactionEthereumTransactionInfoExtended {
 	return v.Transaction
 }
 
-// GetRouterAddressFromPairBaseCurrencyEthereumDexTradesBlockBlockExtended includes the requested fields of the GraphQL type BlockExtended.
+// GetRouterAddressFromPairBaseCurrencysEthereumDexTradesBlockBlockExtended includes the requested fields of the GraphQL type BlockExtended.
 // The GraphQL type's documentation follows.
 //
 // BlockExtended
-type GetRouterAddressFromPairBaseCurrencyEthereumDexTradesBlockBlockExtended struct {
+type GetRouterAddressFromPairBaseCurrencysEthereumDexTradesBlockBlockExtended struct {
 	// Block number (height) in blockchain
 	Height int `json:"height"`
 }
 
-// GetHeight returns GetRouterAddressFromPairBaseCurrencyEthereumDexTradesBlockBlockExtended.Height, and is useful for accessing the field via an interface.
-func (v *GetRouterAddressFromPairBaseCurrencyEthereumDexTradesBlockBlockExtended) GetHeight() int {
+// GetHeight returns GetRouterAddressFromPairBaseCurrencysEthereumDexTradesBlockBlockExtended.Height, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencysEthereumDexTradesBlockBlockExtended) GetHeight() int {
 	return v.Height
 }
 
-// GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtended includes the requested fields of the GraphQL type EthereumTransactionInfoExtended.
+// GetRouterAddressFromPairBaseCurrencysEthereumDexTradesTransactionEthereumTransactionInfoExtended includes the requested fields of the GraphQL type EthereumTransactionInfoExtended.
 // The GraphQL type's documentation follows.
 //
 // Blockchain Transaction Extended info
-type GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtended struct {
+type GetRouterAddressFromPairBaseCurrencysEthereumDexTradesTransactionEthereumTransactionInfoExtended struct {
 	// Transaction receiver
-	To GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo `json:"to"`
+	To GetRouterAddressFromPairBaseCurrencysEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo `json:"to"`
 }
 
-// GetTo returns GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtended.To, and is useful for accessing the field via an interface.
-func (v *GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtended) GetTo() GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo {
+// GetTo returns GetRouterAddressFromPairBaseCurrencysEthereumDexTradesTransactionEthereumTransactionInfoExtended.To, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencysEthereumDexTradesTransactionEthereumTransactionInfoExtended) GetTo() GetRouterAddressFromPairBaseCurrencysEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo {
 	return v.To
 }
 
-// GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo includes the requested fields of the GraphQL type EthereumAddressInfo.
+// GetRouterAddressFromPairBaseCurrencysEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo includes the requested fields of the GraphQL type EthereumAddressInfo.
 // The GraphQL type's documentation follows.
 //
 // Address detailed information for Ethereum network
-type GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo struct {
+type GetRouterAddressFromPairBaseCurrencysEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo struct {
 	// String address representation
 	Address string `json:"address"`
 }
 
-// GetAddress returns GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo.Address, and is useful for accessing the field via an interface.
-func (v *GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo) GetAddress() string {
+// GetAddress returns GetRouterAddressFromPairBaseCurrencysEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo.Address, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencysEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo) GetAddress() string {
 	return v.Address
 }
 
-// GetRouterAddressFromPairBaseCurrencyResponse is returned by GetRouterAddressFromPairBaseCurrency on success.
-type GetRouterAddressFromPairBaseCurrencyResponse struct {
+// GetRouterAddressFromPairBaseCurrencysResponse is returned by GetRouterAddressFromPairBaseCurrencys on success.
+type GetRouterAddressFromPairBaseCurrencysResponse struct {
 	// Ethereum Mainnet / Classic Chain Datasets
-	Ethereum GetRouterAddressFromPairBaseCurrencyEthereum `json:"ethereum"`
+	Ethereum GetRouterAddressFromPairBaseCurrencysEthereum `json:"ethereum"`
 }
 
-// GetEthereum returns GetRouterAddressFromPairBaseCurrencyResponse.Ethereum, and is useful for accessing the field via an interface.
-func (v *GetRouterAddressFromPairBaseCurrencyResponse) GetEthereum() GetRouterAddressFromPairBaseCurrencyEthereum {
+// GetEthereum returns GetRouterAddressFromPairBaseCurrencysResponse.Ethereum, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencysResponse) GetEthereum() GetRouterAddressFromPairBaseCurrencysEthereum {
 	return v.Ethereum
 }
 
@@ -608,27 +608,29 @@ func (v *__GetPairCreatedByFactoryInput) GetLimit() int { return v.Limit }
 // GetFactoryAddress returns __GetPairCreatedByFactoryInput.FactoryAddress, and is useful for accessing the field via an interface.
 func (v *__GetPairCreatedByFactoryInput) GetFactoryAddress() string { return v.FactoryAddress }
 
-// __GetRouterAddressFromPairBaseCurrencyInput is used internally by genqlient
-type __GetRouterAddressFromPairBaseCurrencyInput struct {
+// __GetRouterAddressFromPairBaseCurrencysInput is used internally by genqlient
+type __GetRouterAddressFromPairBaseCurrencysInput struct {
 	Network        EthereumNetwork `json:"network"`
 	FactoryAddress string          `json:"factoryAddress"`
-	BaseCurrency   string          `json:"baseCurrency"`
+	TokenAddresses []string        `json:"tokenAddresses"`
 	Limit          int             `json:"limit"`
 }
 
-// GetNetwork returns __GetRouterAddressFromPairBaseCurrencyInput.Network, and is useful for accessing the field via an interface.
-func (v *__GetRouterAddressFromPairBaseCurrencyInput) GetNetwork() EthereumNetwork { return v.Network }
+// GetNetwork returns __GetRouterAddressFromPairBaseCurrencysInput.Network, and is useful for accessing the field via an interface.
+func (v *__GetRouterAddressFromPairBaseCurrencysInput) GetNetwork() EthereumNetwork { return v.Network }
 
-// GetFactoryAddress returns __GetRouterAddressFromPairBaseCurrencyInput.FactoryAddress, and is useful for accessing the field via an interface.
-func (v *__GetRouterAddressFromPairBaseCurrencyInput) GetFactoryAddress() string {
+// GetFactoryAddress returns __GetRouterAddressFromPairBaseCurrencysInput.FactoryAddress, and is useful for accessing the field via an interface.
+func (v *__GetRouterAddressFromPairBaseCurrencysInput) GetFactoryAddress() string {
 	return v.FactoryAddress
 }
 
-// GetBaseCurrency returns __GetRouterAddressFromPairBaseCurrencyInput.BaseCurrency, and is useful for accessing the field via an interface.
-func (v *__GetRouterAddressFromPairBaseCurrencyInput) GetBaseCurrency() string { return v.BaseCurrency }
+// GetTokenAddresses returns __GetRouterAddressFromPairBaseCurrencysInput.TokenAddresses, and is useful for accessing the field via an interface.
+func (v *__GetRouterAddressFromPairBaseCurrencysInput) GetTokenAddresses() []string {
+	return v.TokenAddresses
+}
 
-// GetLimit returns __GetRouterAddressFromPairBaseCurrencyInput.Limit, and is useful for accessing the field via an interface.
-func (v *__GetRouterAddressFromPairBaseCurrencyInput) GetLimit() int { return v.Limit }
+// GetLimit returns __GetRouterAddressFromPairBaseCurrencysInput.Limit, and is useful for accessing the field via an interface.
+func (v *__GetRouterAddressFromPairBaseCurrencysInput) GetLimit() int { return v.Limit }
 
 // __GetTopNDexsForNetworkInput is used internally by genqlient
 type __GetTopNDexsForNetworkInput struct {
@@ -803,20 +805,20 @@ query GetPairCreatedByFactory ($network: EthereumNetwork!, $limit: Int!, $factor
 	return &data, err
 }
 
-func GetRouterAddressFromPairBaseCurrency(
+func GetRouterAddressFromPairBaseCurrencys(
 	ctx context.Context,
 	client graphql.Client,
 	network EthereumNetwork,
 	factoryAddress string,
-	baseCurrency string,
+	tokenAddresses []string,
 	limit int,
-) (*GetRouterAddressFromPairBaseCurrencyResponse, error) {
+) (*GetRouterAddressFromPairBaseCurrencysResponse, error) {
 	req := &graphql.Request{
-		OpName: "GetRouterAddressFromPairBaseCurrency",
+		OpName: "GetRouterAddressFromPairBaseCurrencys",
 		Query: `
-query GetRouterAddressFromPairBaseCurrency ($network: EthereumNetwork!, $factoryAddress: String!, $baseCurrency: String!, $limit: Int!) {
+query GetRouterAddressFromPairBaseCurrencys ($network: EthereumNetwork!, $factoryAddress: String!, $tokenAddresses: [String!], $limit: Int!) {
 	ethereum(network: $network) {
-		dexTrades(options: {limit:$limit,desc:"block.height"}, baseCurrency: {is:$baseCurrency}, exchangeAddress: {is:$factoryAddress}) {
+		dexTrades(options: {limit:$limit,desc:"block.height"}, baseCurrency: {in:$tokenAddresses}, exchangeAddress: {is:$factoryAddress}) {
 			block {
 				height
 			}
@@ -829,16 +831,16 @@ query GetRouterAddressFromPairBaseCurrency ($network: EthereumNetwork!, $factory
 	}
 }
 `,
-		Variables: &__GetRouterAddressFromPairBaseCurrencyInput{
+		Variables: &__GetRouterAddressFromPairBaseCurrencysInput{
 			Network:        network,
 			FactoryAddress: factoryAddress,
-			BaseCurrency:   baseCurrency,
+			TokenAddresses: tokenAddresses,
 			Limit:          limit,
 		},
 	}
 	var err error
 
-	var data GetRouterAddressFromPairBaseCurrencyResponse
+	var data GetRouterAddressFromPairBaseCurrencysResponse
 	resp := &graphql.Response{Data: &data}
 
 	err = client.MakeRequest(

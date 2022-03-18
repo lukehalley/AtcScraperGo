@@ -36,11 +36,11 @@ query GetPairCreatedByFactory($network: EthereumNetwork!, $limit: Int!, $factory
   }
 }
 
-query GetRouterAddressFromPairBaseCurrency ($network: EthereumNetwork!, $factoryAddress: String!, $baseCurrency: String!, $limit: Int!) {
+query GetRouterAddressFromPairBaseCurrencys ($network: EthereumNetwork!, $factoryAddress: String!, $tokenAddresses: [String!], $limit: Int!) {
   ethereum(network: $network) {
     dexTrades(
       options: {limit: $limit, desc: "block.height"}
-      baseCurrency: {is: $baseCurrency}
+      baseCurrency: {in: $tokenAddresses}
       exchangeAddress: {is: $factoryAddress}
     ) {
       block {
