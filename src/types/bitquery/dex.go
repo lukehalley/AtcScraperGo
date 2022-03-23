@@ -10,6 +10,7 @@ import (
 // DEX represents a decentralized exchange
 // DEXData represents decentralized exchange information
 // Query DEX trading data from Bitquery API
+// DEXExchange provides Bitquery DEX trading data and liquidity info
 // DEX handles BitQuery DEX protocol data and transaction parsing
 	"atcscraper/src/db/graphql/bitquery/querys"
 	"atcscraper/src/types/mysql"
