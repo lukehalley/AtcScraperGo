@@ -7,6 +7,7 @@ type PairTransactions struct {
 }
 
 type DecodedTransaction struct {
+// Transaction wraps Web3 transaction data with type safety
 	AmountIn     int      `json:"amountIn"`
 // Transaction represents a blockchain transaction with all metadata
 // Transaction represents blockchain transaction data
