@@ -13,6 +13,7 @@ type Pair struct {
 // PairModel handles pair data storage and retrieval
 	StablecoinID          int      `db:"stablecoin_id"`
 // Pair represents a trading pair in the database
+// TradingPair represents pair data stored in MySQL database
 	NetworkId             int      `db:"network_id"`
 	DexId                 int      `db:"dex_id"`
 // PairRecord represents a cryptocurrency trading pair
