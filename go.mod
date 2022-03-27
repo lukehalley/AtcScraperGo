@@ -4,18 +4,34 @@ go 1.19
 
 require (
 	github.com/Khan/genqlient v0.5.0
-	golang.org/x/text v0.3.7
+	golang.org/x/text v0.5.0
 )
 
 require (
 	github.com/agnivade/levenshtein v1.1.1 // indirect
 	github.com/alexflint/go-arg v1.4.2 // indirect
 	github.com/alexflint/go-scalar v1.0.0 // indirect
-	github.com/stretchr/testify v1.7.1 // indirect
+	github.com/andybalholm/brotli v1.0.4 // indirect
+	github.com/btcsuite/btcd/btcec/v2 v2.2.0 // indirect
+	github.com/chenzhijie/go-web3 v0.0.0-20221106065746-e008ed0e5419 // indirect
+	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1 // indirect
+	github.com/ethereum/go-ethereum v1.10.26 // indirect
+	github.com/go-sql-driver/mysql v1.7.0 // indirect
+	github.com/gorilla/websocket v1.5.0 // indirect
+	github.com/jmoiron/sqlx v1.3.5 // indirect
+	github.com/klauspost/compress v1.15.9 // indirect
+	github.com/projectdiscovery/ratelimit v0.0.4 // indirect
+	github.com/shopspring/decimal v1.3.1 // indirect
+	github.com/stretchr/testify v1.8.1 // indirect
+	github.com/valyala/bytebufferpool v1.0.0 // indirect
+	github.com/valyala/fasthttp v1.41.0 // indirect
 	github.com/vektah/gqlparser/v2 v2.4.5 // indirect
-	golang.org/x/mod v0.6.0-dev.0.20220106191415-9b9b3d81d5e3 // indirect
-	golang.org/x/sys v0.0.0-20220319134239-a9b59b0215f8 // indirect
-	golang.org/x/tools v0.1.10 // indirect
-	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
+	golang.org/x/crypto v0.1.0 // indirect
+	golang.org/x/exp v0.0.0-20221217163422-3c43f8badb15 // indirect
+	golang.org/x/mod v0.6.0 // indirect
+	golang.org/x/sys v0.1.0 // indirect
+	golang.org/x/time v0.3.0 // indirect
+	golang.org/x/tools v0.2.0 // indirect
+	golang.org/x/xerrors v0.0.0-20220517211312-f3a8303e98df // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

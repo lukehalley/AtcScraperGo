@@ -91,11 +91,13 @@ query GetAllStablecoinPairsCreatedForDex($network: EthereumNetwork!, $from: ISO8
       baseCurrency {
         symbol
         address
+        decimals
       }
       baseAmount
       quoteCurrency {
         symbol
         address
+        decimals
       }
       quoteAmount
       trades: count
