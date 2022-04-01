@@ -79,11 +79,10 @@ query GetAllStablecoinPairsCreatedForDex($network: EthereumNetwork!, $from: ISO8
   ethereum(network: $network) {
     dexTrades(
       options: {asc: "timeInterval.second", limit: $limit}
-      time: {after: $from }
+      time: {after: $from}
       exchangeAddress: {is: $factoryAddress}
       quoteCurrency: {in: $stablecoinAddresses}
       tradeAmountUsd: {gt: $tradeAmountUsd}
-
     ) {
       timeInterval {
         second(count: 60)
@@ -108,6 +107,9 @@ query GetAllStablecoinPairsCreatedForDex($network: EthereumNetwork!, $from: ISO8
       close: maximum(of: block, get: quote_price)
       volume: quoteAmount
       count: count
+      transaction {
+        hash
+      }
     }
   }
 }
