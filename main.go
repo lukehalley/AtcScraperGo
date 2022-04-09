@@ -1,181 +1,169 @@
 package main
 
 import (
-	"atcscraper/src/data"
-	"atcscraper/src/db/graphql/bitquery/querys"
-	graphql_helpers "atcscraper/src/db/graphql/helpers"
-	insert "atcscraper/src/db/mysql/insert"
-	query "atcscraper/src/db/mysql/query"
+	"atcscraper/src/api/chainlist/requests"
+	geckoterminal_api "atcscraper/src/api/geckoterminal/requests"
+	mysql_insert "atcscraper/src/db/mysql/insert"
+	mysql_query "atcscraper/src/db/mysql/query"
 	"atcscraper/src/io"
-	"atcscraper/src/types/bitquery"
-	dex "atcscraper/src/web3"
-	"context"
+	logging "atcscraper/src/log"
+	geckoterminal_types "atcscraper/src/types/geckoterminal"
 	"fmt"
-	"github.com/Khan/genqlient/graphql"
-	"github.com/projectdiscovery/ratelimit"
 	"log"
 	"os"
 	"strconv"
-	"time"
+	"strings"
 )
 
 func main() {
 
+	// Init Vars
+	var CollectedData []geckoterminal_types.GeckoTerminalNetworkWithDexs
+
 	// Env Vars
+	// LazyMode := false
 	CacheMode, _ := strconv.ParseBool(os.Getenv("CACHE_MODE"))
 
-	////////////////////////////////////////////////////
-	// Init Vars
-	////////////////////////////////////////////////////
+	logging.LogSeparator(false)
+	log.Printf("Collecting Coingecko CoingeckoBuildID")
+	logging.LogSeparator(false)
 
-	// List For Storing Network Dexs
-	var ProcessedNetworkDexs []bitquery.Dex
-	var DexsWithPairs []bitquery.Dex
+	CoingeckoBuildID := geckoterminal_api.GetGeckoterminalBuildID()
+	ChainlistBuildID := chainlist.GetChainlistBuildID()
 
-	// Set Our Beginning Time For Timeframe
-	FromTime := graphql_helpers.GenerateGraphQLTimestamp("2022-12-01T01:00:00Z")
-
-	// Set Our NetworkObject
-	NumberOfDexsToCollect := 5
-
-	////////////////////////////////////////////////////
-	// Setup HTTP Client For API Calls
-	////////////////////////////////////////////////////
-
-	// Get The Bitquery API Key
-	BitqueryApiKey := "BQY6Sk2AvIsRy20KFTdNXuiSvDr9DEtR"
-
-	// Create Query Client
-	HTTPClient := graphql_helpers.CreateHTTPClientWithAuth(BitqueryApiKey)
-	QueryClient := graphql.NewClient("https://graphql.bitquery.io", &HTTPClient)
-	QueryContext := context.Background()
-
-	////////////////////////////////////////////////////
-	// Get Bitquery Account Details
-	////////////////////////////////////////////////////
-
-	graphql_helpers.LogSeparator(false)
-
-	// Get Out Current Bitquery Account Details
-	StartAccountQuery, QueryError := atcqueries.GetBitQueryAccountDetails(QueryContext, QueryClient, BitqueryApiKey)
-	StartingBitQueryPoints, _ := strconv.Atoi(StartAccountQuery.Utilities.ActivePeriod.PointsRemaining)
-
-	// Catch Query Errors
-	if QueryError != nil {
-		log.Panicln("Error Querying Bitquery Account:", QueryError)
-	} else {
-		log.Printf("Bitquery Points Balance: %v", StartingBitQueryPoints)
-	}
-
-	graphql_helpers.LogSeparator(true)
+	log.Printf("Coingecko Build ID: %v", CoingeckoBuildID)
+	log.Printf("ChainList Build ID: %v", ChainlistBuildID)
+	logging.LogSeparator(true)
 
 	if !CacheMode {
 
 		////////////////////////////////////////////////////
-		// Collect Networks + Stablecoins
+		// Call GT To Get Networks
 		////////////////////////////////////////////////////
 
-		Networks := data.GetNetworkList()
+		logging.LogSeparator(false)
+		log.Printf("Collecting Coingecko Networks")
+		logging.LogSeparator(false)
+
+		Networks := geckoterminal_api.GetGeckoterminalNetworks(CoingeckoBuildID)
+
+		log.Printf("Collected %d Networks", len(Networks.Networks))
+		logging.LogSeparator(true)
+
 
 		////////////////////////////////////////////////////
-		// Get All UnprocessedNetworkDexs On Each NetworkObject
+		// Iterate Through Networks And Get All Their Dexs
 		////////////////////////////////////////////////////
 
-		// Start Log
-		graphql_helpers.LogSeparator(false)
-		log.Printf("Collecting Dex For %v Network(s)", len(Networks))
-		graphql_helpers.LogSeparator(false)
+		logging.LogSeparator(false)
+		log.Printf("Collecting Network Dexs")
+		logging.LogSeparator(false)
 
-		// Kick Off The Function Which Gets The Dexs For Each Network
-		var UnprocessedNetworkDexs [][]bitquery.Dex
-		DexCollectionRateLimit := ratelimit.New(context.Background(), 1, time.Duration(60 * time.Second))
-		for _, Network := range Networks {
-			DexCollectionRateLimit.Take()
-			CurrentNetworkDexs := data.CollectDexsForNetwork(Network, NumberOfDexsToCollect, FromTime, QueryContext, QueryClient)
-			UnprocessedNetworkDexs = append(UnprocessedNetworkDexs, CurrentNetworkDexs)
-		}
+		for _, Network := range Networks.Networks {
 
-		graphql_helpers.LogSeparator(false)
+			// Create Collection Object
+			var NetworkWithDexsAndPairs geckoterminal_types.GeckoTerminalNetworkWithDexs
 
-		// Get Non-Null Dexs
-		for _, NetworkDex := range UnprocessedNetworkDexs {
-			CurrentNetwork := data.TitleCaseString(string(NetworkDex[0].Network.Name))
-			NetworkDexCount := 0
-			for _, Dex := range NetworkDex {
-				if Dex.RouterAddress != "" && Dex.FactoryAddress != "" {
-					NetworkDexCount = NetworkDexCount + 1
-					ProcessedNetworkDexs = append(ProcessedNetworkDexs, Dex)
+			// Get Chain RPCs
+			ChainInfo := chainlist.GetChainInfo(Network.Attributes.ChainID, ChainlistBuildID)
+
+			var FilteredRPCs []string
+			for _, RPC := range ChainInfo.PageProps.Chain.RPC {
+				if !(strings.Contains(RPC.URL, "API")) {
+					FilteredRPCs = append(FilteredRPCs, RPC.URL)
 				}
 			}
-			log.Printf("[%v] %v Dex(s)", CurrentNetwork, NetworkDexCount)
-		}
 
-		// Result Log
-		graphql_helpers.LogSeparator(false)
-		log.Printf("Collected %v Dex(s) Across %v Network(s)", len(ProcessedNetworkDexs), len(Networks))
-		graphql_helpers.LogSeparator(true)
+			// Check If We Have Any RPCs
+			if len(FilteredRPCs) > 0 {
 
-		// Sleep For 1 Min For Rate Limit
-		time.Sleep(60 * time.Second)
+				// Add RPCs
+				for _, RPCUrl := range FilteredRPCs {
+					NetworkWithDexsAndPairs.RPCs = append(NetworkWithDexsAndPairs.RPCs, RPCUrl)
+				}
 
-		////////////////////////////////////////////////////
-		// Get Dex Pairs
-		////////////////////////////////////////////////////
+				// Add Network Details
+				NetworkWithDexsAndPairs.Network = struct {
+					Name                  string
+					Identifier            string
+					ChainID               int
+					ExplorerURL           string
+					NativeCurrencySymbol  string
+					NativeCurrencyAddress string
+					PoolReserveThreshold  string
+					ImageURL              string
+					ExplorerLogoURL       string
+				} (Network.Attributes)
 
-		// Pair Log
-		graphql_helpers.LogSeparator(false)
-		log.Printf("Collecting Pairs For %v Dexs(s)", len(ProcessedNetworkDexs))
-		graphql_helpers.LogSeparator(false)
+				NetworkQueryResults := mysql_query.GetNetwork(NetworkWithDexsAndPairs.Network.Identifier, NetworkWithDexsAndPairs.Network.ChainID)
+				var NetworkDBID int64
+				if len(NetworkQueryResults) > 0 {
+					NetworkDBID = int64(NetworkQueryResults[0].NetworkId)
+				} else {
+					// Add Network To DB
+					NetworkDBID = mysql_insert.AddNetworkToDB(
+						NetworkWithDexsAndPairs.Network.Identifier,
+						NetworkWithDexsAndPairs.Network.ChainID,
+						FilteredRPCs,
+						"",
+						"",
+						ChainInfo.PageProps.Chain.Explorers[0].Standard,
+						NetworkWithDexsAndPairs.Network.ExplorerURL,
+						NetworkWithDexsAndPairs.Network.NativeCurrencySymbol,
+						NetworkWithDexsAndPairs.Network.NativeCurrencyAddress,
+						1,
+						5,
+					)
+				}
 
-		// For Each Dex - Get All Pairs Matched With Selected Stablecoins
-		PairCollectionRateLimit := ratelimit.New(context.Background(), 10, time.Duration(60 * time.Second))
-		for _, Dex := range ProcessedNetworkDexs {
-			PairCollectionRateLimit.Take()
-			Dex.Pairs = data.CollectStablecoinPairsForDex(Dex, 1000, FromTime, QueryContext, QueryClient)
-			if len(Dex.Pairs) > 0 {
-				DexsWithPairs = append(DexsWithPairs, Dex)
-				log.Printf("Collected %v Pairs(s) For Dex %v On Network %v", len(Dex.Pairs), Dex.FactoryAddress, Dex.Network.Name)
+				fmt.Printf("NetworkDBID: %d", NetworkDBID)
+
+				// Call API To Retrieve Network Dexs
+				var DexResponse geckoterminal_types.GeckoTerminalDexs
+				DexResponse = geckoterminal_api.GetGeckoterminalDexsForNetwork(CoingeckoBuildID, Network.Attributes.Identifier)
+
+				// Iterate Through Networks Dexs
+				for _, Dex := range DexResponse.PageProps.Dexes {
+
+					// Create New Dex Object
+					var CollectedDex geckoterminal_types.Dex
+
+					// Get Values
+					CollectedDex.Name = Dex.Attributes.Name
+					CollectedDex.Identifier = Dex.Attributes.Identifier
+					CollectedDex.ImageURL = Dex.Attributes.ImageURL
+					CollectedDex.URL = Dex.Attributes.URL
+
+					// Add It To Networks Dex List
+					NetworkWithDexsAndPairs.Dexes = append(NetworkWithDexsAndPairs.Dexes, CollectedDex)
+				}
+
+				log.Printf("[%v] %v Dex(s)", Network.Attributes.Name, len(NetworkWithDexsAndPairs.Dexes))
+
+				// Add Network With Data To Master List
+				CollectedData = append(CollectedData, NetworkWithDexsAndPairs)
+
 			}
+
 		}
 
-		graphql_helpers.LogSeparator(true)
+		logging.LogSeparator(true)
 
 		////////////////////////////////////////////////////
 		// Save Data To Local Cache
 		////////////////////////////////////////////////////
 
 		// Cache Log
-		graphql_helpers.LogSeparator(false)
+		logging.LogSeparator(false)
 		log.Printf("Saving Data To Local Cache...")
-		graphql_helpers.LogSeparator(false)
+		logging.LogSeparator(false)
 
 		// Save Data To Local File
-		io.SaveDataToCache(DexsWithPairs, "DexCache")
+		io.SaveGTDataToCache(CollectedData, "GTCollectedData")
 
 		// Finish Log
 		log.Printf("Data Saved")
-		graphql_helpers.LogSeparator(true)
-
-		////////////////////////////////////////////////////
-		// Calculate How Many Bitquery Points We Used
-		////////////////////////////////////////////////////
-
-		graphql_helpers.LogSeparator(false)
-
-		// Get Out Current Bitquery Account Details
-		EndAccountQuery, EndQueryError := atcqueries.GetBitQueryAccountDetails(QueryContext, QueryClient, BitqueryApiKey)
-		EndingBitQueryPoints, _ := strconv.Atoi(EndAccountQuery.Utilities.ActivePeriod.PointsRemaining)
-		UsedBitQueryPoints := StartingBitQueryPoints - EndingBitQueryPoints
-
-		// Catch Query Errors
-		if EndQueryError != nil {
-			log.Panicln("Error Querying Bitquery Account:", EndQueryError)
-		} else {
-			log.Printf("New Bitquery Points Balance: %v", StartingBitQueryPoints)
-			log.Printf("Final BitQuery Points Usage: %v", UsedBitQueryPoints)
-		}
-
-		graphql_helpers.LogSeparator(true)
+		logging.LogSeparator(true)
 
 	} else {
 
@@ -184,102 +172,77 @@ func main() {
 		////////////////////////////////////////////////////
 
 		// Read Local Cache
-		DexsWithPairs = io.ReadCacheFile("DexCache")
+		CollectedData = io.ReadGTCacheFile("GTCollectedData")
 
-		graphql_helpers.LogSeparator(false)
-		log.Printf("Read %v Dex(s) From Cache", len(DexsWithPairs))
-		graphql_helpers.LogSeparator(true)
+		logging.LogSeparator(false)
+		log.Printf("Read %v Networks(s) From Cache", len(CollectedData))
+		logging.LogSeparator(true)
 
 	}
 
 	////////////////////////////////////////////////////
-	// Write Tokens To DB
+	// Get Dex Pairs
 	////////////////////////////////////////////////////
 
-	graphql_helpers.LogSeparator(false)
-	log.Printf("Inserting Collected Pairs To DB")
-	graphql_helpers.LogSeparator(false)
+	// Iterate Through Networks Dexs
+	for _, Network := range CollectedData {
 
-	// Group Networks With Their Stablecoins
-	for _, Dex := range DexsWithPairs {
-		for _, DexPair := range Dex.Pairs {
+		// Get Pairs For Each Dex
+		for _, Dex := range Network.Dexes {
 
-			////////////////////////////////////////////////////
-			// Add or Read Dex
-			////////////////////////////////////////////////////
+			// Get All Pairs For Current Dex
+			DexPairs := geckoterminal_api.GetGeckoterminalDexPairs(Network.Network.Identifier, Dex.Identifier, 1)
 
-			// Check If The Dex Is Already Stored
-			RetrievedDexDBId := query.GetDexFromDB(Dex.RouterAddress, Dex.FactoryAddress, Dex.Network.NetworkId)
-			DexDBId := int64(0)
+			// Iterate Through Pairs We Got
+			for _, DexPair := range DexPairs.Data {
 
-			// If The Dex Not Already Stored - Add It To The DB
-			if len(RetrievedDexDBId) < 1 {
-				// Add The Current Dex To The DB
-				DexDBId = insert.AddDexToDB(Dex.RouterAddress, Dex.FactoryAddress, Dex.Network.NetworkId)
-			} else {
-				DexDBId = int64(RetrievedDexDBId[0].DexId)
-			}
+				// Create New Pair Object
+				var Pair geckoterminal_types.Pair
 
-			////////////////////////////////////////////////////
-			// Add or Read Base Currency
-			////////////////////////////////////////////////////
+				// Add The Pair Address
+				Pair.Address = DexPair.Attributes.Address
 
-			// Check If The Base Currency Token Is Already Stored
-			RetrievedDBBaseCurrency := query.GetTokenFromDB(Dex.Network.NetworkId, DexPair.BaseCurrency.Address, DexPair.BaseCurrency.Symbol)
-			BaseCurrencyDBId := int64(0)
+				// Get Current Pair Transactions
+				PairTransactions := geckoterminal_api.GetGeckoterminalPairTransactionsAndTokens(Network.Network.Identifier, Pair.Address, 1)
 
-			// Add The Base Token To The DB If It's Not Stored
-			if len(RetrievedDBBaseCurrency) < 1 {
-				BaseCurrencyDBId = insert.AddTokenToDB(DexPair.BaseCurrency.Symbol, DexPair.BaseCurrency.Address, DexPair.BaseCurrency.Decimals, 0, Dex.Network.NetworkId)
-			} else {
-				BaseCurrencyDBId = int64(RetrievedDBBaseCurrency[0].TokenId)
-			}
+				// Collect Transactions
+				for _, PairTransaction := range PairTransactions.Data {
+					Pair.Transactions = append(Pair.Transactions, PairTransaction.Attributes.TxHash)
+				}
 
-			////////////////////////////////////////////////////
-			// Add or Read Quote Currency
-			////////////////////////////////////////////////////
+				if len(Pair.Transactions) > 0 {
 
-			// Query The DB For The DB ID Of Pairs RetrievedDBStablecoinDB
-			RetrievedDBStablecoinDB := query.GetTokenFromDB(Dex.Network.NetworkId, DexPair.QuoteCurrency.Address, DexPair.QuoteCurrency.Symbol)
-			StablecoinDBId := int64(0)
+					// Add Base Token Details
+					var BaseToken geckoterminal_types.Token
+					BaseToken.Name = PairTransactions.Included[0].Attributes.Name
+					BaseToken.Symbol = PairTransactions.Included[0].Attributes.Symbol
+					BaseToken.Address = PairTransactions.Included[0].Attributes.Address
+					Pair.BaseToken = BaseToken
 
-			// Add The Quote Token To The DB If It's Not Stored
-			if len(RetrievedDBStablecoinDB) < 1 {
-				StablecoinDBId = insert.AddTokenToDB(DexPair.QuoteCurrency.Symbol, DexPair.QuoteCurrency.Address, DexPair.QuoteCurrency.Decimals, 1, Dex.Network.NetworkId)
-			} else {
-				StablecoinDBId = int64(RetrievedDBStablecoinDB[0].TokenId)
-			}
+					// Add Quote Token Details
+					var QuoteToken geckoterminal_types.Token
+					QuoteToken.Name = PairTransactions.Included[1].Attributes.Name
+					QuoteToken.Symbol = PairTransactions.Included[1].Attributes.Symbol
+					QuoteToken.Address = PairTransactions.Included[1].Attributes.Address
+					Pair.QuoteToken = QuoteToken
 
-			////////////////////////////////////////////////////
-			// Add or Read Pair
-			////////////////////////////////////////////////////
+					// Add The Pair Address
+					Pair.Name = fmt.Sprintf("%v/%v", BaseToken.Symbol, QuoteToken.Symbol)
 
-			// Build The Pairs Name
-			PairName := fmt.Sprintf("%v/%v", DexPair.BaseCurrency.Symbol, DexPair.QuoteCurrency.Symbol)
+					// Append The Pair To Out Collection
+					Dex.Pairs = append(Dex.Pairs, Pair)
 
-			// Get The Address Of The Pair
-			PairAddress := dex.GetPairAddress(DexPair.BaseCurrency.Address, DexPair.QuoteCurrency.Address, Dex.FactoryAddress, Dex.Network.ChainRpc)
-
-			// Check If The Pair Is Already Stored
-			RetrievedDBPair := query.GetPairFromDB(PairAddress, Dex.Network.NetworkId)
-
-			// Add The Pair To The DB If It's Not Stored
-			if len(RetrievedDBPair) < 1 {
-
-				// Insert The Pair Into The DB
-				insert.AddPairToDB(BaseCurrencyDBId, StablecoinDBId, Dex.Network.NetworkId, DexDBId, PairName, PairAddress)
-
-				log.Printf("Added: %v [%v]", PairName, Dex.Network.Name)
-
-			} else {
-
-				log.Printf("Already Present: %v [%v]", PairName, Dex.Network.Name)
+				}
 
 			}
+
+			log.Printf("[%v - %v] %v Pairs(s)", Network.Network.Name, Dex.Name, len(Dex.Pairs))
 
 		}
-	}
 
-	graphql_helpers.LogSeparator(true)
+
+		// Get Pair Transactions
+		geckoterminal_api.GetGeckoterminalPairTransactionsAndTokens(Network.Network.Identifier, "Yo", 1)
+	}
 
 }

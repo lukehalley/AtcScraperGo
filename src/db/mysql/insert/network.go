@@ -5,17 +5,39 @@ import (
 	"fmt"
 )
 
+func AddNetworkToDB(NetworkName string, ChainNumber int, ChainRPCs []string, ExplorerAPIPrefix string, ExplorerAPIKey string, ExplorerTxURL string, ExplorerType string, GasSymbol string, GasAddress string, MinGas int, MaxGas int) int64 {
 
-func AddDexToDB(RouterAddress string, FactoryAddress string, NetworkId int) int64 {
+	// Make Sure We Only Put Max 5 RPCs In
+	if len(ChainRPCs) > 5 {
+		ChainRPCs = ChainRPCs[0:4]
+	}
 
-	DBKeys := "network_id, router_address, factory_address"
-	SelectStatement := fmt.Sprintf("(SELECT %d AS network_id, '%v' AS router_address, '%v' AS factory_address)", NetworkId, RouterAddress, FactoryAddress)
-	CompareStatement := fmt.Sprintf("dexs.network_id = %d AND dexs.router_address = '%v' AND dexs.factory_address = '%v'", NetworkId, RouterAddress, FactoryAddress)
+	// Build Our RPC Insert String
+	var RPCSQLString string
+	var RPCKeys string
+	for Index, ChainRPC := range ChainRPCs {
+		IndexPlus := Index + 1
 
-	InsertQuery := "INSERT INTO dexs(" + DBKeys + ") SELECT * FROM " + SelectStatement + " AS tmp WHERE NOT EXISTS (SELECT * FROM dexs WHERE " + CompareStatement + ") LIMIT 1"
+		IsLastRPC := len(ChainRPCs) == IndexPlus
 
-	InsertedDexID := mysqlutils.ExecuteInsert(InsertQuery)
+		RPCSQLString = RPCSQLString + fmt.Sprintf("'%v' AS chain_rpc_%d", ChainRPC, IndexPlus)
+		RPCKeys = RPCKeys + fmt.Sprintf("chain_rpc_%d", IndexPlus)
 
-	return InsertedDexID
+		if !IsLastRPC {
+			RPCSQLString = RPCSQLString + ", "
+			RPCKeys = RPCKeys + ", "
+		}
+
+	}
+
+	DBKeys := fmt.Sprintf("name, chain_number, %v, explorer_api_prefix, explorer_api_key, explorer_tx_url, explorer_type, gas_symbol, gas_address, max_gas, min_gas", RPCKeys)
+	SelectStatement := fmt.Sprintf("(SELECT '%v' AS name, %d AS chain_number, %v, '%v' AS explorer_api_prefix, '%v' AS explorer_api_key, '%v' AS explorer_tx_url, '%v' AS explorer_type, '%v' AS gas_symbol, '%v' AS gas_address, %d AS max_gas, %d AS min_gas)", NetworkName, ChainNumber, RPCSQLString, ExplorerAPIPrefix, ExplorerAPIKey, ExplorerTxURL, ExplorerType, GasSymbol, GasAddress, MinGas, MaxGas)
+	CompareStatement := fmt.Sprintf("networks.name = '%v' AND networks.chain_number = %d", NetworkName, ChainNumber)
+
+	InsertQuery := "INSERT INTO networks(" + DBKeys + ") SELECT * FROM " + SelectStatement + " AS tmp WHERE NOT EXISTS (SELECT * FROM networks WHERE " + CompareStatement + ") LIMIT 1"
+
+	InsertedNetworkID := mysqlutils.ExecuteInsert(InsertQuery)
+
+	return InsertedNetworkID
 
 }

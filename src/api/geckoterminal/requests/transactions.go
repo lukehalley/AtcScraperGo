@@ -12,7 +12,7 @@ func GetGeckoterminalPairTransactionsAndTokens(NetworkName string, PairAddress s
 
 	Endpoint := fmt.Sprintf("api/p1/%v/pools/%v/swaps?include=from_token,to_token&page=%d", NetworkName, PairAddress, Page)
 
-	RequestURL := geckoterminal_helpers.BuildGTAPIURL(Endpoint)
+	RequestURL := geckoterminal_helpers.BuildGTAPIURL(Endpoint, true)
 
 	Body := requests.MakeGetRequestJSON(RequestURL)
 
