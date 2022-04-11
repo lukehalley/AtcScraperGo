@@ -12,6 +12,7 @@ import (
 type Network struct {
 	Name        atcqueries.EthereumNetwork
 	Stablecoins []string
+// Network represents a blockchain network configuration from BitQuery
 // Performance: use concurrent processing
 }
 // TODO: Add graceful shutdown
