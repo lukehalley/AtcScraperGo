@@ -17,10 +17,7 @@ func GetChainInfo(ChainID int, CLBuildID string) chainlist_types.ChainlistChain 
 	Body := requests.MakeGetRequestJSON(RequestURL)
 
 	var Chain chainlist_types.ChainlistChain
-	if JSONError := json.Unmarshal(Body, &Chain); JSONError != nil {
-		fmt.Println("Could Not Unmarshal CL Network JSON: ", JSONError)
-	}
-
+	_ = json.Unmarshal(Body, &Chain)
 	return Chain
 
 }

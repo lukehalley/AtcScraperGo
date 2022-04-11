@@ -2,14 +2,47 @@ package requests
 
 import (
 	"bytes"
+	"crypto/tls"
+	"crypto/x509"
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
+	"os"
 )
+
+func BuildProxyClient() *http.Client {
+
+	ProxyEndpoint := os.Getenv("ZYTE_ENDPOINT")
+	ProxyApiKey := os.Getenv("ZYTE_API_KEY")
+
+	ProxyCert, ProxyCertLoadError := ioutil.ReadFile("static/proxy/zyte-proxy-ca.cer")
+	if ProxyCertLoadError != nil {
+		log.Fatal(ProxyCertLoadError)
+	}
+
+	ProxyCertPool := x509.NewCertPool()
+	ProxyCertPool.AppendCertsFromPEM(ProxyCert)
+
+	RawURL := "http://" + ProxyApiKey + ":@" + ProxyEndpoint
+	ProxyURL, _ := url.Parse(RawURL)
+	ProxyClient := &http.Client{
+		Transport: &http.Transport{
+			Proxy: http.ProxyURL(ProxyURL),
+			TLSClientConfig: &tls.Config{
+				RootCAs: ProxyCertPool,
+			},
+		},
+	}
+
+	return ProxyClient
+}
 
 func MakeGetRequestRAW(RequestURL string) string {
 
-	Response, Error := http.Get(RequestURL)
+	ProxyClient := BuildProxyClient()
+
+	Response, Error := ProxyClient.Get(RequestURL)
 
 	if Error != nil {
 		log.Fatalln(Error)
@@ -23,7 +56,9 @@ func MakeGetRequestRAW(RequestURL string) string {
 
 func MakeGetRequestJSON(RequestURL string) []byte {
 
-	Response, Error := http.Get(RequestURL)
+	ProxyClient := BuildProxyClient()
+
+	Response, Error := ProxyClient.Get(RequestURL)
 
 	if Error != nil {
 		log.Fatalln(Error)

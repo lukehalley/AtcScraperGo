@@ -1,9 +1,14 @@
 package geckoterminal
 
+import "atcscraper/src/types/mysql"
+
 type GeckoTerminalNetworkWithDexs struct {
 	 Network               Network
+	 NetworkDBId           int
 	 Dexes                 []Dex
+	 DexDBId               int
 	 RPCs                  []string
+	 Stablecoins           []mysql.Stablecoin
 }
 
 type Network struct {
@@ -20,6 +25,8 @@ type Network struct {
 
 type Dex struct {
 	 Name                  string
+	 FactoryAddress        string
+	 RouterAddress         string
 	 Identifier            string
 	 URL                   string
 	 ImageURL              string

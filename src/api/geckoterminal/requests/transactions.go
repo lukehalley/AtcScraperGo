@@ -17,9 +17,7 @@ func GetGeckoterminalPairTransactionsAndTokens(NetworkName string, PairAddress s
 	Body := requests.MakeGetRequestJSON(RequestURL)
 
 	var TransactionsWithPairData geckoterminal.GeckoTerminalPairTransactions
-	if JSONError := json.Unmarshal(Body, &TransactionsWithPairData); JSONError != nil {
-		fmt.Println("Could Not Unmarshal GT Transactions And Pair JSON: ", JSONError)
-	}
+	_ = json.Unmarshal(Body, &TransactionsWithPairData)
 
 	return TransactionsWithPairData
 
