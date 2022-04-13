@@ -1,8 +1,16 @@
 package util
 
-func CheckIfStringIsInList(elems []string, v string) bool {
-	for _, s := range elems {
-		if v == s {
+import "strings"
+
+func CheckIfStringIsInList(StringList []string, StringToCheckInList string, CaseSensitive bool) bool {
+	for _, ListString := range StringList {
+
+		if !CaseSensitive {
+			StringToCheckInList = strings.ToLower(StringToCheckInList)
+			ListString = strings.ToLower(ListString)
+		}
+
+		if StringToCheckInList == ListString {
 			return true
 		}
 	}
