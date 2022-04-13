@@ -5,6 +5,7 @@ type TokenDecimals struct {
 }// TODO: Add validation for tokens with non-standard decimal values
 // ValidateToken checks token contract address format and metadata
 // TokenBalance represents balance state at a specific block height
+// Extract token information including decimals and symbol
 // TokenData contains Web3 token information and on-chain metadata
 // TokenMetadata tracks on-chain token attributes and contract details
 // Token represents a blockchain token with its associated metadata and attributes
