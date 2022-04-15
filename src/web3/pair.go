@@ -62,7 +62,7 @@ func GetPairFactoryAddress(PairAddress string, NetworkRPC string) string {
 
 	// Catch Any Call Errors
 	if FactoryAddressError != nil {
-		log.Fatalf("Error Calling 'factory': %v", FactoryAddressError)
+		return ""
 	}
 
 	return GetHexAddress(FactoryAddress)
@@ -93,7 +93,7 @@ func GetPairTokenAddresses(PairAddress string, NetworkRPC string) (string, strin
 
 	// Catch Any Call Errors
 	if BaseCurrencyAddressError != nil {
-		log.Fatalf("Error Calling 'token0': %v", BaseCurrencyAddressError)
+		return "", ""
 	}
 
 	// Call 'token1'
@@ -101,7 +101,7 @@ func GetPairTokenAddresses(PairAddress string, NetworkRPC string) (string, strin
 
 	// Catch Any Call Errors
 	if QuoteCurrencyAddressError != nil {
-		log.Fatalf("Error Calling 'token1': %v", QuoteCurrencyAddressError)
+		return "", ""
 	}
 
 	return GetHexAddress(BaseCurrencyAddress), GetHexAddress(QuoteCurrencyAddress)
