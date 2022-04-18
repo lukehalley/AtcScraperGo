@@ -359,10 +359,11 @@ func main() {
 						Pair.Name = fmt.Sprintf("%v/%v", BaseToken.Symbol, QuoteToken.Symbol)
 
 						// Check If Pair Contains A Stablecoin
-						IsStablecoinPair := (util.CheckIfStringIsInList(NetworkStablecoins, BaseToken.Address, false)) || (util.CheckIfStringIsInList(NetworkStablecoins, QuoteToken.Address, false))
+						BaseTokenIsStablecoin, BaseTokenMatchIndex := util.CheckIfStringIsInList(NetworkStablecoins, BaseToken.Address, false)
+						QuoteTokenIsStablecoin, QuoteTokenMatchIndex := util.CheckIfStringIsInList(NetworkStablecoins, QuoteToken.Address, false)
 
 						// Check If Pair Contains A Stablecoin
-						if IsStablecoinPair {
+						if BaseTokenIsStablecoin || QuoteTokenIsStablecoin {
 
 							// Collect Transactions
 							for PairTransactionIndex, PairTransaction := range Pair.Transactions {
@@ -382,6 +383,7 @@ func main() {
 
 							}
 
+							// Check If We Have Any Decoded Transactions
 							if len(Pair.Transactions) > 0 {
 
 								if DexDBId < 0 {
@@ -410,6 +412,92 @@ func main() {
 
 								// Append The Pair To Out Collection
 								Dex.Pairs = append(Dex.Pairs, Pair)
+
+								// DB Ids
+								var TokenDBId int64
+								var PairDBId int64
+								var RouteDBId int64
+
+								if BaseTokenIsStablecoin {
+
+									// Check If Our Token Is Already In DB
+									TokenQueryResults := mysql_query.GetTokenFromDB(Network.NetworkDBId, QuoteToken.Symbol, QuoteToken.Address)
+									if len(TokenQueryResults) > 0 {
+										// Set Token DB ID
+										TokenDBId = int64(TokenQueryResults[0].TokenId)
+									} else {
+										// Add Token To DB
+										TokenDBId = mysql_insert.AddTokenToDB(QuoteToken.Symbol, QuoteToken.Address, QuoteToken.Decimals, Network.NetworkDBId)
+									}
+
+									// Get Out Stablecoin Details
+									StablecoinDetails := Network.Stablecoins[BaseTokenMatchIndex]
+
+									// Check If Our Pair Is Already In DB
+									PairQueryResults := mysql_query.GetPairFromDB(Pair.Address, Network.NetworkDBId)
+									if len(PairQueryResults) > 0 {
+										// Set Pair DB ID
+										PairDBId = int64(PairQueryResults[0].PairId)
+									} else {
+										// Add Pair To DB
+										mysql_insert.AddPairToDB(TokenDBId, StablecoinDetails.StablecoinId, Network.NetworkDBId, DexDBId, Pair.Name, Pair.Address)
+									}
+
+								} else {
+
+									// Check If Our Token Is Already In DB
+									TokenQueryResults := mysql_query.GetTokenFromDB(Network.NetworkDBId, QuoteToken.Symbol, QuoteToken.Address)
+									if len(TokenQueryResults) > 0 {
+										// Set Token DB ID
+										TokenDBId = int64(TokenQueryResults[0].TokenId)
+									} else {
+										// Add Token To DB
+										TokenDBId = mysql_insert.AddTokenToDB(BaseToken.Symbol, BaseToken.Address, BaseToken.Decimals, Network.NetworkDBId)
+									}
+
+									// Get Out Stablecoin Details
+									StablecoinDetails := Network.Stablecoins[QuoteTokenMatchIndex]
+
+									// Check If Our Pair Is Already In DB
+									PairQueryResults := mysql_query.GetPairFromDB(Pair.Address, Network.NetworkDBId)
+									if len(PairQueryResults) > 0 {
+										// Set Pair DB ID
+										PairDBId = int64(PairQueryResults[0].PairId)
+									} else {
+										// Add Pair To DB
+										mysql_insert.AddPairToDB(TokenDBId, StablecoinDetails.StablecoinId, Network.NetworkDBId, DexDBId, Pair.Name, Pair.Address)
+									}
+
+								}
+
+								// Add Pair Routes To DB
+								for _, PairTransaction := range Pair.Transactions {
+
+									// Create A Comma Seperated String For Route
+									var RouteString string
+									for _, RouteAddress := range PairTransaction.InputData.Path {
+										RouteString = fmt.Sprintf("%v,%v", RouteString, RouteAddress)
+									}
+
+									RouteQueryResults := mysql_query.GetRouteFromDB(Network.NetworkDBId, DexDBId, int(PairDBId))
+
+									if len(RouteQueryResults) > 0 {
+
+										// Set Route DB ID
+										RouteDBId = int64(RouteQueryResults[0].RouteId)
+
+									} else {
+
+										// Add Route To DB
+										RouteDBId = mysql_insert.AddRouteToDB(Network.NetworkDBId, DexDBId, PairDBId, RouteString, PairTransaction.MethodName, PairTransaction.Hash, 0, PairTransaction.InputData.AmountIn, PairTransaction.InputData.AmountOutMin, 0)
+
+									}
+
+									fmt.Printf("", RouteDBId)
+
+								}
+
+
 
 								log.Printf("    [%d/%d] Added: %v", PairCountIndex, PairCount, Pair.Name)
 							}
