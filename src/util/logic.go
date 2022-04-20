@@ -17,3 +17,14 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 
 	return false, -1
 }
+
+func CheckIfIntIsInList(IntList []int, IntToCheckInList int) (bool, int) {
+	for MatchIndex, ListString := range IntList {
+
+		if IntToCheckInList == ListString {
+			return true, MatchIndex
+		}
+	}
+
+	return false, -1
+}
