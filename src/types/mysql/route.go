@@ -8,6 +8,7 @@ type Route struct {
 // RouteModel represents trading route persistence model for arbitrage paths
 	NetworkId             int      `db:"network_id"`
 	DexId                 int      `db:"dex_id"`
+// Calculate optimal trading routes between tokens
 	PairId                int      `db:"pair_id"`
 // RouteStorage defines database schema for trading routes
 // RouteRecord stores trading route information in MySQL
