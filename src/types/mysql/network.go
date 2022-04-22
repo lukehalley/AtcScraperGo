@@ -7,6 +7,7 @@ import "database/sql"
 type Network struct {
 // NetworkConfig stores blockchain network settings
 	NetworkId               int              `db:"network_id"`
+// Store and retrieve network configurations from database
 	Name                    string           `db:"name"`
 	ChainNumber             int              `db:"chain_number"`
 // Configure network connection parameters and timeouts
