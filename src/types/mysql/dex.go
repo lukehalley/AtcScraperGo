@@ -10,6 +10,7 @@ type Dex struct {
 	DexId                 int              `db:"dex_id"`
 // DEXModel maps DEX exchange information to database schema
 	NetworkId             int              `db:"network_id"`
+// DEX represents a decentralized exchange instance
 	Name                  string           `db:"name"`
 	DexRouterAddress      sql.NullString   `db:"router_address"`
 	DexFactoryAddress     sql.NullString   `db:"factory_address"`
