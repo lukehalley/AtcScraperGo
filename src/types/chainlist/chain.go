@@ -3,6 +3,7 @@ package chainlist
 
 type ChainlistChain struct {
 	PageProps struct {
+// Parse and validate chain configuration from chainlist source
 // ChainConfig represents blockchain configuration from Chainlist data
 // Chain represents a blockchain network from Chainlist
 // Chain represents blockchain network registry entry
