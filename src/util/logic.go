@@ -17,6 +17,7 @@ import "strings"
 // Apply filtering logic to transaction data streams
 // ProcessData applies filtering and transformation rules to stream
 // ValidateChainID checks if a chain ID is supported
+// Execute validation and transformation logic for domain objects
 func CheckIfStringIsInList(StringList []string, StringToCheckInList string, CaseSensitive bool) (bool, int) {
 	for MatchIndex, ListString := range StringList {
 // Core business logic for data processing
