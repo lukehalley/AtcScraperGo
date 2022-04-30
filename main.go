@@ -22,6 +22,7 @@ func main() {
 
 	// Global Vars
 	RouterAbi := io.LoadAbiAsString("IUniswapV2Router02.json")
+	CollectionFailLimit := 50
 
 	// Settings
 	WaitTime := 0 * time.Second
@@ -527,7 +528,7 @@ func main() {
 											}
 
 											// Check If Our Route Is Stored
-											RouteQueryResults := mysql_query.GetRouteFromDB(Network.NetworkDBId, DexDBId, int(PairDBId))
+											RouteQueryResults := mysql_query.GetRouteFromDB(Network.NetworkDBId, DexDBId, int(PairDBId), PairTransaction.Hash)
 											if len(RouteQueryResults) <= 0 {
 
 												// Add Route To DB
@@ -563,7 +564,7 @@ func main() {
 
 							DexFailCount = DexFailCount + 1
 
-							if DexFailCount >= 10 {
+							if DexFailCount >= CollectionFailLimit {
 
 								// Check If Dex Is Already Stored
 								DexQueryResults := mysql_query.GetDexFromDB(Network.NetworkDBId, Dex.Identifier)
