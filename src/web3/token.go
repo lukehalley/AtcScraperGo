@@ -8,9 +8,6 @@ import (
 
 func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 
-	// Schedule The Call To WaitGroup's Done To Tell GoRoutine Is Completed.
-	// defer TokenDecimalWaitGroup.Done()
-
 	// Create Instance Of Web3
 	Web3, Web3Error := web3.NewWeb3(ChainRPC)
 

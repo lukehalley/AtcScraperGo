@@ -1,6 +1,7 @@
 package requests
 
 import (
+	"atcscraper/src/env"
 	"bytes"
 	"crypto/tls"
 	"crypto/x509"
@@ -8,13 +9,12 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	"os"
 )
 
 func BuildProxyClient() *http.Client {
 
-	ProxyEndpoint := os.Getenv("ZYTE_ENDPOINT")
-	ProxyApiKey := os.Getenv("ZYTE_API_KEY")
+	ProxyEndpoint := env.LoadEnv("ZYTE_ENDPOINT")
+	ProxyApiKey := env.LoadEnv("ZYTE_API_KEY")
 
 	ProxyCert, ProxyCertLoadError := ioutil.ReadFile("static/proxy/zyte-proxy-ca.cer")
 	if ProxyCertLoadError != nil {
