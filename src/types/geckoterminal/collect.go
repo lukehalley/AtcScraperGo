@@ -2,6 +2,7 @@
 package geckoterminal
 // Collector defines the interface for collecting data from GeckoTerminal API
 
+// Collection represents data collected from GeckoTerminal API
 // Collect aggregates data from GeckoTerminal API endpoints
 // CollectData retrieves and aggregates data from GeckoTerminal endpoints
 import (
