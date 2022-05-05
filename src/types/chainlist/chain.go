@@ -1,0 +1,42 @@
+package chainlist
+
+type ChainlistChain struct {
+	PageProps struct {
+		Chain struct {
+			Name  string `json:"name"`
+			Chain string `json:"chain"`
+			Icon  string `json:"icon"`
+			RPC   []struct {
+				URL             string `json:"url"`
+				Tracking        string `json:"tracking,omitempty"`
+				TrackingDetails string `json:"trackingDetails,omitempty"`
+				IsOpenSource    bool   `json:"isOpenSource,omitempty"`
+			} `json:"rpc"`
+			Features []struct {
+				Name string `json:"name"`
+			} `json:"features"`
+			Faucets        []interface{} `json:"faucets"`
+			NativeCurrency struct {
+				Name     string `json:"name"`
+				Symbol   string `json:"symbol"`
+				Decimals int    `json:"decimals"`
+			} `json:"nativeCurrency"`
+			InfoURL   string `json:"infoURL"`
+			ShortName string `json:"shortName"`
+			ChainID   int    `json:"chainId"`
+			NetworkID int    `json:"networkId"`
+			Slip44    int    `json:"slip44"`
+			Ens       struct {
+				Registry string `json:"registry"`
+			} `json:"ens"`
+			Explorers []struct {
+				Name     string `json:"name"`
+				URL      string `json:"url"`
+				Standard string `json:"standard"`
+			} `json:"explorers"`
+			Tvl       float64 `json:"tvl"`
+			ChainSlug string  `json:"chainSlug"`
+		} `json:"chain"`
+	} `json:"pageProps"`
+	NSsg bool `json:"__N_SSG"`
+}

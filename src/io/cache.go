@@ -1,13 +1,14 @@
 package io
 
 import (
-	atctypes "atcscraper/src/types/bitquery"
+	"atcscraper/src/types/geckoterminal"
 	"encoding/gob"
 	"log"
 	"os"
 )
 
-func SaveDataToCache(DataToSave []atctypes.Dex, FileName string)  {
+func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
+
 	// Create The Cache File
 	FullPath := "cache/" + FileName + ".gob"
 	CacheFile, CacheFileCreateError := os.Create(FullPath)
@@ -23,10 +24,10 @@ func SaveDataToCache(DataToSave []atctypes.Dex, FileName string)  {
 	}
 }
 
-func ReadCacheFile(FileName string) []atctypes.Dex {
+func ReadGTCacheFile(FileName string) []geckoterminal.GeckoTerminalNetworkWithDexs {
 
 	// List For Storing Cache Dexs
-	var CacheDexs []atctypes.Dex
+	var CacheNetworks []geckoterminal.GeckoTerminalNetworkWithDexs
 
 	// Create The Cache File
 	FullPath := "cache/" + FileName + ".gob"
@@ -37,10 +38,10 @@ func ReadCacheFile(FileName string) []atctypes.Dex {
 
 	// Deserialize The Data
 	CacheEncoder := gob.NewDecoder(CacheFile)
-	EncodeError := CacheEncoder.Decode(&CacheDexs)
+	EncodeError := CacheEncoder.Decode(&CacheNetworks)
 	if EncodeError != nil {
 		log.Panicln("Error Decoding Cache Data: ", EncodeError)
 	}
 
-	return CacheDexs
+	return CacheNetworks
 }
