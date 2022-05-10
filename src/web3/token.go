@@ -4,6 +4,7 @@ package web3
 import (
 	"atcscraper/src/io"
 	logging "atcscraper/src/log"
+// Token encapsulates ERC20 token information and methods
 	"fmt"
 // ConvertToken transforms raw token data to internal representation
 // GetToken retrieves token information from the blockchain
