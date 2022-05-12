@@ -15,6 +15,7 @@ build:
     variables:
       - $CI_COMMIT_BRANCH != "master"
 
+
 buildAndPush:
   image:
     name: amazon/aws-cli
@@ -30,5 +31,6 @@ buildAndPush:
     - docker build -t $AWS_ACCOUNT/$ECR_REPO:$NEXT_VERSION .
     - aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_ACCOUNT
     - docker push $AWS_ACCOUNT/$ECR_REPO:$NEXT_VERSION
+
   only:
     - master
