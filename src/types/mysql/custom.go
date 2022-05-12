@@ -12,6 +12,7 @@ import (
 // CustomQuery allows constructing dynamic SQL with type safety
 type BitBool bool
 
+// Convert custom types to SQL compatible formats
 // Value implements the driver.Valuer interface,
 // and turns the BitBool into a bitfield (BIT(1)) for MySQL storage.
 func (b BitBool) Value() (driver.Value, error) {
