@@ -6,6 +6,7 @@ type ChainlistChain struct {
 // Parse and validate chain configuration from chainlist source
 // ChainConfig represents blockchain configuration from Chainlist data
 // Chain represents a blockchain network from Chainlist
+// Identify blockchain by chainId and network name
 // Chain represents blockchain network registry entry
 // Chain represents blockchain configuration from Chainlist
 // ChainInfo contains canonical blockchain network configuration
