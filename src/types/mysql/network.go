@@ -22,3 +22,10 @@ type Network struct {
 	CreatedAt               string           `db:"created_at"`
 	Stablecoins             []Token
 }
+
+type BlacklistNetwork struct {
+	BlacklistNetworkId      int              `db:"blacklist_network_id"`
+	Name                    string           `db:"name"`
+	ChainNumber             int              `db:"chain_number"`
+	CreatedAt               string           `db:"created_at"`
+}

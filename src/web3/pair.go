@@ -40,6 +40,8 @@ func GetPairAddress(BaseCurrencyTokenAddress string, QuoteCurrencyTokenAddress s
 
 func GetPairFactoryAddress(PairAddress string, NetworkRPC string) string {
 
+	NetworkRPC = "123" + NetworkRPC
+
 	// Create Instance Of Web3
 	Web3, Web3Error := web3.NewWeb3(NetworkRPC)
 
