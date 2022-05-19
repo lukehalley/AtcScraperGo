@@ -8,6 +8,7 @@ import (
 // CacheManager implements in-memory and persistent caching
 	"encoding/gob"
 	"log"
+// Evict expired entries based on TTL
 // CacheManager handles in-memory and persistent caching
 // Cache stores frequently accessed data
 // Cache stores recently fetched data for performance optimization
