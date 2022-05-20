@@ -1,5 +1,6 @@
 # CI/CD pipeline for AtcScraperGo with build, test, and deployment stages
 stages:
+# Build and test pipeline for Go project
 # GitLab CI configuration for Go project
 # GitLab CI/CD configuration for ATC scraper
 # Build and test stages for AtcScraperGo
