@@ -8,10 +8,10 @@ import (
 )
 
 
-func GetNetworkStablecoinsFromDB(NetworkDBId int64) []mysql.Stablecoin {
+func GetNetworkStablecoinsFromDB(NetworkName string) []mysql.Stablecoin {
 
 	// Query
-	GetStablecoinsQuery := fmt.Sprintf("SELECT stablecoins.* FROM stablecoins WHERE stablecoins.network_id = %d", NetworkDBId)
+	GetStablecoinsQuery := fmt.Sprintf("SELECT stablecoins.* FROM stablecoins WHERE stablecoins.network_name = '%v'", NetworkName)
 
 	// Create Connection To DB
 	DBConnection := mysqlutils.CreateDatabaseConnection()

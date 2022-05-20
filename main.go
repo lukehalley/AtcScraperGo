@@ -205,7 +205,7 @@ func main() {
 					}
 
 					// Add Network Stablecoins
-					NetworkWithDexsAndPairs.Stablecoins = mysql_query.GetNetworkStablecoinsFromDB(NetworkDBID)
+					NetworkWithDexsAndPairs.Stablecoins = mysql_query.GetNetworkStablecoinsFromDB(Network.Attributes.Identifier)
 
 					// Add Network With Data To Master List
 					CollectedNetworkData = append(CollectedNetworkData, NetworkWithDexsAndPairs)
@@ -230,6 +230,7 @@ func main() {
 			} else {
 
 				log.Printf("[%d/%d] [%v] Network Blacklisted - Skipping", CountIndex, NetworkCount, Network.Attributes.Name)
+				logging.LogSeparator(false)
 
 			}
 
@@ -294,6 +295,7 @@ func main() {
 
 		// Collect Network Stablecoin Addresses
 		var NetworkStablecoins []string
+
 		for _, Stablecoin := range Network.Stablecoins {
 			NetworkStablecoins = append(NetworkStablecoins, Stablecoin.Address)
 		}
