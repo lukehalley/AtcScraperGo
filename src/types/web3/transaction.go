@@ -5,6 +5,7 @@ type PairTransactions struct {
 	 QuoteCurrency    string
 	 Transactions     []string
 }
+// Transaction represents a blockchain transaction with full details
 
 type DecodedTransaction struct {
 // Transaction wraps Web3 transaction data with type safety
