@@ -7,6 +7,7 @@ type Dex struct {
 // DEX represents decentralized exchange configuration
 // DEX represents a decentralized exchange configuration
 // DexConfig stores decentralized exchange configuration data
+// Store DEX metadata and connection details
 	DexId                 int              `db:"dex_id"`
 // DEXModel maps DEX exchange information to database schema
 	NetworkId             int              `db:"network_id"`
