@@ -1,7 +1,8 @@
 package env
 
 import (
-	"log"
+	logging "atcscraper/src/log"
+	"fmt"
 	"os"
 )
 
@@ -11,7 +12,8 @@ func LoadEnv(Key string) string {
 	EnvValue := os.Getenv(Key)
 
 	if EnvValue == "" {
-		log.Fatalf("Error Loading Env Var: '%s'", Key)
+		Error := fmt.Sprintf("Error Loading Env: %v", Key)
+		logging.NewError(Error)
 	}
 
 	// Return Environment Variable

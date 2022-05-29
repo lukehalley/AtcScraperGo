@@ -1,8 +1,9 @@
 package mysql_utils
 
 import (
+	logging "atcscraper/src/log"
 	"context"
-	"log"
+	"fmt"
 )
 
 func ExecuteInsert(InsertQuery string) int64 {
@@ -11,23 +12,25 @@ func ExecuteInsert(InsertQuery string) int64 {
 	DBConnection := CreateDatabaseConnection()
 
 	// Execute DB Query
-	QueryResult, QueryError := DBConnection.ExecContext(context.Background(), InsertQuery)
+	InsertResult, InsertError := DBConnection.ExecContext(context.Background(), InsertQuery)
 
 	// Catch Insert Error
-	if QueryError != nil {
-		log.Fatal("Error Inserting DB Record: ", QueryError)
+	if InsertError != nil {
+		Error := fmt.Sprintf("Error Inserting DB Record: %v", InsertError)
+		logging.NewError(Error)
 	}
 
 	// Get Inserted Row ID
 	InsertedRowID := int64(0)
-	if QueryResult != nil {
-		InsertedRowID, _ = QueryResult.LastInsertId()
+	if InsertResult != nil {
+		InsertedRowID, _ = InsertResult.LastInsertId()
 	}
 
 	// Close Connection
 	DBConnectionCloseError := DBConnection.Close()
 	if DBConnectionCloseError != nil {
-		log.Fatal(DBConnectionCloseError)
+		Error := fmt.Sprintf("Error Closing DB Connecting: %v", DBConnectionCloseError.Error())
+		logging.NewError(Error)
 	}
 
 	return InsertedRowID

@@ -2,11 +2,12 @@ package requests
 
 import (
 	"atcscraper/src/env"
+	logging "atcscraper/src/log"
 	"bytes"
 	"crypto/tls"
 	"crypto/x509"
+	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 )
@@ -18,7 +19,8 @@ func BuildProxyClient() *http.Client {
 
 	ProxyCert, ProxyCertLoadError := ioutil.ReadFile("static/proxy/zyte-proxy-ca.cer")
 	if ProxyCertLoadError != nil {
-		log.Fatal(ProxyCertLoadError)
+		Error := fmt.Sprintf("Error Loading ZYTE Proxy Cert: %v", ProxyCertLoadError.Error())
+		logging.NewError(Error)
 	}
 
 	ProxyCertPool := x509.NewCertPool()
@@ -42,10 +44,11 @@ func MakeGetRequestRAW(RequestURL string) string {
 
 	ProxyClient := BuildProxyClient()
 
-	Response, Error := ProxyClient.Get(RequestURL)
+	Response, RequestError := ProxyClient.Get(RequestURL)
 
-	if Error != nil {
-		log.Fatalln(Error)
+	if RequestError != nil {
+		Error := fmt.Sprintf("Error Making RAW Request: %v", RequestError.Error())
+		logging.NewError(Error)
 	}
 
 	ResponseBody, _ := ioutil.ReadAll(Response.Body)
@@ -58,10 +61,11 @@ func MakeGetRequestJSON(RequestURL string) []byte {
 
 	ProxyClient := BuildProxyClient()
 
-	Response, Error := ProxyClient.Get(RequestURL)
+	Response, RequestError := ProxyClient.Get(RequestURL)
 
-	if Error != nil {
-		log.Fatalln(Error)
+	if RequestError != nil {
+		Error := fmt.Sprintf("RequestError Making Get Request: %v", RequestError.Error())
+		logging.NewError(Error)
 	}
 
 	ResponseBody, _ := ioutil.ReadAll(Response.Body)

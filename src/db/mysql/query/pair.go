@@ -2,6 +2,7 @@ package query
 
 import (
 	mysqlutils "atcscraper/src/db/mysql/utils"
+	logging "atcscraper/src/log"
 	"atcscraper/src/types/mysql"
 	"fmt"
 	"log"
@@ -30,7 +31,8 @@ func GetPairFromDB(PairAddress string, NetworkId int) []mysql.Pair {
 	// Close Connection
 	DBConnectionCloseError := DBConnection.Close()
 	if DBConnectionCloseError != nil {
-		log.Fatal(DBConnectionCloseError)
+		Error := fmt.Sprintf("Error Closing DB Connecting: %v", DBConnectionCloseError.Error())
+		logging.NewError(Error)
 	}
 
 	return Pair
@@ -60,7 +62,8 @@ func GetBlacklistPairFromDB(PairAddress string, NetworkId int) []mysql.Blacklist
 	// Close Connection
 	DBConnectionCloseError := DBConnection.Close()
 	if DBConnectionCloseError != nil {
-		log.Fatal(DBConnectionCloseError)
+		Error := fmt.Sprintf("Error Closing DB Connecting: %v", DBConnectionCloseError.Error())
+		logging.NewError(Error)
 	}
 
 	return BlacklistPair
@@ -83,13 +86,15 @@ func GetBlacklistedPairsForNetwork(NetworkId int) []string {
 
 	// Catch Any Errors When Querying
 	if QueryError != nil {
-		log.Fatal(QueryError)
+		Error := fmt.Sprintf("Error Querying DB For Blacklisted Pairs For Network: %v", QueryError.Error())
+		logging.NewError(Error)
 	}
 
 	// Close Connection
 	DBConnectionCloseError := DBConnection.Close()
 	if DBConnectionCloseError != nil {
-		log.Fatal(DBConnectionCloseError)
+		Error := fmt.Sprintf("Error Closing DB Connecting: %v", DBConnectionCloseError.Error())
+		logging.NewError(Error)
 	}
 
 	// Get All Blacklisted Pair Addresses
