@@ -284,9 +284,6 @@ func main() {
 	// Network Count
 	NetworkCount := len(CollectedNetworkData)
 
-	// Lazy
-	CollectedNetworkData = CollectedNetworkData[2:]
-
 	// Iterate Through Networks Dexs
 	for NetworkIndex, Network := range CollectedNetworkData {
 
