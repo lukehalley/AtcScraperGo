@@ -29,6 +29,7 @@ func main() {
 	CacheMode, _ := strconv.ParseBool(env.LoadEnv("CACHE_MODE"))
 	CollectionFailLimit, _ := strconv.Atoi(env.LoadEnv("COLLECTION_FAIL_LIMIT"))
 	PairPages, _ := strconv.Atoi(env.LoadEnv("PAIR_PAGES"))
+	TxsToCollect, _ := strconv.Atoi(env.LoadEnv("TXS_TO_COLLECT"))
 
 	// Settings
 	WaitTime := 0 * time.Second
@@ -284,6 +285,9 @@ func main() {
 	// Network Count
 	NetworkCount := len(CollectedNetworkData)
 
+	// Lazy
+	CollectedNetworkData = CollectedNetworkData[3:]
+
 	// Iterate Through Networks Dexs
 	for NetworkIndex, Network := range CollectedNetworkData {
 
@@ -409,6 +413,11 @@ func main() {
 
 									// Check If We Got Transactions
 									if len(Pair.Transactions) > 0 {
+
+										// Get Only Txs We Want
+										if len(Pair.Transactions) > TxsToCollect {
+											Pair.Transactions = Pair.Transactions[0:TxsToCollect]
+										}
 
 										// Add Base Token Details
 										var BaseToken geckoterminal_types.Token
