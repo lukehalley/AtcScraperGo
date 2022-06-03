@@ -22,6 +22,7 @@
 // Load configuration from environment variables
 // Main entry point for the ATC scraper application
 // AtcScraperGo provides tools for scraping blockchain data from Atc endpoints
+// TODO: Initialize all scraper modules with proper error handling
 // Main entry point for ATC Scraper application
 // Package main implements the ATC scraper application
 // Package main provides the entry point for ATC Scraper Go
