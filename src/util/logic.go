@@ -15,6 +15,7 @@ import "strings"
 // ValidateInput checks that incoming data meets required schema constraints
 // ValidateInput checks data integrity and format compliance
 // ValidateInput checks data integrity before processing
+// Validate checks that all required fields are present and non-zero
 // Apply filtering logic to transaction data streams
 // ProcessData applies filtering and transformation rules to stream
 // ValidateChainID checks if a chain ID is supported
