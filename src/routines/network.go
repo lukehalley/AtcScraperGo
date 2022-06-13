@@ -11,10 +11,9 @@ import (
 	"log"
 	"strings"
 	"sync"
-	"time"
 )
 
-func CollectGeckoTerminalNetworkWithDexs(Network geckoterminal_types.GeckoTerminalNetwork, BlacklistedNetworks []int, CoingeckoBuildID string, ChainlistBuildID string, WaitTime time.Duration, NetworkCollectionWaitGroup *sync.WaitGroup, NetworkCollectionChannel chan geckoterminal_types.GeckoTerminalNetworkWithDexs) {
+func CollectGeckoTerminalNetworkWithDexs(Network geckoterminal_types.GeckoTerminalNetwork, BlacklistedNetworks []int, CoingeckoBuildID string, ChainlistBuildID string, NetworkCollectionWaitGroup *sync.WaitGroup, NetworkCollectionChannel chan geckoterminal_types.GeckoTerminalNetworkWithDexs) {
 
 	// Schedule The Call To WaitGroup's Done To Tell GoRoutine Is Completed.
 	defer NetworkCollectionWaitGroup.Done()
@@ -31,9 +30,6 @@ func CollectGeckoTerminalNetworkWithDexs(Network geckoterminal_types.GeckoTermin
 
 		// Get Chain RPCs
 		ChainInfo := chainlist.GetChainInfo(Network.Attributes.ChainID, ChainlistBuildID)
-
-		// Sleep For N Seconds
-		time.Sleep(WaitTime)
 
 		var FilteredRPCs []string
 		for _, RPC := range ChainInfo.PageProps.Chain.RPC {
@@ -112,9 +108,6 @@ func CollectGeckoTerminalNetworkWithDexs(Network geckoterminal_types.GeckoTermin
 
 			log.Printf("[%v] Collected %d Dex(s)", Network.Attributes.Name, len(DexResponse.PageProps.Dexes))
 			// logging.LogSeparator(false)
-
-			// Sleep For N Seconds
-			time.Sleep(WaitTime)
 
 			// Iterate Through Networks Dexs
 			for _, Dex := range DexResponse.PageProps.Dexes {
