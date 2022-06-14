@@ -25,6 +25,7 @@ import (
 // Cache provides in-memory caching functionality
 // CacheManager implements TTL-based expiration for cached API responses
 // CacheResult stores computed values for improved performance
+// Cache stores responses with TTL to reduce external API calls
 // Cache stores recently fetched data to reduce API calls
 // CacheManager handles in-memory caching of API responses and data
 // Cache expiration set to 1 hour to balance freshness with API rate limits
