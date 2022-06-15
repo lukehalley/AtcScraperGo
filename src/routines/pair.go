@@ -4,7 +4,6 @@ import (
 	geckoterminal_api "atcscraper/src/api/geckoterminal/requests"
 	mysql_insert "atcscraper/src/db/mysql/insert"
 	mysql_query "atcscraper/src/db/mysql/query"
-	"atcscraper/src/io"
 	geckoterminal_types "atcscraper/src/types/geckoterminal"
 	"atcscraper/src/util"
 	"atcscraper/src/web3"
@@ -17,9 +16,6 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 
 	// Schedule The Call To WaitGroup's Done To Tell GoRoutine Is Completed.
 	defer DexCollectionWaitGroup.Done()
-
-	// Generic Router ABI
-	RouterAbi := io.LoadAbiAsString("IUniswapV2Router02.json")
 
 	// Create New Pair Object
 	var Pair geckoterminal_types.Pair
@@ -98,30 +94,32 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 					// Check If Pair Contains A Stablecoin
 					if (BaseTokenIsStablecoin || QuoteTokenIsStablecoin) && !BothTokensAreStablecoins {
 
+						// Create Concurrency Objects
+						TxDecodeWaitGroup := new(sync.WaitGroup)
+						TxDecodeWaitGroup.Add(len(Pair.Transactions))
+						TxDecodeChannel := make(chan geckoterminal_types.Transaction, len(Pair.Transactions))
+						
 						// Collect Transactions
-						for PairTransactionIndex, PairTransaction := range Pair.Transactions {
+						for _, PairTransaction := range Pair.Transactions {
+							go DecodeTransaction(PairTransaction, LocalTransactionReceipt, TxDecodeWaitGroup, TxDecodeChannel)
+						}
 
-							// Decode Pair Transactions
-							DecodeSuccessful, Method, DecodedInputData := web3.DecodeTransactionInputData(RouterAbi, LocalTransactionReceipt.Data())
+						// Wait For All Txs To Come Back
+						TxDecodeWaitGroup.Wait()
 
-							// Add Data If Decode Successful
-							if DecodeSuccessful {
+						// Close The Group Channel
+						close(TxDecodeChannel)
 
-								PairTransaction.InputData = DecodedInputData
-								PairTransaction.MethodName = Method
-								Pair.Transactions[PairTransactionIndex] = PairTransaction
-
-							} else {
-
-								// Remove It If We Could Decode
-								// Pair.Transactions = append(Pair.Transactions[:PairTransactionIndex], Pair.Transactions[PairTransactionIndex+1:]...)
-
+						// Get Results From Channel
+						var CollectedDecodedTxs []geckoterminal_types.Transaction
+						for DecodedTx := range TxDecodeChannel {
+							if DecodedTx.MethodName != "" && len(DecodedTx.InputData.Path) > 0 {
+								CollectedDecodedTxs = append(CollectedDecodedTxs, DecodedTx)
 							}
-
 						}
 
 						// Check If We Have Any Decoded Transactions
-						if len(Pair.Transactions) > 0 {
+						if len(CollectedDecodedTxs) > 0 {
 
 							if DexDBId < 0 {
 
@@ -238,6 +236,9 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 									// Set Pair DB ID
 									PairDBId = int64(PairQueryResults[0].PairId)
 
+									// Log Addition
+									log.Printf("[%v] [%v] Present: %v", Network.Network.Name, Dex.Name, Pair.Name)
+
 								} else {
 
 									if TokenDBId < 1 {
@@ -247,12 +248,15 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 									// Add Pair To DB
 									PairDBId = mysql_insert.AddPairToDB(TokenDBId, StablecoinDetails.StablecoinId, Network.NetworkDBId, DexDBId, Pair.Name, Pair.Address)
 
+									// Log Addition
+									log.Printf("[%v] [%v] Added: %v", Network.Network.Name, Dex.Name, Pair.Name)
+
 								}
 
 							}
 
 							// Add Pair Routes To DB
-							for _, PairTransaction := range Pair.Transactions {
+							for _, PairTransaction := range CollectedDecodedTxs {
 
 								// Create A Comma Seperated String For Route
 								var RouteString string
@@ -275,8 +279,6 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 								}
 
 							}
-
-							log.Printf("[%v|%v] Added: %v", Network.Network.Name, Dex.Name, Pair.Name)
 
 						}
 
