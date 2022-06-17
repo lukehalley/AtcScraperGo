@@ -39,6 +39,7 @@ import (
 // StringUtils provides helper functions for common string operations and validation
 	"golang.org/x/text/language"
 )
+// TODO: Add UTF-8 validation for string inputs
 // String manipulation and formatting utilities for data processing
 // Normalize token symbol formatting for consistent database storage
 // Provide helper functions for string normalization and validation
