@@ -78,24 +78,28 @@ func CreateDatabaseConnection() *sqlx.DB {
 
 				if DBConnectionError != nil {
 
-					IsRetryError := CheckConnectionError(DBConnectionError)
+					IsRetryError = CheckConnectionError(DBConnectionError)
 
 					if !IsRetryError {
-						Error := fmt.Sprintf("Error Connecting To DB During Retry: %v", DBConnectionError.Error())
+						Error = fmt.Sprintf("Error Connecting To DB During Retry: %v", DBConnectionError.Error())
 						logging.NewError(Error)
 					}
+
+				} else {
+
+					IsRetryError = false
 
 				}
 
 			}
+
 		} else {
 
-			Error := fmt.Sprintf("Error Connecting To DB: %v", DBConnectionError.Error())
+			Error = fmt.Sprintf("Error Connecting To DB: %v", DBConnectionError.Error())
 			logging.NewError(Error)
 
 		}
 
-		logging.NewError(Error)
 	}
 
 	// Return DB Connection

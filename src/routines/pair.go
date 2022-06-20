@@ -236,9 +236,6 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 									// Set Pair DB ID
 									PairDBId = int64(PairQueryResults[0].PairId)
 
-									// Log Addition
-									log.Printf("[%v] [%v] Present: %v", Network.Network.Name, Dex.Name, Pair.Name)
-
 								} else {
 
 									if TokenDBId < 1 {
