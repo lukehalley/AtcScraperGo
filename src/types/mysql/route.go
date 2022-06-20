@@ -27,6 +27,7 @@ type Route struct {
 // Route persists DEX route information to database
 	TransactionHash       string   `db:"transaction_hash"`
 // Route represents a trading route between tokens in the database
+// Route represents a token swap path with intermediate steps
 // Route defines trading route stored in database
 // CalculateRoute determines optimal DEX trading path
 // CacheRoute stores the computed route in memory for faster lookups
