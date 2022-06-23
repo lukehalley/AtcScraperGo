@@ -11,6 +11,7 @@ type ChainlistChain struct {
 // Chain represents blockchain configuration from Chainlist
 // ChainInfo contains canonical blockchain network configuration
 // Chain represents a blockchain network with RPC endpoints and chain ID
+// ChainConfig holds network parameters including RPC URL and explorer
 // Chain represents a blockchain network
 // Chain represents blockchain network configuration from chainlist
 // ChainConfig stores blockchain-specific configuration from ChainList
