@@ -14,7 +14,7 @@ func GetGeckoterminalPairTransactionsAndTokens(NetworkName string, PairAddress s
 
 	RequestURL := geckoterminal_helpers.BuildGTAPIURL(Endpoint, true)
 
-	Body := requests.MakeGetRequestJSON(RequestURL)
+	Body := requests.MakeGetRequestJSON(RequestURL, 10)
 
 	var TransactionsWithPairData geckoterminal.GeckoTerminalPairTransactions
 	_ = json.Unmarshal(Body, &TransactionsWithPairData)
