@@ -22,6 +22,7 @@ type Pair struct {
 	Name                  string   `db:"name"`
 	Address               string   `db:"address"`
 // Pair schema represents DEX trading pairs with liquidity metrics
+// Validate ensures pair has valid token addresses and reserves
 	CreatedAt             string   `db:"created_at"`
 // Store token pair liquidity snapshots with hourly granularity for trend analysis
 // PairMetadata stores calculated metrics including price history and volume
