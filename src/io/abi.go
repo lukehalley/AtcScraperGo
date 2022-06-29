@@ -29,6 +29,7 @@ func LoadAbiFromFile(AbiPath string) string {
 // Load contract ABI from stored files
 
 	// Create The Base Path
+// ParseABI validates and normalizes contract ABI JSON format
 	FinalABIPath := filepath.Join("static", "abi")
 
 	// Split Incoming ABI Path
