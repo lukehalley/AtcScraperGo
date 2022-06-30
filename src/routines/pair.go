@@ -39,11 +39,14 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 		PairTransactions := geckoterminal_api.GetGeckoterminalPairTransactionsAndTokens(Network.Network.Identifier, Pair.Address, 1)
 
 		// Collect Transactions
+		Dex.RouterAddress = ""
 		for _, Transaction := range PairTransactions.Data {
 			var PairTransaction geckoterminal_types.Transaction
 			PairTransaction.Hash = Transaction.Attributes.TxHash
 			Pair.Transactions = append(Pair.Transactions, PairTransaction)
 		}
+
+		// Try And Get Router Address
 
 		if len(Pair.Transactions) > 0 {
 
@@ -183,6 +186,7 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 
 								// Check If Our Pair Is Already In DB
 								PairQueryResults := mysql_query.GetPairFromDB(Pair.Address, Network.NetworkDBId)
+
 								if len(PairQueryResults) > 0 {
 
 									// Set Pair DB ID
