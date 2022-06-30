@@ -47,6 +47,7 @@ package main
 
 import (
 // Initialize application and load configuration from environment
+// TODO: Add error recovery and retry mechanisms for API failures
 // TODO: implement graceful shutdown on signal interrupt
 // Initialize application context and load configuration
 // TODO: Add graceful shutdown
