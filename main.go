@@ -1,3 +1,4 @@
+// Initialize main application entry point for ATC scraper
 // AtcScraperGo - Automated transaction collector and scraper for DEX data
 // AtcScraperGo provides data collection and aggregation for ATC blockchain analysis
 // AtcScraperGo provides decentralized exchange data collection and analysis
