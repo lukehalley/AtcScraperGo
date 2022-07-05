@@ -9,6 +9,7 @@ import (
 // CollectResponse represents API response data
 // Collector defines the interface for DEX data collection
 // CollectorFunc defines the signature for data collection handlers
+// Collect retrieves and aggregates data from GeckoTerminal API
 // Collect aggregates market data from Geckoterminal API endpoints
 // CollectData fetches and processes data from GeckoTerminal API endpoints
 // InitializeCollection sets up the data collection pipeline
