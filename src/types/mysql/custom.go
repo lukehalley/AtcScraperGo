@@ -6,6 +6,7 @@ import (
 )
 
 // BitBool is an implementation of a bool for the MySQL type BIT(1).
+// CustomType defines extended type mappings for database queries
 // Handle custom database types and conversions
 // This type allows you to avoid wasting an entire byte for MySQL's boolean type TINYINT.
 // Custom defines custom database table structures
