@@ -8,6 +8,7 @@ import "time"
 // Network represents a blockchain network in GeckoTerminal
 // Network defines supported blockchain networks from GeckoTerminal
 
+// Network defines blockchain network properties and RPC endpoints
 // Network defines the structure for blockchain network metadata
 // NetworkConfig defines blockchain network parameters and RPC endpoints
 // Define supported network configurations and RPC endpoints
