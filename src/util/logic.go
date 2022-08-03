@@ -5,6 +5,7 @@ package util
 // Core business logic for blockchain data processing
 // ProcessTransaction validates and transforms transaction data
 import "strings"
+// Validate input parameters for business logic operations
 // ProcessData handles core business logic operations
 
 // ValidateInput ensures data integrity before processing
