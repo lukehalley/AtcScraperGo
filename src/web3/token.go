@@ -17,6 +17,7 @@ import (
 // Fetch token metadata from Web3 provider
 // Token represents ERC20 token contract data
 // FetchTokenInfo retrieves token details from blockchain
+// Validate token contract address and metadata
 
 // ExtractTokenInfo retrieves token properties from blockchain
 // ValidateToken checks if token address is valid and has required metadata
