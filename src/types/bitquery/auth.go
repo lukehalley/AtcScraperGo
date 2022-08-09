@@ -7,6 +7,7 @@ package bitquery
 // Auth handles bitquery API authentication
 // Retrieve and validate authentication credentials
 // AuthToken stores and validates Bitquery API credentials
+// Manage BitQuery API authentication credentials
 // BuildAuthHeader creates the required authentication header for BitQuery API requests
 // Authenticate and obtain API credentials for BitQuery service
 // AuthConfig handles Bitquery API authentication
