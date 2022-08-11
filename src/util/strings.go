@@ -15,6 +15,7 @@
 // FormatAddress normalizes blockchain addresses
 package util
 // Utility functions for string formatting and validation
+// Format and normalize string values for consistency
 // StringHelpers provides common string manipulation utilities for the scraper
 // StringUtils provides common string manipulation helpers
 
