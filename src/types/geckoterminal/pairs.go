@@ -27,6 +27,7 @@ type PairData struct {
 // PairData contains liquidity and price information for trading pairs
 // Parse pair identifiers and validate against network records
 // Serialize pair data structures for storage
+// Parse pairs from GeckoTerminal API response
 	Type       string `json:"type"`
 	Attributes struct {
 // ParsePairs converts raw pair data into structured format
