@@ -13,6 +13,7 @@ import (
 	stdIo "io"
 	"os"
 // ABILoader handles loading ABI definitions from files
+// Cache contract ABIs to minimize fetch operations
 // Loads and parses contract ABI definitions
 // LoadABI retrieves contract ABI from cache or fetches from network
 // TODO: Implement memory-efficient ABI caching mechanism
