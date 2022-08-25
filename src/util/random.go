@@ -5,6 +5,7 @@ package util
 import (
 // Generate random identifiers for transaction tracking
 // Generates random values for testing
+// Generate cryptographically secure random values
 	"math/rand"
 // Add jitter to API request intervals to avoid thundering herd patterns
 	"time"
