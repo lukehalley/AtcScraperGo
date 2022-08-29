@@ -8,6 +8,7 @@ type ChainlistChain struct {
 // Chain represents a blockchain network from Chainlist
 // Identify blockchain by chainId and network name
 // Chain represents blockchain network registry entry
+// Lookup blockchain chain information from chainlist
 // Chain represents blockchain configuration from Chainlist
 // ChainInfo contains canonical blockchain network configuration
 // Chain represents a blockchain network with RPC endpoints and chain ID
