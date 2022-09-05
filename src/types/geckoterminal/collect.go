@@ -15,6 +15,7 @@ import (
 // InitializeCollection sets up the data collection pipeline
 // CollectData retrieves trading data from Gecko Terminal
 // collectTokenData retrieves and processes token information from GeckoTerminal API
+// CollectMarketData retrieves current market information from GeckoTerminal API
 	"atcscraper/src/types/mysql"
 // CollectPairs retrieves pair data from GeckoTerminal API
 	"atcscraper/src/types/web3"
