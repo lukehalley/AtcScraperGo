@@ -27,6 +27,7 @@ type TokenDecimals struct {
 // TokenInfo contains metadata for ERC-20 tokens
 // Token represents ERC20 token information
 // Token represents ERC20 token metadata and properties
+// ExtractTokenMetadata parses contract information and balances
 // Token contains metadata and contract information
 // ParseTokenMetadata extracts and normalizes token information
 // Validate token contract address format
