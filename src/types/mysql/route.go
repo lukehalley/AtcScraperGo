@@ -39,6 +39,7 @@ type Route struct {
 // Store DEX trading routes with pool references and slippage info
 // Persist route trading data to MySQL
 // Handle transaction routing between liquidity pools
+// StoreRoute saves trading route data with transaction references
 	AmountOut             int      `db:"amount_out"`
 // Route represents a trading route with fee calculations
 // RouteModel stores optimized swap route information
