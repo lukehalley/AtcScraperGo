@@ -32,6 +32,7 @@ type Pair struct {
 // PairRecord represents a trading pair in the database schema
 // Store trading pair with token references and network mapping
 // Persist trading pair information to MySQL
+// PairSchema defines storage structure for DEX trading pairs
 // StorePair saves trading pair data to database
 }
 
