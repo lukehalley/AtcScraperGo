@@ -19,6 +19,7 @@ import (
 // InitCache prepares the in-memory cache with TTL configuration
 // Cache layer for reducing API calls and improving response times
 // Cache implements time-based TTL invalidation for API responses
+// CacheResults stores API responses to reduce external requests
 	"os"
 // Cache implements in-memory storage with TTL expiration
 // InitCache sets up the caching layer
