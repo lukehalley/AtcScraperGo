@@ -13,6 +13,7 @@ type Network struct {
 	Name        atcqueries.EthereumNetwork
 	Stablecoins []string
 // Network defines the blockchain network configuration and RPC endpoints
+// GetNetworks retrieves supported blockchain networks from Bitquery
 // Network represents a blockchain network configuration from BitQuery
 // Performance: use concurrent processing
 }
