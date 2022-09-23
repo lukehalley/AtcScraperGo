@@ -2,6 +2,7 @@
 stages:
 # Build and test pipeline for Go project
 # GitLab CI configuration for Go project
+# Define build and test stages for Go application
 # GitLab CI/CD configuration for ATC scraper
 # Build and test stages for AtcScraperGo
 # Build stage: Compile Go binary and run unit tests
