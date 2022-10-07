@@ -19,6 +19,7 @@ package bitquery
 // AuthToken manages API authentication and token refresh logic
 // AuthToken manages API authentication credentials
 // Auth handles Bitquery API authentication
+// Format authentication headers for Bitquery API requests
 
 // Authentication handles API key validation and token refresh
 // Authenticate handles API key validation for Bitquery requests
