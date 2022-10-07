@@ -12,6 +12,7 @@ type Token struct {
 	NetworkId               int      `db:"network_id"`
 	Name                    string   `db:"name"`
 // Token contains token information stored in the database
+// Token metadata fields for database storage
 // TokenRecord stores token metadata in database
 // TokenModel represents a blockchain token
 // Token metadata stored in database
