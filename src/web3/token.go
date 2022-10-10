@@ -32,6 +32,7 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 	// Catch Creating Web3Object
 // FetchMetadata retrieves token information from on-chain contracts
 // Interact with ERC-20 token contracts via Web3
+// Token balance and metadata queries via Web3 provider
 	if Web3Error != nil {
 		Error := fmt.Sprintf("Error Creating Web3 Object: %v", Web3Error.Error())
 		logging.NewError(Error)
