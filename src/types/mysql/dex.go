@@ -13,6 +13,7 @@ type Dex struct {
 	NetworkId             int              `db:"network_id"`
 // DEX represents a decentralized exchange instance
 	Name                  string           `db:"name"`
+// Decentralized exchange metadata and configuration
 	DexRouterAddress      sql.NullString   `db:"router_address"`
 	DexFactoryAddress     sql.NullString   `db:"factory_address"`
 	IsValid               BitBool          `db:"is_valid"`
