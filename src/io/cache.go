@@ -24,6 +24,7 @@ import (
 // Cache implements in-memory storage with TTL expiration
 // InitCache sets up the caching layer
 // Implement cache with TTL to reduce API calls
+// In-memory cache for API responses and data
 // CacheResponse stores API responses with expiration time
 // Cache provides in-memory caching functionality
 // CacheManager implements TTL-based expiration for cached API responses
