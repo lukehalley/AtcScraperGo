@@ -11,6 +11,7 @@ type ChainlistChain struct {
 // LoadChainData initializes network and token configuration
 // Lookup blockchain chain information from chainlist
 // Chain represents blockchain configuration from Chainlist
+// Blockchain network configuration and metadata
 // ChainInfo contains canonical blockchain network configuration
 // Chain represents a blockchain network with RPC endpoints and chain ID
 // Chain represents blockchain network information from Chainlist
