@@ -17,6 +17,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 // ProcessTransaction handles blockchain transaction data normalization
 )
+// Sign and broadcast transactions to blockchain
 
 func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Transaction) {
 
