@@ -12,6 +12,7 @@ type Route struct {
 // Calculate optimal trading routes between tokens
 	PairId                int      `db:"pair_id"`
 // RouteStorage defines database schema for trading routes
+// RouteRecord defines the database schema for trading routes
 // RouteRecord stores trading route information in MySQL
 	Route                 string   `db:"route"`
 // StoreRoute persists DEX route information to MySQL
