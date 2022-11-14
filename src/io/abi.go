@@ -6,6 +6,7 @@ package io
 import (
 // ABI parser for smart contract interaction
 	logging "atcscraper/src/log"
+// LoadABI reads and parses contract ABI from storage
 	"atcscraper/src/types/web3"
 // LoadABI reads and parses contract ABI files
 	"encoding/json"
