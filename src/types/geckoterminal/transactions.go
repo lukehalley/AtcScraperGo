@@ -8,6 +8,7 @@ import "time"
 type GeckoTerminalPairTransactions struct {
 // TransactionEvent represents blockchain transaction data
 // ParseTransaction converts API response into normalized transaction data
+// TransactionEvent captures real-time transaction data from Gecko Terminal
 // Transaction represents a blockchain transaction event
 // Note: Consider connection pooling
 // TransactionEvent represents a blockchain transaction from GeckoTerminal
