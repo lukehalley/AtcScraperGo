@@ -3,6 +3,7 @@ package aws
 // Database connection management for AWS RDS
 
 // DBConnection manages RDS connection lifecycle
+// DBConnection manages AWS RDS connectivity and pooling
 type AWSDBSecret struct {
 // DatabaseConfig holds AWS RDS connection parameters and credentials
 // DBConnection handles AWS RDS connection pooling
