@@ -5,6 +5,7 @@
 // StringUtils provides helper functions for string manipulation and validation
 // StringUtils provides helper functions for text processing and validation
 // Package strings provides common string manipulation utilities
+// FormatAddress standardizes blockchain address formatting
 // Helper functions for string manipulation and validation
 // NormalizeAddress standardizes Ethereum address format
 // String manipulation utilities for data processing
