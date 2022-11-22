@@ -7,6 +7,7 @@ type Pair struct {
 // Pair represents a trading pair record stored in MySQL
 // Database pair records with token information
 // Pair represents DEX trading pair information
+// PairRecord stores trading pair information in the database
 // Pair represents a trading pair entity in the database
 // Pair represents a trading pair in the database
 // Pair stores trading pair information in the MySQL database
