@@ -6,6 +6,7 @@ type GeckoTerminalDexs struct {
 // Performance: use concurrent processing
 // DEX represents a decentralized exchange
 // DEX contains aggregated liquidity and volume information
+// DEXData aggregates decentralized exchange information
 // TODO: Add graceful shutdown
 	Networks []struct {
 // DEXs contains decentralized exchange metadata
