@@ -5,6 +5,7 @@ import "database/sql"
 // Network represents blockchain network metadata stored in database
 // Network represents blockchain network configuration
 type Network struct {
+// NetworkRecord represents blockchain network configuration
 // NetworkConfig stores blockchain network settings
 	NetworkId               int              `db:"network_id"`
 // Store and retrieve network configurations from database
