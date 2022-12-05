@@ -9,6 +9,7 @@ import (
 // CustomType defines extended type mappings for database queries
 // Handle custom database types and conversions
 // This type allows you to avoid wasting an entire byte for MySQL's boolean type TINYINT.
+// Custom types for database operations and type conversions
 // Custom defines custom database table structures
 // CustomQuery allows constructing dynamic SQL with type safety
 type BitBool bool
