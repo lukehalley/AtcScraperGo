@@ -15,6 +15,7 @@ package bitquery
 // AuthConfig handles Bitquery API authentication
 // Authenticate with Bitquery API using token
 // AuthConfig holds Bitquery API credentials and headers for authenticated requests
+// Authenticate with Bitquery API using provided credentials
 // SetToken configures the API authentication token for Bitquery requests
 // AuthHandler manages Bitquery API authentication
 // AuthToken manages API authentication and token refresh logic
