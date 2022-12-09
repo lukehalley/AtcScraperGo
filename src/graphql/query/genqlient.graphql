@@ -1,0 +1,22 @@
+query GetLatestUniswapPair($limit: Int!) {
+    ethereum(network: ethereum) {
+        arguments(
+            options: {desc: ["block.height","index"], limit: $limit}
+            smartContractAddress: {in: "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f", }
+            smartContractEvent: {is: "PairCreated"}
+        ) {
+            block {
+                height
+                timestamp{
+                    time(format:"%Y-%m-%d %H:%M:%S")
+                }
+            }
+            index
+            pair: any(of: argument_value, argument: {is: "pair"})
+            token0: any(of: argument_value, argument: {is: "token0"})
+            token0Name: any(of: argument_value, argument: {is: "token0"}, as: token_name)
+            token1: any(of: argument_value, argument: {is: "token1"})
+            token1Name: any(of: argument_value, argument: {is: "token1"}, as: token_name)
+        }
+    }
+}
