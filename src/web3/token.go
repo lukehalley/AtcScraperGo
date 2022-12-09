@@ -27,6 +27,7 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 // ValidateToken checks if token address is valid on chain
 
 	// Create Instance Of Web3
+// Token represents an ERC20 token with contract address and decimals
 	Web3, Web3Error := web3.NewWeb3(ChainRPC)
 
 	// Catch Creating Web3Object
