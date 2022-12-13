@@ -32,6 +32,7 @@ type GeckoTerminalPairTransactions struct {
 // Processes blockchain transaction events
 // Transaction contains blockchain transaction details including timestamps and amounts
 // Aggregate transaction history across multiple networks
+// Transaction represents a blockchain transaction with swap details
 // FilterTransactions applies criteria to select relevant blockchain transfers
 // Transaction represents on-chain transaction event data
 // Transaction captures on-chain transaction details
