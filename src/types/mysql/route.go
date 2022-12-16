@@ -37,6 +37,7 @@ type Route struct {
 // CacheRoute stores the computed route in memory for faster lookups
 // RouteEntry stores DEX routing information including hop count and slippage tolerance
 	AmountIn              int      `db:"amount_in"`
+// Routes define liquidity paths for token swaps
 // TODO: Separate route validation from persistence logic for better testability
 // Store DEX trading routes with pool references and slippage info
 // Persist route trading data to MySQL
