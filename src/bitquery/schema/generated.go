@@ -34,6 +34,166 @@ const (
 	EthereumNetworkMatic EthereumNetwork = "matic"
 )
 
+// GetPairCreatedByFactoryEthereum includes the requested fields of the GraphQL type Ethereum.
+// The GraphQL type's documentation follows.
+//
+// Ethereum Chain
+type GetPairCreatedByFactoryEthereum struct {
+	// Arguments of Smart Contract Calls and Events
+	Arguments []GetPairCreatedByFactoryEthereumArguments `json:"arguments"`
+}
+
+// GetArguments returns GetPairCreatedByFactoryEthereum.Arguments, and is useful for accessing the field via an interface.
+func (v *GetPairCreatedByFactoryEthereum) GetArguments() []GetPairCreatedByFactoryEthereumArguments {
+	return v.Arguments
+}
+
+// GetPairCreatedByFactoryEthereumArguments includes the requested fields of the GraphQL type EthereumArguments.
+// The GraphQL type's documentation follows.
+//
+// Arguments of Smart Contract Calls and Events
+type GetPairCreatedByFactoryEthereumArguments struct {
+	// Address value of method or event argument
+	Reference GetPairCreatedByFactoryEthereumArgumentsReferenceEthereumAddressInfo `json:"reference"`
+	// Block in the blockchain
+	Block GetPairCreatedByFactoryEthereumArgumentsBlock `json:"block"`
+}
+
+// GetReference returns GetPairCreatedByFactoryEthereumArguments.Reference, and is useful for accessing the field via an interface.
+func (v *GetPairCreatedByFactoryEthereumArguments) GetReference() GetPairCreatedByFactoryEthereumArgumentsReferenceEthereumAddressInfo {
+	return v.Reference
+}
+
+// GetBlock returns GetPairCreatedByFactoryEthereumArguments.Block, and is useful for accessing the field via an interface.
+func (v *GetPairCreatedByFactoryEthereumArguments) GetBlock() GetPairCreatedByFactoryEthereumArgumentsBlock {
+	return v.Block
+}
+
+// GetPairCreatedByFactoryEthereumArgumentsBlock includes the requested fields of the GraphQL type Block.
+// The GraphQL type's documentation follows.
+//
+// Block
+type GetPairCreatedByFactoryEthereumArgumentsBlock struct {
+	// Block number (height) in blockchain
+	Height int `json:"height"`
+}
+
+// GetHeight returns GetPairCreatedByFactoryEthereumArgumentsBlock.Height, and is useful for accessing the field via an interface.
+func (v *GetPairCreatedByFactoryEthereumArgumentsBlock) GetHeight() int { return v.Height }
+
+// GetPairCreatedByFactoryEthereumArgumentsReferenceEthereumAddressInfo includes the requested fields of the GraphQL type EthereumAddressInfo.
+// The GraphQL type's documentation follows.
+//
+// Address detailed information for Ethereum network
+type GetPairCreatedByFactoryEthereumArgumentsReferenceEthereumAddressInfo struct {
+	// String address representation
+	Address string `json:"address"`
+}
+
+// GetAddress returns GetPairCreatedByFactoryEthereumArgumentsReferenceEthereumAddressInfo.Address, and is useful for accessing the field via an interface.
+func (v *GetPairCreatedByFactoryEthereumArgumentsReferenceEthereumAddressInfo) GetAddress() string {
+	return v.Address
+}
+
+// GetPairCreatedByFactoryResponse is returned by GetPairCreatedByFactory on success.
+type GetPairCreatedByFactoryResponse struct {
+	// Ethereum Mainnet / Classic Chain Datasets
+	Ethereum GetPairCreatedByFactoryEthereum `json:"ethereum"`
+}
+
+// GetEthereum returns GetPairCreatedByFactoryResponse.Ethereum, and is useful for accessing the field via an interface.
+func (v *GetPairCreatedByFactoryResponse) GetEthereum() GetPairCreatedByFactoryEthereum {
+	return v.Ethereum
+}
+
+// GetRouterAddressFromPairBaseCurrencyEthereum includes the requested fields of the GraphQL type Ethereum.
+// The GraphQL type's documentation follows.
+//
+// Ethereum Chain
+type GetRouterAddressFromPairBaseCurrencyEthereum struct {
+	// Trades on Ethereum DEX Smart Contracts
+	DexTrades []GetRouterAddressFromPairBaseCurrencyEthereumDexTrades `json:"dexTrades"`
+}
+
+// GetDexTrades returns GetRouterAddressFromPairBaseCurrencyEthereum.DexTrades, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencyEthereum) GetDexTrades() []GetRouterAddressFromPairBaseCurrencyEthereumDexTrades {
+	return v.DexTrades
+}
+
+// GetRouterAddressFromPairBaseCurrencyEthereumDexTrades includes the requested fields of the GraphQL type EthereumDexTrades.
+// The GraphQL type's documentation follows.
+//
+// Trades on DEX smart contracts
+type GetRouterAddressFromPairBaseCurrencyEthereumDexTrades struct {
+	// Block in the blockchain
+	Block GetRouterAddressFromPairBaseCurrencyEthereumDexTradesBlockBlockExtended `json:"block"`
+	// Transaction of DexTrade
+	Transaction GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtended `json:"transaction"`
+}
+
+// GetBlock returns GetRouterAddressFromPairBaseCurrencyEthereumDexTrades.Block, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencyEthereumDexTrades) GetBlock() GetRouterAddressFromPairBaseCurrencyEthereumDexTradesBlockBlockExtended {
+	return v.Block
+}
+
+// GetTransaction returns GetRouterAddressFromPairBaseCurrencyEthereumDexTrades.Transaction, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencyEthereumDexTrades) GetTransaction() GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtended {
+	return v.Transaction
+}
+
+// GetRouterAddressFromPairBaseCurrencyEthereumDexTradesBlockBlockExtended includes the requested fields of the GraphQL type BlockExtended.
+// The GraphQL type's documentation follows.
+//
+// BlockExtended
+type GetRouterAddressFromPairBaseCurrencyEthereumDexTradesBlockBlockExtended struct {
+	// Block number (height) in blockchain
+	Height int `json:"height"`
+}
+
+// GetHeight returns GetRouterAddressFromPairBaseCurrencyEthereumDexTradesBlockBlockExtended.Height, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencyEthereumDexTradesBlockBlockExtended) GetHeight() int {
+	return v.Height
+}
+
+// GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtended includes the requested fields of the GraphQL type EthereumTransactionInfoExtended.
+// The GraphQL type's documentation follows.
+//
+// Blockchain Transaction Extended info
+type GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtended struct {
+	// Transaction receiver
+	To GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo `json:"to"`
+}
+
+// GetTo returns GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtended.To, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtended) GetTo() GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo {
+	return v.To
+}
+
+// GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo includes the requested fields of the GraphQL type EthereumAddressInfo.
+// The GraphQL type's documentation follows.
+//
+// Address detailed information for Ethereum network
+type GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo struct {
+	// String address representation
+	Address string `json:"address"`
+}
+
+// GetAddress returns GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo.Address, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencyEthereumDexTradesTransactionEthereumTransactionInfoExtendedToEthereumAddressInfo) GetAddress() string {
+	return v.Address
+}
+
+// GetRouterAddressFromPairBaseCurrencyResponse is returned by GetRouterAddressFromPairBaseCurrency on success.
+type GetRouterAddressFromPairBaseCurrencyResponse struct {
+	// Ethereum Mainnet / Classic Chain Datasets
+	Ethereum GetRouterAddressFromPairBaseCurrencyEthereum `json:"ethereum"`
+}
+
+// GetEthereum returns GetRouterAddressFromPairBaseCurrencyResponse.Ethereum, and is useful for accessing the field via an interface.
+func (v *GetRouterAddressFromPairBaseCurrencyResponse) GetEthereum() GetRouterAddressFromPairBaseCurrencyEthereum {
+	return v.Ethereum
+}
+
 // GetTopNDexsForNetworkEthereum includes the requested fields of the GraphQL type Ethereum.
 // The GraphQL type's documentation follows.
 //
@@ -125,6 +285,44 @@ func (v *GetTopNDexsForNetworkResponse) GetEthereum() GetTopNDexsForNetworkEther
 	return v.Ethereum
 }
 
+// __GetPairCreatedByFactoryInput is used internally by genqlient
+type __GetPairCreatedByFactoryInput struct {
+	Network        EthereumNetwork `json:"network"`
+	Limit          int             `json:"limit"`
+	FactoryAddress string          `json:"factoryAddress"`
+}
+
+// GetNetwork returns __GetPairCreatedByFactoryInput.Network, and is useful for accessing the field via an interface.
+func (v *__GetPairCreatedByFactoryInput) GetNetwork() EthereumNetwork { return v.Network }
+
+// GetLimit returns __GetPairCreatedByFactoryInput.Limit, and is useful for accessing the field via an interface.
+func (v *__GetPairCreatedByFactoryInput) GetLimit() int { return v.Limit }
+
+// GetFactoryAddress returns __GetPairCreatedByFactoryInput.FactoryAddress, and is useful for accessing the field via an interface.
+func (v *__GetPairCreatedByFactoryInput) GetFactoryAddress() string { return v.FactoryAddress }
+
+// __GetRouterAddressFromPairBaseCurrencyInput is used internally by genqlient
+type __GetRouterAddressFromPairBaseCurrencyInput struct {
+	Network        EthereumNetwork `json:"network"`
+	FactoryAddress string          `json:"factoryAddress"`
+	BaseCurrency   string          `json:"baseCurrency"`
+	Limit          int             `json:"limit"`
+}
+
+// GetNetwork returns __GetRouterAddressFromPairBaseCurrencyInput.Network, and is useful for accessing the field via an interface.
+func (v *__GetRouterAddressFromPairBaseCurrencyInput) GetNetwork() EthereumNetwork { return v.Network }
+
+// GetFactoryAddress returns __GetRouterAddressFromPairBaseCurrencyInput.FactoryAddress, and is useful for accessing the field via an interface.
+func (v *__GetRouterAddressFromPairBaseCurrencyInput) GetFactoryAddress() string {
+	return v.FactoryAddress
+}
+
+// GetBaseCurrency returns __GetRouterAddressFromPairBaseCurrencyInput.BaseCurrency, and is useful for accessing the field via an interface.
+func (v *__GetRouterAddressFromPairBaseCurrencyInput) GetBaseCurrency() string { return v.BaseCurrency }
+
+// GetLimit returns __GetRouterAddressFromPairBaseCurrencyInput.Limit, and is useful for accessing the field via an interface.
+func (v *__GetRouterAddressFromPairBaseCurrencyInput) GetLimit() int { return v.Limit }
+
 // __GetTopNDexsForNetworkInput is used internally by genqlient
 type __GetTopNDexsForNetworkInput struct {
 	Network EthereumNetwork `json:"network"`
@@ -144,6 +342,96 @@ func (v *__GetTopNDexsForNetworkInput) GetOffset() int { return v.Offset }
 
 // GetFrom returns __GetTopNDexsForNetworkInput.From, and is useful for accessing the field via an interface.
 func (v *__GetTopNDexsForNetworkInput) GetFrom() time.Time { return v.From }
+
+func GetPairCreatedByFactory(
+	ctx context.Context,
+	client graphql.Client,
+	network EthereumNetwork,
+	limit int,
+	factoryAddress string,
+) (*GetPairCreatedByFactoryResponse, error) {
+	req := &graphql.Request{
+		OpName: "GetPairCreatedByFactory",
+		Query: `
+query GetPairCreatedByFactory ($network: EthereumNetwork!, $limit: Int!, $factoryAddress: String!) {
+	ethereum(network: $network) {
+		arguments(smartContractAddress: {is:$factoryAddress}, smartContractEvent: {is:"PairCreated"}, options: {desc:"block.height",limit:$limit}) {
+			reference {
+				address
+			}
+			block {
+				height
+			}
+		}
+	}
+}
+`,
+		Variables: &__GetPairCreatedByFactoryInput{
+			Network:        network,
+			Limit:          limit,
+			FactoryAddress: factoryAddress,
+		},
+	}
+	var err error
+
+	var data GetPairCreatedByFactoryResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
+
+func GetRouterAddressFromPairBaseCurrency(
+	ctx context.Context,
+	client graphql.Client,
+	network EthereumNetwork,
+	factoryAddress string,
+	baseCurrency string,
+	limit int,
+) (*GetRouterAddressFromPairBaseCurrencyResponse, error) {
+	req := &graphql.Request{
+		OpName: "GetRouterAddressFromPairBaseCurrency",
+		Query: `
+query GetRouterAddressFromPairBaseCurrency ($network: EthereumNetwork!, $factoryAddress: String!, $baseCurrency: String!, $limit: Int!) {
+	ethereum(network: $network) {
+		dexTrades(options: {limit:$limit,desc:"block.height"}, baseCurrency: {is:$baseCurrency}, exchangeAddress: {is:$factoryAddress}) {
+			block {
+				height
+			}
+			transaction {
+				to {
+					address
+				}
+			}
+		}
+	}
+}
+`,
+		Variables: &__GetRouterAddressFromPairBaseCurrencyInput{
+			Network:        network,
+			FactoryAddress: factoryAddress,
+			BaseCurrency:   baseCurrency,
+			Limit:          limit,
+		},
+	}
+	var err error
+
+	var data GetRouterAddressFromPairBaseCurrencyResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
 
 func GetTopNDexsForNetwork(
 	ctx context.Context,
