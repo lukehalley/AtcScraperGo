@@ -1,0 +1,9 @@
+schema: ./graphql/schema.graphql
+operations:
+- ./graphql/genqlient.graphql
+generated: generated.go
+package: main
+
+bindings:
+  ISO8601DateTime:
+    type: time.Time

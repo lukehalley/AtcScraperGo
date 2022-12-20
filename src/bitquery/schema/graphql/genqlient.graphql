@@ -1,0 +1,56 @@
+query GetTopNDexsForNetwork($network: EthereumNetwork!, $limit: Int!, $offset: Int!, $from: ISO8601DateTime) {
+  ethereum(network: $network) {
+    dexTrades(
+      options: {desc: "trades", limit: $limit, offset: $offset}
+      date: {since: $from}
+      protocol: {is: "Uniswap v2"}
+    ) {
+      protocol
+      trades: count
+      currencies: count(uniq: buy_currency)
+      contracts: count(uniq: smart_contracts)
+      exchange {
+        fullName
+        address {
+          address
+        }
+      }
+    }
+  }
+}
+
+query GetPairCreatedByFactory($network: EthereumNetwork!, $limit: Int!, $factoryAddress: String!) {
+  ethereum(network: $network) {
+    arguments(
+      smartContractAddress: {is: $factoryAddress}
+      smartContractEvent: {is: "PairCreated"}
+      options: {desc: "block.height", limit: $limit}
+    ) {
+      reference {
+        address
+      }
+      block {
+        height
+      }
+    }
+  }
+}
+
+query GetRouterAddressFromPairBaseCurrency ($network: EthereumNetwork!, $factoryAddress: String!, $baseCurrency: String!, $limit: Int!) {
+  ethereum(network: $network) {
+    dexTrades(
+      options: {limit: $limit, desc: "block.height"}
+      baseCurrency: {is: $baseCurrency}
+      exchangeAddress: {is: $factoryAddress}
+    ) {
+      block {
+        height
+      }
+      transaction {
+        to {
+          address
+        }
+      }
+    }
+  }
+}
