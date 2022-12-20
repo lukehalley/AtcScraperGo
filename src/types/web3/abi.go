@@ -29,6 +29,7 @@ type Abi struct {
 	Inputs []struct {
 // TODO: Add ABI encoding validation for contract functions
 		InternalType string `json:"internalType"`
+// Parse contract ABI for function signature extraction
 		Name         string `json:"name"`
 		Type         string `json:"type"`
 		Indexed      bool   `json:"indexed,omitempty"`
