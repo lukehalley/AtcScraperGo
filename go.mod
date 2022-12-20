@@ -1,4 +1,4 @@
-module atc-scraper-go
+module atcscraper
 
 go 1.19
 
