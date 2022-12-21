@@ -74,3 +74,38 @@ query GetBitQueryAccountDetails ($apiKey: String!) {
     }
   }
 }
+
+query GetAllStablecoinPairsCreatedForDex($network: EthereumNetwork!, $from: ISO8601DateTime, $limit: Int!, $factoryAddress: String!, $stablecoinAddress: String!, $tradeAmountUsd: Float!) {
+  ethereum(network: $network) {
+    dexTrades(
+      options: {asc: "timeInterval.second", limit: $limit}
+      time: {after: $from }
+      exchangeAddress: {is: $factoryAddress}
+      quoteCurrency: {is: $stablecoinAddress}
+      tradeAmountUsd: {gt: $tradeAmountUsd}
+
+    ) {
+      timeInterval {
+        second(count: 60)
+      }
+      baseCurrency {
+        symbol
+        address
+      }
+      baseAmount
+      quoteCurrency {
+        symbol
+        address
+      }
+      quoteAmount
+      trades: count
+      quotePrice
+      high: quotePrice(calculate: maximum)
+      low: quotePrice(calculate: minimum)
+      open: minimum(of: block, get: quote_price)
+      close: maximum(of: block, get: quote_price)
+      volume: quoteAmount
+      count: count
+    }
+  }
+}

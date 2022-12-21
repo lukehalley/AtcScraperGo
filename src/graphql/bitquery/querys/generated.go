@@ -34,6 +34,160 @@ const (
 	EthereumNetworkMatic EthereumNetwork = "matic"
 )
 
+// GetAllStablecoinPairsCreatedForDexEthereum includes the requested fields of the GraphQL type Ethereum.
+// The GraphQL type's documentation follows.
+//
+// Ethereum Chain
+type GetAllStablecoinPairsCreatedForDexEthereum struct {
+	// Trades on Ethereum DEX Smart Contracts
+	DexTrades []GetAllStablecoinPairsCreatedForDexEthereumDexTrades `json:"dexTrades"`
+}
+
+// GetDexTrades returns GetAllStablecoinPairsCreatedForDexEthereum.DexTrades, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereum) GetDexTrades() []GetAllStablecoinPairsCreatedForDexEthereumDexTrades {
+	return v.DexTrades
+}
+
+// GetAllStablecoinPairsCreatedForDexEthereumDexTrades includes the requested fields of the GraphQL type EthereumDexTrades.
+// The GraphQL type's documentation follows.
+//
+// Trades on DEX smart contracts
+type GetAllStablecoinPairsCreatedForDexEthereumDexTrades struct {
+	// Time interval
+	TimeInterval GetAllStablecoinPairsCreatedForDexEthereumDexTradesTimeInterval `json:"timeInterval"`
+	// Base currency
+	BaseCurrency GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency `json:"baseCurrency"`
+	BaseAmount   float64                                                         `json:"baseAmount"`
+	// Quote currency
+	QuoteCurrency GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency `json:"quoteCurrency"`
+	QuoteAmount   float64                                                          `json:"quoteAmount"`
+	Trades        int                                                              `json:"trades"`
+	QuotePrice    float64                                                          `json:"quotePrice"`
+	High          float64                                                          `json:"high"`
+	Low           float64                                                          `json:"low"`
+	Open          string                                                           `json:"open"`
+	Close         string                                                           `json:"close"`
+	Volume        float64                                                          `json:"volume"`
+	Count         int                                                              `json:"count"`
+}
+
+// GetTimeInterval returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.TimeInterval, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetTimeInterval() GetAllStablecoinPairsCreatedForDexEthereumDexTradesTimeInterval {
+	return v.TimeInterval
+}
+
+// GetBaseCurrency returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.BaseCurrency, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetBaseCurrency() GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency {
+	return v.BaseCurrency
+}
+
+// GetBaseAmount returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.BaseAmount, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetBaseAmount() float64 {
+	return v.BaseAmount
+}
+
+// GetQuoteCurrency returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.QuoteCurrency, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetQuoteCurrency() GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency {
+	return v.QuoteCurrency
+}
+
+// GetQuoteAmount returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.QuoteAmount, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetQuoteAmount() float64 {
+	return v.QuoteAmount
+}
+
+// GetTrades returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.Trades, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetTrades() int { return v.Trades }
+
+// GetQuotePrice returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.QuotePrice, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetQuotePrice() float64 {
+	return v.QuotePrice
+}
+
+// GetHigh returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.High, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetHigh() float64 { return v.High }
+
+// GetLow returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.Low, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetLow() float64 { return v.Low }
+
+// GetOpen returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.Open, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetOpen() string { return v.Open }
+
+// GetClose returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.Close, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetClose() string { return v.Close }
+
+// GetVolume returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.Volume, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetVolume() float64 { return v.Volume }
+
+// GetCount returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.Count, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetCount() int { return v.Count }
+
+// GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency includes the requested fields of the GraphQL type Currency.
+// The GraphQL type's documentation follows.
+//
+// Crypto currency ( token, coin, currency )
+type GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency struct {
+	// Currency symbol
+	Symbol string `json:"symbol"`
+	// Token Smart Contract Address
+	Address string `json:"address"`
+}
+
+// GetSymbol returns GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency.Symbol, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency) GetSymbol() string {
+	return v.Symbol
+}
+
+// GetAddress returns GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency.Address, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency) GetAddress() string {
+	return v.Address
+}
+
+// GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency includes the requested fields of the GraphQL type Currency.
+// The GraphQL type's documentation follows.
+//
+// Crypto currency ( token, coin, currency )
+type GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency struct {
+	// Currency symbol
+	Symbol string `json:"symbol"`
+	// Token Smart Contract Address
+	Address string `json:"address"`
+}
+
+// GetSymbol returns GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency.Symbol, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency) GetSymbol() string {
+	return v.Symbol
+}
+
+// GetAddress returns GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency.Address, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency) GetAddress() string {
+	return v.Address
+}
+
+// GetAllStablecoinPairsCreatedForDexEthereumDexTradesTimeInterval includes the requested fields of the GraphQL type TimeInterval.
+// The GraphQL type's documentation follows.
+//
+// Time Interval
+type GetAllStablecoinPairsCreatedForDexEthereumDexTradesTimeInterval struct {
+	Second string `json:"second"`
+}
+
+// GetSecond returns GetAllStablecoinPairsCreatedForDexEthereumDexTradesTimeInterval.Second, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTradesTimeInterval) GetSecond() string {
+	return v.Second
+}
+
+// GetAllStablecoinPairsCreatedForDexResponse is returned by GetAllStablecoinPairsCreatedForDex on success.
+type GetAllStablecoinPairsCreatedForDexResponse struct {
+	// Ethereum Mainnet / Classic Chain Datasets
+	Ethereum GetAllStablecoinPairsCreatedForDexEthereum `json:"ethereum"`
+}
+
+// GetEthereum returns GetAllStablecoinPairsCreatedForDexResponse.Ethereum, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexResponse) GetEthereum() GetAllStablecoinPairsCreatedForDexEthereum {
+	return v.Ethereum
+}
+
 // GetBitQueryAccountDetailsResponse is returned by GetBitQueryAccountDetails on success.
 type GetBitQueryAccountDetailsResponse struct {
 	// Utility Dataset
@@ -396,6 +550,40 @@ func (v *GetTopNDexsForNetworkResponse) GetEthereum() GetTopNDexsForNetworkEther
 	return v.Ethereum
 }
 
+// __GetAllStablecoinPairsCreatedForDexInput is used internally by genqlient
+type __GetAllStablecoinPairsCreatedForDexInput struct {
+	Network           EthereumNetwork `json:"network"`
+	From              time.Time       `json:"from"`
+	Limit             int             `json:"limit"`
+	FactoryAddress    string          `json:"factoryAddress"`
+	StablecoinAddress string          `json:"stablecoinAddress"`
+	TradeAmountUsd    float64         `json:"tradeAmountUsd"`
+}
+
+// GetNetwork returns __GetAllStablecoinPairsCreatedForDexInput.Network, and is useful for accessing the field via an interface.
+func (v *__GetAllStablecoinPairsCreatedForDexInput) GetNetwork() EthereumNetwork { return v.Network }
+
+// GetFrom returns __GetAllStablecoinPairsCreatedForDexInput.From, and is useful for accessing the field via an interface.
+func (v *__GetAllStablecoinPairsCreatedForDexInput) GetFrom() time.Time { return v.From }
+
+// GetLimit returns __GetAllStablecoinPairsCreatedForDexInput.Limit, and is useful for accessing the field via an interface.
+func (v *__GetAllStablecoinPairsCreatedForDexInput) GetLimit() int { return v.Limit }
+
+// GetFactoryAddress returns __GetAllStablecoinPairsCreatedForDexInput.FactoryAddress, and is useful for accessing the field via an interface.
+func (v *__GetAllStablecoinPairsCreatedForDexInput) GetFactoryAddress() string {
+	return v.FactoryAddress
+}
+
+// GetStablecoinAddress returns __GetAllStablecoinPairsCreatedForDexInput.StablecoinAddress, and is useful for accessing the field via an interface.
+func (v *__GetAllStablecoinPairsCreatedForDexInput) GetStablecoinAddress() string {
+	return v.StablecoinAddress
+}
+
+// GetTradeAmountUsd returns __GetAllStablecoinPairsCreatedForDexInput.TradeAmountUsd, and is useful for accessing the field via an interface.
+func (v *__GetAllStablecoinPairsCreatedForDexInput) GetTradeAmountUsd() float64 {
+	return v.TradeAmountUsd
+}
+
 // __GetBitQueryAccountDetailsInput is used internally by genqlient
 type __GetBitQueryAccountDetailsInput struct {
 	ApiKey string `json:"apiKey"`
@@ -461,6 +649,70 @@ func (v *__GetTopNDexsForNetworkInput) GetOffset() int { return v.Offset }
 
 // GetFrom returns __GetTopNDexsForNetworkInput.From, and is useful for accessing the field via an interface.
 func (v *__GetTopNDexsForNetworkInput) GetFrom() time.Time { return v.From }
+
+func GetAllStablecoinPairsCreatedForDex(
+	ctx context.Context,
+	client graphql.Client,
+	network EthereumNetwork,
+	from time.Time,
+	limit int,
+	factoryAddress string,
+	stablecoinAddress string,
+	tradeAmountUsd float64,
+) (*GetAllStablecoinPairsCreatedForDexResponse, error) {
+	req := &graphql.Request{
+		OpName: "GetAllStablecoinPairsCreatedForDex",
+		Query: `
+query GetAllStablecoinPairsCreatedForDex ($network: EthereumNetwork!, $from: ISO8601DateTime, $limit: Int!, $factoryAddress: String!, $stablecoinAddress: String!, $tradeAmountUsd: Float!) {
+	ethereum(network: $network) {
+		dexTrades(options: {asc:"timeInterval.second",limit:$limit}, time: {after:$from}, exchangeAddress: {is:$factoryAddress}, quoteCurrency: {is:$stablecoinAddress}, tradeAmountUsd: {gt:$tradeAmountUsd}) {
+			timeInterval {
+				second(count: 60)
+			}
+			baseCurrency {
+				symbol
+				address
+			}
+			baseAmount
+			quoteCurrency {
+				symbol
+				address
+			}
+			quoteAmount
+			trades: count
+			quotePrice
+			high: quotePrice(calculate: maximum)
+			low: quotePrice(calculate: minimum)
+			open: minimum(of: block, get: quote_price)
+			close: maximum(of: block, get: quote_price)
+			volume: quoteAmount
+			count
+		}
+	}
+}
+`,
+		Variables: &__GetAllStablecoinPairsCreatedForDexInput{
+			Network:           network,
+			From:              from,
+			Limit:             limit,
+			FactoryAddress:    factoryAddress,
+			StablecoinAddress: stablecoinAddress,
+			TradeAmountUsd:    tradeAmountUsd,
+		},
+	}
+	var err error
+
+	var data GetAllStablecoinPairsCreatedForDexResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
 
 func GetBitQueryAccountDetails(
 	ctx context.Context,
