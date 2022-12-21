@@ -54,3 +54,23 @@ query GetRouterAddressFromPairBaseCurrency ($network: EthereumNetwork!, $factory
     }
   }
 }
+
+query GetBitQueryAccountDetails ($apiKey: String!) {
+  utilities {
+    activePeriod (apiKey: $apiKey){
+      pointsRemaining
+      points
+      isPaid
+      isPointsConsumed
+      isSpent
+      isBlocked
+      starts {
+        date
+      }
+      ends {
+        date
+      }
+      billingDay
+    }
+  }
+}
