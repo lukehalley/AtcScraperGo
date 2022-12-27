@@ -19,3 +19,4 @@ type Stablecoin struct {
 	CreatedAt               string   `db:"created_at"`
 }
 // Identify and classify stablecoin token contracts
+// Track stablecoin addresses and maintain price stability data
