@@ -552,12 +552,12 @@ func (v *GetTopNDexsForNetworkResponse) GetEthereum() GetTopNDexsForNetworkEther
 
 // __GetAllStablecoinPairsCreatedForDexInput is used internally by genqlient
 type __GetAllStablecoinPairsCreatedForDexInput struct {
-	Network           EthereumNetwork `json:"network"`
-	From              time.Time       `json:"from"`
-	Limit             int             `json:"limit"`
-	FactoryAddress    string          `json:"factoryAddress"`
-	StablecoinAddress string          `json:"stablecoinAddress"`
-	TradeAmountUsd    float64         `json:"tradeAmountUsd"`
+	Network             EthereumNetwork `json:"network"`
+	From                time.Time       `json:"from"`
+	Limit               int             `json:"limit"`
+	FactoryAddress      string          `json:"factoryAddress"`
+	StablecoinAddresses []string        `json:"stablecoinAddresses"`
+	TradeAmountUsd      float64         `json:"tradeAmountUsd"`
 }
 
 // GetNetwork returns __GetAllStablecoinPairsCreatedForDexInput.Network, and is useful for accessing the field via an interface.
@@ -574,9 +574,9 @@ func (v *__GetAllStablecoinPairsCreatedForDexInput) GetFactoryAddress() string {
 	return v.FactoryAddress
 }
 
-// GetStablecoinAddress returns __GetAllStablecoinPairsCreatedForDexInput.StablecoinAddress, and is useful for accessing the field via an interface.
-func (v *__GetAllStablecoinPairsCreatedForDexInput) GetStablecoinAddress() string {
-	return v.StablecoinAddress
+// GetStablecoinAddresses returns __GetAllStablecoinPairsCreatedForDexInput.StablecoinAddresses, and is useful for accessing the field via an interface.
+func (v *__GetAllStablecoinPairsCreatedForDexInput) GetStablecoinAddresses() []string {
+	return v.StablecoinAddresses
 }
 
 // GetTradeAmountUsd returns __GetAllStablecoinPairsCreatedForDexInput.TradeAmountUsd, and is useful for accessing the field via an interface.
@@ -659,15 +659,15 @@ func GetAllStablecoinPairsCreatedForDex(
 	from time.Time,
 	limit int,
 	factoryAddress string,
-	stablecoinAddress string,
+	stablecoinAddresses []string,
 	tradeAmountUsd float64,
 ) (*GetAllStablecoinPairsCreatedForDexResponse, error) {
 	req := &graphql.Request{
 		OpName: "GetAllStablecoinPairsCreatedForDex",
 		Query: `
-query GetAllStablecoinPairsCreatedForDex ($network: EthereumNetwork!, $from: ISO8601DateTime, $limit: Int!, $factoryAddress: String!, $stablecoinAddress: String!, $tradeAmountUsd: Float!) {
+query GetAllStablecoinPairsCreatedForDex ($network: EthereumNetwork!, $from: ISO8601DateTime, $limit: Int!, $factoryAddress: String!, $stablecoinAddresses: [String!], $tradeAmountUsd: Float!) {
 	ethereum(network: $network) {
-		dexTrades(options: {asc:"timeInterval.second",limit:$limit}, time: {after:$from}, exchangeAddress: {is:$factoryAddress}, quoteCurrency: {is:$stablecoinAddress}, tradeAmountUsd: {gt:$tradeAmountUsd}) {
+		dexTrades(options: {asc:"timeInterval.second",limit:$limit}, time: {after:$from}, exchangeAddress: {is:$factoryAddress}, quoteCurrency: {in:$stablecoinAddresses}, tradeAmountUsd: {gt:$tradeAmountUsd}) {
 			timeInterval {
 				second(count: 60)
 			}
@@ -694,12 +694,12 @@ query GetAllStablecoinPairsCreatedForDex ($network: EthereumNetwork!, $from: ISO
 }
 `,
 		Variables: &__GetAllStablecoinPairsCreatedForDexInput{
-			Network:           network,
-			From:              from,
-			Limit:             limit,
-			FactoryAddress:    factoryAddress,
-			StablecoinAddress: stablecoinAddress,
-			TradeAmountUsd:    tradeAmountUsd,
+			Network:             network,
+			From:                from,
+			Limit:               limit,
+			FactoryAddress:      factoryAddress,
+			StablecoinAddresses: stablecoinAddresses,
+			TradeAmountUsd:      tradeAmountUsd,
 		},
 	}
 	var err error
