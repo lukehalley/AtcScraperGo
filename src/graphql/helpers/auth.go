@@ -1,7 +1,7 @@
-package atcutils
+package atchelpers
 
 import (
-	atctypes "atcscraper/src/data/types"
+	"atcscraper/src/types"
 	"net/http"
 )
 
