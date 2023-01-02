@@ -1,14 +1,14 @@
 package atchelpers
 
 import (
-	"atcscraper/src/types"
+	"atcscraper/src/types/bitquery"
 	"net/http"
 )
 
 func CreateHTTPClientWithAuth(APIKey string) http.Client {
 
 	HTTPClient := http.Client{
-		Transport: &atctypes.AuthedTransport{
+		Transport: &bitquery.AuthedTransport{
 			Key:     APIKey,
 			Wrapped: http.DefaultTransport,
 		},

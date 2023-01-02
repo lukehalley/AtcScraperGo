@@ -131,6 +131,8 @@ type GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency struct {
 	Symbol string `json:"symbol"`
 	// Token Smart Contract Address
 	Address string `json:"address"`
+	// Decimals
+	Decimals int `json:"decimals"`
 }
 
 // GetSymbol returns GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency.Symbol, and is useful for accessing the field via an interface.
@@ -143,6 +145,11 @@ func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency) GetAdd
 	return v.Address
 }
 
+// GetDecimals returns GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency.Decimals, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency) GetDecimals() int {
+	return v.Decimals
+}
+
 // GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency includes the requested fields of the GraphQL type Currency.
 // The GraphQL type's documentation follows.
 //
@@ -152,6 +159,8 @@ type GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency struct {
 	Symbol string `json:"symbol"`
 	// Token Smart Contract Address
 	Address string `json:"address"`
+	// Decimals
+	Decimals int `json:"decimals"`
 }
 
 // GetSymbol returns GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency.Symbol, and is useful for accessing the field via an interface.
@@ -162,6 +171,11 @@ func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency) GetSy
 // GetAddress returns GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency.Address, and is useful for accessing the field via an interface.
 func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency) GetAddress() string {
 	return v.Address
+}
+
+// GetDecimals returns GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency.Decimals, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTradesQuoteCurrency) GetDecimals() int {
+	return v.Decimals
 }
 
 // GetAllStablecoinPairsCreatedForDexEthereumDexTradesTimeInterval includes the requested fields of the GraphQL type TimeInterval.
@@ -674,11 +688,13 @@ query GetAllStablecoinPairsCreatedForDex ($network: EthereumNetwork!, $from: ISO
 			baseCurrency {
 				symbol
 				address
+				decimals
 			}
 			baseAmount
 			quoteCurrency {
 				symbol
 				address
+				decimals
 			}
 			quoteAmount
 			trades: count

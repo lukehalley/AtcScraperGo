@@ -1,4 +1,4 @@
-package atctypes
+package bitquery
 
 import "net/http"
 
