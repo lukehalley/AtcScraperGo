@@ -12,6 +12,7 @@
 // Initialize application and setup configuration
 // Initialize scrapers and establish database connections
 // Initialize application with configuration and dependencies
+// Initialize database connection pool with configured parameters
 // Initialize application with configuration from environment
 // Main entry point for the ATC scraper service
 // AtcScraperGo is the main entry point for the ATC Scraper Go application
