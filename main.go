@@ -2,11 +2,17 @@ package main
 
 import (
 	"atcscraper/src/data"
-	atcqueries "atcscraper/src/graphql/bitquery/querys"
-	atchelpers "atcscraper/src/graphql/helpers"
-	atctypes "atcscraper/src/types"
+	"atcscraper/src/db/graphql/bitquery/querys"
+	graphql_helpers "atcscraper/src/db/graphql/helpers"
+	insert "atcscraper/src/db/mysql/insert"
+	query "atcscraper/src/db/mysql/query"
+	"atcscraper/src/io"
+	"atcscraper/src/types/bitquery"
+	dex "atcscraper/src/web3"
 	"context"
+	"fmt"
 	"github.com/Khan/genqlient/graphql"
+	"github.com/projectdiscovery/ratelimit"
 	"log"
 	"os"
 	"strconv"
@@ -18,22 +24,29 @@ func main() {
 	// Env Vars
 	CacheMode, _ := strconv.ParseBool(os.Getenv("CACHE_MODE"))
 
-	// Collection Settings
-	// Networks := []string{"ethereum", "bsc", "matic", "klaytn", "avalanche", "fantom", "moonbeam"}
-	Networks := []string{"klaytn"}
-
+	////////////////////////////////////////////////////
 	// Init Vars
-	var FinalCollectedDexs []atctypes.Dex
+	////////////////////////////////////////////////////
+
+	// List For Storing Network Dexs
+	var ProcessedNetworkDexs []bitquery.Dex
+	var DexsWithPairs []bitquery.Dex
+
+	// Set Our Beginning Time For Timeframe
+	FromTime := graphql_helpers.GenerateGraphQLTimestamp("2022-12-01T01:00:00Z")
+
+	// Set Our NetworkObject
+	NumberOfDexsToCollect := 5
 
 	////////////////////////////////////////////////////
 	// Setup HTTP Client For API Calls
 	////////////////////////////////////////////////////
 
 	// Get The Bitquery API Key
-	BitqueryApiKey := "BQYZVuAE5Tl7zOvKBmQajtsyaH5JaqmG"
+	BitqueryApiKey := "BQY6Sk2AvIsRy20KFTdNXuiSvDr9DEtR"
 
 	// Create Query Client
-	HTTPClient := atchelpers.CreateHTTPClientWithAuth(BitqueryApiKey)
+	HTTPClient := graphql_helpers.CreateHTTPClientWithAuth(BitqueryApiKey)
 	QueryClient := graphql.NewClient("https://graphql.bitquery.io", &HTTPClient)
 	QueryContext := context.Background()
 
@@ -41,92 +54,209 @@ func main() {
 	// Get Bitquery Account Details
 	////////////////////////////////////////////////////
 
-	atchelpers.LogSeparator(false)
+	graphql_helpers.LogSeparator(false)
 
 	// Get Out Current Bitquery Account Details
-	AccountQuery, QueryError := atcqueries.GetBitQueryAccountDetails(QueryContext, QueryClient, BitqueryApiKey)
+	StartAccountQuery, QueryError := atcqueries.GetBitQueryAccountDetails(QueryContext, QueryClient, BitqueryApiKey)
+	StartingBitQueryPoints, _ := strconv.Atoi(StartAccountQuery.Utilities.ActivePeriod.PointsRemaining)
 
 	// Catch Query Errors
 	if QueryError != nil {
 		log.Panicln("Error Querying Bitquery Account:", QueryError)
 	} else {
-		log.Printf("Bitquery Points Remaining: %v", AccountQuery.Utilities.ActivePeriod.PointsRemaining)
+		log.Printf("Bitquery Points Balance: %v", StartingBitQueryPoints)
 	}
 
-	atchelpers.LogSeparator(true)
+	graphql_helpers.LogSeparator(true)
 
 	if !CacheMode {
 
 		////////////////////////////////////////////////////
-		// Get All NetworkDexs On Each NetworkObject
+		// Collect Networks + Stablecoins
 		////////////////////////////////////////////////////
 
-		// Set Our Beginning Time For Timeframe
-		FromTime := atchelpers.GenerateGraphQLTimestamp("2022-01-01T01:00:00Z")
+		Networks := data.GetNetworkList()
 
-		// Set Our NetworkObject
-		NumberOfDexsToCollect := 5
+		////////////////////////////////////////////////////
+		// Get All UnprocessedNetworkDexs On Each NetworkObject
+		////////////////////////////////////////////////////
 
 		// Start Log
-		atchelpers.LogSeparator(false)
+		graphql_helpers.LogSeparator(false)
 		log.Printf("Collecting Dex For %v Network(s)", len(Networks))
-		atchelpers.LogSeparator(false)
+		graphql_helpers.LogSeparator(false)
 
 		// Kick Off The Function Which Gets The Dexs For Each Network
-		var NetworkDexs [][]atctypes.Dex
-		for Index, Network := range Networks {
-			IsLastElement := (len(Networks) - 1) == Index
+		var UnprocessedNetworkDexs [][]bitquery.Dex
+		DexCollectionRateLimit := ratelimit.New(context.Background(), 1, time.Duration(60 * time.Second))
+		for _, Network := range Networks {
+			DexCollectionRateLimit.Take()
 			CurrentNetworkDexs := data.CollectDexsForNetwork(Network, NumberOfDexsToCollect, FromTime, QueryContext, QueryClient)
-			NetworkDexs = append(NetworkDexs, CurrentNetworkDexs)
-			if !IsLastElement {
-				time.Sleep(60 * time.Second)
-			}
+			UnprocessedNetworkDexs = append(UnprocessedNetworkDexs, CurrentNetworkDexs)
 		}
 
-		atchelpers.LogSeparator(false)
+		graphql_helpers.LogSeparator(false)
 
 		// Get Non-Null Dexs
-		for _, NetworkDex := range NetworkDexs {
-			CurrentNetwork := data.TitleCaseString(NetworkDex[0].Network)
+		for _, NetworkDex := range UnprocessedNetworkDexs {
+			CurrentNetwork := data.TitleCaseString(string(NetworkDex[0].Network.Name))
 			NetworkDexCount := 0
 			for _, Dex := range NetworkDex {
 				if Dex.RouterAddress != "" && Dex.FactoryAddress != "" {
 					NetworkDexCount = NetworkDexCount + 1
-					FinalCollectedDexs = append(FinalCollectedDexs, Dex)
+					ProcessedNetworkDexs = append(ProcessedNetworkDexs, Dex)
 				}
 			}
 			log.Printf("[%v] %v Dex(s)", CurrentNetwork, NetworkDexCount)
 		}
 
+		// Result Log
+		graphql_helpers.LogSeparator(false)
+		log.Printf("Collected %v Dex(s) Across %v Network(s)", len(ProcessedNetworkDexs), len(Networks))
+		graphql_helpers.LogSeparator(true)
+
+		// Sleep For 1 Min For Rate Limit
+		time.Sleep(60 * time.Second)
+
+		////////////////////////////////////////////////////
+		// Get Dex Pairs
+		////////////////////////////////////////////////////
+
+		// Pair Log
+		graphql_helpers.LogSeparator(false)
+		log.Printf("Collecting Pairs For %v Dexs(s)", len(ProcessedNetworkDexs))
+		graphql_helpers.LogSeparator(false)
+
+		// For Each Dex - Get All Pairs Matched With Selected Stablecoins
+		PairCollectionRateLimit := ratelimit.New(context.Background(), 10, time.Duration(60 * time.Second))
+		for _, Dex := range ProcessedNetworkDexs {
+			PairCollectionRateLimit.Take()
+			Dex.Pairs = data.CollectStablecoinPairsForDex(Dex, 1000, FromTime, QueryContext, QueryClient)
+			if len(Dex.Pairs) > 0 {
+				DexsWithPairs = append(DexsWithPairs, Dex)
+				log.Printf("Collected %v Pairs(s) For Dex %v On Network %v", len(Dex.Pairs), Dex.FactoryAddress, Dex.Network.Name)
+			}
+		}
+
+		graphql_helpers.LogSeparator(true)
+
+		////////////////////////////////////////////////////
+		// Save Data To Local Cache
+		////////////////////////////////////////////////////
+
+		// Cache Log
+		graphql_helpers.LogSeparator(false)
+		log.Printf("Saving Data To Local Cache...")
+		graphql_helpers.LogSeparator(false)
+
+		// Save Data To Local File
+		io.SaveDataToCache(DexsWithPairs, "DexCache")
+
+		// Finish Log
+		log.Printf("Data Saved")
+		graphql_helpers.LogSeparator(true)
+
+		////////////////////////////////////////////////////
+		// Calculate How Many Bitquery Points We Used
+		////////////////////////////////////////////////////
+
+		graphql_helpers.LogSeparator(false)
+
+		// Get Out Current Bitquery Account Details
+		EndAccountQuery, EndQueryError := atcqueries.GetBitQueryAccountDetails(QueryContext, QueryClient, BitqueryApiKey)
+		EndingBitQueryPoints, _ := strconv.Atoi(EndAccountQuery.Utilities.ActivePeriod.PointsRemaining)
+		UsedBitQueryPoints := StartingBitQueryPoints - EndingBitQueryPoints
+
+		// Catch Query Errors
+		if EndQueryError != nil {
+			log.Panicln("Error Querying Bitquery Account:", EndQueryError)
+		} else {
+			log.Printf("New Bitquery Points Balance: %v", StartingBitQueryPoints)
+			log.Printf("Final BitQuery Points Usage: %v", UsedBitQueryPoints)
+		}
+
+		graphql_helpers.LogSeparator(true)
+
 	} else {
 
-		FinalCollectedDexs = []atctypes.Dex {
-			{
-				Network : "klaytn",
-				FactoryAddress : "0xf51082ba95c18315ca51a1ab8d9db537ff52312e",
-				RouterAddress : "0x805c3fa4f0425f7b4ec6848e10de7cc7e0841a07",
-			},
-			{
-				Network: "klaytn",
-				FactoryAddress: "0xdee3df2560bceb55d3d7ef12f76dcb01785e6b29",
-				RouterAddress: "0xf50782a24afcb26acb85d086cf892bfffb5731b5",
-			},
-			{
-				Network: "klaytn",
-				FactoryAddress: "0xa25ba09d8837f6319cd65b2345c0bbea99c39cb1",
-				RouterAddress: "0x66ec1b0c3bf4c15a76289ac36098704acd44170f",
-			},
-			{
-				Network: "klaytn",
-				FactoryAddress: "0x3679c3766e70133ee4a7eb76031e49d3d1f2b50c",
-				RouterAddress: "0xf50782a24afcb26acb85d086cf892bfffb5731b5",
-			},
-		}
+		////////////////////////////////////////////////////
+		// Load Local Cache File
+		////////////////////////////////////////////////////
+
+		// Read Local Cache
+		DexsWithPairs = io.ReadCacheFile("DexCache")
+
+		graphql_helpers.LogSeparator(false)
+		log.Printf("Read %v Dex(s) From Cache", len(DexsWithPairs))
+		graphql_helpers.LogSeparator(true)
 
 	}
 
-	atchelpers.LogSeparator(false)
-	log.Printf("Collected %v Dex(s) Across %v Network(s)", len(FinalCollectedDexs), len(Networks))
-	atchelpers.LogSeparator(true)
+	////////////////////////////////////////////////////
+	// Write Tokens To DB
+	////////////////////////////////////////////////////
+
+	graphql_helpers.LogSeparator(false)
+	log.Printf("Inserting Collected Pairs To DB")
+	graphql_helpers.LogSeparator(false)
+
+	// Group Networks With Their Stablecoins
+	for _, Dex := range DexsWithPairs {
+		for _, DexPair := range Dex.Pairs {
+
+			// Add The Current Dex To The DB
+			DexDBId := insert.AddDexToDB(Dex.RouterAddress, Dex.FactoryAddress, Dex.Network.NetworkId)
+
+			// If Its Already Stored - Query The DB For Its ID
+			if DexDBId < 1 {
+				RetrievedDBId := query.GetDexFromDB(Dex.RouterAddress, Dex.FactoryAddress, Dex.Network.NetworkId)
+
+				DexDBId = int64(RetrievedDBId.DexId)
+			}
+
+			// Get The Address Of The Pair
+			PairAddress := dex.GetPairAddress(DexPair.BaseCurrency.Address, DexPair.QuoteCurrency.Address, Dex.FactoryAddress, Dex.Network.ChainRpc)
+
+			// Build The Pairs Name
+			PairName := fmt.Sprintf("%v/%v", DexPair.BaseCurrency.Symbol, DexPair.QuoteCurrency.Symbol)
+
+			// Add The Base Token To The DB
+			BaseCurrencyDBId := insert.AddTokenToDB(DexPair.BaseCurrency.Symbol, DexPair.BaseCurrency.Address, DexPair.BaseCurrency.Decimals, 0, Dex.Network.NetworkId)
+
+			// If Its Already Stored - Query The DB For Its ID
+			if BaseCurrencyDBId < 1 {
+				RetrievedCurrencyDBId := query.GetTokenFromDB(Dex.Network.NetworkId, DexPair.BaseCurrency.Address)
+
+				// If We Don't Get ID Back - Skip Iteration
+				if RetrievedCurrencyDBId.TokenId == 0 {
+					log.Printf("Already Present: %v [%v]", PairName, Dex.Network.Name)
+					continue
+				}
+
+				BaseCurrencyDBId = int64(RetrievedCurrencyDBId.TokenId)
+			}
+
+			// Query The DB For The DB ID Of Pairs StablecoinDBId
+			StablecoinDBId := query.GetTokenFromDB(Dex.Network.NetworkId, DexPair.QuoteCurrency.Address)
+
+			// If We Don't Get ID Back - Skip Iteration
+			if StablecoinDBId.TokenId == 0 {
+				log.Printf("Already Present: %v [%v]", PairName, Dex.Network.Name)
+				continue
+			}
+
+			// Insert The Pair Into The DB
+			InsertedPairId := insert.AddPairToDB(BaseCurrencyDBId, StablecoinDBId.TokenId, Dex.Network.NetworkId, DexDBId, PairName, PairAddress)
+
+			if InsertedPairId > 0 {
+				log.Printf("Added: %v [%v]", PairName, Dex.Network.Name)
+			} else {
+				log.Printf("Already Present: %v [%v]", PairName, Dex.Network.Name)
+			}
+
+		}
+	}
+
+	graphql_helpers.LogSeparator(true)
 
 }

@@ -1,36 +1,35 @@
 package data
 
 import (
-	atcqueries "atcscraper/src/graphql/bitquery/querys"
-	atctypes "atcscraper/src/types"
+	"atcscraper/src/db/graphql/bitquery/querys"
+	"atcscraper/src/types/bitquery"
+	"atcscraper/src/types/mysql"
 	"context"
 	"github.com/Khan/genqlient/graphql"
 	"log"
+	"sort"
 	"sync"
 	"time"
 )
 
-func CollectDexsForNetwork(Network string, AmountOfDexs int, FromTime time.Time, QueryContext context.Context, QueryClient graphql.Client) []atctypes.Dex {
-
-	// Create Network Object From Network String
-	NetworkObject := atcqueries.EthereumNetwork(Network)
+func CollectDexsForNetwork(Network mysql.Network, AmountOfDexs int, FromTime time.Time, QueryContext context.Context, QueryClient graphql.Client) []bitquery.Dex {
 
 	// Get N Dexs On Current NetworkObject Sorted By Transactions
-	NetworksDexsQuery, _ := atcqueries.GetTopNDexsForNetwork(QueryContext, QueryClient, NetworkObject, AmountOfDexs, 0, FromTime)
+	NetworksDexsQuery, _ := atcqueries.GetTopNDexsForNetwork(QueryContext, QueryClient, atcqueries.EthereumNetwork(Network.Name), AmountOfDexs, 0, FromTime)
 
 	// Collect Dexs From Query
 	NetworkDexs := NetworksDexsQuery.Ethereum.DexTrades
 	DexCount := len(NetworkDexs)
 
 	// Create List For Dexs
-	var CollectedNetworkDexs []atctypes.Dex
+	var CollectedNetworkDexs []bitquery.Dex
 
 	if DexCount > 0 {
 
 		// Create Concurrency Objects
 		DexContractCollectionWaitGroup := new(sync.WaitGroup)
 		DexContractCollectionWaitGroup.Add(len(NetworkDexs))
-		DexContractCollectionChannel := make(chan atctypes.Dex, len(NetworkDexs))
+		DexContractCollectionChannel := make(chan bitquery.Dex, len(NetworkDexs))
 
 		// Kick Off The Function Which Gets The Router + Factory Contract For Each Dex
 		for _, NetworkDex := range NetworkDexs {
@@ -50,23 +49,20 @@ func CollectDexsForNetwork(Network string, AmountOfDexs int, FromTime time.Time,
 
 	}
 
-	log.Printf("[%v] Collecting Finished", TitleCaseString(Network))
+	log.Printf("[%v] Collecting Finished", TitleCaseString(string(Network.Name)))
 
 	// Return List Of Collected Dexs With Channel
 	return CollectedNetworkDexs
 
 }
 
-func CollectDexFactoryAndRouter(Network string, NetworkDex atcqueries.GetTopNDexsForNetworkEthereumDexTrades, QueryContext context.Context, QueryClient graphql.Client, DexContractCollectionWaitGroup *sync.WaitGroup, DexContractCollectionChannel chan atctypes.Dex) {
+func CollectDexFactoryAndRouter(Network mysql.Network, NetworkDex atcqueries.GetTopNDexsForNetworkEthereumDexTrades, QueryContext context.Context, QueryClient graphql.Client, DexContractCollectionWaitGroup *sync.WaitGroup, DexContractCollectionChannel chan bitquery.Dex) {
 
 	// Schedule The Call To WaitGroup's Done To Tell GoRoutine Is Completed.
 	defer DexContractCollectionWaitGroup.Done()
 
-	// Create Network Object From Network String
-	NetworkObject := atcqueries.EthereumNetwork(Network)
-
 	// Create Dex Object
-	var CollectedDex atctypes.Dex
+	var CollectedDex bitquery.Dex
 
 	// Set Dex Network
 	CollectedDex.Network = Network
@@ -75,7 +71,7 @@ func CollectDexFactoryAndRouter(Network string, NetworkDex atcqueries.GetTopNDex
 	DexFactoryAddress := NetworkDex.Exchange.Address.Address
 
 	// Get 50 Pairs Created By The Factory So We Can Get The Dexs Router Address
-	PairsCreatedByDexQuery, _ := atcqueries.GetPairCreatedByFactory(QueryContext, QueryClient, NetworkObject, 50, DexFactoryAddress)
+	PairsCreatedByDexQuery, _ := atcqueries.GetPairCreatedByFactory(QueryContext, QueryClient, atcqueries.EthereumNetwork(Network.Name), 50, DexFactoryAddress)
 
 	var TokenAddresses []string
 
@@ -91,7 +87,7 @@ func CollectDexFactoryAndRouter(Network string, NetworkDex atcqueries.GetTopNDex
 		}
 
 		// Get The Router Address From One Of The Primary Tokens Dex Trades
-		DexRouterQuery, QueryError := atcqueries.GetRouterAddressFromPairBaseCurrencys(QueryContext, QueryClient, NetworkObject, DexFactoryAddress, TokenAddresses, 1)
+		DexRouterQuery, QueryError := atcqueries.GetRouterAddressFromPairBaseCurrencys(QueryContext, QueryClient, atcqueries.EthereumNetwork(Network.Name), DexFactoryAddress, TokenAddresses, 1)
 
 		// Catch Query Errors
 		if QueryError == nil {
@@ -113,4 +109,37 @@ func CollectDexFactoryAndRouter(Network string, NetworkDex atcqueries.GetTopNDex
 
 	DexContractCollectionChannel <- CollectedDex
 
+}
+
+func CollectStablecoinPairsForDex(Dex bitquery.Dex, Limit int, FromTime time.Time, QueryContext context.Context, QueryClient graphql.Client) []atcqueries.GetAllStablecoinPairsCreatedForDexEthereumDexTrades {
+
+	// Collect Stablecoin Addresses
+	var Stablecoins []string
+	for _, DBStablecoin := range Dex.Network.Stablecoins {
+		Stablecoins = append(Stablecoins, DBStablecoin.Address)
+	}
+
+	// List For Unique Pairs
+	var UniquePairs []atcqueries.GetAllStablecoinPairsCreatedForDexEthereumDexTrades
+
+	// Query For Dex Stablecoins
+	DexStablecoinPairsQuery, _ := atcqueries.GetAllStablecoinPairsCreatedForDex(QueryContext, QueryClient, atcqueries.EthereumNetwork(Dex.Network.Name), FromTime, Limit, Dex.FactoryAddress, Stablecoins, 1)
+
+	// Collect All Unique Pairs
+	CollectedPairs := DexStablecoinPairsQuery.Ethereum.DexTrades
+	if len(CollectedPairs) > 0 {
+		var CollectedBaseCurrencyAddresses []string
+		for _, CollectedPair := range CollectedPairs {
+			target := CollectedPair.BaseCurrency.Address
+			sort.Strings(CollectedBaseCurrencyAddresses)
+			i := sort.SearchStrings(CollectedBaseCurrencyAddresses, target)
+			TokenAlreadyCollected := i < len(CollectedBaseCurrencyAddresses) && CollectedBaseCurrencyAddresses[i] == target
+			if !TokenAlreadyCollected {
+				CollectedBaseCurrencyAddresses = append(CollectedBaseCurrencyAddresses, CollectedPair.BaseCurrency.Address)
+				UniquePairs = append(UniquePairs, CollectedPair)
+			}
+		}
+	}
+
+	return UniquePairs
 }
