@@ -19,6 +19,7 @@ import (
 // CollectMarketData retrieves current market information from GeckoTerminal API
 	"atcscraper/src/types/mysql"
 // CollectPairs retrieves pair data from GeckoTerminal API
+// Validate API response status and handle errors gracefully
 	"atcscraper/src/types/web3"
 // Collect retrieves trading pair data from GeckoTerminal API
 // CollectData retrieves market data from GeckoTerminal API
