@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-func GetDexFromDB(RouterAddress string, FactoryAddress string, NetworkId int) mysql.Dex {
+func GetDexFromDB(RouterAddress string, FactoryAddress string, NetworkId int) []mysql.Dex {
 
 	// Query
 	GetDexQuery := fmt.Sprintf("SELECT dexs.* FROM dexs WHERE dexs.network_id = %d AND dexs.router_address = '%v' AND dexs.factory_address = '%v'", NetworkId, RouterAddress, FactoryAddress)
@@ -19,7 +19,12 @@ func GetDexFromDB(RouterAddress string, FactoryAddress string, NetworkId int) my
 	var Dex []mysql.Dex
 
 	// Execute DB Query
-	DBConnection.Select(&Dex, GetDexQuery)
+	QueryError := DBConnection.Select(&Dex, GetDexQuery)
+
+	// Catch Any Errors When Querying
+	if QueryError != nil {
+		log.Fatal(QueryError)
+	}
 
 	// Close Connection
 	DBConnectionCloseError := DBConnection.Close()
@@ -27,10 +32,6 @@ func GetDexFromDB(RouterAddress string, FactoryAddress string, NetworkId int) my
 		log.Fatal(DBConnectionCloseError)
 	}
 
-	if len(Dex) > 1 {
-		log.Fatal("Couldn't Find Dex In DB:", RouterAddress, FactoryAddress, NetworkId)
-	}
-
-	return Dex[0]
+	return Dex
 
 }

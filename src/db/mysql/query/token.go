@@ -37,10 +37,10 @@ func GetStablecoinsFromDB() []mysql.Token {
 
 }
 
-func GetTokenFromDB(NetworkId int, TokenAddress string) mysql.Token {
+func GetTokenFromDB(NetworkId int, TokenAddress string, TokenSymbol string) []mysql.Token {
 
 	// Query
-	GetTokenQuery := fmt.Sprintf("SELECT tokens.* FROM tokens WHERE tokens.network_id = %d AND tokens.address = '%v'", NetworkId, TokenAddress)
+	GetTokenQuery := fmt.Sprintf("SELECT tokens.* FROM tokens WHERE tokens.network_id = %d AND tokens.address = '%v' AND tokens.symbol = '%v'", NetworkId, TokenAddress, TokenSymbol)
 
 	// Create Connection To DB
 	DBConnection := mysqlutils.CreateDatabaseConnection()
@@ -53,7 +53,7 @@ func GetTokenFromDB(NetworkId int, TokenAddress string) mysql.Token {
 
 	// Catch Any Errors When Querying
 	if QueryError != nil {
-		log.Fatal(QueryError)
+		log.Fatal("Error Querying DB: ", QueryError)
 	}
 
 	// Close Connection
@@ -62,12 +62,6 @@ func GetTokenFromDB(NetworkId int, TokenAddress string) mysql.Token {
 		log.Fatal(DBConnectionCloseError)
 	}
 
-	if len(Token) > 1 {
-		return Token[0]
-	} else {
-		var NullToken mysql.Token
-		NullToken.TokenId = 0
-		return NullToken
-	}
+	return Token
 
 }
