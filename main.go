@@ -204,54 +204,77 @@ func main() {
 	for _, Dex := range DexsWithPairs {
 		for _, DexPair := range Dex.Pairs {
 
-			// Add The Current Dex To The DB
-			DexDBId := insert.AddDexToDB(Dex.RouterAddress, Dex.FactoryAddress, Dex.Network.NetworkId)
+			////////////////////////////////////////////////////
+			// Add or Read Dex
+			////////////////////////////////////////////////////
 
-			// If Its Already Stored - Query The DB For Its ID
-			if DexDBId < 1 {
-				RetrievedDBId := query.GetDexFromDB(Dex.RouterAddress, Dex.FactoryAddress, Dex.Network.NetworkId)
+			// Check If The Dex Is Already Stored
+			RetrievedDexDBId := query.GetDexFromDB(Dex.RouterAddress, Dex.FactoryAddress, Dex.Network.NetworkId)
+			DexDBId := int64(0)
 
-				DexDBId = int64(RetrievedDBId.DexId)
+			// If The Dex Not Already Stored - Add It To The DB
+			if len(RetrievedDexDBId) < 1 {
+				// Add The Current Dex To The DB
+				DexDBId = insert.AddDexToDB(Dex.RouterAddress, Dex.FactoryAddress, Dex.Network.NetworkId)
+			} else {
+				DexDBId = int64(RetrievedDexDBId[0].DexId)
 			}
 
-			// Get The Address Of The Pair
-			PairAddress := dex.GetPairAddress(DexPair.BaseCurrency.Address, DexPair.QuoteCurrency.Address, Dex.FactoryAddress, Dex.Network.ChainRpc)
+			////////////////////////////////////////////////////
+			// Add or Read Base Currency
+			////////////////////////////////////////////////////
+
+			// Check If The Base Currency Token Is Already Stored
+			RetrievedDBBaseCurrency := query.GetTokenFromDB(Dex.Network.NetworkId, DexPair.BaseCurrency.Address, DexPair.BaseCurrency.Symbol)
+			BaseCurrencyDBId := int64(0)
+
+			// Add The Base Token To The DB If It's Not Stored
+			if len(RetrievedDBBaseCurrency) < 1 {
+				BaseCurrencyDBId = insert.AddTokenToDB(DexPair.BaseCurrency.Symbol, DexPair.BaseCurrency.Address, DexPair.BaseCurrency.Decimals, 0, Dex.Network.NetworkId)
+			} else {
+				BaseCurrencyDBId = int64(RetrievedDBBaseCurrency[0].TokenId)
+			}
+
+			////////////////////////////////////////////////////
+			// Add or Read Quote Currency
+			////////////////////////////////////////////////////
+
+			// Query The DB For The DB ID Of Pairs RetrievedDBStablecoinDB
+			RetrievedDBStablecoinDB := query.GetTokenFromDB(Dex.Network.NetworkId, DexPair.QuoteCurrency.Address, DexPair.QuoteCurrency.Symbol)
+			StablecoinDBId := int64(0)
+
+			// Add The Quote Token To The DB If It's Not Stored
+			if len(RetrievedDBStablecoinDB) < 1 {
+				StablecoinDBId = insert.AddTokenToDB(DexPair.QuoteCurrency.Symbol, DexPair.QuoteCurrency.Address, DexPair.QuoteCurrency.Decimals, 1, Dex.Network.NetworkId)
+			} else {
+				StablecoinDBId = int64(RetrievedDBStablecoinDB[0].TokenId)
+			}
+
+			////////////////////////////////////////////////////
+			// Add or Read Pair
+			////////////////////////////////////////////////////
 
 			// Build The Pairs Name
 			PairName := fmt.Sprintf("%v/%v", DexPair.BaseCurrency.Symbol, DexPair.QuoteCurrency.Symbol)
 
-			// Add The Base Token To The DB
-			BaseCurrencyDBId := insert.AddTokenToDB(DexPair.BaseCurrency.Symbol, DexPair.BaseCurrency.Address, DexPair.BaseCurrency.Decimals, 0, Dex.Network.NetworkId)
+			// Get The Address Of The Pair
+			PairAddress := dex.GetPairAddress(DexPair.BaseCurrency.Address, DexPair.QuoteCurrency.Address, Dex.FactoryAddress, Dex.Network.ChainRpc)
 
-			// If Its Already Stored - Query The DB For Its ID
-			if BaseCurrencyDBId < 1 {
-				RetrievedCurrencyDBId := query.GetTokenFromDB(Dex.Network.NetworkId, DexPair.BaseCurrency.Address)
+			// Check If The Pair Is Already Stored
+			RetrievedDBPair := query.GetPairFromDB(PairAddress, Dex.Network.NetworkId)
 
-				// If We Don't Get ID Back - Skip Iteration
-				if RetrievedCurrencyDBId.TokenId == 0 {
-					log.Printf("Already Present: %v [%v]", PairName, Dex.Network.Name)
-					continue
-				}
+			// Add The Pair To The DB If It's Not Stored
+			if len(RetrievedDBPair) < 1 {
 
-				BaseCurrencyDBId = int64(RetrievedCurrencyDBId.TokenId)
-			}
+				// Insert The Pair Into The DB
+				insert.AddPairToDB(BaseCurrencyDBId, StablecoinDBId, Dex.Network.NetworkId, DexDBId, PairName, PairAddress)
 
-			// Query The DB For The DB ID Of Pairs StablecoinDBId
-			StablecoinDBId := query.GetTokenFromDB(Dex.Network.NetworkId, DexPair.QuoteCurrency.Address)
-
-			// If We Don't Get ID Back - Skip Iteration
-			if StablecoinDBId.TokenId == 0 {
-				log.Printf("Already Present: %v [%v]", PairName, Dex.Network.Name)
-				continue
-			}
-
-			// Insert The Pair Into The DB
-			InsertedPairId := insert.AddPairToDB(BaseCurrencyDBId, StablecoinDBId.TokenId, Dex.Network.NetworkId, DexDBId, PairName, PairAddress)
-
-			if InsertedPairId > 0 {
 				log.Printf("Added: %v [%v]", PairName, Dex.Network.Name)
+
 			} else {
+
 				log.Printf("Already Present: %v [%v]", PairName, Dex.Network.Name)
+
 			}
 
 		}

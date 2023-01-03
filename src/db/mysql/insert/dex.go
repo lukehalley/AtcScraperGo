@@ -14,8 +14,8 @@ func AddDexToDB(RouterAddress string, FactoryAddress string, NetworkId int) int6
 
 	InsertQuery := "INSERT INTO dexs(" + DBKeys + ") SELECT * FROM " + SelectStatement + " AS tmp WHERE NOT EXISTS (SELECT * FROM dexs WHERE " + CompareStatement + ") LIMIT 1"
 
-	InsertedPairID := mysqlutils.ExecuteInsert(InsertQuery)
+	InsertedDexID := mysqlutils.ExecuteInsert(InsertQuery)
 
-	return InsertedPairID
+	return InsertedDexID
 
 }

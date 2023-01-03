@@ -11,7 +11,12 @@ func ExecuteInsert(InsertQuery string) int64 {
 	DBConnection := CreateDatabaseConnection()
 
 	// Execute DB Query
-	QueryResult, _ := DBConnection.ExecContext(context.Background(), InsertQuery)
+	QueryResult, QueryError := DBConnection.ExecContext(context.Background(), InsertQuery)
+
+	// Catch Insert Error
+	if QueryError != nil {
+		log.Fatal("Error Inserting DB Record: ", QueryError)
+	}
 
 	// Get Inserted Row ID
 	InsertedRowID := int64(0)
