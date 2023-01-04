@@ -1,23 +1,17 @@
-package geckoterminal
+package chainlist
 
 import (
 	"atcscraper/src/env"
 	"fmt"
 )
 
-func BuildGTAPIURL(Endpoint string, IsApp bool) string {
+func BuildChainlistPIURL(Endpoint string) string {
 
 	// Get Base URL
-	GtBaseUrl := ""
-	if IsApp {
-		GtBaseUrl = env.LoadEnv("GT_APP_URL")
-	} else {
-		GtBaseUrl = env.LoadEnv("GT_BASE_URL")
-	}
-
+	ChainlistBaseUrl := env.LoadEnv("CL_BASE_URL")
 
 	// Build URL
-	FullURL := fmt.Sprintf("%v/%v", GtBaseUrl, Endpoint)
+	FullURL := fmt.Sprintf("%v/%v", ChainlistBaseUrl, Endpoint)
 
 	return FullURL
 

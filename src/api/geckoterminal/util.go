@@ -5,12 +5,20 @@ import (
 	"fmt"
 )
 
-func BuildGTAPIURL(Endpoint string) string {
+func BuildGTAPIURL(Endpoint string, IsApp bool) string {
 
 	// Get Base URL
-	GtBaseUrl := env.LoadEnv("GT_BASE_URL")
+	GtBaseUrl := ""
+	if IsApp {
+		GtBaseUrl = env.LoadEnv("GT_APP_URL")
+	} else {
+		GtBaseUrl = env.LoadEnv("GT_BASE_URL")
+	}
 
-	return fmt.Sprintf("%v/%v", GtBaseUrl, Endpoint)
 
+	// Build URL
+	FullURL := fmt.Sprintf("%v/%v", GtBaseUrl, Endpoint)
+
+	return FullURL
 
 }

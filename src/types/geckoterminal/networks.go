@@ -2,7 +2,7 @@ package geckoterminal
 
 import "time"
 
-type GetGTNetworks struct {
+type GeckoTerminalNetworks struct {
 	Networks []struct {
 		ID         string `json:"id"`
 		Type       string `json:"type"`

@@ -24,10 +24,10 @@ func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
 	}
 }
 
-func ReadGTCacheFile(FileName string) geckoterminal.GetGTNetworks {
+func ReadGTCacheFile(FileName string) []geckoterminal.GeckoTerminalNetworkWithDexs {
 
 	// List For Storing Cache Dexs
-	var CacheNetworks geckoterminal.GetGTNetworks
+	var CacheNetworks []geckoterminal.GeckoTerminalNetworkWithDexs
 
 	// Create The Cache File
 	FullPath := "cache/" + FileName + ".gob"
