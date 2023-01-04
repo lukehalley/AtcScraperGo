@@ -1,8 +1,8 @@
 package data
 
 import (
-	"atcscraper/src/db/graphql/helpers"
 	query2 "atcscraper/src/db/mysql/query"
+	log2 "atcscraper/src/log"
 	"atcscraper/src/types/mysql"
 	"log"
 )
@@ -26,10 +26,10 @@ func GetNetworkList() []mysql.Network {
 	}
 
 	// Result Log
-	atchelpers.LogSeparator(false)
+	log2.LogSeparator(false)
 	log.Printf("Got %v Networks(s) From DB", len(DBNetworks))
 	log.Printf("Got %v Stablecoins(s) From DB", len(DBStablecoins))
-	atchelpers.LogSeparator(true)
+	log2.LogSeparator(true)
 
 	return DBNetworks
 

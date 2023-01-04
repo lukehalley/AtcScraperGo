@@ -4,6 +4,7 @@ import (
 	"atcscraper/src/db/graphql/bitquery/querys"
 	"atcscraper/src/types/bitquery"
 	"atcscraper/src/types/mysql"
+	"atcscraper/src/types/web3"
 	"context"
 	"github.com/Khan/genqlient/graphql"
 	"log"
@@ -111,7 +112,20 @@ func CollectDexFactoryAndRouter(Network mysql.Network, NetworkDex atcqueries.Get
 
 }
 
-func CollectStablecoinPairsForDex(Dex bitquery.Dex, Limit int, FromTime time.Time, QueryContext context.Context, QueryClient graphql.Client) []atcqueries.GetAllStablecoinPairsCreatedForDexEthereumDexTrades {
+func SearchPairTransactions(PairTransactions []web3.PairTransactions, BaseCurrency string, QuoteCurrency string) (bool, int) {
+
+	Index := sort.Search(len(PairTransactions), func(i int) bool {
+		return PairTransactions[i].BaseCurrency >= BaseCurrency && PairTransactions[i].QuoteCurrency >= QuoteCurrency
+	})
+
+	if Index < len(PairTransactions) && PairTransactions[Index].BaseCurrency == BaseCurrency && PairTransactions[Index].QuoteCurrency == QuoteCurrency {
+		return true, Index
+	} else {
+		return false, -1
+	}
+}
+
+func CollectStablecoinPairsForDex(Dex bitquery.Dex, Limit int, FromTime time.Time, QueryContext context.Context, QueryClient graphql.Client) ([]atcqueries.GetAllStablecoinPairsCreatedForDexEthereumDexTrades, []web3.PairTransactions) {
 
 	// Collect Stablecoin Addresses
 	var Stablecoins []string
@@ -125,11 +139,27 @@ func CollectStablecoinPairsForDex(Dex bitquery.Dex, Limit int, FromTime time.Tim
 	// Query For Dex Stablecoins
 	DexStablecoinPairsQuery, _ := atcqueries.GetAllStablecoinPairsCreatedForDex(QueryContext, QueryClient, atcqueries.EthereumNetwork(Dex.Network.Name), FromTime, Limit, Dex.FactoryAddress, Stablecoins, 1)
 
+	// Create A List Of Pair Transactions
+	var PairTransactions []web3.PairTransactions
+
 	// Collect All Unique Pairs
 	CollectedPairs := DexStablecoinPairsQuery.Ethereum.DexTrades
 	if len(CollectedPairs) > 0 {
 		var CollectedBaseCurrencyAddresses []string
 		for _, CollectedPair := range CollectedPairs {
+
+			PairIndexCreated, ResultIndex := SearchPairTransactions(PairTransactions, CollectedPair.BaseCurrency.Address, CollectedPair.QuoteCurrency.Address)
+
+			if !PairIndexCreated {
+				var NewPair web3.PairTransactions
+				NewPair.BaseCurrency = CollectedPair.BaseCurrency.Address
+				NewPair.QuoteCurrency = CollectedPair.QuoteCurrency.Address
+				NewPair.Transactions = append(NewPair.Transactions, CollectedPair.Transaction.Hash)
+				PairTransactions = append(PairTransactions, NewPair)
+			} else {
+				PairTransactions[ResultIndex].Transactions = append(PairTransactions[ResultIndex].Transactions, CollectedPair.Transaction.Hash)
+			}
+
 			target := CollectedPair.BaseCurrency.Address
 			sort.Strings(CollectedBaseCurrencyAddresses)
 			i := sort.SearchStrings(CollectedBaseCurrencyAddresses, target)
@@ -141,5 +171,5 @@ func CollectStablecoinPairsForDex(Dex bitquery.Dex, Limit int, FromTime time.Tim
 		}
 	}
 
-	return UniquePairs
+	return UniquePairs, PairTransactions
 }

@@ -1,14 +1,14 @@
-package requests
+package chainlist
 
 import (
-	geckoterminal_helpers "atcscraper/src/api/geckoterminal"
+	"atcscraper/src/api/chainlist"
 	"atcscraper/src/requests"
 	"regexp"
 )
 
-func GetGeckoterminalBuildID() string {
+func GetChainlistBuildID() string {
 
-	RequestURL := geckoterminal_helpers.BuildGTAPIURL("_next/data/", false)
+	RequestURL := chainlist.BuildChainlistPIURL("")
 
 	BodyString := requests.MakeGetRequestRAW(RequestURL)
 

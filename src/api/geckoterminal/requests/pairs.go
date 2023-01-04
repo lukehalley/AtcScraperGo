@@ -6,21 +6,25 @@ import (
 	"atcscraper/src/types/geckoterminal"
 	"encoding/json"
 	"fmt"
+	"net/url"
 )
 
-func GetGeckoterminalPairTransactionsAndTokens(NetworkName string, PairAddress string, Page int) geckoterminal.GeckoTerminalPairTransactions {
+func GetGeckoterminalDexPairs(NetworkName string, DexName string, Page int) geckoterminal.GeckoTerminalDexPairs {
 
-	Endpoint := fmt.Sprintf("api/p1/%v/pools/%v/swaps?include=from_token,to_token&page=%d", NetworkName, PairAddress, Page)
+	// Escape Chars
+	Comma := url.QueryEscape(",")
 
-	RequestURL := geckoterminal_helpers.BuildGTAPIURL(Endpoint)
+	Endpoint := fmt.Sprintf("api/p1/%v/pools?dex=%v&include=dex,dex.dex_metric%vdex.network%vtokens&page=%d&include_network_metrics=false", NetworkName, DexName, Comma, Comma, Page)
+
+	RequestURL := geckoterminal_helpers.BuildGTAPIURL(Endpoint, true)
 
 	Body := requests.MakeGetRequestJSON(RequestURL)
 
-	var TransactionsWithPairData geckoterminal.GeckoTerminalPairTransactions
-	if JSONError := json.Unmarshal(Body, &TransactionsWithPairData); JSONError != nil {
-		fmt.Println("Could Not Unmarshal GT Transactions And Pair JSON: ", JSONError)
+	var DexPairs geckoterminal.GeckoTerminalDexPairs
+	if JSONError := json.Unmarshal(Body, &DexPairs); JSONError != nil {
+		fmt.Println("Could Not Unmarshal GT Dex Pairs: ", JSONError)
 	}
 
-	return TransactionsWithPairData
+	return DexPairs
 
 }

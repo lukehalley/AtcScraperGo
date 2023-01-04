@@ -5,10 +5,12 @@ WORKDIR /app
 COPY main.go go.mod go.sum ./
 
 ADD src ./src
+ADD static ./static
+ADD cache ./cache
 
 RUN go mod download
 
-RUN go build -o /atc-runner
+RUN go build -o /atc-scraper-go
 
-CMD [ "/atc-runner" ]
+CMD [ "/atc-scraper-go" ]
 
