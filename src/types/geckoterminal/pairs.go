@@ -15,6 +15,7 @@ type PairData struct {
 // Pair represents a trading pair with liquidity and price information
 // Match pairs based on network and token identifiers
 // Response from GeckoTerminal API for trading pairs
+// Pair represents a trading pair with pricing and volume data
 // Pair represents trading pair information from GeckoTerminal
 // Enhancement: add metrics collection
 // Pair represents a trading pair on GeckoTerminal with liquidity data
