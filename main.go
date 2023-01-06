@@ -272,6 +272,8 @@ func main() {
 			// Count For Dex Iteration
 			DexCountIndex := DexIndex + 1
 
+			log.Printf("  [%d/%d] Dex: %v", DexCountIndex, DexCount, Dex.Name)
+
 			// Dex Is Invalid Dex List
 			DexIsInvalid, _ := util.CheckIfStringIsInList(InvalidDexs, Dex.Identifier, false)
 
@@ -283,8 +285,6 @@ func main() {
 				// State Vars
 				DexFailCount := 0
 				DexIsValid := true
-
-				log.Printf("  [%d/%d] Dex: %v", DexCountIndex, DexCount, Dex.Name)
 
 				// Get All Pairs For Current Dex
 				DexPairs := geckoterminal_api.GetGeckoterminalDexPairs(Network.Network.Identifier, Dex.Identifier, 1)
@@ -424,16 +424,21 @@ func main() {
 									// DB Ids
 									var TokenDBId int64
 									var PairDBId int64
-									var RouteDBId int64
 
 									if BaseTokenIsStablecoin {
 
 										// Check If Our Token Is Already In DB
 										TokenQueryResults := mysql_query.GetTokenFromDB(Network.NetworkDBId, QuoteToken.Symbol, QuoteToken.Address)
 										if len(TokenQueryResults) > 0 {
+
 											// Set Token DB ID
 											TokenDBId = int64(TokenQueryResults[0].TokenId)
+
 										} else {
+
+											// Get Token Decimals
+											QuoteToken.Decimals = int(web3.GetTokenDecimals(QuoteToken.Address, Network.RPCs[0]))
+
 											// Add Token To DB
 											TokenDBId = mysql_insert.AddTokenToDB(QuoteToken.Symbol, QuoteToken.Address, QuoteToken.Decimals, Network.NetworkDBId)
 										}
@@ -456,9 +461,14 @@ func main() {
 										// Check If Our Token Is Already In DB
 										TokenQueryResults := mysql_query.GetTokenFromDB(Network.NetworkDBId, QuoteToken.Symbol, QuoteToken.Address)
 										if len(TokenQueryResults) > 0 {
+
 											// Set Token DB ID
 											TokenDBId = int64(TokenQueryResults[0].TokenId)
 										} else {
+
+											// Get Token Decimals
+											BaseToken.Decimals = int(web3.GetTokenDecimals(BaseToken.Address, Network.RPCs[0]))
+
 											// Add Token To DB
 											TokenDBId = mysql_insert.AddTokenToDB(BaseToken.Symbol, BaseToken.Address, BaseToken.Decimals, Network.NetworkDBId)
 										}
@@ -469,11 +479,15 @@ func main() {
 										// Check If Our Pair Is Already In DB
 										PairQueryResults := mysql_query.GetPairFromDB(Pair.Address, Network.NetworkDBId)
 										if len(PairQueryResults) > 0 {
+
 											// Set Pair DB ID
 											PairDBId = int64(PairQueryResults[0].PairId)
+
 										} else {
+
 											// Add Pair To DB
 											mysql_insert.AddPairToDB(TokenDBId, StablecoinDetails.StablecoinId, Network.NetworkDBId, DexDBId, Pair.Name, Pair.Address)
+
 										}
 
 									}
@@ -483,33 +497,29 @@ func main() {
 
 										// Create A Comma Seperated String For Route
 										var RouteString string
-										for _, RouteAddress := range PairTransaction.InputData.Path {
-											RouteString = fmt.Sprintf("%v,%v", RouteString, RouteAddress)
+										for RouteAddressIndex, RouteAddress := range PairTransaction.InputData.Path {
+											if RouteAddressIndex <= 0 {
+												RouteString = fmt.Sprintf("%v", RouteAddress)
+											} else {
+												RouteString = fmt.Sprintf("%v,%v", RouteString, RouteAddress)
+											}
+
 										}
 
+										// Check If Our Route Is Stored
 										RouteQueryResults := mysql_query.GetRouteFromDB(Network.NetworkDBId, DexDBId, int(PairDBId))
-
-										if len(RouteQueryResults) > 0 {
-
-											// Set Route DB ID
-											RouteDBId = int64(RouteQueryResults[0].RouteId)
-
-										} else {
+										if len(RouteQueryResults) <= 0 {
 
 											// Add Route To DB
-											RouteDBId = mysql_insert.AddRouteToDB(Network.NetworkDBId, DexDBId, PairDBId, RouteString, PairTransaction.MethodName, PairTransaction.Hash, 0, PairTransaction.InputData.AmountIn, PairTransaction.InputData.AmountOutMin, 0)
+											mysql_insert.AddRouteToDB(Network.NetworkDBId, DexDBId, PairDBId, RouteString, PairTransaction.MethodName, PairTransaction.Hash, 0, PairTransaction.InputData.AmountIn, PairTransaction.InputData.AmountOutMin, 0)
 
 										}
-
-										fmt.Printf("", RouteDBId)
 
 									}
 
-
-
 									log.Printf("    [%d/%d] Added: %v", PairCountIndex, PairCount, Pair.Name)
-								}
 
+								}
 
 							}
 
