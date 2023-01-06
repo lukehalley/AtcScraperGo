@@ -18,7 +18,7 @@ func GetPairAddress(BaseCurrencyTokenAddress string, QuoteCurrencyTokenAddress s
 	}
 
 	// Load Factory ABI
-	FactoryAbi := io.LoadAbi("IUniswapV2Factory.json")
+	FactoryAbi := io.LoadAbiAsString("IUniswapV2Factory.json")
 
 	// Create Factory Contract Object
 	FactoryContract, FactoryContractError := Web3.Eth.NewContract(FactoryAbi, FactoryAddress)
@@ -49,7 +49,7 @@ func GetPairFactoryAddress(PairAddress string, NetworkRPC string) string {
 	}
 
 	// Load Factory ABI
-	PairAbi := io.LoadAbi("IUniswapV2Pair.json")
+	PairAbi := io.LoadAbiAsString("IUniswapV2Pair.json")
 
 	// Create Pair Contract Object
 	PairContract, PairContractError := Web3.Eth.NewContract(PairAbi, PairAddress)
@@ -80,7 +80,7 @@ func GetPairTokenAddresses(PairAddress string, NetworkRPC string) (string, strin
 	}
 
 	// Load Factory ABI
-	PairAbi := io.LoadAbi("IUniswapV2Pair.json")
+	PairAbi := io.LoadAbiAsString("IUniswapV2Pair.json")
 
 	// Create Pair Contract Object
 	PairContract, PairContractError := Web3.Eth.NewContract(PairAbi, PairAddress)

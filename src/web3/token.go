@@ -20,7 +20,7 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) {
 	}
 
 	// Load Router ABI
-	PairAbi := io.LoadAbi("IUniswapV2ERC20.json")
+	PairAbi := io.LoadAbiAsString("IUniswapV2ERC20.json")
 
 	// Create Router Contract Object
 	PairContract, PairContractError := Web3.Eth.NewContract(PairAbi, TokenAddress)

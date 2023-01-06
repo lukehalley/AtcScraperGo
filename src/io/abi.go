@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-func LoadAbi(AbiPath string) string {
+func LoadAbiAsString(AbiPath string) string {
 
 	// Create The Base Path
 	FinalABIPath := filepath.Join("static", "abi")

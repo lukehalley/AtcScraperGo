@@ -5,6 +5,7 @@ import (
 	"atcscraper/src/types/bitquery"
 	"atcscraper/src/types/mysql"
 	"atcscraper/src/types/web3"
+	"atcscraper/src/util"
 	"context"
 	"github.com/Khan/genqlient/graphql"
 	"log"
@@ -50,7 +51,7 @@ func CollectDexsForNetwork(Network mysql.Network, AmountOfDexs int, FromTime tim
 
 	}
 
-	log.Printf("[%v] Collecting Finished", TitleCaseString(string(Network.Name)))
+	log.Printf("[%v] Collecting Finished", util.TitleCaseString(string(Network.Name)))
 
 	// Return List Of Collected Dexs With Channel
 	return CollectedNetworkDexs
