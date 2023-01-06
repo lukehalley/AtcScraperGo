@@ -20,15 +20,8 @@ import (
 
 func main() {
 
-	LocalTransactionReceipt := web3.GetTransactionReceipt("https://avax-dfk.gateway.pokt.network/v1/lb/6244818c00b9f0003ad1b619//ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc", "0xcc33b6e24520490cbaba813e5822bcc0de976abc4fde00b74b6c5f47df0b8fb5")
-
-	fmt.Printf("%v", LocalTransactionReceipt.To())
-
+	// Global Vars
 	RouterAbi := io.LoadAbiAsString("IUniswapV2Router02.json")
-
-	TransactionMethod, TransactionData := web3.DecodeTransactionInputData(RouterAbi, LocalTransactionReceipt.Data())
-
-	fmt.Printf("", TransactionMethod, TransactionData)
 
 	// Settings
 	WaitTime := 0 * time.Second
@@ -191,24 +184,6 @@ func main() {
 					// Add It To Networks Dex List
 					NetworkWithDexsAndPairs.Dexes = append(NetworkWithDexsAndPairs.Dexes, CollectedDex)
 
-					// Check If Network Is Already Stored
-					DexQueryResults := mysql_query.GetDexFromDB(NetworkWithDexsAndPairs.NetworkDBId, CollectedDex.Identifier)
-
-					var DexDBId int64
-					if len(DexQueryResults) > 0 {
-						// Get Network DB ID
-						DexDBId = int64(DexQueryResults[0].DexId)
-					} else {
-						// Add Network To DB
-						DexDBId = mysql_insert.AddDexToDB(
-							NetworkWithDexsAndPairs.NetworkDBId,
-							CollectedDex.Identifier,
-						)
-					}
-
-					// Set Network DB ID
-					NetworkWithDexsAndPairs.DexDBId = int(DexDBId)
-
 				}
 
 				// Add Network Stablecoins
@@ -291,6 +266,13 @@ func main() {
 		// Get Pairs For Each Dex
 		for DexIndex, Dex := range Network.Dexes {
 
+			// Dex DB Vars
+			DexDBId := -1
+
+			// State Vars
+			DexFailCount := 0
+			DexIsValid := true
+
 			// Count For Dex Iteration
 			DexCountIndex := DexIndex + 1
 
@@ -298,11 +280,6 @@ func main() {
 
 			// Get All Pairs For Current Dex
 			DexPairs := geckoterminal_api.GetGeckoterminalDexPairs(Network.Network.Identifier, Dex.Identifier, 1)
-
-			// Get Factory Address
-			if Dex.FactoryAddress == "" {
-				Dex.FactoryAddress = web3.GetPairFactoryAddress(DexPairs.Data[0].Attributes.Address, Network.RPCs[0])
-			}
 
 			// Sleep For N Seconds
 			time.Sleep(WaitTime)
@@ -322,35 +299,39 @@ func main() {
 				// Add The Pair Address
 				Pair.Address = DexPair.Attributes.Address
 
-				// Get Pair Token Addresses
-				BaseCurrencyAddress, QuoteCurrencyAddress := web3.GetPairTokenAddresses(Pair.Address, Network.RPCs[0])
+				// Get Factory Address
+				if Dex.FactoryAddress == "" {
+					Dex.FactoryAddress = web3.GetPairFactoryAddress(DexPair.Attributes.Address, Network.RPCs[0])
 
-				// Check If Pair Contains A Stablecoin
-				IsStablecoinPair := (util.CheckIfStringIsInList(NetworkStablecoins, BaseCurrencyAddress, false)) || (util.CheckIfStringIsInList(NetworkStablecoins, QuoteCurrencyAddress, false))
-
-				// Check If Pair Contains A Stablecoin
-				if IsStablecoinPair {
-
-					// Get Current Pair Transactions
-					PairTransactions := geckoterminal_api.GetGeckoterminalPairTransactionsAndTokens(Network.Network.Identifier, Pair.Address, 1)
-
-					// Sleep For N Seconds
-					time.Sleep(WaitTime)
-
-					// Collect Transactions
-					for _, PairTransaction := range PairTransactions.Data {
-						Pair.Transactions = append(Pair.Transactions, PairTransaction.Attributes.TxHash)
+					if Dex.FactoryAddress != "" {
+						log.Printf("    Found Factory Address: %v", Dex.FactoryAddress)
 					}
 
-					//// Get Router Address
-					//TransactionReceipt := web3.GetTransactionReceipt(Network.RPCs[0], Pair.Transactions[0])
-					//
-					//// Get Router Address
-					//if Dex.RouterAddress == "" {
-					//	Dex.RouterAddress = TransactionReceipt.ContractAddress.Hex()
-					//}
-					//
-					//fmt.Printf("", TransactionReceipt)
+				}
+
+				// Get Current Pair Transactions
+				PairTransactions := geckoterminal_api.GetGeckoterminalPairTransactionsAndTokens(Network.Network.Identifier, Pair.Address, 1)
+
+				// Sleep For N Seconds
+				time.Sleep(WaitTime)
+
+				// Collect Transactions
+				for _, Transaction := range PairTransactions.Data {
+					var PairTransaction geckoterminal_types.Transaction
+					PairTransaction.Hash = Transaction.Attributes.TxHash
+					Pair.Transactions = append(Pair.Transactions, PairTransaction)
+				}
+
+				// Get First Transaction
+				LocalTransactionReceipt := web3.GetTransactionReceipt(Network.RPCs[0], Pair.Transactions[0].Hash)
+
+				// Get Router Address
+				Dex.RouterAddress = LocalTransactionReceipt.To().Hex()
+
+				// Decode First Transaction To See If We Can - If So We Will Continue
+				DexIsValid, _, _ = web3.DecodeTransactionInputData(RouterAbi, LocalTransactionReceipt.Data())
+
+				if DexIsValid {
 
 					// Check If We Got Transactions
 					if len(Pair.Transactions) > 0 {
@@ -369,13 +350,100 @@ func main() {
 						QuoteToken.Address = PairTransactions.Included[0].Attributes.Address
 						Pair.QuoteToken = QuoteToken
 
+						// Add Market Metadata
+						Pair.TwentyFourHourVolume = DexPair.Attributes.ToVolumeInUsd
+						Pair.TwentyFourHourTxs = DexPair.Attributes.SwapCount24H
+						Pair.Liquidity = DexPair.Attributes.ReserveInUsd
+
 						// Add The Pair Address
 						Pair.Name = fmt.Sprintf("%v/%v", BaseToken.Symbol, QuoteToken.Symbol)
 
-						// Append The Pair To Out Collection
-						Dex.Pairs = append(Dex.Pairs, Pair)
+						// Check If Pair Contains A Stablecoin
+						IsStablecoinPair := (util.CheckIfStringIsInList(NetworkStablecoins, BaseToken.Address, false)) || (util.CheckIfStringIsInList(NetworkStablecoins, QuoteToken.Address, false))
 
-						log.Printf("    [%d/%d] Added: %v", PairCountIndex, PairCount, Pair.Name)
+						// Check If Pair Contains A Stablecoin
+						if IsStablecoinPair {
+
+							// Collect Transactions
+							for PairTransactionIndex, PairTransaction := range Pair.Transactions {
+
+								// Decode Pair Transactions
+								DecodeSuccessful, Method, DecodedInputData := web3.DecodeTransactionInputData(RouterAbi, LocalTransactionReceipt.Data())
+
+								// Add Data If Decode Successful
+								if DecodeSuccessful {
+									PairTransaction.InputData = DecodedInputData
+									PairTransaction.MethodName = Method
+									Pair.Transactions[PairTransactionIndex] = PairTransaction
+								} else {
+									// Remove It If We Could Decode
+									Pair.Transactions = append(Pair.Transactions[:PairTransactionIndex], Pair.Transactions[PairTransactionIndex+1:]...)
+								}
+
+							}
+
+							if len(Pair.Transactions) > 0 {
+
+								if DexDBId < 0 {
+
+									// Check If Dex Is Already Stored
+									DexQueryResults := mysql_query.GetDexFromDB(Network.NetworkDBId, Dex.Identifier)
+
+									if len(DexQueryResults) > 0 {
+
+										// Set Dex DB ID
+										DexDBId = DexQueryResults[0].DexId
+
+									} else {
+
+										// Add Dex To DB
+										DexDBId = int(mysql_insert.AddDexToDB(
+											Network.NetworkDBId,
+											Dex.Identifier,
+											Dex.RouterAddress,
+											Dex.FactoryAddress,
+											1,
+										))
+
+									}
+								}
+
+								// Append The Pair To Out Collection
+								Dex.Pairs = append(Dex.Pairs, Pair)
+
+								log.Printf("    [%d/%d] Added: %v", PairCountIndex, PairCount, Pair.Name)
+							}
+
+
+						}
+
+					}
+
+					DexFailCount = 0
+
+				} else {
+
+					DexFailCount = DexFailCount + 1
+
+					if DexFailCount >= 10 {
+
+						// Check If Dex Is Already Stored
+						DexQueryResults := mysql_query.GetDexFromDB(Network.NetworkDBId, Dex.Identifier)
+
+						if len(DexQueryResults) <= 0 {
+
+							// Set Dex DB ID
+							DexDBId = int(mysql_insert.AddDexToDB(
+								Network.NetworkDBId,
+								Dex.Identifier,
+								Dex.RouterAddress,
+								Dex.FactoryAddress,
+								0,
+							))
+
+						}
+
+						break
 
 					}
 
@@ -383,7 +451,11 @@ func main() {
 
 			}
 
-			log.Printf("    > [%d/%d] [%v] Collected %d Pairs", DexCountIndex, DexCount, Dex.Name, len(Dex.Pairs))
+			if DexIsValid {
+				log.Printf("    > [%d/%d] [%v] Collected %d Pairs", DexCountIndex, DexCount, Dex.Name, len(Dex.Pairs))
+			} else {
+				log.Printf("    > [%d/%d] [%v] Skipping", DexCountIndex, DexCount, Dex.Name)
+			}
 
 		}
 

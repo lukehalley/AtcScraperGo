@@ -1,6 +1,9 @@
 package geckoterminal
 
-import "atcscraper/src/types/mysql"
+import (
+	"atcscraper/src/types/mysql"
+	"atcscraper/src/types/web3"
+)
 
 type GeckoTerminalNetworkWithDexs struct {
 	 Network               Network
@@ -36,9 +39,12 @@ type Dex struct {
 type Pair struct {
 	 Name                  string
 	 Address               string
+	 TwentyFourHourTxs     int
+	 TwentyFourHourVolume  string
+	 Liquidity             string
 	 BaseToken             Token
 	 QuoteToken            Token
-	 Transactions          []string
+	 Transactions          []Transaction
 }
 
 type Token struct {
@@ -46,4 +52,10 @@ type Token struct {
 	 Symbol                string
 	 Address               string
 	 Decimals              int
+}
+
+type Transaction struct {
+	Hash                   string
+	MethodName             string
+	InputData              web3.DecodedTransaction
 }
