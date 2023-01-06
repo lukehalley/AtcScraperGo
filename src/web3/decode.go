@@ -13,33 +13,33 @@ func MapToJson(param map[string]interface{}) string {
 	return dataString
 }
 
-func DecodeTransactionInputData(ABI string, TransactionInputData []byte) (string, web3.TransactionInput) {
+func DecodeTransactionInputData(ABI string, TransactionInputData []byte) (bool, string, web3.DecodedTransaction) {
 
-	DecodedInputData := web3.TransactionInput{}
+	DecodedInputData := web3.DecodedTransaction{}
 
 	ABIObject, ABIReadError := abi.JSON(strings.NewReader(ABI))
 	if ABIReadError != nil {
-		return "", DecodedInputData
+		return false, "", DecodedInputData
 	}
 
 	MethodSigData := TransactionInputData[:4]
 	Method, MethodError := ABIObject.MethodById(MethodSigData)
 	if MethodError != nil {
-		return "", DecodedInputData
+		return false, "", DecodedInputData
 	}
 
 	InputsSigData := TransactionInputData[4:]
 	InputsMap := make(map[string]interface{})
 	if UnpackError := Method.Inputs.UnpackIntoMap(InputsMap, InputsSigData); UnpackError != nil {
-		return "", DecodedInputData
+		return false, "", DecodedInputData
 	}
 
 	InputDataJSON := MapToJson(InputsMap)
 	JSONParseError := json.Unmarshal([]byte(InputDataJSON), &DecodedInputData)
 	if JSONParseError != nil {
-		return "", DecodedInputData
+		return false, "", DecodedInputData
 	}
 
-	return Method.Name, DecodedInputData
+	return true, Method.Name, DecodedInputData
 
 }

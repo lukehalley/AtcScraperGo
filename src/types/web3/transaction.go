@@ -6,7 +6,7 @@ type PairTransactions struct {
 	 Transactions     []string
 }
 
-type TransactionInput struct {
+type DecodedTransaction struct {
 	AmountIn     int      `json:"amountIn"`
 	AmountOutMin int64    `json:"amountOutMin"`
 	Deadline     int64    `json:"deadline"`
