@@ -8,9 +8,7 @@ type Route struct {
 	Route                 string   `db:"route"`
 	Method                string   `db:"method"`
 	TransactionHash       string   `db:"transaction_hash"`
-	BlockNumber           int      `db:"block_number"`
 	AmountIn              int      `db:"amount_in"`
 	AmountOut             int      `db:"amount_out"`
-	TxTimestamp           int      `db:"tx_timestamp"`
 	CreatedAt             string   `db:"created_at"`
 }
