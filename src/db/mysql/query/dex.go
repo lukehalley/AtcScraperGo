@@ -7,10 +7,10 @@ import (
 	"log"
 )
 
-func GetDexFromDB(RouterAddress string, FactoryAddress string, NetworkId int) []mysql.Dex {
+func GetDexFromDB(NetworkId int, DexName string) []mysql.Dex {
 
 	// Query
-	GetDexQuery := fmt.Sprintf("SELECT dexs.* FROM dexs WHERE dexs.network_id = %d AND dexs.router_address = '%v' AND dexs.factory_address = '%v'", NetworkId, RouterAddress, FactoryAddress)
+	GetDexQuery := fmt.Sprintf("SELECT dexs.* FROM dexs WHERE dexs.network_id = %d AND dexs.name = '%v'", NetworkId, DexName)
 
 	// Create Connection To DB
 	DBConnection := mysqlutils.CreateDatabaseConnection()

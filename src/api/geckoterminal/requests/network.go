@@ -17,9 +17,7 @@ func GetGeckoterminalNetworks(GTBuildID string) geckoterminal.GeckoTerminalNetwo
 	Body := requests.MakeGetRequestJSON(RequestURL)
 
 	var Networks geckoterminal.GeckoTerminalNetworks
-	if JSONError := json.Unmarshal(Body, &Networks); JSONError != nil {
-		fmt.Println("Could Not Unmarshal GT Networks JSON: ", JSONError)
-	}
+	_ = json.Unmarshal(Body, &Networks)
 
 	return Networks
 

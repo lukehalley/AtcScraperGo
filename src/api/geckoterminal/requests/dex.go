@@ -17,9 +17,7 @@ func GetGeckoterminalDexsForNetwork(GTBuildID string, NetworkName string) geckot
 	Body := requests.MakeGetRequestJSON(RequestURL)
 
 	var Dexs geckoterminal.GeckoTerminalDexs
-	if JSONError := json.Unmarshal(Body, &Dexs); JSONError != nil {
-		fmt.Println("Could Not Unmarshal GT Dexs JSON: ", JSONError)
-	}
+	_ = json.Unmarshal(Body, &Dexs)
 
 	return Dexs
 

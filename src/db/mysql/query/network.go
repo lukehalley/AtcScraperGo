@@ -7,10 +7,10 @@ import (
 	"log"
 )
 
-func GetNetwork(NetworkName string, ChainNumber int) []mysql.Network {
+func GetNetwork(NetworkName string) []mysql.Network {
 
 	// Query
-	GetBitqueryCompatibleNetworksQuery := fmt.Sprintf("SELECT networks.* FROM networks WHERE networks.name = '%v' AND networks.chain_number = %d", NetworkName, ChainNumber)
+	GetBitqueryCompatibleNetworksQuery := fmt.Sprintf("SELECT networks.* FROM networks WHERE networks.name = '%v'", NetworkName)
 
 	// Create Connection To DB
 	DBConnection := mysqlutils.CreateDatabaseConnection()
