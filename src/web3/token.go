@@ -2,18 +2,17 @@ package web3
 
 import (
 	"atcscraper/src/io"
-	"atcscraper/src/types/mysql"
 	"github.com/chenzhijie/go-web3"
 	"log"
 )
 
-func GetTokenDecimals(TokenAddress string, TokenNetwork mysql.Network) {
+func GetTokenDecimals(TokenAddress string, ChainRPC string) {
 
 	// Schedule The Call To WaitGroup's Done To Tell GoRoutine Is Completed.
 	// defer TokenDecimalWaitGroup.Done()
 
 	// Create Instance Of Web3
-	Web3, Web3Error := web3.NewWeb3(TokenNetwork.ChainRpc)
+	Web3, Web3Error := web3.NewWeb3(ChainRPC)
 
 	// Catch Creating Web3Object
 	if Web3Error != nil {

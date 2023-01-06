@@ -37,3 +37,73 @@ func GetPairAddress(BaseCurrencyTokenAddress string, QuoteCurrencyTokenAddress s
 	return GetHexAddress(PairAddress)
 
 }
+
+func GetPairFactoryAddress(PairAddress string, NetworkRPC string) string {
+
+	// Create Instance Of Web3
+	Web3, Web3Error := web3.NewWeb3(NetworkRPC)
+
+	// Catch Creating Web3Object
+	if Web3Error != nil {
+		log.Fatal(Web3Error)
+	}
+
+	// Load Factory ABI
+	PairAbi := io.LoadAbi("IUniswapV2Pair.json")
+
+	// Create Pair Contract Object
+	PairContract, PairContractError := Web3.Eth.NewContract(PairAbi, PairAddress)
+	if PairContractError != nil {
+		log.Fatal(PairContractError)
+	}
+
+	// Call 'getPair'
+	FactoryAddress, FactoryAddressError := PairContract.Call("factory")
+
+	// Catch Any Call Errors
+	if FactoryAddressError != nil {
+		log.Fatalf("Error Calling 'factory': %v", FactoryAddressError)
+	}
+
+	return GetHexAddress(FactoryAddress)
+
+}
+
+func GetPairTokenAddresses(PairAddress string, NetworkRPC string) (string, string) {
+
+	// Create Instance Of Web3
+	Web3, Web3Error := web3.NewWeb3(NetworkRPC)
+
+	// Catch Creating Web3Object
+	if Web3Error != nil {
+		log.Fatal(Web3Error)
+	}
+
+	// Load Factory ABI
+	PairAbi := io.LoadAbi("IUniswapV2Pair.json")
+
+	// Create Pair Contract Object
+	PairContract, PairContractError := Web3.Eth.NewContract(PairAbi, PairAddress)
+	if PairContractError != nil {
+		log.Fatal(PairContractError)
+	}
+
+	// Call 'token0'
+	BaseCurrencyAddress, BaseCurrencyAddressError := PairContract.Call("token0")
+
+	// Catch Any Call Errors
+	if BaseCurrencyAddressError != nil {
+		log.Fatalf("Error Calling 'token0': %v", BaseCurrencyAddressError)
+	}
+
+	// Call 'token1'
+	QuoteCurrencyAddress, QuoteCurrencyAddressError := PairContract.Call("token1")
+
+	// Catch Any Call Errors
+	if QuoteCurrencyAddressError != nil {
+		log.Fatalf("Error Calling 'token1': %v", QuoteCurrencyAddressError)
+	}
+
+	return GetHexAddress(BaseCurrencyAddress), GetHexAddress(QuoteCurrencyAddress)
+
+}

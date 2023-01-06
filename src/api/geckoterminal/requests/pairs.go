@@ -21,9 +21,7 @@ func GetGeckoterminalDexPairs(NetworkName string, DexName string, Page int) geck
 	Body := requests.MakeGetRequestJSON(RequestURL)
 
 	var DexPairs geckoterminal.GeckoTerminalDexPairs
-	if JSONError := json.Unmarshal(Body, &DexPairs); JSONError != nil {
-		fmt.Println("Could Not Unmarshal GT Dex Pairs: ", JSONError)
-	}
+	_ = json.Unmarshal(Body, &DexPairs)
 
 	return DexPairs
 
