@@ -311,10 +311,6 @@ func main() {
 					if Dex.FactoryAddress == "" {
 						Dex.FactoryAddress = web3.GetPairFactoryAddress(DexPair.Attributes.Address, Network.RPCs[0])
 
-						if Dex.FactoryAddress != "" {
-							log.Printf("    Found Factory Address: %v", Dex.FactoryAddress)
-						}
-
 					}
 
 					// Get Current Pair Transactions
@@ -453,7 +449,7 @@ func main() {
 											PairDBId = int64(PairQueryResults[0].PairId)
 										} else {
 											// Add Pair To DB
-											mysql_insert.AddPairToDB(TokenDBId, StablecoinDetails.StablecoinId, Network.NetworkDBId, DexDBId, Pair.Name, Pair.Address)
+											PairDBId = mysql_insert.AddPairToDB(TokenDBId, StablecoinDetails.StablecoinId, Network.NetworkDBId, DexDBId, Pair.Name, Pair.Address)
 										}
 
 									} else {
@@ -486,7 +482,7 @@ func main() {
 										} else {
 
 											// Add Pair To DB
-											mysql_insert.AddPairToDB(TokenDBId, StablecoinDetails.StablecoinId, Network.NetworkDBId, DexDBId, Pair.Name, Pair.Address)
+											PairDBId = mysql_insert.AddPairToDB(TokenDBId, StablecoinDetails.StablecoinId, Network.NetworkDBId, DexDBId, Pair.Name, Pair.Address)
 
 										}
 
@@ -511,7 +507,7 @@ func main() {
 										if len(RouteQueryResults) <= 0 {
 
 											// Add Route To DB
-											mysql_insert.AddRouteToDB(Network.NetworkDBId, DexDBId, PairDBId, RouteString, PairTransaction.MethodName, PairTransaction.Hash, 0, PairTransaction.InputData.AmountIn, PairTransaction.InputData.AmountOutMin, 0)
+											mysql_insert.AddRouteToDB(Network.NetworkDBId, DexDBId, PairDBId, RouteString, PairTransaction.MethodName, PairTransaction.Hash, PairTransaction.InputData.AmountIn, PairTransaction.InputData.AmountOutMin)
 
 										}
 
