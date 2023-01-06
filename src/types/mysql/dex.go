@@ -8,5 +8,6 @@ type Dex struct {
 	Name                  string           `db:"name"`
 	DexRouterAddress      sql.NullString   `db:"router_address"`
 	DexFactoryAddress     sql.NullString   `db:"factory_address"`
+	IsValid               BitBool          `db:"is_valid"`
 	CreatedAt             string           `db:"created_at"`
 }

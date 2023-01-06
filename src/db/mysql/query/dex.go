@@ -7,6 +7,40 @@ import (
 	"log"
 )
 
+func GetInvalidDexs() []string {
+
+	// Query
+	GetInvalidDexQuery := fmt.Sprintf("SELECT dexs.* FROM dexs WHERE dexs.is_valid = 0")
+
+	// Create Connection To DB
+	DBConnection := mysqlutils.CreateDatabaseConnection()
+
+	// Create List Of Dexs
+	var Dexs []mysql.Dex
+
+	// Execute DB Query
+	QueryError := DBConnection.Select(&Dexs, GetInvalidDexQuery)
+
+	// Catch Any Errors When Querying
+	if QueryError != nil {
+		log.Fatal(QueryError)
+	}
+
+	// Close Connection
+	DBConnectionCloseError := DBConnection.Close()
+	if DBConnectionCloseError != nil {
+		log.Fatal(DBConnectionCloseError)
+	}
+
+	var InvalidDexs []string
+	for _, Dex := range Dexs {
+		InvalidDexs = append(InvalidDexs, Dex.Name)
+	}
+
+	return InvalidDexs
+
+}
+
 func GetDexFromDB(NetworkId int, DexName string) []mysql.Dex {
 
 	// Query
