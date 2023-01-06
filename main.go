@@ -20,11 +20,21 @@ import (
 
 func main() {
 
+	LocalTransactionReceipt := web3.GetTransactionReceipt("https://avax-dfk.gateway.pokt.network/v1/lb/6244818c00b9f0003ad1b619//ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc", "0xcc33b6e24520490cbaba813e5822bcc0de976abc4fde00b74b6c5f47df0b8fb5")
+
+	fmt.Printf("%v", LocalTransactionReceipt.To())
+
+	RouterAbi := io.LoadAbiAsString("IUniswapV2Router02.json")
+
+	TransactionMethod, TransactionData := web3.DecodeTransactionInputData(RouterAbi, LocalTransactionReceipt.Data())
+
+	fmt.Printf("", TransactionMethod, TransactionData)
+
 	// Settings
 	WaitTime := 0 * time.Second
 	
 	// Init Vars
-	var CollectedData []geckoterminal_types.GeckoTerminalNetworkWithDexs
+	var CollectedNetworkData []geckoterminal_types.GeckoTerminalNetworkWithDexs
 
 	// Env Vars
 	// LazyMode := false
@@ -205,7 +215,7 @@ func main() {
 				NetworkWithDexsAndPairs.Stablecoins = mysql_query.GetNetworkStablecoinsFromDB(NetworkDBID)
 
 				// Add Network With Data To Master List
-				CollectedData = append(CollectedData, NetworkWithDexsAndPairs)
+				CollectedNetworkData = append(CollectedNetworkData, NetworkWithDexsAndPairs)
 
 			} else {
 
@@ -228,7 +238,7 @@ func main() {
 		logging.LogSeparator(false)
 
 		// Save Data To Local File
-		io.SaveGTDataToCache(CollectedData, "GTCollectedData")
+		io.SaveGTDataToCache(CollectedNetworkData, "GTCollectedData")
 
 		// Finish Log
 		log.Printf("Data Saved")
@@ -241,10 +251,10 @@ func main() {
 		////////////////////////////////////////////////////
 
 		// Read Local Cache
-		CollectedData = io.ReadGTCacheFile("GTCollectedData")
+		CollectedNetworkData = io.ReadGTCacheFile("GTCollectedData")
 
 		logging.LogSeparator(false)
-		log.Printf("Read %v Networks(s) From Cache", len(CollectedData))
+		log.Printf("Read %v Networks(s) From Cache", len(CollectedNetworkData))
 		logging.LogSeparator(true)
 
 	}
@@ -253,8 +263,19 @@ func main() {
 	// Get Dex Pairs
 	////////////////////////////////////////////////////
 
+	// Dex Log
+	logging.LogSeparator(false)
+	log.Printf("Collecting Dex Pairs...")
+	logging.LogSeparator(false)
+
+	// Network Count
+	NetworkCount := len(CollectedNetworkData)
+
 	// Iterate Through Networks Dexs
-	for _, Network := range CollectedData {
+	for NetworkIndex, Network := range CollectedNetworkData {
+
+		// Count For Network Iteration
+		NetworkCountIndex := NetworkIndex + 1
 
 		// Collect Network Stablecoin Addresses
 		var NetworkStablecoins []string
@@ -262,8 +283,18 @@ func main() {
 			NetworkStablecoins = append(NetworkStablecoins, Stablecoin.Address)
 		}
 
+		// Dex Count
+		DexCount := len(Network.Dexes)
+
+		log.Printf("[%d/%d] [%v] Collecting Pairs Across %d Dex(s)", NetworkCountIndex, NetworkCount, Network.Network.Name, DexCount)
+
 		// Get Pairs For Each Dex
-		for _, Dex := range Network.Dexes {
+		for DexIndex, Dex := range Network.Dexes {
+
+			// Count For Dex Iteration
+			DexCountIndex := DexIndex + 1
+
+			log.Printf("  [%d/%d] Dex: %v", DexCountIndex, DexCount, Dex.Name)
 
 			// Get All Pairs For Current Dex
 			DexPairs := geckoterminal_api.GetGeckoterminalDexPairs(Network.Network.Identifier, Dex.Identifier, 1)
@@ -276,8 +307,14 @@ func main() {
 			// Sleep For N Seconds
 			time.Sleep(WaitTime)
 
+			// Pair Count
+			PairCount := len(DexPairs.Data)
+
 			// Iterate Through Pairs We Got
-			for _, DexPair := range DexPairs.Data {
+			for PairIndex, DexPair := range DexPairs.Data {
+
+				// Count For Pair Iteration
+				PairCountIndex := PairIndex + 1
 
 				// Create New Pair Object
 				var Pair geckoterminal_types.Pair
@@ -285,54 +322,72 @@ func main() {
 				// Add The Pair Address
 				Pair.Address = DexPair.Attributes.Address
 
-				// Get Current Pair Transactions
-				PairTransactions := geckoterminal_api.GetGeckoterminalPairTransactionsAndTokens(Network.Network.Identifier, Pair.Address, 1)
+				// Get Pair Token Addresses
+				BaseCurrencyAddress, QuoteCurrencyAddress := web3.GetPairTokenAddresses(Pair.Address, Network.RPCs[0])
 
-				// Sleep For N Seconds
-				time.Sleep(WaitTime)
+				// Check If Pair Contains A Stablecoin
+				IsStablecoinPair := (util.CheckIfStringIsInList(NetworkStablecoins, BaseCurrencyAddress, false)) || (util.CheckIfStringIsInList(NetworkStablecoins, QuoteCurrencyAddress, false))
 
-				// Collect Transactions
-				for _, PairTransaction := range PairTransactions.Data {
-					Pair.Transactions = append(Pair.Transactions, PairTransaction.Attributes.TxHash)
-				}
+				// Check If Pair Contains A Stablecoin
+				if IsStablecoinPair {
 
-				if len(Pair.Transactions) > 0 {
+					// Get Current Pair Transactions
+					PairTransactions := geckoterminal_api.GetGeckoterminalPairTransactionsAndTokens(Network.Network.Identifier, Pair.Address, 1)
 
-					// Add Base Token Details
-					var BaseToken geckoterminal_types.Token
-					BaseToken.Name = PairTransactions.Included[1].Attributes.Name
-					BaseToken.Symbol = PairTransactions.Included[1].Attributes.Symbol
-					BaseToken.Address = PairTransactions.Included[1].Attributes.Address
-					Pair.BaseToken = BaseToken
+					// Sleep For N Seconds
+					time.Sleep(WaitTime)
 
-					// Add Quote Token Details
-					var QuoteToken geckoterminal_types.Token
-					QuoteToken.Name = PairTransactions.Included[0].Attributes.Name
-					QuoteToken.Symbol = PairTransactions.Included[0].Attributes.Symbol
-					QuoteToken.Address = PairTransactions.Included[0].Attributes.Address
-					Pair.QuoteToken = QuoteToken
+					// Collect Transactions
+					for _, PairTransaction := range PairTransactions.Data {
+						Pair.Transactions = append(Pair.Transactions, PairTransaction.Attributes.TxHash)
+					}
 
-					// Add The Pair Address
-					Pair.Name = fmt.Sprintf("%v/%v", BaseToken.Symbol, QuoteToken.Symbol)
+					//// Get Router Address
+					//TransactionReceipt := web3.GetTransactionReceipt(Network.RPCs[0], Pair.Transactions[0])
+					//
+					//// Get Router Address
+					//if Dex.RouterAddress == "" {
+					//	Dex.RouterAddress = TransactionReceipt.ContractAddress.Hex()
+					//}
+					//
+					//fmt.Printf("", TransactionReceipt)
 
-					// Check If Pair Contains A Stablecoin
-					IsStablecoinPair := (util.CheckIfStringIsInList(NetworkStablecoins, BaseToken.Address)) || (util.CheckIfStringIsInList(NetworkStablecoins, QuoteToken.Address))
+					// Check If We Got Transactions
+					if len(Pair.Transactions) > 0 {
 
-					// Append The Pair To Out Collection If Pair Contains A Stablecoin
-					if IsStablecoinPair {
+						// Add Base Token Details
+						var BaseToken geckoterminal_types.Token
+						BaseToken.Name = PairTransactions.Included[1].Attributes.Name
+						BaseToken.Symbol = PairTransactions.Included[1].Attributes.Symbol
+						BaseToken.Address = PairTransactions.Included[1].Attributes.Address
+						Pair.BaseToken = BaseToken
+
+						// Add Quote Token Details
+						var QuoteToken geckoterminal_types.Token
+						QuoteToken.Name = PairTransactions.Included[0].Attributes.Name
+						QuoteToken.Symbol = PairTransactions.Included[0].Attributes.Symbol
+						QuoteToken.Address = PairTransactions.Included[0].Attributes.Address
+						Pair.QuoteToken = QuoteToken
+
+						// Add The Pair Address
+						Pair.Name = fmt.Sprintf("%v/%v", BaseToken.Symbol, QuoteToken.Symbol)
+
+						// Append The Pair To Out Collection
 						Dex.Pairs = append(Dex.Pairs, Pair)
+
+						log.Printf("    [%d/%d] Added: %v", PairCountIndex, PairCount, Pair.Name)
+
 					}
 
 				}
 
 			}
 
-			log.Printf("[%v - %v] %v Pairs(s)", Network.Network.Name, Dex.Name, len(Dex.Pairs))
+			log.Printf("    > [%d/%d] [%v] Collected %d Pairs", DexCountIndex, DexCount, Dex.Name, len(Dex.Pairs))
 
 		}
 
-		// Get Pair Transactions
-		geckoterminal_api.GetGeckoterminalPairTransactionsAndTokens(Network.Network.Identifier, "Yo", 1)
+		logging.LogSeparator(false)
 		
 	}
 
