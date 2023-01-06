@@ -2,8 +2,8 @@ package util
 
 import "strings"
 
-func CheckIfStringIsInList(StringList []string, StringToCheckInList string, CaseSensitive bool) bool {
-	for _, ListString := range StringList {
+func CheckIfStringIsInList(StringList []string, StringToCheckInList string, CaseSensitive bool) (bool, int) {
+	for MatchIndex, ListString := range StringList {
 
 		if !CaseSensitive {
 			StringToCheckInList = strings.ToLower(StringToCheckInList)
@@ -11,8 +11,9 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 		}
 
 		if StringToCheckInList == ListString {
-			return true
+			return true, MatchIndex
 		}
 	}
-	return false
+
+	return false, -1
 }
