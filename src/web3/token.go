@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-func GetTokenDecimals(TokenAddress string, ChainRPC string) {
+func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 
 	// Schedule The Call To WaitGroup's Done To Tell GoRoutine Is Completed.
 	// defer TokenDecimalWaitGroup.Done()
@@ -29,13 +29,13 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) {
 	}
 
 	// Call 'decimals'
-	TokenDecimals, GetTokenDecimalsCallError := PairContract.Call("decimals")
+	TokenDecimalsResult, GetTokenDecimalsCallError := PairContract.Call("decimals")
 
 	// Catch Any Call Errors
 	if PairContractError != nil {
 		log.Fatalf("Error Calling 'decimals': %v", GetTokenDecimalsCallError)
 	}
 
-	print(TokenDecimals)
+	return TokenDecimalsResult.(uint8)
 
 }
