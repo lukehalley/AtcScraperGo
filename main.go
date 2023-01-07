@@ -9,6 +9,7 @@ import (
 	"atcscraper/src/env"
 	"atcscraper/src/io"
 	logging "atcscraper/src/log"
+	"atcscraper/src/requests"
 	geckoterminal_types "atcscraper/src/types/geckoterminal"
 	"atcscraper/src/util"
 	"atcscraper/src/web3"
@@ -82,125 +83,153 @@ func main() {
 		log.Printf("Collecting Network Dexs")
 		logging.LogSeparator(false)
 
+		BlacklistedNetworks := mysql_query.GetBlacklistedNetworks()
+
 		for Index, Network := range Networks.Networks {
 
+			// Counter
 			CountIndex := Index + 1
 
 			// Create Collection Object
 			var NetworkWithDexsAndPairs geckoterminal_types.GeckoTerminalNetworkWithDexs
 
-			log.Printf("[%d/%d] [%v] Getting RPCs From Chainlist...", CountIndex, NetworkCount, Network.Attributes.Name)
+			// Check If Network Blacklisted
+			NetworkIsBlacklisted, _ := util.CheckIfIntIsInList(BlacklistedNetworks, Network.Attributes.ChainID)
 
-			// Get Chain RPCs
-			ChainInfo := chainlist.GetChainInfo(Network.Attributes.ChainID, ChainlistBuildID)
+			if !NetworkIsBlacklisted {
 
-			// Sleep For N Seconds
-			time.Sleep(WaitTime)
+				log.Printf("[%d/%d] [%v] Getting RPCs From Chainlist...", CountIndex, NetworkCount, Network.Attributes.Name)
 
-			var FilteredRPCs []string
-			for _, RPC := range ChainInfo.PageProps.Chain.RPC {
-				if !(strings.Contains(RPC.URL, "API")) {
-					FilteredRPCs = append(FilteredRPCs, RPC.URL)
-				}
-			}
-
-			// Check If We Have Any RPCs
-			if len(FilteredRPCs) > 0 {
-
-				log.Printf("[%d/%d] [%v] Collected %d RPC(s)", CountIndex, NetworkCount, Network.Attributes.Name, len(FilteredRPCs))
-
-				// Add RPCs
-				for _, RPCUrl := range FilteredRPCs {
-					NetworkWithDexsAndPairs.RPCs = append(NetworkWithDexsAndPairs.RPCs, RPCUrl)
-				}
-
-				// Add Network Details
-				NetworkWithDexsAndPairs.Network = struct {
-					Name                  string
-					Identifier            string
-					ChainID               int
-					ExplorerURL           string
-					NativeCurrencySymbol  string
-					NativeCurrencyAddress string
-					PoolReserveThreshold  string
-					ImageURL              string
-					ExplorerLogoURL       string
-				} (Network.Attributes)
-
-				// Check If Network Is Already Stored
-				NetworkQueryResults := mysql_query.GetNetwork(NetworkWithDexsAndPairs.Network.Identifier)
-
-				// Chain Explorer
-				var ChainExplorer string
-				if len(ChainInfo.PageProps.Chain.Explorers) > 0 {
-					ChainExplorer = ChainInfo.PageProps.Chain.Explorers[0].Standard
-				} else {
-					ChainExplorer = "none"
-				}
-
-				var NetworkDBID int64
-				if len(NetworkQueryResults) > 0 {
-					// Get Network DB ID
-					NetworkDBID = int64(NetworkQueryResults[0].NetworkId)
-				} else {
-					// Add Network To DB
-					NetworkDBID = mysql_insert.AddNetworkToDB(
-						NetworkWithDexsAndPairs.Network.Identifier,
-						NetworkWithDexsAndPairs.Network.ChainID,
-						FilteredRPCs,
-						"",
-						"",
-						ChainExplorer,
-						NetworkWithDexsAndPairs.Network.ExplorerURL,
-						NetworkWithDexsAndPairs.Network.NativeCurrencySymbol,
-						NetworkWithDexsAndPairs.Network.NativeCurrencyAddress,
-						1,
-						5,
-					)
-				}
-
-				// Set Network DB ID
-				NetworkWithDexsAndPairs.NetworkDBId = int(NetworkDBID)
-
-				log.Printf("[%d/%d] [%v] Getting Dexs From Coingecko...", CountIndex, NetworkCount, Network.Attributes.Name)
-
-				// Call API To Retrieve Network Dexs
-				var DexResponse geckoterminal_types.GeckoTerminalDexs
-				DexResponse = geckoterminal_api.GetGeckoterminalDexsForNetwork(CoingeckoBuildID, Network.Attributes.Identifier)
-
-				log.Printf("[%d/%d] [%v] Collected %d Dex(s)", CountIndex, NetworkCount, Network.Attributes.Name, len(DexResponse.PageProps.Dexes))
-				logging.LogSeparator(false)
+				// Get Chain RPCs
+				ChainInfo := chainlist.GetChainInfo(Network.Attributes.ChainID, ChainlistBuildID)
 
 				// Sleep For N Seconds
 				time.Sleep(WaitTime)
 
-				// Iterate Through Networks Dexs
-				for _, Dex := range DexResponse.PageProps.Dexes {
+				var FilteredRPCs []string
+				for _, RPC := range ChainInfo.PageProps.Chain.RPC {
+					if !(strings.Contains(RPC.URL, "API")) {
+						HealthyRPC := requests.CheckURLIsReachable(RPC.URL)
+						if HealthyRPC {
+							FilteredRPCs = append(FilteredRPCs, RPC.URL)
+						}
 
-					// Create New Dex Object
-					var CollectedDex geckoterminal_types.Dex
+					}
+				}
 
-					// Get Values
-					CollectedDex.Name = Dex.Attributes.Name
-					CollectedDex.Identifier = Dex.Attributes.Identifier
-					CollectedDex.ImageURL = Dex.Attributes.ImageURL
-					CollectedDex.URL = Dex.Attributes.URL
+				// Check If We Have Any RPCs
+				if len(FilteredRPCs) > 0 {
 
-					// Add It To Networks Dex List
-					NetworkWithDexsAndPairs.Dexes = append(NetworkWithDexsAndPairs.Dexes, CollectedDex)
+					log.Printf("[%d/%d] [%v] Collected %d RPC(s)", CountIndex, NetworkCount, Network.Attributes.Name, len(FilteredRPCs))
+
+					// Add RPCs
+					for _, RPCUrl := range FilteredRPCs {
+						NetworkWithDexsAndPairs.RPCs = append(NetworkWithDexsAndPairs.RPCs, RPCUrl)
+					}
+
+					// Add Network Details
+					NetworkWithDexsAndPairs.Network = struct {
+						Name                  string
+						Identifier            string
+						ChainID               int
+						ExplorerURL           string
+						NativeCurrencySymbol  string
+						NativeCurrencyAddress string
+						PoolReserveThreshold  string
+						ImageURL              string
+						ExplorerLogoURL       string
+					} (Network.Attributes)
+
+					// Check If Network Is Already Stored
+					NetworkQueryResults := mysql_query.GetNetwork(NetworkWithDexsAndPairs.Network.Identifier)
+
+					// Chain Explorer
+					var ChainExplorer string
+					if len(ChainInfo.PageProps.Chain.Explorers) > 0 {
+						ChainExplorer = ChainInfo.PageProps.Chain.Explorers[0].Standard
+					} else {
+						ChainExplorer = "none"
+					}
+
+					var NetworkDBID int64
+					if len(NetworkQueryResults) > 0 {
+						// Get Network DB ID
+						NetworkDBID = int64(NetworkQueryResults[0].NetworkId)
+					} else {
+						// Add Network To DB
+						NetworkDBID = mysql_insert.AddNetworkToDB(
+							NetworkWithDexsAndPairs.Network.Identifier,
+							NetworkWithDexsAndPairs.Network.ChainID,
+							FilteredRPCs,
+							"",
+							"",
+							ChainExplorer,
+							NetworkWithDexsAndPairs.Network.ExplorerURL,
+							NetworkWithDexsAndPairs.Network.NativeCurrencySymbol,
+							NetworkWithDexsAndPairs.Network.NativeCurrencyAddress,
+							1,
+							5,
+						)
+					}
+
+					// Set Network DB ID
+					NetworkWithDexsAndPairs.NetworkDBId = int(NetworkDBID)
+
+					log.Printf("[%d/%d] [%v] Getting Dexs From Coingecko...", CountIndex, NetworkCount, Network.Attributes.Name)
+
+					// Call API To Retrieve Network Dexs
+					var DexResponse geckoterminal_types.GeckoTerminalDexs
+					DexResponse = geckoterminal_api.GetGeckoterminalDexsForNetwork(CoingeckoBuildID, Network.Attributes.Identifier)
+
+					log.Printf("[%d/%d] [%v] Collected %d Dex(s)", CountIndex, NetworkCount, Network.Attributes.Name, len(DexResponse.PageProps.Dexes))
+					logging.LogSeparator(false)
+
+					// Sleep For N Seconds
+					time.Sleep(WaitTime)
+
+					// Iterate Through Networks Dexs
+					for _, Dex := range DexResponse.PageProps.Dexes {
+
+						// Create New Dex Object
+						var CollectedDex geckoterminal_types.Dex
+
+						// Get Values
+						CollectedDex.Name = Dex.Attributes.Name
+						CollectedDex.Identifier = Dex.Attributes.Identifier
+						CollectedDex.ImageURL = Dex.Attributes.ImageURL
+						CollectedDex.URL = Dex.Attributes.URL
+
+						// Add It To Networks Dex List
+						NetworkWithDexsAndPairs.Dexes = append(NetworkWithDexsAndPairs.Dexes, CollectedDex)
+
+					}
+
+					// Add Network Stablecoins
+					NetworkWithDexsAndPairs.Stablecoins = mysql_query.GetNetworkStablecoinsFromDB(NetworkDBID)
+
+					// Add Network With Data To Master List
+					CollectedNetworkData = append(CollectedNetworkData, NetworkWithDexsAndPairs)
+
+				} else {
+
+					// Check If Network Is Already Blacklisted
+					BlacklistNetworkQueryResults := mysql_query.GetBlacklistNetwork(Network.Attributes.Name)
+
+					if len(BlacklistNetworkQueryResults) <= 0 {
+
+						// Add Network To Blacklist Table
+						mysql_insert.AddBlacklistNetworkToDB(Network.Attributes.Name, Network.Attributes.ChainID)
+
+					}
+
+					log.Printf("[%d/%d] [%v] No Available RPCs - Skipping", CountIndex, NetworkCount, Network.Attributes.Name)
+					logging.LogSeparator(false)
 
 				}
 
-				// Add Network Stablecoins
-				NetworkWithDexsAndPairs.Stablecoins = mysql_query.GetNetworkStablecoinsFromDB(NetworkDBID)
-
-				// Add Network With Data To Master List
-				CollectedNetworkData = append(CollectedNetworkData, NetworkWithDexsAndPairs)
-
 			} else {
 
-				log.Printf("[%d/%d] [%v] No Available RPCs - Skipping", CountIndex, NetworkCount, Network.Attributes.Name)
-				logging.LogSeparator(false)
+				log.Printf("[%d/%d] [%v] Network Blacklisted - Skipping", CountIndex, NetworkCount, Network.Attributes.Name)
 
 			}
 

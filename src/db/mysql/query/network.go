@@ -10,7 +10,7 @@ import (
 func GetNetwork(NetworkName string) []mysql.Network {
 
 	// Query
-	GetBitqueryCompatibleNetworksQuery := fmt.Sprintf("SELECT networks.* FROM networks WHERE networks.name = '%v'", NetworkName)
+	GetNetworkQuery := fmt.Sprintf("SELECT networks.* FROM networks WHERE networks.name = '%v'", NetworkName)
 
 	// Create Connection To DB
 	DBConnection := mysqlutils.CreateDatabaseConnection()
@@ -19,7 +19,7 @@ func GetNetwork(NetworkName string) []mysql.Network {
 	var Networks []mysql.Network
 
 	// Execute DB Query
-	QueryError := DBConnection.Select(&Networks, GetBitqueryCompatibleNetworksQuery)
+	QueryError := DBConnection.Select(&Networks, GetNetworkQuery)
 
 	// Catch Any Errors When Querying
 	if QueryError != nil {
@@ -33,6 +33,70 @@ func GetNetwork(NetworkName string) []mysql.Network {
 	}
 
 	return Networks
+
+}
+
+func GetBlacklistNetwork(NetworkName string) []mysql.BlacklistNetwork {
+
+	// Query
+	GetBlacklistNetworksQuery := fmt.Sprintf("SELECT blacklist_networks.* FROM blacklist_networks WHERE blacklist_networks.name = '%v'", NetworkName)
+
+	// Create Connection To DB
+	DBConnection := mysqlutils.CreateDatabaseConnection()
+
+	// Create List Of BlacklistNetworks
+	var BlacklistNetworks []mysql.BlacklistNetwork
+
+	// Execute DB Query
+	QueryError := DBConnection.Select(&BlacklistNetworks, GetBlacklistNetworksQuery)
+
+	// Catch Any Errors When Querying
+	if QueryError != nil {
+		log.Fatal(QueryError)
+	}
+
+	// Close Connection
+	DBConnectionCloseError := DBConnection.Close()
+	if DBConnectionCloseError != nil {
+		log.Fatal(DBConnectionCloseError)
+	}
+
+	return BlacklistNetworks
+
+}
+
+func GetBlacklistedNetworks() []int {
+
+	// Query
+	GetBlacklistNetworks := fmt.Sprintf("SELECT blacklist_networks.* FROM blacklist_networks")
+
+	// Create Connection To DB
+	DBConnection := mysqlutils.CreateDatabaseConnection()
+
+	// Create List Of BlacklistNetworks
+	var BlacklistNetworks []mysql.BlacklistNetwork
+
+	// Execute DB Query
+	QueryError := DBConnection.Select(&BlacklistNetworks, GetBlacklistNetworks)
+
+	// Catch Any Errors When Querying
+	if QueryError != nil {
+		log.Fatal(QueryError)
+	}
+
+	// Close Connection
+	DBConnectionCloseError := DBConnection.Close()
+	if DBConnectionCloseError != nil {
+		log.Fatal(DBConnectionCloseError)
+	}
+
+	// Get Blacklist Network Chain IDs
+	var BlacklistNetworkChainIds []int
+	for _, BlacklistNetwork := range BlacklistNetworks {
+		BlacklistNetworkChainIds = append(BlacklistNetworkChainIds, BlacklistNetwork.ChainNumber)
+	}
+
+	return BlacklistNetworkChainIds
 
 }
 
