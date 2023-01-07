@@ -3,9 +3,38 @@ package query
 import (
 	mysqlutils "atcscraper/src/db/mysql/utils"
 	"atcscraper/src/types/mysql"
+	"fmt"
 	"log"
 )
 
+func GetNetwork(NetworkName string) []mysql.Network {
+
+	// Query
+	GetBitqueryCompatibleNetworksQuery := fmt.Sprintf("SELECT networks.* FROM networks WHERE networks.name = '%v'", NetworkName)
+
+	// Create Connection To DB
+	DBConnection := mysqlutils.CreateDatabaseConnection()
+
+	// Create List Of Networks
+	var Networks []mysql.Network
+
+	// Execute DB Query
+	QueryError := DBConnection.Select(&Networks, GetBitqueryCompatibleNetworksQuery)
+
+	// Catch Any Errors When Querying
+	if QueryError != nil {
+		log.Fatal(QueryError)
+	}
+
+	// Close Connection
+	DBConnectionCloseError := DBConnection.Close()
+	if DBConnectionCloseError != nil {
+		log.Fatal(DBConnectionCloseError)
+	}
+
+	return Networks
+
+}
 
 func GetBitqueryCompatibleNetworks() []mysql.Network {
 
