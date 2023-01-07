@@ -5,6 +5,8 @@ import (
 	geckoterminal_api "atcscraper/src/api/geckoterminal/requests"
 	mysql_insert "atcscraper/src/db/mysql/insert"
 	mysql_query "atcscraper/src/db/mysql/query"
+	mysql_utils "atcscraper/src/db/mysql/utils"
+	"atcscraper/src/env"
 	"atcscraper/src/io"
 	logging "atcscraper/src/log"
 	geckoterminal_types "atcscraper/src/types/geckoterminal"
@@ -12,7 +14,6 @@ import (
 	"atcscraper/src/web3"
 	"fmt"
 	"log"
-	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -20,9 +21,13 @@ import (
 
 func main() {
 
-	// Global Vars
-	RouterAbi := io.LoadAbiAsString("IUniswapV2Router02.json")
-	CollectionFailLimit := 50
+	// Create Connection To DB
+	mysql_utils.CreateDatabaseConnection()
+
+	// Env Vars
+	CacheMode, _ := strconv.ParseBool(env.LoadEnv("CACHE_MODE"))
+	CollectionFailLimit, _ := strconv.Atoi(env.LoadEnv("COLLECTION_FAIL_LIMIT"))
+	PairPages, _ := strconv.Atoi(env.LoadEnv("PAIR_PAGES"))
 
 	// Settings
 	WaitTime := 0 * time.Second
@@ -30,9 +35,8 @@ func main() {
 	// Init Vars
 	var CollectedNetworkData []geckoterminal_types.GeckoTerminalNetworkWithDexs
 
-	// Env Vars
-	// LazyMode := false
-	CacheMode, _ := strconv.ParseBool(os.Getenv("CACHE_MODE"))
+	// ABIs
+	RouterAbi := io.LoadAbiAsString("IUniswapV2Router02.json")
 
 	logging.LogSeparator(false)
 	log.Printf("Collecting Coingecko CoingeckoBuildID")
@@ -290,8 +294,29 @@ func main() {
 				DexFailCount := 0
 				DexIsValid := true
 
-				// Get All Pairs For Current Dex
+				// Get First Page Dexs
 				DexPairs := geckoterminal_api.GetGeckoterminalDexPairs(Network.Network.Identifier, Dex.Identifier, 1)
+
+				// If We Want To Collect More Than One Page
+				if PairPages > 1 {
+
+					for i := 2; i <= PairPages; i++ {
+
+						// Get All Pairs For Current Dex
+						CurrentPageDexPairs := geckoterminal_api.GetGeckoterminalDexPairs(Network.Network.Identifier, Dex.Identifier, i)
+
+						// Add The Rest Of The Pairs To The List
+						if len(CurrentPageDexPairs.Data) > 0 {
+							for _, CurrentPageDexPair := range CurrentPageDexPairs.Data {
+								DexPairs.Data = append(DexPairs.Data, CurrentPageDexPair)
+							}
+						} else {
+							break
+						}
+
+					}
+
+				}
 
 				// Sleep For N Seconds
 				time.Sleep(WaitTime)

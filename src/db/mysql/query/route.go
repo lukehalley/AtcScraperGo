@@ -10,7 +10,7 @@ import (
 func GetRouteFromDB(NetworkId int, DexId int, PairId int, TxHash string) []mysql.Route {
 
 	// Query
-	GetRouteQuery := fmt.Sprintf("SELECT routes.* FROM routes WHERE routes.network_id = %d AND routes.dex_id = %d AND routes.pair_id = %d AND routes.transaction_hash '%v'", NetworkId, DexId, PairId, TxHash)
+	GetRouteQuery := fmt.Sprintf("SELECT routes.* FROM routes WHERE routes.network_id = %d AND routes.dex_id = %d AND routes.pair_id = %d AND routes.transaction_hash = '%v'", NetworkId, DexId, PairId, TxHash)
 
 	// Create Connection To DB
 	DBConnection := mysqlutils.CreateDatabaseConnection()

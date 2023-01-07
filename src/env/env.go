@@ -6,14 +6,14 @@ import (
 )
 
 // LoadEnv Get Env Var
-func LoadEnv(key string) string {
+func LoadEnv(Key string) string {
 
-	EnvValue := os.Getenv(key)
+	EnvValue := os.Getenv(Key)
 
 	if EnvValue == "" {
-		log.Fatalf("Error Loading Env Var: '%s'", key)
+		log.Fatalf("Error Loading Env Var: '%s'", Key)
 	}
 
 	// Return Environment Variable
-	return os.Getenv(key)
+	return os.Getenv(Key)
 }
