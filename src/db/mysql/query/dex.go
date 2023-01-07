@@ -7,10 +7,44 @@ import (
 	"log"
 )
 
-func GetDexFromDB(RouterAddress string, FactoryAddress string, NetworkId int) []mysql.Dex {
+func GetInvalidDexs() []string {
 
 	// Query
-	GetDexQuery := fmt.Sprintf("SELECT dexs.* FROM dexs WHERE dexs.network_id = %d AND dexs.router_address = '%v' AND dexs.factory_address = '%v'", NetworkId, RouterAddress, FactoryAddress)
+	GetInvalidDexQuery := fmt.Sprintf("SELECT dexs.* FROM dexs WHERE dexs.is_valid = 0")
+
+	// Create Connection To DB
+	DBConnection := mysqlutils.CreateDatabaseConnection()
+
+	// Create List Of Dexs
+	var Dexs []mysql.Dex
+
+	// Execute DB Query
+	QueryError := DBConnection.Select(&Dexs, GetInvalidDexQuery)
+
+	// Catch Any Errors When Querying
+	if QueryError != nil {
+		log.Fatal(QueryError)
+	}
+
+	// Close Connection
+	DBConnectionCloseError := DBConnection.Close()
+	if DBConnectionCloseError != nil {
+		log.Fatal(DBConnectionCloseError)
+	}
+
+	var InvalidDexs []string
+	for _, Dex := range Dexs {
+		InvalidDexs = append(InvalidDexs, Dex.Name)
+	}
+
+	return InvalidDexs
+
+}
+
+func GetDexFromDB(NetworkId int, DexName string) []mysql.Dex {
+
+	// Query
+	GetDexQuery := fmt.Sprintf("SELECT dexs.* FROM dexs WHERE dexs.network_id = %d AND dexs.name = '%v'", NetworkId, DexName)
 
 	// Create Connection To DB
 	DBConnection := mysqlutils.CreateDatabaseConnection()

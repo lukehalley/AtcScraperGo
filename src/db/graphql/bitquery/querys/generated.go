@@ -69,6 +69,8 @@ type GetAllStablecoinPairsCreatedForDexEthereumDexTrades struct {
 	Close         string                                                           `json:"close"`
 	Volume        float64                                                          `json:"volume"`
 	Count         int                                                              `json:"count"`
+	// Transaction of DexTrade
+	Transaction GetAllStablecoinPairsCreatedForDexEthereumDexTradesTransactionEthereumTransactionInfoExtended `json:"transaction"`
 }
 
 // GetTimeInterval returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.TimeInterval, and is useful for accessing the field via an interface.
@@ -121,6 +123,11 @@ func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetVolume() float6
 
 // GetCount returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.Count, and is useful for accessing the field via an interface.
 func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetCount() int { return v.Count }
+
+// GetTransaction returns GetAllStablecoinPairsCreatedForDexEthereumDexTrades.Transaction, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTrades) GetTransaction() GetAllStablecoinPairsCreatedForDexEthereumDexTradesTransactionEthereumTransactionInfoExtended {
+	return v.Transaction
+}
 
 // GetAllStablecoinPairsCreatedForDexEthereumDexTradesBaseCurrency includes the requested fields of the GraphQL type Currency.
 // The GraphQL type's documentation follows.
@@ -189,6 +196,20 @@ type GetAllStablecoinPairsCreatedForDexEthereumDexTradesTimeInterval struct {
 // GetSecond returns GetAllStablecoinPairsCreatedForDexEthereumDexTradesTimeInterval.Second, and is useful for accessing the field via an interface.
 func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTradesTimeInterval) GetSecond() string {
 	return v.Second
+}
+
+// GetAllStablecoinPairsCreatedForDexEthereumDexTradesTransactionEthereumTransactionInfoExtended includes the requested fields of the GraphQL type EthereumTransactionInfoExtended.
+// The GraphQL type's documentation follows.
+//
+// Blockchain Transaction Extended info
+type GetAllStablecoinPairsCreatedForDexEthereumDexTradesTransactionEthereumTransactionInfoExtended struct {
+	// Hash hex representation
+	Hash string `json:"hash"`
+}
+
+// GetHash returns GetAllStablecoinPairsCreatedForDexEthereumDexTradesTransactionEthereumTransactionInfoExtended.Hash, and is useful for accessing the field via an interface.
+func (v *GetAllStablecoinPairsCreatedForDexEthereumDexTradesTransactionEthereumTransactionInfoExtended) GetHash() string {
+	return v.Hash
 }
 
 // GetAllStablecoinPairsCreatedForDexResponse is returned by GetAllStablecoinPairsCreatedForDex on success.
@@ -705,6 +726,9 @@ query GetAllStablecoinPairsCreatedForDex ($network: EthereumNetwork!, $from: ISO
 			close: maximum(of: block, get: quote_price)
 			volume: quoteAmount
 			count
+			transaction {
+				hash
+			}
 		}
 	}
 }
