@@ -7,10 +7,10 @@ import (
 	"log"
 )
 
-func GetTokenFromDB(NetworkId int, TokenSymbol string, TokenAddress string) []mysql.Token {
+func GetTokenFromDB(NetworkId int, TokenAddress string) []mysql.Token {
 
 	// Query
-	GetTokenQuery := fmt.Sprintf("SELECT tokens.* FROM tokens WHERE tokens.network_id = %d AND tokens.address = '%v' AND tokens.symbol = '%v'", NetworkId, TokenAddress, TokenSymbol)
+	GetTokenQuery := fmt.Sprintf("SELECT tokens.* FROM tokens WHERE tokens.network_id = %d AND tokens.address = '%v'", NetworkId, TokenAddress)
 
 	// Create Connection To DB
 	DBConnection := mysqlutils.CreateDatabaseConnection()
