@@ -252,6 +252,9 @@ func main() {
 	// Iterate Through Networks Dexs
 	for NetworkIndex, Network := range CollectedNetworkData {
 
+		// Get All Network Blacklist Pairs So We Can Skip Them
+		BlacklistPairAddresses := mysql_query.GetBlacklistedPairsForNetwork(Network.NetworkDBId)
+
 		// Count For Network Iteration
 		NetworkCountIndex := NetworkIndex + 1
 
@@ -307,245 +310,280 @@ func main() {
 					// Add The Pair Address
 					Pair.Address = DexPair.Attributes.Address
 
-					// Get Factory Address
-					if Dex.FactoryAddress == "" {
-						Dex.FactoryAddress = web3.GetPairFactoryAddress(DexPair.Attributes.Address, Network.RPCs[0])
+					// Dex Is Invalid Dex List
+					PairIsBlacklisted, _ := util.CheckIfStringIsInList(BlacklistPairAddresses, Pair.Address, false)
 
-					}
+					// If The Pair Is Not Blacklisted Get Info On It
+					if !PairIsBlacklisted {
 
-					// Get Current Pair Transactions
-					PairTransactions := geckoterminal_api.GetGeckoterminalPairTransactionsAndTokens(Network.Network.Identifier, Pair.Address, 1)
+						// Get Factory Address
+						if Dex.FactoryAddress == "" {
+							Dex.FactoryAddress = web3.GetPairFactoryAddress(DexPair.Attributes.Address, Network.RPCs[0])
+						}
 
-					// Sleep For N Seconds
-					time.Sleep(WaitTime)
+						// Get Current Pair Transactions
+						PairTransactions := geckoterminal_api.GetGeckoterminalPairTransactionsAndTokens(Network.Network.Identifier, Pair.Address, 1)
 
-					// Collect Transactions
-					for _, Transaction := range PairTransactions.Data {
-						var PairTransaction geckoterminal_types.Transaction
-						PairTransaction.Hash = Transaction.Attributes.TxHash
-						Pair.Transactions = append(Pair.Transactions, PairTransaction)
-					}
+						// Sleep For N Seconds
+						time.Sleep(WaitTime)
 
-					// Get First Transaction
-					LocalTransactionReceipt := web3.GetTransactionReceipt(Network.RPCs[0], Pair.Transactions[0].Hash)
+						// Collect Transactions
+						for _, Transaction := range PairTransactions.Data {
+							var PairTransaction geckoterminal_types.Transaction
+							PairTransaction.Hash = Transaction.Attributes.TxHash
+							Pair.Transactions = append(Pair.Transactions, PairTransaction)
+						}
 
-					// Get Router Address
-					Dex.RouterAddress = LocalTransactionReceipt.To().Hex()
+						// Get First Transaction
+						LocalTransactionReceipt := web3.GetTransactionReceipt(Network.RPCs[0], Pair.Transactions[0].Hash)
 
-					// Decode First Transaction To See If We Can - If So We Will Continue
-					DexIsValid, _, _ = web3.DecodeTransactionInputData(RouterAbi, LocalTransactionReceipt.Data())
+						// Get Router Address
+						Dex.RouterAddress = LocalTransactionReceipt.To().Hex()
 
-					if DexIsValid {
+						// Decode First Transaction To See If We Can - If So We Will Continue
+						DexIsValid, _, _ = web3.DecodeTransactionInputData(RouterAbi, LocalTransactionReceipt.Data())
 
-						// Check If We Got Transactions
-						if len(Pair.Transactions) > 0 {
+						if DexIsValid {
 
-							// Add Base Token Details
-							var BaseToken geckoterminal_types.Token
-							BaseToken.Name = PairTransactions.Included[1].Attributes.Name
-							BaseToken.Symbol = PairTransactions.Included[1].Attributes.Symbol
-							BaseToken.Address = PairTransactions.Included[1].Attributes.Address
-							Pair.BaseToken = BaseToken
+							// Check If We Got Transactions
+							if len(Pair.Transactions) > 0 {
 
-							// Add Quote Token Details
-							var QuoteToken geckoterminal_types.Token
-							QuoteToken.Name = PairTransactions.Included[0].Attributes.Name
-							QuoteToken.Symbol = PairTransactions.Included[0].Attributes.Symbol
-							QuoteToken.Address = PairTransactions.Included[0].Attributes.Address
-							Pair.QuoteToken = QuoteToken
+								// Add Base Token Details
+								var BaseToken geckoterminal_types.Token
+								BaseToken.Name = PairTransactions.Included[1].Attributes.Name
+								BaseToken.Symbol = PairTransactions.Included[1].Attributes.Symbol
+								BaseToken.Address = PairTransactions.Included[1].Attributes.Address
+								Pair.BaseToken = BaseToken
 
-							// Add Market Metadata
-							Pair.TwentyFourHourVolume = DexPair.Attributes.ToVolumeInUsd
-							Pair.TwentyFourHourTxs = DexPair.Attributes.SwapCount24H
-							Pair.Liquidity = DexPair.Attributes.ReserveInUsd
+								// Add Quote Token Details
+								var QuoteToken geckoterminal_types.Token
+								QuoteToken.Name = PairTransactions.Included[0].Attributes.Name
+								QuoteToken.Symbol = PairTransactions.Included[0].Attributes.Symbol
+								QuoteToken.Address = PairTransactions.Included[0].Attributes.Address
+								Pair.QuoteToken = QuoteToken
 
-							// Add The Pair Address
-							Pair.Name = fmt.Sprintf("%v/%v", BaseToken.Symbol, QuoteToken.Symbol)
+								// Add Market Metadata
+								Pair.TwentyFourHourVolume = DexPair.Attributes.ToVolumeInUsd
+								Pair.TwentyFourHourTxs = DexPair.Attributes.SwapCount24H
+								Pair.Liquidity = DexPair.Attributes.ReserveInUsd
 
-							// Check If Pair Contains A Stablecoin
-							BaseTokenIsStablecoin, BaseTokenMatchIndex := util.CheckIfStringIsInList(NetworkStablecoins, BaseToken.Address, false)
-							QuoteTokenIsStablecoin, QuoteTokenMatchIndex := util.CheckIfStringIsInList(NetworkStablecoins, QuoteToken.Address, false)
+								// Add The Pair Address
+								Pair.Name = fmt.Sprintf("%v/%v", BaseToken.Symbol, QuoteToken.Symbol)
 
-							// Check If Pair Contains A Stablecoin
-							if BaseTokenIsStablecoin || QuoteTokenIsStablecoin {
+								// Check If Pair Contains A Stablecoin
+								BaseTokenIsStablecoin, BaseTokenMatchIndex := util.CheckIfStringIsInList(NetworkStablecoins, BaseToken.Address, false)
+								QuoteTokenIsStablecoin, QuoteTokenMatchIndex := util.CheckIfStringIsInList(NetworkStablecoins, QuoteToken.Address, false)
 
-								// Collect Transactions
-								for PairTransactionIndex, PairTransaction := range Pair.Transactions {
+								// Check If Both Tokens Are Stablecoins
+								BothTokensAreStablecoins := BaseTokenIsStablecoin && QuoteTokenIsStablecoin
 
-									// Decode Pair Transactions
-									DecodeSuccessful, Method, DecodedInputData := web3.DecodeTransactionInputData(RouterAbi, LocalTransactionReceipt.Data())
+								// Check If Pair Contains A Stablecoin
+								if (BaseTokenIsStablecoin || QuoteTokenIsStablecoin) && !BothTokensAreStablecoins {
 
-									// Add Data If Decode Successful
-									if DecodeSuccessful {
-										PairTransaction.InputData = DecodedInputData
-										PairTransaction.MethodName = Method
-										Pair.Transactions[PairTransactionIndex] = PairTransaction
-									} else {
-										// Remove It If We Could Decode
-										Pair.Transactions = append(Pair.Transactions[:PairTransactionIndex], Pair.Transactions[PairTransactionIndex+1:]...)
-									}
+									// Collect Transactions
+									for PairTransactionIndex, PairTransaction := range Pair.Transactions {
 
-								}
+										// Decode Pair Transactions
+										DecodeSuccessful, Method, DecodedInputData := web3.DecodeTransactionInputData(RouterAbi, LocalTransactionReceipt.Data())
 
-								// Check If We Have Any Decoded Transactions
-								if len(Pair.Transactions) > 0 {
-
-									if DexDBId < 0 {
-
-										// Check If Dex Is Already Stored
-										DexQueryResults := mysql_query.GetDexFromDB(Network.NetworkDBId, Dex.Identifier)
-
-										if len(DexQueryResults) > 0 {
-
-											// Set Dex DB ID
-											DexDBId = DexQueryResults[0].DexId
-
+										// Add Data If Decode Successful
+										if DecodeSuccessful {
+											PairTransaction.InputData = DecodedInputData
+											PairTransaction.MethodName = Method
+											Pair.Transactions[PairTransactionIndex] = PairTransaction
 										} else {
-
-											// Add Dex To DB
-											DexDBId = int(mysql_insert.AddDexToDB(
-												Network.NetworkDBId,
-												Dex.Identifier,
-												Dex.RouterAddress,
-												Dex.FactoryAddress,
-												1,
-											))
-
-										}
-									}
-
-									// Append The Pair To Out Collection
-									Dex.Pairs = append(Dex.Pairs, Pair)
-
-									// DB Ids
-									var TokenDBId int64
-									var PairDBId int64
-
-									if BaseTokenIsStablecoin {
-
-										// Check If Our Token Is Already In DB
-										TokenQueryResults := mysql_query.GetTokenFromDB(Network.NetworkDBId, QuoteToken.Symbol, QuoteToken.Address)
-										if len(TokenQueryResults) > 0 {
-
-											// Set Token DB ID
-											TokenDBId = int64(TokenQueryResults[0].TokenId)
-
-										} else {
-
-											// Get Token Decimals
-											QuoteToken.Decimals = int(web3.GetTokenDecimals(QuoteToken.Address, Network.RPCs[0]))
-
-											// Add Token To DB
-											TokenDBId = mysql_insert.AddTokenToDB(QuoteToken.Symbol, QuoteToken.Address, QuoteToken.Decimals, Network.NetworkDBId)
-										}
-
-										// Get Out Stablecoin Details
-										StablecoinDetails := Network.Stablecoins[BaseTokenMatchIndex]
-
-										// Check If Our Pair Is Already In DB
-										PairQueryResults := mysql_query.GetPairFromDB(Pair.Address, Network.NetworkDBId)
-										if len(PairQueryResults) > 0 {
-											// Set Pair DB ID
-											PairDBId = int64(PairQueryResults[0].PairId)
-										} else {
-											// Add Pair To DB
-											PairDBId = mysql_insert.AddPairToDB(TokenDBId, StablecoinDetails.StablecoinId, Network.NetworkDBId, DexDBId, Pair.Name, Pair.Address)
-										}
-
-									} else {
-
-										// Check If Our Token Is Already In DB
-										TokenQueryResults := mysql_query.GetTokenFromDB(Network.NetworkDBId, QuoteToken.Symbol, QuoteToken.Address)
-										if len(TokenQueryResults) > 0 {
-
-											// Set Token DB ID
-											TokenDBId = int64(TokenQueryResults[0].TokenId)
-										} else {
-
-											// Get Token Decimals
-											BaseToken.Decimals = int(web3.GetTokenDecimals(BaseToken.Address, Network.RPCs[0]))
-
-											// Add Token To DB
-											TokenDBId = mysql_insert.AddTokenToDB(BaseToken.Symbol, BaseToken.Address, BaseToken.Decimals, Network.NetworkDBId)
-										}
-
-										// Get Out Stablecoin Details
-										StablecoinDetails := Network.Stablecoins[QuoteTokenMatchIndex]
-
-										// Check If Our Pair Is Already In DB
-										PairQueryResults := mysql_query.GetPairFromDB(Pair.Address, Network.NetworkDBId)
-										if len(PairQueryResults) > 0 {
-
-											// Set Pair DB ID
-											PairDBId = int64(PairQueryResults[0].PairId)
-
-										} else {
-
-											// Add Pair To DB
-											PairDBId = mysql_insert.AddPairToDB(TokenDBId, StablecoinDetails.StablecoinId, Network.NetworkDBId, DexDBId, Pair.Name, Pair.Address)
-
+											// Remove It If We Could Decode
+											Pair.Transactions = append(Pair.Transactions[:PairTransactionIndex], Pair.Transactions[PairTransactionIndex+1:]...)
 										}
 
 									}
 
-									// Add Pair Routes To DB
-									for _, PairTransaction := range Pair.Transactions {
+									// Check If We Have Any Decoded Transactions
+									if len(Pair.Transactions) > 0 {
 
-										// Create A Comma Seperated String For Route
-										var RouteString string
-										for RouteAddressIndex, RouteAddress := range PairTransaction.InputData.Path {
-											if RouteAddressIndex <= 0 {
-												RouteString = fmt.Sprintf("%v", RouteAddress)
+										if DexDBId < 0 {
+
+											// Check If Dex Is Already Stored
+											DexQueryResults := mysql_query.GetDexFromDB(Network.NetworkDBId, Dex.Identifier)
+
+											if len(DexQueryResults) > 0 {
+
+												// Set Dex DB ID
+												DexDBId = DexQueryResults[0].DexId
+
 											} else {
-												RouteString = fmt.Sprintf("%v,%v", RouteString, RouteAddress)
+
+												// Add Dex To DB
+												DexDBId = int(mysql_insert.AddDexToDB(
+													Network.NetworkDBId,
+													Dex.Identifier,
+													Dex.RouterAddress,
+													Dex.FactoryAddress,
+													1,
+												))
+
+											}
+										}
+
+										// Append The Pair To Out Collection
+										Dex.Pairs = append(Dex.Pairs, Pair)
+
+										// DB Ids
+										var TokenDBId int64
+										var PairDBId int64
+
+										if BaseTokenIsStablecoin {
+
+											// Check If Our Token Is Already In DB
+											TokenQueryResults := mysql_query.GetTokenFromDB(Network.NetworkDBId, QuoteToken.Address)
+											if len(TokenQueryResults) > 0 {
+
+												// Set Token DB ID
+												TokenDBId = int64(TokenQueryResults[0].TokenId)
+
+											} else {
+
+												// Get Token Decimals
+												QuoteToken.Decimals = int(web3.GetTokenDecimals(QuoteToken.Address, Network.RPCs[0]))
+
+												// Add Token To DB
+												TokenDBId = mysql_insert.AddTokenToDB(QuoteToken.Symbol, QuoteToken.Address, QuoteToken.Decimals, Network.NetworkDBId)
+											}
+
+											// Get Out Stablecoin Details
+											StablecoinDetails := Network.Stablecoins[BaseTokenMatchIndex]
+
+											// Check If Our Pair Is Already In DB
+											PairQueryResults := mysql_query.GetPairFromDB(Pair.Address, Network.NetworkDBId)
+											if len(PairQueryResults) > 0 {
+
+												// Set Pair DB ID
+												PairDBId = int64(PairQueryResults[0].PairId)
+
+											} else {
+
+												if TokenDBId < 1 {
+													log.Panicln("Invalid Token DB Id: ", TokenDBId)
+												}
+
+												// Add Pair To DB
+												PairDBId = mysql_insert.AddPairToDB(TokenDBId, StablecoinDetails.StablecoinId, Network.NetworkDBId, DexDBId, Pair.Name, Pair.Address)
+
+											}
+
+										} else {
+
+											// Check If Our Token Is Already In DB
+											TokenQueryResults := mysql_query.GetTokenFromDB(Network.NetworkDBId, BaseToken.Address)
+											if len(TokenQueryResults) > 0 {
+
+												// Set Token DB ID
+												TokenDBId = int64(TokenQueryResults[0].TokenId)
+
+											} else {
+
+												// Get Token Decimals
+												BaseToken.Decimals = int(web3.GetTokenDecimals(BaseToken.Address, Network.RPCs[0]))
+
+												// Add Token To DB
+												TokenDBId = mysql_insert.AddTokenToDB(BaseToken.Symbol, BaseToken.Address, BaseToken.Decimals, Network.NetworkDBId)
+											}
+
+											// Get Out Stablecoin Details
+											StablecoinDetails := Network.Stablecoins[QuoteTokenMatchIndex]
+
+											// Check If Our Pair Is Already In DB
+											PairQueryResults := mysql_query.GetPairFromDB(Pair.Address, Network.NetworkDBId)
+											if len(PairQueryResults) > 0 {
+
+												// Set Pair DB ID
+												PairDBId = int64(PairQueryResults[0].PairId)
+
+											} else {
+
+												if TokenDBId < 1 {
+													log.Panicln("Invalid Token DB Id: ", TokenDBId)
+												}
+
+												// Add Pair To DB
+												PairDBId = mysql_insert.AddPairToDB(TokenDBId, StablecoinDetails.StablecoinId, Network.NetworkDBId, DexDBId, Pair.Name, Pair.Address)
+
 											}
 
 										}
 
-										// Check If Our Route Is Stored
-										RouteQueryResults := mysql_query.GetRouteFromDB(Network.NetworkDBId, DexDBId, int(PairDBId))
-										if len(RouteQueryResults) <= 0 {
+										// Add Pair Routes To DB
+										for _, PairTransaction := range Pair.Transactions {
 
-											// Add Route To DB
-											mysql_insert.AddRouteToDB(Network.NetworkDBId, DexDBId, PairDBId, RouteString, PairTransaction.MethodName, PairTransaction.Hash, PairTransaction.InputData.AmountIn, PairTransaction.InputData.AmountOutMin)
+											// Create A Comma Seperated String For Route
+											var RouteString string
+											for RouteAddressIndex, RouteAddress := range PairTransaction.InputData.Path {
+												if RouteAddressIndex <= 0 {
+													RouteString = fmt.Sprintf("%v", RouteAddress)
+												} else {
+													RouteString = fmt.Sprintf("%v,%v", RouteString, RouteAddress)
+												}
+
+											}
+
+											// Check If Our Route Is Stored
+											RouteQueryResults := mysql_query.GetRouteFromDB(Network.NetworkDBId, DexDBId, int(PairDBId))
+											if len(RouteQueryResults) <= 0 {
+
+												// Add Route To DB
+												mysql_insert.AddRouteToDB(Network.NetworkDBId, DexDBId, PairDBId, RouteString, PairTransaction.MethodName, PairTransaction.Hash, PairTransaction.InputData.AmountIn, PairTransaction.InputData.AmountOutMin)
+
+											}
 
 										}
 
+										log.Printf("    [%d/%d] Added: %v", PairCountIndex, PairCount, Pair.Name)
+
 									}
 
-									log.Printf("    [%d/%d] Added: %v", PairCountIndex, PairCount, Pair.Name)
+								} else {
+
+									// Check If Pair Is Blacklisted
+									BlacklistPairQueryResults := mysql_query.GetBlacklistPairFromDB(Pair.Address, Network.NetworkDBId)
+									if len(BlacklistPairQueryResults) <= 0 {
+
+										// Add Pair To Pair Blacklist DB
+										mysql_insert.AddBlacklistPairToDB(Network.NetworkDBId, Pair.Name, Pair.Address)
+
+									}
+
 
 								}
 
 							}
 
-						}
+							DexFailCount = 0
 
-						DexFailCount = 0
+						} else {
 
-					} else {
+							DexFailCount = DexFailCount + 1
 
-						DexFailCount = DexFailCount + 1
+							if DexFailCount >= 10 {
 
-						if DexFailCount >= 10 {
+								// Check If Dex Is Already Stored
+								DexQueryResults := mysql_query.GetDexFromDB(Network.NetworkDBId, Dex.Identifier)
 
-							// Check If Dex Is Already Stored
-							DexQueryResults := mysql_query.GetDexFromDB(Network.NetworkDBId, Dex.Identifier)
+								if len(DexQueryResults) <= 0 {
 
-							if len(DexQueryResults) <= 0 {
+									// Set Dex DB ID
+									DexDBId = int(mysql_insert.AddDexToDB(
+										Network.NetworkDBId,
+										Dex.Identifier,
+										Dex.RouterAddress,
+										Dex.FactoryAddress,
+										0,
+									))
 
-								// Set Dex DB ID
-								DexDBId = int(mysql_insert.AddDexToDB(
-									Network.NetworkDBId,
-									Dex.Identifier,
-									Dex.RouterAddress,
-									Dex.FactoryAddress,
-									0,
-								))
+								}
+
+								break
 
 							}
-
-							break
 
 						}
 

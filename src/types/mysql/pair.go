@@ -10,3 +10,11 @@ type Pair struct {
 	Address               string   `db:"address"`
 	CreatedAt             string   `db:"created_at"`
 }
+
+type BlacklistPair struct {
+	BlacklistPairId       int      `db:"blacklistpair_id"`
+	NetworkId             int      `db:"network_id"`
+	Name                  string   `db:"name"`
+	Address               string   `db:"address"`
+	CreatedAt             string   `db:"created_at"`
+}
