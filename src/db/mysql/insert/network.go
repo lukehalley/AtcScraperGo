@@ -41,3 +41,17 @@ func AddNetworkToDB(NetworkName string, ChainNumber int, ChainRPCs []string, Exp
 	return InsertedNetworkID
 
 }
+
+func AddBlacklistNetworkToDB(NetworkName string, ChainNumber int) int64 {
+
+	DBKeys := fmt.Sprintf("name, chain_number")
+	SelectStatement := fmt.Sprintf("(SELECT '%v' AS name, %d AS chain_number)", NetworkName, ChainNumber)
+	CompareStatement := fmt.Sprintf("blacklist_networks.name = '%v' AND blacklist_networks.chain_number = %d", NetworkName, ChainNumber)
+
+	InsertQuery := "INSERT INTO blacklist_networks(" + DBKeys + ") SELECT * FROM " + SelectStatement + " AS tmp WHERE NOT EXISTS (SELECT * FROM blacklist_networks WHERE " + CompareStatement + ") LIMIT 1"
+
+	InsertedNetworkID := mysqlutils.ExecuteInsert(InsertQuery)
+
+	return InsertedNetworkID
+
+}
