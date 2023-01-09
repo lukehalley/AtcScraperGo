@@ -48,8 +48,11 @@ func CheckTransactionBaseInfo(tx *types.Transaction) {
 	Gas := tx.Gas()
 	GasPrice := tx.GasPrice().Uint64()
 	Nonce := tx.Nonce()
+	Data := tx.Data()
 
-	fmt.Printf("", HexAddress, ChainId, Value, TransactionMessage, Hex, Gas, GasPrice, Nonce)
+	FData := Data[:4]
+
+	fmt.Printf("", HexAddress, ChainId, Value, TransactionMessage, Hex, Gas, GasPrice, Nonce, Data, FData)
 
 }
 

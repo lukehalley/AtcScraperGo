@@ -22,6 +22,10 @@ func DecodeTransactionInputData(ABI string, TransactionInputData []byte) (bool, 
 		return false, "", DecodedInputData
 	}
 
+	if len(TransactionInputData) <= 8 {
+		return false, "", DecodedInputData
+	}
+
 	MethodSigData := TransactionInputData[:4]
 	Method, MethodError := ABIObject.MethodById(MethodSigData)
 	if MethodError != nil {
