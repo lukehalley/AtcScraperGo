@@ -33,26 +33,19 @@ func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Trans
 		return false, TransactionByHash
 	}
 
-	return true, TransactionByHash
+	TxIsValid := CheckTransactionBaseInfo(TransactionByHash)
+
+	return TxIsValid, TransactionByHash
 
 
 }
 
-func CheckTransactionBaseInfo(tx *types.Transaction) {
+func CheckTransactionBaseInfo(Transaction *types.Transaction) bool {
 
-	HexAddress := tx.Hash().Hex()
-	ChainId := tx.ChainId()
-	Value := tx.Value().String()
-	TransactionMessage := GetTransactionMessage(tx).From().Hex()
-	Hex := tx.To().Hex()
-	Gas := tx.Gas()
-	GasPrice := tx.GasPrice().Uint64()
-	Nonce := tx.Nonce()
-	Data := tx.Data()
+	ToAddressIsValid := len(Transaction.To().Hex()) > 0
+	DataIsValid := len(Transaction.Data()) > 8
 
-	FData := Data[:4]
-
-	fmt.Printf("", HexAddress, ChainId, Value, TransactionMessage, Hex, Gas, GasPrice, Nonce, Data, FData)
+	return ToAddressIsValid && DataIsValid
 
 }
 
