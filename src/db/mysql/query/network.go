@@ -2,9 +2,9 @@ package query
 
 import (
 	mysqlutils "atcscraper/src/db/mysql/utils"
+	logging "atcscraper/src/log"
 	"atcscraper/src/types/mysql"
 	"fmt"
-	"log"
 )
 
 func GetNetwork(NetworkName string) []mysql.Network {
@@ -23,13 +23,15 @@ func GetNetwork(NetworkName string) []mysql.Network {
 
 	// Catch Any Errors When Querying
 	if QueryError != nil {
-		log.Fatal(QueryError)
+		Error := fmt.Sprintf("Error Querying DB For Network: %v", QueryError.Error())
+		logging.NewError(Error)
 	}
 
 	// Close Connection
 	DBConnectionCloseError := DBConnection.Close()
 	if DBConnectionCloseError != nil {
-		log.Fatal(DBConnectionCloseError)
+		Error := fmt.Sprintf("Error Closing DB Connecting: %v", DBConnectionCloseError.Error())
+		logging.NewError(Error)
 	}
 
 	return Networks
@@ -52,13 +54,15 @@ func GetBlacklistNetwork(NetworkName string) []mysql.BlacklistNetwork {
 
 	// Catch Any Errors When Querying
 	if QueryError != nil {
-		log.Fatal(QueryError)
+		Error := fmt.Sprintf("Error Querying DB For Blacklisted Network: %v", QueryError.Error())
+		logging.NewError(Error)
 	}
 
 	// Close Connection
 	DBConnectionCloseError := DBConnection.Close()
 	if DBConnectionCloseError != nil {
-		log.Fatal(DBConnectionCloseError)
+		Error := fmt.Sprintf("Error Closing DB Connecting: %v", DBConnectionCloseError.Error())
+		logging.NewError(Error)
 	}
 
 	return BlacklistNetworks
@@ -81,13 +85,15 @@ func GetBlacklistedNetworks() []int {
 
 	// Catch Any Errors When Querying
 	if QueryError != nil {
-		log.Fatal(QueryError)
+		Error := fmt.Sprintf("Error Querying DB For Blacklisted Networks: %v", QueryError.Error())
+		logging.NewError(Error)
 	}
 
 	// Close Connection
 	DBConnectionCloseError := DBConnection.Close()
 	if DBConnectionCloseError != nil {
-		log.Fatal(DBConnectionCloseError)
+		Error := fmt.Sprintf("Error Closing DB Connecting: %v", DBConnectionCloseError.Error())
+		logging.NewError(Error)
 	}
 
 	// Get Blacklist Network Chain IDs
@@ -116,13 +122,15 @@ func GetBitqueryCompatibleNetworks() []mysql.Network {
 
 	// Catch Any Errors When Querying
 	if QueryError != nil {
-		log.Fatal(QueryError)
+		Error := fmt.Sprintf("Error Querying DB For Bitquery Compatible Networks: %v", QueryError.Error())
+		logging.NewError(Error)
 	}
 
 	// Close Connection
 	DBConnectionCloseError := DBConnection.Close()
 	if DBConnectionCloseError != nil {
-		log.Fatal(DBConnectionCloseError)
+		Error := fmt.Sprintf("Error Closing DB Connecting: %v", DBConnectionCloseError.Error())
+		logging.NewError(Error)
 	}
 
 	return Networks

@@ -2,11 +2,12 @@ package mysql_utils
 
 import (
 	"atcscraper/src/env"
+	logging "atcscraper/src/log"
 	"atcscraper/src/types/aws"
 	"encoding/json"
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
-	"log"
 	"os"
 )
 
@@ -15,14 +16,16 @@ func LoadAWSDBSecret(SecretName string) aws.AWSDBSecret {
 	SecretJSON := os.Getenv(SecretName)
 
 	if SecretJSON == "" {
-		log.Fatal("No DB Secret Found!")
+		Error := fmt.Sprintf("No DB Secret Found With Name: %v", SecretName)
+		logging.NewError(Error)
 	}
 
 	DBSecret := aws.AWSDBSecret{}
 	_ = json.Unmarshal([]byte(SecretJSON), &DBSecret)
 
 	if SecretJSON == "" {
-		log.Fatalf("Error Loading DB Secret Env Var: '%s'", SecretName)
+		Error := fmt.Sprintf("Error Loading DB Secret Env Var: %v", SecretName)
+		logging.NewError(Error)
 	}
 
 	// Return DBSecret
@@ -46,7 +49,8 @@ func CreateDatabaseConnection() *sqlx.DB {
 	// Connect To DB + Catch Any Errors
 	DBConnection, DBError := sqlx.Connect("mysql", DBConnectionString)
 	if DBError != nil {
-		log.Fatal(DBError)
+		Error := fmt.Sprintf("Error Connecting To DB: %v", DBError.Error())
+		logging.NewError(Error)
 	}
 
 	// Return DB Connection

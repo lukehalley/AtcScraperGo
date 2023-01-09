@@ -1,10 +1,11 @@
 package io
 
 import (
+	logging "atcscraper/src/log"
 	"atcscraper/src/types/web3"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -28,7 +29,8 @@ func LoadAbiAsString(AbiPath string) string {
 
 	// Handle Problem Loading ABI Json
 	if ABIJSONLoadError != nil {
-		log.Fatalf("Error Loading ABI [%v]: %v", AbiPath, ABIJSONLoadError)
+		Error := fmt.Sprintf("Error Loading ABI [%v]: %v", AbiPath, ABIJSONLoadError.Error())
+		logging.NewError(Error)
 	}
 
 	// Defer The File Being Closed
@@ -39,7 +41,8 @@ func LoadAbiAsString(AbiPath string) string {
 
 	// Catch Reading The JSON Data In
 	if AbiStrConversionError != nil {
-		log.Fatalf("Failed To Load ABI JSON: %v", AbiStrConversionError)
+		Error := fmt.Sprintf("Failed To Read ABI JSON: %v", AbiStrConversionError.Error())
+		logging.NewError(Error)
 	}
 
 	// Convert The File Into A Struct
@@ -47,13 +50,15 @@ func LoadAbiAsString(AbiPath string) string {
 
 	// Check For Any Unmarshal Errors
 	if UnmarshalError := json.Unmarshal(AbiJSONData, &JSONAbiStruct); UnmarshalError != nil {
-		log.Fatalf("Failed To Unmarshal JSON File, Error: %v", UnmarshalError)
+		Error := fmt.Sprintf("Failed To Unmarshal JSON File: %v", UnmarshalError.Error())
+		logging.NewError(Error)
 	}
 
 	// Convert The ABI Into A String
 	JSONAbiString, AbiStrConversionError := json.Marshal(JSONAbiStruct.Abi)
 	if AbiStrConversionError != nil {
-		log.Fatal(AbiStrConversionError)
+		Error := fmt.Sprintf("Failed To Convert ABI To String: %v", AbiStrConversionError.Error())
+		logging.NewError(Error)
 	}
 
 	return string(JSONAbiString)

@@ -1,37 +1,55 @@
 package web3
 
-
-
 import (
+	logging "atcscraper/src/log"
 	"context"
 	"encoding/hex"
 	"fmt"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"log"
 )
 
-func GetTransactionReceipt(NetworkRPC string, TXHash string) *types.Transaction {
+func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Transaction) {
 
 	// Create Web3 Client
 	Web3Client, Web3ClientError := ethclient.Dial(NetworkRPC)
 
 	// Catch Creating Web3 Client
 	if Web3ClientError != nil {
-		log.Fatal(Web3ClientError)
+		Error := fmt.Sprintf("Error Dialing RPC %v To Create Web3 Client: %v", NetworkRPC, Web3ClientError.Error())
+		logging.NewError(Error)
 	}
 
 	// ConvertHexToHash
 	TxHash := common.HexToHash(TXHash)
 
-	var TransactionReceipt *types.Transaction
-	TransactionReceipt, _, TransactionReceiptError := Web3Client.TransactionByHash(context.Background(), TxHash)
+	var TransactionByHash *types.Transaction
+	TransactionByHash, _, TransactionReceiptError := Web3Client.TransactionByHash(context.Background(), TxHash)
+
 	if TransactionReceiptError != nil {
-		log.Fatal(TransactionReceiptError)
+		// Error := fmt.Sprintf("Error Getting Transaction By Hash: %v", TransactionReceiptError.Error())
+		// logging.NewError(Error)
+		return false, TransactionByHash
 	}
 
-	return TransactionReceipt
+	return true, TransactionByHash
+
+
+}
+
+func CheckTransactionBaseInfo(tx *types.Transaction) {
+
+	HexAddress := tx.Hash().Hex()
+	ChainId := tx.ChainId()
+	Value := tx.Value().String()
+	TransactionMessage := GetTransactionMessage(tx).From().Hex()
+	Hex := tx.To().Hex()
+	Gas := tx.Gas()
+	GasPrice := tx.GasPrice().Uint64()
+	Nonce := tx.Nonce()
+
+	fmt.Printf("", HexAddress, ChainId, Value, TransactionMessage, Hex, Gas, GasPrice, Nonce)
 
 }
 
@@ -49,9 +67,10 @@ func PrintTransactionBaseInfo(tx *types.Transaction) {
 }
 
 func GetTransactionMessage(tx *types.Transaction) types.Message {
-	msg, err := tx.AsMessage(types.LatestSignerForChainID(tx.ChainId()), nil)
-	if err != nil {
-		log.Fatal(err)
+	TransactionMessage, GetTransactionMessageError := tx.AsMessage(types.LatestSignerForChainID(tx.ChainId()), nil)
+	if GetTransactionMessageError != nil {
+		Error := fmt.Sprintf("Error Getting Transaction Message: %v", GetTransactionMessageError.Error())
+		logging.NewError(Error)
 	}
-	return msg
+	return TransactionMessage
 }
