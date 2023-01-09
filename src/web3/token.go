@@ -21,16 +21,19 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 
 	// Create Router Contract Object
 	PairContract, PairContractError := Web3.Eth.NewContract(PairAbi, TokenAddress)
+
+	// Catch ABI Load Error
 	if PairContractError != nil {
-		log.Fatal(PairContractError)
+		log.Fatalf("Error Parsing Pair Contract ABI: %v", PairContractError)
 	}
 
 	// Call 'decimals'
 	TokenDecimalsResult, GetTokenDecimalsCallError := PairContract.Call("decimals")
 
 	// Catch Any Call Errors
-	if PairContractError != nil {
-		log.Fatalf("Error Calling 'decimals': %v", GetTokenDecimalsCallError)
+	if GetTokenDecimalsCallError != nil {
+		log.Printf("Warning: Error Calling 'decimals': %v", GetTokenDecimalsCallError)
+		return 0
 	}
 
 	return TokenDecimalsResult.(uint8)

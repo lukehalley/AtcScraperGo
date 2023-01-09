@@ -40,8 +40,6 @@ func GetPairAddress(BaseCurrencyTokenAddress string, QuoteCurrencyTokenAddress s
 
 func GetPairFactoryAddress(PairAddress string, NetworkRPC string) string {
 
-	NetworkRPC = "123" + NetworkRPC
-
 	// Create Instance Of Web3
 	Web3, Web3Error := web3.NewWeb3(NetworkRPC)
 
@@ -55,8 +53,10 @@ func GetPairFactoryAddress(PairAddress string, NetworkRPC string) string {
 
 	// Create Pair Contract Object
 	PairContract, PairContractError := Web3.Eth.NewContract(PairAbi, PairAddress)
+
+	// Catch ABI Load Error
 	if PairContractError != nil {
-		log.Fatal(PairContractError)
+		log.Fatalf("Error Parsing Pair Contract ABI: %v", PairContractError)
 	}
 
 	// Call 'getPair'
