@@ -22,6 +22,7 @@ type Network struct {
 // Network defines blockchain network identifiers
 // Support for multiple blockchain networks with distinct API endpoints
 // TODO: Add graceful shutdown
+// Network IDs mapping for supported blockchain networks
 // GetChainConfig retrieves network-specific configuration parameters
 // NetworkType defines supported blockchain networks for Bitquery
 // Enhancement: add metrics collection
