@@ -2,9 +2,9 @@ package query
 
 import (
 	mysqlutils "atcscraper/src/db/mysql/utils"
+	logging "atcscraper/src/log"
 	"atcscraper/src/types/mysql"
 	"fmt"
-	"log"
 )
 
 func GetTokenFromDB(NetworkId int, TokenAddress string) []mysql.Token {
@@ -23,13 +23,15 @@ func GetTokenFromDB(NetworkId int, TokenAddress string) []mysql.Token {
 
 	// Catch Any Errors When Querying
 	if QueryError != nil {
-		log.Fatal("Error Querying DB: ", QueryError)
+		Error := fmt.Sprintf("Error Querying DB For Token: %v", QueryError.Error())
+		logging.NewError(Error)
 	}
 
 	// Close Connection
 	DBConnectionCloseError := DBConnection.Close()
 	if DBConnectionCloseError != nil {
-		log.Fatal(DBConnectionCloseError)
+		Error := fmt.Sprintf("Error Closing DB Connecting: %v", DBConnectionCloseError.Error())
+		logging.NewError(Error)
 	}
 
 	return Token

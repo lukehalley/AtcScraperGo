@@ -2,6 +2,7 @@ package query
 
 import (
 	mysqlutils "atcscraper/src/db/mysql/utils"
+	logging "atcscraper/src/log"
 	"atcscraper/src/types/mysql"
 	"fmt"
 	"log"
@@ -30,7 +31,8 @@ func GetRouteFromDB(NetworkId int, DexId int, PairId int, TxHash string) []mysql
 	// Close Connection
 	DBConnectionCloseError := DBConnection.Close()
 	if DBConnectionCloseError != nil {
-		log.Fatal(DBConnectionCloseError)
+		Error := fmt.Sprintf("Error Closing DB Connecting: %v", DBConnectionCloseError.Error())
+		logging.NewError(Error)
 	}
 
 	return Route

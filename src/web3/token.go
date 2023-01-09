@@ -2,6 +2,8 @@ package web3
 
 import (
 	"atcscraper/src/io"
+	logging "atcscraper/src/log"
+	"fmt"
 	"github.com/chenzhijie/go-web3"
 	"log"
 )
@@ -13,7 +15,8 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 
 	// Catch Creating Web3Object
 	if Web3Error != nil {
-		log.Fatal(Web3Error)
+		Error := fmt.Sprintf("Error Creating Web3 Object: %v", Web3Error.Error())
+		logging.NewError(Error)
 	}
 
 	// Load Router ABI
@@ -24,7 +27,8 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 
 	// Catch ABI Load Error
 	if PairContractError != nil {
-		log.Fatalf("Error Parsing Pair Contract ABI: %v", PairContractError)
+		Error := fmt.Sprintf("Error Parsing Pair Contract ABI: %v", PairContractError.Error())
+		logging.NewError(Error)
 	}
 
 	// Call 'decimals'

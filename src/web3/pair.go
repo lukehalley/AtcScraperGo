@@ -2,9 +2,10 @@ package web3
 
 import (
 	"atcscraper/src/io"
+	logging "atcscraper/src/log"
+	"fmt"
 	"github.com/chenzhijie/go-web3"
 	"github.com/ethereum/go-ethereum/common"
-	"log"
 )
 
 func GetPairAddress(BaseCurrencyTokenAddress string, QuoteCurrencyTokenAddress string, FactoryAddress string, NetworkRPC string) string {
@@ -14,7 +15,8 @@ func GetPairAddress(BaseCurrencyTokenAddress string, QuoteCurrencyTokenAddress s
 
 	// Catch Creating Web3Object
 	if Web3Error != nil {
-		log.Fatal(Web3Error)
+		Error := fmt.Sprintf("Error Creating Web3 Object: %v", Web3Error.Error())
+		logging.NewError(Error)
 	}
 
 	// Load Factory ABI
@@ -23,7 +25,8 @@ func GetPairAddress(BaseCurrencyTokenAddress string, QuoteCurrencyTokenAddress s
 	// Create Factory Contract Object
 	FactoryContract, FactoryContractError := Web3.Eth.NewContract(FactoryAbi, FactoryAddress)
 	if FactoryContractError != nil {
-		log.Fatal(FactoryContractError)
+		Error := fmt.Sprintf("Error Creating Factory Contract Object: %v", FactoryContractError.Error())
+		logging.NewError(Error)
 	}
 
 	// Call 'getPair'
@@ -31,7 +34,8 @@ func GetPairAddress(BaseCurrencyTokenAddress string, QuoteCurrencyTokenAddress s
 
 	// Catch Any Call Errors
 	if PairAddressError != nil {
-		log.Fatalf("Error Calling 'getPair': %v", PairAddressError)
+		Error := fmt.Sprintf("Error Calling 'getPair': %v", PairAddressError.Error())
+		logging.NewError(Error)
 	}
 
 	return GetHexAddress(PairAddress)
@@ -45,7 +49,8 @@ func GetPairFactoryAddress(PairAddress string, NetworkRPC string) string {
 
 	// Catch Creating Web3Object
 	if Web3Error != nil {
-		log.Fatal(Web3Error)
+		Error := fmt.Sprintf("Error Creating Web3 Object: %v", Web3Error.Error())
+		logging.NewError(Error)
 	}
 
 	// Load Factory ABI
@@ -56,7 +61,8 @@ func GetPairFactoryAddress(PairAddress string, NetworkRPC string) string {
 
 	// Catch ABI Load Error
 	if PairContractError != nil {
-		log.Fatalf("Error Parsing Pair Contract ABI: %v", PairContractError)
+		Error := fmt.Sprintf("Error Creating Pair Contract Object: %v", PairContractError.Error())
+		logging.NewError(Error)
 	}
 
 	// Call 'getPair'
@@ -78,7 +84,8 @@ func GetPairTokenAddresses(PairAddress string, NetworkRPC string) (string, strin
 
 	// Catch Creating Web3Object
 	if Web3Error != nil {
-		log.Fatal(Web3Error)
+		Error := fmt.Sprintf("Error Creating Web3 Object: %v", Web3Error.Error())
+		logging.NewError(Error)
 	}
 
 	// Load Factory ABI
@@ -87,7 +94,8 @@ func GetPairTokenAddresses(PairAddress string, NetworkRPC string) (string, strin
 	// Create Pair Contract Object
 	PairContract, PairContractError := Web3.Eth.NewContract(PairAbi, PairAddress)
 	if PairContractError != nil {
-		log.Fatal(PairContractError)
+		Error := fmt.Sprintf("Error Creating Pair Contract Object: %v", PairContractError.Error())
+		logging.NewError(Error)
 	}
 
 	// Call 'token0'
