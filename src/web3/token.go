@@ -5,7 +5,6 @@ import (
 	logging "atcscraper/src/log"
 	"fmt"
 	"github.com/chenzhijie/go-web3"
-	"log"
 )
 
 func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
@@ -36,7 +35,7 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 
 	// Catch Any Call Errors
 	if GetTokenDecimalsCallError != nil {
-		log.Printf("Warning: Error Calling 'decimals': %v", GetTokenDecimalsCallError)
+		// log.Printf("Warning: Error Calling 'decimals': %v", GetTokenDecimalsCallError)
 		return 0
 	}
 

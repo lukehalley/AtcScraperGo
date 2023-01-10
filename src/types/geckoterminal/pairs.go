@@ -1,98 +1,100 @@
 package geckoterminal
 
+type PairData struct {
+	ID         string `json:"id"`
+	Type       string `json:"type"`
+	Attributes struct {
+		Address             string `json:"address"`
+		Name                string `json:"name"`
+		FromVolumeInUsd     string `json:"from_volume_in_usd"`
+		ToVolumeInUsd       string `json:"to_volume_in_usd"`
+		SwapCount24H        int    `json:"swap_count_24h"`
+		PricePercentChange  string `json:"price_percent_change"`
+		PricePercentChanges struct {
+			Last5M  string `json:"last_5m"`
+			Last15M string `json:"last_15m"`
+			Last30M string `json:"last_30m"`
+			Last1H  string `json:"last_1h"`
+			Last6H  string `json:"last_6h"`
+			Last24H string `json:"last_24h"`
+		} `json:"price_percent_changes"`
+		PoolFee                  interface{} `json:"pool_fee"`
+		BaseTokenID              string      `json:"base_token_id"`
+		PriceInUsd               string      `json:"price_in_usd"`
+		ReserveInUsd             string      `json:"reserve_in_usd"`
+		AggregatedNetworkMetrics struct {
+			TotalSwapVolumeUsd24H string `json:"total_swap_volume_usd_24h"`
+			TotalSwapCount24H     int    `json:"total_swap_count_24h"`
+		} `json:"aggregated_network_metrics"`
+		HistoricalData struct {
+			Last5M struct {
+				SwapsCount     int    `json:"swaps_count"`
+				PriceInUsd     string `json:"price_in_usd"`
+				VolumeInUsd    string `json:"volume_in_usd"`
+				BuySwapsCount  int    `json:"buy_swaps_count"`
+				SellSwapsCount int    `json:"sell_swaps_count"`
+			} `json:"last_5m"`
+			Last15M struct {
+				SwapsCount     int    `json:"swaps_count"`
+				PriceInUsd     string `json:"price_in_usd"`
+				VolumeInUsd    string `json:"volume_in_usd"`
+				BuySwapsCount  int    `json:"buy_swaps_count"`
+				SellSwapsCount int    `json:"sell_swaps_count"`
+			} `json:"last_15m"`
+			Last30M struct {
+				SwapsCount     int    `json:"swaps_count"`
+				PriceInUsd     string `json:"price_in_usd"`
+				VolumeInUsd    string `json:"volume_in_usd"`
+				BuySwapsCount  int    `json:"buy_swaps_count"`
+				SellSwapsCount int    `json:"sell_swaps_count"`
+			} `json:"last_30m"`
+			Last1H struct {
+				SwapsCount     int    `json:"swaps_count"`
+				PriceInUsd     string `json:"price_in_usd"`
+				VolumeInUsd    string `json:"volume_in_usd"`
+				BuySwapsCount  int    `json:"buy_swaps_count"`
+				SellSwapsCount int    `json:"sell_swaps_count"`
+			} `json:"last_1h"`
+			Last6H struct {
+				SwapsCount     int    `json:"swaps_count"`
+				PriceInUsd     string `json:"price_in_usd"`
+				VolumeInUsd    string `json:"volume_in_usd"`
+				BuySwapsCount  int    `json:"buy_swaps_count"`
+				SellSwapsCount int    `json:"sell_swaps_count"`
+			} `json:"last_6h"`
+			Last24H struct {
+				SwapsCount     int    `json:"swaps_count"`
+				PriceInUsd     string `json:"price_in_usd"`
+				VolumeInUsd    string `json:"volume_in_usd"`
+				BuySwapsCount  int    `json:"buy_swaps_count"`
+				SellSwapsCount int    `json:"sell_swaps_count"`
+			} `json:"last_24h"`
+		} `json:"historical_data"`
+	} `json:"attributes"`
+	Relationships struct {
+		Dex struct {
+			Data struct {
+				ID   string `json:"id"`
+				Type string `json:"type"`
+			} `json:"data"`
+		} `json:"dex"`
+		Tokens struct {
+			Data []struct {
+				ID   string `json:"id"`
+				Type string `json:"type"`
+			} `json:"data"`
+		} `json:"tokens"`
+		PoolMetric struct {
+			Data struct {
+				ID   string `json:"id"`
+				Type string `json:"type"`
+			} `json:"data"`
+		} `json:"pool_metric"`
+	} `json:"relationships"`
+}
+
 type GeckoTerminalDexPairs struct {
-	Data []struct {
-		ID         string `json:"id"`
-		Type       string `json:"type"`
-		Attributes struct {
-			Address             string `json:"address"`
-			Name                string `json:"name"`
-			FromVolumeInUsd     string `json:"from_volume_in_usd"`
-			ToVolumeInUsd       string `json:"to_volume_in_usd"`
-			SwapCount24H        int    `json:"swap_count_24h"`
-			PricePercentChange  string `json:"price_percent_change"`
-			PricePercentChanges struct {
-				Last5M  string `json:"last_5m"`
-				Last15M string `json:"last_15m"`
-				Last30M string `json:"last_30m"`
-				Last1H  string `json:"last_1h"`
-				Last6H  string `json:"last_6h"`
-				Last24H string `json:"last_24h"`
-			} `json:"price_percent_changes"`
-			PoolFee                  interface{} `json:"pool_fee"`
-			BaseTokenID              string      `json:"base_token_id"`
-			PriceInUsd               string      `json:"price_in_usd"`
-			ReserveInUsd             string      `json:"reserve_in_usd"`
-			AggregatedNetworkMetrics struct {
-				TotalSwapVolumeUsd24H string `json:"total_swap_volume_usd_24h"`
-				TotalSwapCount24H     int    `json:"total_swap_count_24h"`
-			} `json:"aggregated_network_metrics"`
-			HistoricalData struct {
-				Last5M struct {
-					SwapsCount     int    `json:"swaps_count"`
-					PriceInUsd     string `json:"price_in_usd"`
-					VolumeInUsd    string `json:"volume_in_usd"`
-					BuySwapsCount  int    `json:"buy_swaps_count"`
-					SellSwapsCount int    `json:"sell_swaps_count"`
-				} `json:"last_5m"`
-				Last15M struct {
-					SwapsCount     int    `json:"swaps_count"`
-					PriceInUsd     string `json:"price_in_usd"`
-					VolumeInUsd    string `json:"volume_in_usd"`
-					BuySwapsCount  int    `json:"buy_swaps_count"`
-					SellSwapsCount int    `json:"sell_swaps_count"`
-				} `json:"last_15m"`
-				Last30M struct {
-					SwapsCount     int    `json:"swaps_count"`
-					PriceInUsd     string `json:"price_in_usd"`
-					VolumeInUsd    string `json:"volume_in_usd"`
-					BuySwapsCount  int    `json:"buy_swaps_count"`
-					SellSwapsCount int    `json:"sell_swaps_count"`
-				} `json:"last_30m"`
-				Last1H struct {
-					SwapsCount     int    `json:"swaps_count"`
-					PriceInUsd     string `json:"price_in_usd"`
-					VolumeInUsd    string `json:"volume_in_usd"`
-					BuySwapsCount  int    `json:"buy_swaps_count"`
-					SellSwapsCount int    `json:"sell_swaps_count"`
-				} `json:"last_1h"`
-				Last6H struct {
-					SwapsCount     int    `json:"swaps_count"`
-					PriceInUsd     string `json:"price_in_usd"`
-					VolumeInUsd    string `json:"volume_in_usd"`
-					BuySwapsCount  int    `json:"buy_swaps_count"`
-					SellSwapsCount int    `json:"sell_swaps_count"`
-				} `json:"last_6h"`
-				Last24H struct {
-					SwapsCount     int    `json:"swaps_count"`
-					PriceInUsd     string `json:"price_in_usd"`
-					VolumeInUsd    string `json:"volume_in_usd"`
-					BuySwapsCount  int    `json:"buy_swaps_count"`
-					SellSwapsCount int    `json:"sell_swaps_count"`
-				} `json:"last_24h"`
-			} `json:"historical_data"`
-		} `json:"attributes"`
-		Relationships struct {
-			Dex struct {
-				Data struct {
-					ID   string `json:"id"`
-					Type string `json:"type"`
-				} `json:"data"`
-			} `json:"dex"`
-			Tokens struct {
-				Data []struct {
-					ID   string `json:"id"`
-					Type string `json:"type"`
-				} `json:"data"`
-			} `json:"tokens"`
-			PoolMetric struct {
-				Data struct {
-					ID   string `json:"id"`
-					Type string `json:"type"`
-				} `json:"data"`
-			} `json:"pool_metric"`
-		} `json:"relationships"`
-	} `json:"data"`
+	Data []PairData `json:"data"`
 	Included []struct {
 		ID         string `json:"id"`
 		Type       string `json:"type"`
