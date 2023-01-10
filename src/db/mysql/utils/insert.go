@@ -2,8 +2,10 @@ package mysql_utils
 
 import (
 	logging "atcscraper/src/log"
+	"atcscraper/src/util"
 	"context"
 	"fmt"
+	"strings"
 )
 
 func ExecuteInsert(InsertQuery string) int64 {
@@ -16,8 +18,46 @@ func ExecuteInsert(InsertQuery string) int64 {
 
 	// Catch Insert Error
 	if InsertError != nil {
-		Error := fmt.Sprintf("Error Inserting DB Record: %v", InsertError)
-		logging.NewError(Error)
+
+		DeadlockError := strings.Contains(InsertError.Error(), "Deadlock")
+
+		if DeadlockError {
+
+			for DeadlockError {
+
+				// Close Connection
+				DBConnectionCloseError := DBConnection.Close()
+				if DBConnectionCloseError != nil {
+					Error := fmt.Sprintf("Error Closing DB Connecting During Deadlock: %v", DBConnectionCloseError.Error())
+					logging.NewError(Error)
+				}
+
+				// Generate Random Sleep Time
+				util.SleepForRandomRange(1, 10)
+
+				// Create Connection To DB
+				DBConnection = CreateDatabaseConnection()
+
+				// Retry Execute DB Query
+				InsertResult, InsertError = DBConnection.ExecContext(context.Background(), InsertQuery)
+
+				if InsertError != nil {
+
+					DeadlockError = strings.Contains(InsertError.Error(), "Deadlock")
+
+					if !DeadlockError {
+						Error := fmt.Sprintf("Error Inserting DB Record During Deadlock: %v", InsertError)
+						logging.NewError(Error)
+					}
+
+				}
+
+			}
+		} else {
+			Error := fmt.Sprintf("Error Inserting DB Record: %v", InsertError)
+			logging.NewError(Error)
+		}
+
 	}
 
 	// Get Inserted Row ID
