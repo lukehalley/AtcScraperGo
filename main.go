@@ -168,4 +168,11 @@ func main() {
 		}
 	}
 
+	logging.LogSeparator(true)
+
+	// Dex Log
+	logging.LogSeparator(false)
+	log.Printf("Scraping Finished - Bye!")
+	logging.LogSeparator(false)
+
 }
