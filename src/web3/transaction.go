@@ -42,10 +42,16 @@ func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Trans
 
 func CheckTransactionBaseInfo(Transaction *types.Transaction) bool {
 
-	ToAddressIsValid := len(Transaction.To().Hex()) > 0
-	DataIsValid := len(Transaction.Data()) > 8
+	if Transaction.To() != nil && Transaction.Data() != nil{
 
-	return ToAddressIsValid && DataIsValid
+		ToAddressIsValid := len(Transaction.To().Hex()) > 0
+		DataIsValid := len(Transaction.Data()) > 8
+
+		return ToAddressIsValid && DataIsValid
+
+	} else {
+		return false
+	}
 
 }
 
