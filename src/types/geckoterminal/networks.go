@@ -2,30 +2,32 @@ package geckoterminal
 
 import "time"
 
+type GeckoTerminalNetwork struct {
+	ID         string `json:"id"`
+	Type       string `json:"type"`
+	Attributes struct {
+		Name                  string `json:"name"`
+		Identifier            string `json:"identifier"`
+		ChainID               int    `json:"chain_id"`
+		ExplorerURL           string `json:"explorer_url"`
+		NativeCurrencySymbol  string `json:"native_currency_symbol"`
+		NativeCurrencyAddress string `json:"native_currency_address"`
+		PoolReserveThreshold  string `json:"pool_reserve_threshold"`
+		ImageURL              string `json:"image_url"`
+		ExplorerLogoURL       string `json:"explorer_logo_url"`
+	} `json:"attributes"`
+	Relationships struct {
+		NetworkMetric struct {
+			Data struct {
+				ID   string `json:"id"`
+				Type string `json:"type"`
+			} `json:"data"`
+		} `json:"network_metric"`
+	} `json:"relationships"`
+}
+
 type GeckoTerminalNetworks struct {
-	Networks []struct {
-		ID         string `json:"id"`
-		Type       string `json:"type"`
-		Attributes struct {
-			Name                  string `json:"name"`
-			Identifier            string `json:"identifier"`
-			ChainID               int    `json:"chain_id"`
-			ExplorerURL           string `json:"explorer_url"`
-			NativeCurrencySymbol  string `json:"native_currency_symbol"`
-			NativeCurrencyAddress string `json:"native_currency_address"`
-			PoolReserveThreshold  string `json:"pool_reserve_threshold"`
-			ImageURL              string `json:"image_url"`
-			ExplorerLogoURL       string `json:"explorer_logo_url"`
-		} `json:"attributes"`
-		Relationships struct {
-			NetworkMetric struct {
-				Data struct {
-					ID   string `json:"id"`
-					Type string `json:"type"`
-				} `json:"data"`
-			} `json:"network_metric"`
-		} `json:"relationships"`
-	} `json:"networks"`
+	Networks []GeckoTerminalNetwork `json:"networks"`
 	GlobalStats struct {
 		NetworksCount int `json:"networksCount"`
 		DexesCount    int `json:"dexesCount"`
