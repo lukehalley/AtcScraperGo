@@ -4,7 +4,6 @@ import (
 	"atcscraper/src/api/chainlist/requests"
 	geckoterminal_api "atcscraper/src/api/geckoterminal/requests"
 	mysql_query "atcscraper/src/db/mysql/query"
-	mysql_utils "atcscraper/src/db/mysql/utils"
 	"atcscraper/src/env"
 	"atcscraper/src/io"
 	logging "atcscraper/src/log"
@@ -17,9 +16,6 @@ import (
 )
 
 func main() {
-
-	// Create Connection To DB
-	mysql_utils.CreateDatabaseConnection()
 
 	// Env Vars
 	CacheMode, _ := strconv.ParseBool(env.LoadEnv("CACHE_MODE"))
