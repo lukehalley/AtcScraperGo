@@ -33,7 +33,7 @@ func ExecuteInsert(InsertQuery string) int64 {
 				}
 
 				// Generate Random Sleep Time
-				util.SleepForRandomRange(1, 10)
+				util.SleepForRandomRange(1, 3)
 
 				// Create Connection To DB
 				DBConnection = CreateDatabaseConnection()

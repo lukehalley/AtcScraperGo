@@ -24,8 +24,8 @@ func GetPairFromDB(PairAddress string, NetworkId int) []mysql.Pair {
 
 	// Catch Errors
 	if QueryError != nil {
-		log.Println("Error Querying Pairs Table!")
-		log.Panicln("Error: ", QueryError.Error())
+		Error := fmt.Sprintf("Error Querying Pairs Table: %v", QueryError.Error())
+		logging.NewError(Error)
 	}
 
 	// Close Connection

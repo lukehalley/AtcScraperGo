@@ -4,11 +4,13 @@ import (
 	"atcscraper/src/env"
 	logging "atcscraper/src/log"
 	"atcscraper/src/types/aws"
+	"atcscraper/src/util"
 	"encoding/json"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 	"os"
+	"strings"
 )
 
 func LoadAWSDBSecret(SecretName string) aws.AWSDBSecret {
@@ -18,6 +20,7 @@ func LoadAWSDBSecret(SecretName string) aws.AWSDBSecret {
 	if SecretJSON == "" {
 		Error := fmt.Sprintf("No DB Secret Found With Name: %v", SecretName)
 		logging.NewError(Error)
+		logging.NewError("No DB Secret Found!")
 	}
 
 	DBSecret := aws.AWSDBSecret{}
@@ -30,6 +33,15 @@ func LoadAWSDBSecret(SecretName string) aws.AWSDBSecret {
 
 	// Return DBSecret
 	return DBSecret
+}
+
+func CheckConnectionError(DBConnectionError error) bool {
+	TooManyConnectionsError := strings.Contains(DBConnectionError.Error(), "Error 1040")
+	BadConnectionError := strings.Contains(DBConnectionError.Error(), "bad connection")
+	TimeoutError := strings.Contains(DBConnectionError.Error(), "operation timed out")
+	SyncError := strings.Contains(DBConnectionError.Error(), "commands out of sync")
+	IsRetryError := TooManyConnectionsError || BadConnectionError || TimeoutError || SyncError
+	return IsRetryError
 }
 
 func CreateDatabaseConnection() *sqlx.DB {
@@ -47,9 +59,42 @@ func CreateDatabaseConnection() *sqlx.DB {
 	DBConnectionString := DBUsername + ":" + DBPassword + "@tcp(" + DBEndpoint + ")/" + DBName
 
 	// Connect To DB + Catch Any Errors
-	DBConnection, DBError := sqlx.Connect("mysql", DBConnectionString)
-	if DBError != nil {
-		Error := fmt.Sprintf("Error Connecting To DB: %v", DBError.Error())
+	DBConnection, DBConnectionError := sqlx.Connect("mysql", DBConnectionString)
+	if DBConnectionError != nil {
+
+		Error := fmt.Sprintf("Error Connecting To DB: %v", DBConnectionError.Error())
+
+		IsRetryError := CheckConnectionError(DBConnectionError)
+
+		if IsRetryError {
+
+			for IsRetryError {
+
+				// Generate Random Sleep Time
+				util.SleepForRandomRange(1, 3)
+
+				// Retry Execute DB Connect
+				DBConnection, DBConnectionError = sqlx.Connect("mysql", DBConnectionString)
+
+				if DBConnectionError != nil {
+
+					IsRetryError := CheckConnectionError(DBConnectionError)
+
+					if !IsRetryError {
+						Error := fmt.Sprintf("Error Connecting To DB During Retry: %v", DBConnectionError.Error())
+						logging.NewError(Error)
+					}
+
+				}
+
+			}
+		} else {
+
+			Error := fmt.Sprintf("Error Connecting To DB: %v", DBConnectionError.Error())
+			logging.NewError(Error)
+
+		}
+
 		logging.NewError(Error)
 	}
 
