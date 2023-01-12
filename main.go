@@ -21,6 +21,7 @@ func main() {
 	CacheMode, _ := strconv.ParseBool(env.LoadEnv("CACHE_MODE"))
 	PagesToCollect, _ := strconv.Atoi(env.LoadEnv("PAIR_PAGES"))
 	TxsToCollect, _ := strconv.Atoi(env.LoadEnv("TXS_TO_COLLECT"))
+	MaxParallelism, _ := strconv.Atoi(env.LoadEnv("MAX_PARALLELISM"))
 
 	// Settings
 	WaitTime := 0 * time.Second
@@ -150,9 +151,17 @@ func main() {
 	NetworksDexsCollectionWaitGroup.Add(len(CollectedNetworkData))
 	NetworkDexsCollectionChannel := make(chan geckoterminal_types.GeckoTerminalNetworkWithDexs, len(CollectedNetworkData))
 
-	// Iterate Through Networks Dexs
+	// Max Tasks To Run At Once
+	var Semaphore = make(chan int, MaxParallelism)
+
+	// Kick Off Iteration Through Networks Dexs With Semaphore Limit
 	for _, Network := range CollectedNetworkData {
-		go routines.ScrapeNetworkDexs(Network, InvalidDexs, PagesToCollect, TxsToCollect, NetworksDexsCollectionWaitGroup, NetworkDexsCollectionChannel)
+		Semaphore <- 1
+		Network := Network
+		go func(){
+			routines.ScrapeNetworkDexs(Network, InvalidDexs, PagesToCollect, TxsToCollect, NetworksDexsCollectionWaitGroup, NetworkDexsCollectionChannel)
+			<- Semaphore
+		}()
 	}
 
 	// Wait For All Networks To Come Back

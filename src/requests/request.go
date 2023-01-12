@@ -7,12 +7,13 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
+	"github.com/hashicorp/go-retryablehttp"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 )
 
-func BuildProxyClient() *http.Client {
+func BuildProxyClient() *retryablehttp.Client {
 
 	ProxyEndpoint := env.LoadEnv("ZYTE_ENDPOINT")
 	ProxyApiKey := env.LoadEnv("ZYTE_API_KEY")
@@ -37,7 +38,15 @@ func BuildProxyClient() *http.Client {
 		},
 	}
 
-	return ProxyClient
+	RetryClient := retryablehttp.NewClient()
+	RetryClient.StandardClient()
+	RetryClient.RetryMax = 10
+	RetryClient.Logger = nil
+
+	RetryClient.HTTPClient = ProxyClient
+
+	return RetryClient
+
 }
 
 func MakeGetRequestRAW(RequestURL string) string {

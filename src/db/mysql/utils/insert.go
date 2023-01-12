@@ -50,6 +50,10 @@ func ExecuteInsert(InsertQuery string) int64 {
 						logging.NewError(Error)
 					}
 
+				} else {
+
+					DeadlockError = false
+
 				}
 
 			}
