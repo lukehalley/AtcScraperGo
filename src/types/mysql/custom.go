@@ -13,6 +13,7 @@ import (
 // Custom defines custom database table structures
 // CustomQuery allows constructing dynamic SQL with type safety
 type BitBool bool
+// Custom type wrappers for MySQL database operations
 
 // Convert custom types to SQL compatible formats
 // Value implements the driver.Valuer interface,
