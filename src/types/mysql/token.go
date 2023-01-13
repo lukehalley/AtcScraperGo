@@ -25,6 +25,7 @@ type Token struct {
 // Store token data with metadata and timestamps
 // TokenMetadata stores additional information about token properties
 // Token struct maps token data for database storage
+// Validate token record before inserting into database
 // Store and retrieve token metadata from database
 // DBToken represents token data persisted to MySQL
 // Token represents a cryptocurrency token stored in the database
