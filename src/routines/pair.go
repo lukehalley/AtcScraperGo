@@ -4,6 +4,7 @@ import (
 	geckoterminal_api "atcscraper/src/api/geckoterminal/requests"
 	mysql_insert "atcscraper/src/db/mysql/insert"
 	mysql_query "atcscraper/src/db/mysql/query"
+	"atcscraper/src/io"
 	geckoterminal_types "atcscraper/src/types/geckoterminal"
 	"atcscraper/src/util"
 	"atcscraper/src/web3"
@@ -98,10 +99,16 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 						TxDecodeWaitGroup := new(sync.WaitGroup)
 						TxDecodeWaitGroup.Add(len(Pair.Transactions))
 						TxDecodeChannel := make(chan geckoterminal_types.Transaction, len(Pair.Transactions))
-						
+
+						// Generic Router ABI
+						RouterAbi := io.LoadAbiFromFile("IUniswapV2Router02.json")
+						if Dex.RouterAbi.Abi != "" {
+							RouterAbi = Dex.RouterAbi.Abi
+						}
+
 						// Collect Transactions
 						for _, PairTransaction := range Pair.Transactions {
-							go DecodeTransaction(PairTransaction, LocalTransactionReceipt, TxDecodeWaitGroup, TxDecodeChannel)
+							go DecodeTransaction(PairTransaction, LocalTransactionReceipt, RouterAbi, TxDecodeWaitGroup, TxDecodeChannel)
 						}
 
 						// Wait For All Txs To Come Back

@@ -14,7 +14,7 @@ func GetChainInfo(ChainID int, CLBuildID string) chainlist_types.ChainlistChain 
 
 	RequestURL := chainlist_helpers.BuildChainlistPIURL(Endpoint)
 
-	Body := requests.MakeGetRequestJSON(RequestURL)
+	Body := requests.MakeGetRequestJSON(RequestURL, 10)
 
 	var Chain chainlist_types.ChainlistChain
 	_ = json.Unmarshal(Body, &Chain)

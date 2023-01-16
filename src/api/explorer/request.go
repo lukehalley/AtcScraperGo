@@ -8,14 +8,18 @@ import (
 
 func GetAbiFromExplorer(APIUrl string, APIKey string, ContractAddress string) (web3.AbiAPI, bool) {
 
+	// Create ABI Object
+	JSONAbiStruct := web3.AbiAPI{}
+
 	// Build The API URL
 	Endpoint := BuildAPIEndpoint(APIUrl, APIKey, "contract", "getabi", ContractAddress)
 
 	// Call The Explorer API To Get The ABI
-	Body := requests.MakeGetRequestJSON(Endpoint)
+	Body := requests.MakeGetRequestJSON(Endpoint, 1)
 
-	// Convert The File Into A Struct
-	JSONAbiStruct := web3.AbiAPI{}
+	if len(Body) <= 0 {
+		return JSONAbiStruct, false
+	}
 
 	// Decode The JSON Request To Struct
 	_ = json.Unmarshal(Body, &JSONAbiStruct)
@@ -30,7 +34,5 @@ func GetAbiFromExplorer(APIUrl string, APIKey string, ContractAddress string) (w
 		return JSONAbiStruct, false
 
 	}
-
-
 
 }
