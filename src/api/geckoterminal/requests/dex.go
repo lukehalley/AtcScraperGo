@@ -14,7 +14,7 @@ func GetGeckoterminalDexsForNetwork(GTBuildID string, NetworkName string) geckot
 
 	RequestURL := geckoterminal_helpers.BuildGTAPIURL(Endpoint, false)
 
-	Body := requests.MakeGetRequestJSON(RequestURL)
+	Body := requests.MakeGetRequestJSON(RequestURL, 10)
 
 	var Dexs geckoterminal.GeckoTerminalDexs
 	_ = json.Unmarshal(Body, &Dexs)

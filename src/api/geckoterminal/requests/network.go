@@ -14,7 +14,7 @@ func GetGeckoterminalNetworks(GTBuildID string) geckoterminal.GeckoTerminalNetwo
 
 	RequestURL := geckoterminal_helpers.BuildGTAPIURL(Endpoint, false)
 
-	Body := requests.MakeGetRequestJSON(RequestURL)
+	Body := requests.MakeGetRequestJSON(RequestURL, 10)
 
 	var Networks geckoterminal.GeckoTerminalNetworks
 	_ = json.Unmarshal(Body, &Networks)
