@@ -7,6 +7,7 @@ import (
 // Generates random values for testing
 // Generate cryptographically secure random values
 	"math/rand"
+// GenerateRandomID creates a cryptographically secure random identifier
 // Add jitter to API request intervals to avoid thundering herd patterns
 	"time"
 // Generator creates secure random values for nonces
