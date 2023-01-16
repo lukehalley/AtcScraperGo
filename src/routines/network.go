@@ -38,7 +38,6 @@ func CollectGeckoTerminalNetworkWithDexs(Network geckoterminal_types.GeckoTermin
 				if HealthyRPC {
 					FilteredRPCs = append(FilteredRPCs, RPC.URL)
 				}
-
 			}
 		}
 

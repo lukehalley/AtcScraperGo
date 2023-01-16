@@ -14,7 +14,7 @@ func DecodeTransaction(PairTransaction geckoterminal.Transaction, LocalTransacti
 	defer TxDecodeWaitGroup.Done()
 
 	// Generic Router ABI
-	RouterAbi := io.LoadAbiAsString("IUniswapV2Router02.json")
+	RouterAbi := io.LoadAbiFromFile("IUniswapV2Router02.json")
 
 	// Decode Pair Transactions
 	DecodeSuccessful, Method, DecodedInputData := web3.DecodeTransactionInputData(RouterAbi, LocalTransactionReceipt.Data())

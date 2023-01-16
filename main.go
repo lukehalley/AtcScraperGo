@@ -132,6 +132,33 @@ func main() {
 	}
 
 	////////////////////////////////////////////////////
+	// Get Dex ABIs
+	////////////////////////////////////////////////////
+
+	// Create Concurrency Objects
+	NetworkABIsWaitGroup := new(sync.WaitGroup)
+	NetworkABIsWaitGroup.Add(len(CollectedNetworkData))
+	NetworkDexABIsChannel := make(chan geckoterminal_types.GeckoTerminalNetworkWithDexs, len(CollectedNetworkData))
+
+	// Run Network Dexs ABIs
+	for _, Network := range CollectedNetworkData {
+		go routines.CollectNetworkDexsABIs(Network, NetworkABIsWaitGroup, NetworkDexABIsChannel)
+	}
+
+	// Wait For All Networks To Come Back
+	NetworkABIsWaitGroup.Wait()
+
+	// Close The Group Channel
+	close(NetworkDexABIsChannel)
+
+	// Get Results From Channel
+	//for CollectedNetwork := range NetworkDexABIsChannel {
+	//	if len(CollectedNetwork.Dexes) > 0 {
+	//		CollectedNetworkData = append(CollectedNetworkData, CollectedNetwork)
+	//	}
+	//}
+
+	////////////////////////////////////////////////////
 	// Get Dex Pairs
 	////////////////////////////////////////////////////
 

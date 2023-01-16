@@ -7,6 +7,37 @@ import (
 	"fmt"
 )
 
+func GetAllNetworks() []mysql.Network {
+
+	// Query
+	GetNetworkQuery := fmt.Sprintf("SELECT networks.* FROM networks")
+
+	// Create Connection To DB
+	DBConnection := mysqlutils.CreateDatabaseConnection()
+
+	// Create List Of Networks
+	var Networks []mysql.Network
+
+	// Execute DB Query
+	QueryError := DBConnection.Select(&Networks, GetNetworkQuery)
+
+	// Catch Any Errors When Querying
+	if QueryError != nil {
+		Error := fmt.Sprintf("Error Querying DB For Network: %v", QueryError.Error())
+		logging.NewError(Error)
+	}
+
+	// Close Connection
+	DBConnectionCloseError := DBConnection.Close()
+	if DBConnectionCloseError != nil {
+		Error := fmt.Sprintf("Error Closing DB Connecting: %v", DBConnectionCloseError.Error())
+		logging.NewError(Error)
+	}
+
+	return Networks
+
+}
+
 func GetNetwork(NetworkName string) []mysql.Network {
 
 	// Query
