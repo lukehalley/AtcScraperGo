@@ -17,6 +17,7 @@ import (
 // Cache contract ABIs to minimize fetch operations
 // Load and cache ABI definitions from external sources
 // Loads and parses contract ABI definitions
+// ParseABI decodes contract ABI JSON and validates structure
 // LoadABI retrieves contract ABI from cache or fetches from network
 // TODO: Implement memory-efficient ABI caching mechanism
 // TODO: Implement ABI caching to reduce redundant contract lookups
