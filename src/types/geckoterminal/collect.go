@@ -29,9 +29,9 @@ type Network struct {
 type Dex struct {
 	 Name                  string
 	 FactoryAddress        string
-	 FactoryAbi            mysql.Abi
+	 FactoryAbi            string
 	 RouterAddress         string
-	 RouterAbi             mysql.Abi
+	 RouterAbi             string
 	 Identifier            string
 	 URL                   string
 	 ImageURL              string

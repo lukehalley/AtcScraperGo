@@ -6,18 +6,13 @@ import (
 	mysql_query "atcscraper/src/db/mysql/query"
 	geckoterminal_types "atcscraper/src/types/geckoterminal"
 	"sync"
+	"time"
 )
 
 func CollectGeckoTerminalDexPairs(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, NetworkStablecoins []string, Dex geckoterminal_types.Dex, InvalidDexs []string, BlacklistPairAddresses []string, PagesToCollect int, TxsToCollect int, DexCollectionWaitGroup *sync.WaitGroup, DexCollectionChannel chan geckoterminal_types.Dex) {
 
 	// Schedule The Call To WaitGroup's Done To Tell GoRoutine Is Completed.
 	defer DexCollectionWaitGroup.Done()
-
-	// Dex Is Invalid Dex List
-	// DexIsInvalid, _ := util.CheckIfStringIsInList(InvalidDexs, Dex.Identifier, false)
-	//if !DexIsInvalid {
-	//
-	//}
 
 	// Check If Dex Is Already Stored
 	DexQueryResults := mysql_query.GetDexFromDB(Network.NetworkDBId, Dex.Identifier)
@@ -66,21 +61,11 @@ func CollectGeckoTerminalDexPairs(Network geckoterminal_types.GeckoTerminalNetwo
 
 	}
 
-	// Create Concurrency Objects
-	PairCollectionWaitGroup := new(sync.WaitGroup)
-	PairCollectionWaitGroup.Add(len(DexPairs.Data))
-	PairCollectionChannel := make(chan geckoterminal_types.Pair, len(DexPairs.Data))
-
 	// Iterate Through Networks Dexs And Get All Their Pairs
 	for _, DexPair := range DexPairs.Data {
-		go ScrapePairInfo(Network, NetworkStablecoins, Dex, DexDBId, DexPair, BlacklistPairAddresses, TxsToCollect, PairCollectionWaitGroup, PairCollectionChannel)
+		ScrapePairInfo(Network, NetworkStablecoins, Dex, DexDBId, DexPair, BlacklistPairAddresses, TxsToCollect)
+		time.Sleep(1)
 	}
-
-	// Wait For All Networks To Come Back
-	PairCollectionWaitGroup.Wait()
-
-	// Close The Group Channel
-	close(PairCollectionChannel)
 
 	DexCollectionChannel <- Dex
 	
