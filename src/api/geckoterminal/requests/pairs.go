@@ -18,7 +18,7 @@ func GetGeckoterminalDexPairs(NetworkName string, DexName string, Page int) geck
 
 	RequestURL := geckoterminal_helpers.BuildGTAPIURL(Endpoint, true)
 
-	Body := requests.MakeGetRequestJSON(RequestURL)
+	Body := requests.MakeGetRequestJSON(RequestURL, 10)
 
 	var DexPairs geckoterminal.GeckoTerminalDexPairs
 	_ = json.Unmarshal(Body, &DexPairs)
