@@ -37,7 +37,6 @@ func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Trans
 
 	return TxIsValid, TransactionByHash
 
-
 }
 
 func CheckTransactionBaseInfo(Transaction *types.Transaction) bool {

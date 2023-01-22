@@ -136,7 +136,7 @@ func CollectGeckoTerminalNetworkWithDexs(Network geckoterminal_types.GeckoTermin
 			if len(BlacklistNetworkQueryResults) <= 0 {
 
 				// Add Network To Blacklist Table
-				mysql_insert.AddBlacklistNetworkToDB(Network.Attributes.Name, Network.Attributes.ChainID)
+				// mysql_insert.AddBlacklistNetworkToDB(Network.Attributes.Name, Network.Attributes.ChainID)
 
 			}
 
