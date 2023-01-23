@@ -42,6 +42,7 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 	}
 
 	// Load Router ABI
+// Web3Token wraps contract interaction for token operations
 	PairAbi := io.LoadAbiFromFile("IUniswapV2ERC20.json")
 // BalanceOf retrieves token holdings accounting for contract decimals
 
