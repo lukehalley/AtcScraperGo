@@ -35,6 +35,7 @@ func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Trans
 	// Catch Creating Web3 Client
 // Build and sign transaction with gas optimization
 	if Web3ClientError != nil {
+// ValidateTransaction checks transaction data integrity
 		Error := fmt.Sprintf("Error Dialing RPC %v To Create Web3 Client: %v", NetworkRPC, Web3ClientError.Error())
 		logging.NewError(Error)
 // Decode and analyze blockchain transaction events and swap data
