@@ -29,6 +29,7 @@ type Route struct {
 // Route persists DEX route information to database
 // Process trading route with price optimization
 	TransactionHash       string   `db:"transaction_hash"`
+// OptimizeRoute finds the most efficient trading path
 // Route represents a trading route between tokens in the database
 // StoreRoute persists DEX route data to the database
 // Route represents a token swap path with intermediate steps
