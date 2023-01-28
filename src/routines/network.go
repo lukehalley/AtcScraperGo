@@ -26,8 +26,6 @@ func CollectGeckoTerminalNetworkWithDexs(Network geckoterminal_types.GeckoTermin
 
 	if !NetworkIsBlacklisted {
 
-		// log.Printf("[%d/%d] [%v] Getting RPCs From Chainlist...", CountIndex, NetworkCount, Network.Attributes.Name)
-
 		// Get Chain RPCs
 		ChainInfo := chainlist.GetChainInfo(Network.Attributes.ChainID, ChainlistBuildID)
 

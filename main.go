@@ -56,6 +56,9 @@ func main() {
 		// Get All Networks On Geckoterminal
 		Networks := geckoterminal_api.GetGeckoterminalNetworks(CoingeckoBuildID)
 
+		// Lazy
+		Networks.Networks = Networks.Networks[0:1]
+
 		// Network Count
 		NetworkCount := len(Networks.Networks)
 
@@ -101,40 +104,6 @@ func main() {
 		logging.LogSeparator(true)
 
 		////////////////////////////////////////////////////
-		// Get Dex ABIs
-		////////////////////////////////////////////////////
-
-		//// Cache Log
-		//logging.LogSeparator(false)
-		//log.Printf("Loading Dex Abis...")
-		//logging.LogSeparator(false)
-		//
-		//// Create Concurrency Objects
-		//NetworkABIsWaitGroup := new(sync.WaitGroup	)
-		//NetworkABIsWaitGroup.Add(len(CollectedNetworkData))
-		//NetworkDexABIsChannel := make(chan geckoterminal_types.GeckoTerminalNetworkWithDexs, len(CollectedNetworkData))
-		//
-		//// Run Network Dexs ABIs
-		//for _, Network := range CollectedNetworkData {
-		//	go routines.CollectDexsABIs(Network, NetworkABIsWaitGroup, NetworkDexABIsChannel)
-		//}
-		//
-		//// Wait For All Networks To Come Back
-		//NetworkABIsWaitGroup.Wait()
-		//
-		//// Close The Group Channel
-		//close(NetworkDexABIsChannel)
-		//
-		//// Get Results From Channel
-		//for CollectedNetworkWithDexAbis := range NetworkDexABIsChannel {
-		//	if len(CollectedNetworkWithDexAbis.Dexes) > 0 {
-		//		NetworksWithDexsAndAbis = append(NetworksWithDexsAndAbis, CollectedNetworkWithDexAbis)
-		//	}
-		//}
-		//
-		//logging.LogSeparator(true)
-
-		////////////////////////////////////////////////////
 		// Save Data To Local Cache
 		////////////////////////////////////////////////////
 
@@ -168,9 +137,6 @@ func main() {
 	////////////////////////////////////////////////////
 	// Get Dex Pairs
 	////////////////////////////////////////////////////
-
-	// Lazy
-	// CollectedNetworkData = CollectedNetworkData[0:5]
 
 	// Dex Log
 	logging.LogSeparator(false)

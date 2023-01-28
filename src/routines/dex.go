@@ -8,45 +8,49 @@ import (
 	"sync"
 )
 
-func CollectDexsABI(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, ContractAddress string) string {
+func CollectDexsABI(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, ContractAddress string) (string, bool) {
+
+	// Init Vars
+	CollectedAbi := ""
+	WasSuccessful := false
 
 	// Get Network DB Details
 	DBNetworkQuery := mysql_query.GetNetwork(Network.Network.Identifier)
-	NetworkDetails := DBNetworkQuery[0]
 
-	// Blank Abi Strings
-	CollectedAbi := ""
+	if len(DBNetworkQuery) > 0 {
 
-	// Check If API Is An Etherscan or Blockscout Type
-	if NetworkDetails.ExplorerType.String == "scan" || NetworkDetails.ExplorerType.String == "blockscout" {
+		NetworkDetails := DBNetworkQuery[0]
 
-		// Get The Router ABI If We Have The Address
-		if ContractAddress != "" {
+		// Check If API Is An Etherscan or Blockscout Type
+		if NetworkDetails.ExplorerType.String == "scan" || NetworkDetails.ExplorerType.String == "blockscout" {
 
-			// Fetch Router ABI
-			FetchedABI := web3.AbiAPI{}
-			WasSuccessful := false
-			if NetworkDetails.ExplorerApiPrefix.String != "" {
-				FetchedABI, WasSuccessful = explorer.GetAbiFromExplorer(NetworkDetails.ExplorerApiPrefix.String, NetworkDetails.ExplorerApiKey.String, ContractAddress)
-			} else {
-				FetchedABI, WasSuccessful = explorer.GetAbiFromExplorer(NetworkDetails.ExplorerTxUrl.String, "", ContractAddress)
-			}
+			// Get The Router ABI If We Have The Address
+			if ContractAddress != "" {
 
-			NotBlankABI := FetchedABI.Result != ""
+				// Fetch Router ABI
+				FetchedABI := web3.AbiAPI{}
+				if NetworkDetails.ExplorerApiPrefix.String != "" {
+					FetchedABI, WasSuccessful = explorer.GetAbiFromExplorer(NetworkDetails.ExplorerApiPrefix.String, NetworkDetails.ExplorerApiKey.String, ContractAddress)
+				} else {
+					FetchedABI, WasSuccessful = explorer.GetAbiFromExplorer(NetworkDetails.ExplorerTxUrl.String, "", ContractAddress)
+				}
 
-			// Add To Router ABI To DB If Successful
-			if WasSuccessful && NotBlankABI {
+				NotBlankABI := FetchedABI.Result != ""
 
-				// Set Our Dex Objects ABI
-				CollectedAbi = FetchedABI.Result
+				// Add To Router ABI To DB If Successful
+				if WasSuccessful && NotBlankABI {
+
+					// Set Our Dex Objects ABI
+					CollectedAbi = FetchedABI.Result
+
+				}
 
 			}
 
 		}
-
 	}
 
-	return CollectedAbi
+	return CollectedAbi, WasSuccessful
 
 }
 
