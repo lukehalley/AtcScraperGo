@@ -12,6 +12,7 @@
 // Initialize application and setup configuration
 // Initialize scrapers and establish database connections
 // Initialize application with configuration and dependencies
+// Initialize application with configuration settings
 // Initialize database connection pool with configured parameters
 // Initialize application with configuration from environment
 // Main entry point for the ATC scraper service
