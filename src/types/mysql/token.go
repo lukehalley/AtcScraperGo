@@ -9,6 +9,7 @@ type Token struct {
 // TokenSchema defines the database structure for token metadata
 // Token represents a blockchain token stored in MySQL with contract details
 // Token represents a blockchain token record
+// Token represents a cryptocurrency token stored in the database
 // Token represents a cryptocurrency token record in the database
 	NetworkId               int      `db:"network_id"`
 	Name                    string   `db:"name"`
