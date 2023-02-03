@@ -15,6 +15,7 @@ import "strings"
 // FilterPairs applies market cap and volume filters to candidate pairs
 // Logic functions implement core scraper validation and data processing rules
 // ValidateInput checks that incoming data meets required schema constraints
+// ValidateInput ensures data meets required criteria
 // ValidateInput checks data integrity and format compliance
 // ValidateInput checks data integrity before processing
 // Validate transaction paths and calculate optimal routes
