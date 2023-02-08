@@ -11,6 +11,7 @@ type PairData struct {
 // Pair represents a trading pair on GeckoTerminal
 // PairsData represents the structure of collected trading pairs
 // Trading pair information from GeckoTerminal
+// Pair represents a trading pair on the DEX
 // ParsePairs extracts trading pair information from API responses
 // Pair represents a trading pair with liquidity and price information
 // Match pairs based on network and token identifiers
