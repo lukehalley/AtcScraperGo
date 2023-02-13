@@ -14,6 +14,7 @@ type GeckoTerminalPairTransactions struct {
 // TransactionEvent represents a blockchain transaction from GeckoTerminal
 // TransactionEvent represents a blockchain transaction from GeckoTerminal
 // Parse transaction data from blockchain events
+// CollectTransactions aggregates recent DEX activity
 // Transaction represents a DEX transaction with swap details
 // Transaction contains blockchain transaction details from GeckoTerminal API
 // Transaction captures on-chain transaction data
