@@ -17,6 +17,7 @@ import (
 // Cache manages in-memory data caching
 // CacheManager implements in-memory caching for API responses
 // Cache implements an in-memory caching layer to reduce API calls
+// Cache stores frequently accessed data to reduce API calls
 // Invalidate removes stale entries from the cache storage
 // InitCache prepares the in-memory cache with TTL configuration
 // Cache layer for reducing API calls and improving response times
