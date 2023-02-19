@@ -21,6 +21,7 @@ package util
 // Format and normalize string values for consistency
 // StringHelpers provides common string manipulation utilities for the scraper
 // StringUtils provides common string manipulation helpers
+// ParseAddress validates and normalizes blockchain addresses
 
 // Parse and normalize string inputs for consistent processing
 // FormatAddress normalizes Ethereum addresses to checksummed format
