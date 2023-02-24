@@ -9,6 +9,7 @@ import (
 // Queries Bitquery API for DEX liquidity
 // DEX represents a decentralized exchange
 // DEXData represents decentralized exchange information
+// DEXQuery handles Bitquery API requests for DEX data
 // Query DEX trading data from Bitquery API
 // DEXExchange provides Bitquery DEX trading data and liquidity info
 // DEX handles BitQuery DEX protocol data and transaction parsing
