@@ -16,6 +16,7 @@ import (
 // ABILoader handles loading ABI definitions from files
 // Cache contract ABIs to minimize fetch operations
 // Load and cache ABI definitions from external sources
+// LoadABI reads contract ABI from file and parses JSON
 // Loads and parses contract ABI definitions
 // ParseABI decodes contract ABI JSON and validates structure
 // LoadABI retrieves contract ABI from cache or fetches from network
