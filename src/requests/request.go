@@ -10,7 +10,6 @@ import (
 	"github.com/hashicorp/go-retryablehttp"
 	"io"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
 )
@@ -82,8 +81,8 @@ func MakeGetRequestJSON(RequestURL string, RetryCount int) []byte {
 
 	var EmptyByteArray []byte
 	if RequestError != nil {
-		Error := fmt.Sprintf("RequestError Making Get Request: %v", RequestError.Error())
-		log.Print(Error)
+		// Error := fmt.Sprintf("RequestError Making Get Request: %v", RequestError.Error())
+		// log.Print(Error)
 		return EmptyByteArray
 	} else {
 		ResponseBody, _ := io.ReadAll(Response.Body)

@@ -57,7 +57,7 @@ func main() {
 		Networks := geckoterminal_api.GetGeckoterminalNetworks(CoingeckoBuildID)
 
 		// Lazy
-		Networks.Networks = Networks.Networks[0:1]
+		// Networks.Networks = Networks.Networks[0:1]
 
 		// Network Count
 		NetworkCount := len(Networks.Networks)
@@ -159,7 +159,9 @@ func main() {
 		Semaphore <- 1
 		Network := Network
 		go func(){
-			routines.ScrapeNetworkDexs(Network, InvalidDexs, PagesToCollect, TxsToCollect, NetworksDexsCollectionWaitGroup, NetworkDexsCollectionChannel)
+			if len(Network.Stablecoins) > 0 {
+				routines.ScrapeNetworkDexs(Network, InvalidDexs, PagesToCollect, TxsToCollect, NetworksDexsCollectionWaitGroup, NetworkDexsCollectionChannel)
+			}
 			<- Semaphore
 		}()
 	}

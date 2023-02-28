@@ -1,12 +1,13 @@
 package routines
 
 import (
+	"atcscraper/src/aws/lambda"
 	"atcscraper/src/types/geckoterminal"
 	"atcscraper/src/web3"
 	"sync"
 )
 
-func DecodeTransaction(Network geckoterminal.GeckoTerminalNetworkWithDexs, PairTransaction geckoterminal.Transaction, RouterAbi string, TxDecodeWaitGroup *sync.WaitGroup, TxDecodeChannel chan geckoterminal.Transaction) {
+func DecodeTransaction(Network geckoterminal.GeckoTerminalNetworkWithDexs, PairTransaction geckoterminal.Transaction, RouterAddress string, RouterAbiDbId int64, TxDecodeWaitGroup *sync.WaitGroup, TxDecodeChannel chan geckoterminal.Transaction) {
 
 	// Schedule The Call To WaitGroup's Done To Tell GoRoutine Is Completed.
 	defer TxDecodeWaitGroup.Done()
@@ -14,19 +15,35 @@ func DecodeTransaction(Network geckoterminal.GeckoTerminalNetworkWithDexs, PairT
 	// Get Transaction Receipt
 	TransactionReceived, TransactionReceipt := web3.GetTransactionReceipt(Network.RPCs[0], PairTransaction.Hash)
 
-	if TransactionReceived {
+	if TransactionReceipt != nil {
 
-		// Decode Pair Transactions
-		DecodeSuccessful, Method, DecodedInputData := web3.DecodeTransactionInputData(RouterAbi, TransactionReceipt.Data())
+		if TransactionReceipt.To() != nil {
 
-		// Add Data If Decode Successful
-		if DecodeSuccessful {
+			TransactionToDex := TransactionReceipt.To().Hex()
+			TransactionData := TransactionReceipt.Data()
 
-			PairTransaction.InputData = DecodedInputData
-			PairTransaction.MethodName = Method
+			MethodSignature := web3.GetMethodSignature(TransactionData)
+			GetMethodParams := web3.GetMethodParams(TransactionData)
 
+			if TransactionToDex != "" && MethodSignature != "" && GetMethodParams != "" {
+
+				TransactionRightAddress := TransactionToDex == RouterAddress
+
+				if TransactionReceived && TransactionRightAddress {
+
+					// Decode Pair Transactions
+					TxHash := TransactionReceipt.Hash().Hex()
+
+					DecodeLambdaResult := lambda.CallDecodeLambda(Network.RPCs[0], TxHash, RouterAddress, RouterAbiDbId)
+
+					if DecodeLambdaResult.StatusCode == 200 {
+						PairTransaction.MethodName = DecodeLambdaResult.Body.Function
+						PairTransaction.InputData = DecodeLambdaResult.Body.Args
+					}
+
+				}
+			}
 		}
-
 	}
 
 	TxDecodeChannel <- PairTransaction

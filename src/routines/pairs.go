@@ -118,11 +118,13 @@ func CollectGeckoTerminalDexPairs(Network geckoterminal_types.GeckoTerminalNetwo
 				// Get Router Dex ABI
 				if !RouterABIStored {
 					Dex.RouterAbi, RouterAbiObtained = CollectDexsABI(Network, Dex.RouterAddress)
-					if RouterAbiObtained {
+					if !RouterAbiObtained {
 						Dex.RouterAbi = io.LoadAbiFromFile("IUniswapV2Router02.json")
 					}
+					Dex.RouterAbiDBId = mysql_insert.AddABIToDB(Network.NetworkDBId, Network.DexDBId, "router", Dex.RouterAddress, Dex.RouterAbi, "")
 				} else {
 					Dex.RouterAbi = DBDexRouterABIQuery[0].Abi
+					Dex.RouterAbiDBId = int64(DBDexRouterABIQuery[0].AbiId)
 				}
 
 				// Check If Factory Has Been Stored
@@ -135,21 +137,13 @@ func CollectGeckoTerminalDexPairs(Network geckoterminal_types.GeckoTerminalNetwo
 					if !FactoryAbiObtained {
 						Dex.FactoryAbi = io.LoadAbiFromFile("IUniswapV2Factory.json")
 					}
+					Dex.FactoryAbiDBId = mysql_insert.AddABIToDB(Network.NetworkDBId, Network.DexDBId, "factory", Dex.FactoryAddress, Dex.FactoryAbi, "")
 				} else {
 					Dex.FactoryAbi = DBDexFactoryABIQuery[0].Abi
+					Dex.FactoryAbiDBId = int64(DBDexFactoryABIQuery[0].AbiId)
 				}
 
-				// Add Factory ABI To DB If Not Stored
-				if !FactoryABIStored {
-					mysql_insert.AddABIToDB(Network.NetworkDBId, Network.DexDBId, "factory", Dex.FactoryAddress, Dex.FactoryAbi, "")
-				}
-
-				// Add Router ABI To DB If Not Stored
-				if !RouterABIStored {
-					mysql_insert.AddABIToDB(Network.NetworkDBId, Network.DexDBId, "router", Dex.RouterAddress, Dex.RouterAbi, "")
-				}
-
-				DexContractsReceived = Network.DexDBId > 0 && Dex.RouterAddress != "" && Dex.FactoryAddress != "" && RouterAbiObtained && FactoryAbiObtained
+				DexContractsReceived = Network.DexDBId > 0 && Dex.RouterAddress != "" && Dex.RouterAbi != "" && Dex.FactoryAddress != "" && Dex.FactoryAbi != ""
 
 				if DexContractsReceived {
 					break

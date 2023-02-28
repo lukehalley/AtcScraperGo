@@ -13,6 +13,7 @@ require (
 	github.com/alexflint/go-arg v1.4.2 // indirect
 	github.com/alexflint/go-scalar v1.0.0 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
+	github.com/aws/aws-sdk-go v1.44.189 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.2.0 // indirect
 	github.com/chenzhijie/go-web3 v0.0.0-20221106065746-e008ed0e5419 // indirect
 	github.com/deckarep/golang-set v1.8.0 // indirect
@@ -21,9 +22,11 @@ require (
 	github.com/go-ole/go-ole v1.2.1 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect
+	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-retryablehttp v0.7.2 // indirect
+	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/jmoiron/sqlx v1.3.5 // indirect
 	github.com/klauspost/compress v1.15.9 // indirect
 	github.com/projectdiscovery/ratelimit v0.0.4 // indirect
@@ -32,8 +35,11 @@ require (
 	github.com/stretchr/testify v1.8.1 // indirect
 	github.com/tklauser/go-sysconf v0.3.5 // indirect
 	github.com/tklauser/numcpus v0.2.2 // indirect
+	github.com/umbracle/ethgo v0.1.3 // indirect
+	github.com/umbracle/fastrlp v0.0.0-20220527094140-59d5dd30e722 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.41.0 // indirect
+	github.com/valyala/fastjson v1.4.1 // indirect
 	github.com/vektah/gqlparser/v2 v2.4.5 // indirect
 	golang.org/x/crypto v0.1.0 // indirect
 	golang.org/x/exp v0.0.0-20221217163422-3c43f8badb15 // indirect

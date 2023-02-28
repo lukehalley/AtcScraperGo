@@ -54,13 +54,21 @@ func LoadAbiFromFile(AbiPath string) string {
 		logging.NewError(Error)
 	}
 
-	// Convert The ABI Into A String
-	JSONAbiString, AbiStrConversionError := json.Marshal(JSONAbiStruct.Abi)
+	// Marshal The JSON
+	JSONAbi, AbiStrConversionError := json.Marshal(JSONAbiStruct.Abi)
 	if AbiStrConversionError != nil {
 		Error := fmt.Sprintf("Failed To Convert ABI To String: %v", AbiStrConversionError.Error())
 		logging.NewError(Error)
 	}
 
-	return string(JSONAbiString)
+	// Finally, Convert To String
+	JSONAbiString := string(JSONAbi)
+
+	if JSONAbiString == "" {
+		Error := fmt.Sprintf("Failed To Load ABI - Loaded Blank!")
+		logging.NewError(Error)
+	}
+
+	return JSONAbiString
 
 }
