@@ -77,7 +77,7 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 
 			// Collect Transactions
 			for _, PairTransaction := range Pair.Transactions {
-				go DecodeTransaction(Network, PairTransaction, Dex.RouterAbi, TxDecodeWaitGroup, TxDecodeChannel)
+				go DecodeTransaction(Network, PairTransaction, Dex.RouterAddress, Dex.RouterAbiDBId, TxDecodeWaitGroup, TxDecodeChannel)
 			}
 
 			// Wait For All Txs To Come Back
@@ -183,6 +183,9 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 					// Check If Our Pair Is Already In DB
 					PairQueryResults := mysql_query.GetPairFromDB(Pair.Address, Network.NetworkDBId)
 					if len(PairQueryResults) > 0 {
+
+						// Log Addition
+						log.Printf("[%v] [%v] Present: %v", Network.Network.Name, Dex.Name, Pair.Name)
 
 						// Set Pair DB ID
 						PairDBId = int64(PairQueryResults[0].PairId)

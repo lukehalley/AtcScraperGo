@@ -3,6 +3,7 @@ package web3
 import (
 	"atcscraper/src/types/web3"
 	"encoding/json"
+	"fmt"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"strings"
 )
@@ -13,7 +14,25 @@ func MapToJson(param map[string]interface{}) string {
 	return dataString
 }
 
-func DecodeTransactionInputData(ABI string, TransactionInputData []byte) (bool, string, web3.DecodedTransaction) {
+func GetMethodSignature(TransactionInputData []byte) string {
+	if len(TransactionInputData) < 4 {
+		return ""
+	}
+	MethodSignature := TransactionInputData[:4]
+	MethodSignatureString := fmt.Sprintf("0x%x", MethodSignature)
+	return MethodSignatureString
+}
+
+func GetMethodParams(TransactionInputData []byte) string {
+	if len(TransactionInputData) < 8 {
+		return ""
+	}
+	MethodParams := TransactionInputData[4:]
+	MethodParamsString := fmt.Sprintf("0x%x", MethodParams)
+	return MethodParamsString
+}
+
+func DecodeTransactionInputDataWithAbi(ABI string, TransactionInputData []byte) (bool, string, web3.DecodedTransaction) {
 
 	DecodedInputData := web3.DecodedTransaction{}
 
