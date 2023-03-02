@@ -1,3 +1,4 @@
+// AtcScraperGo - Web3 data collection and analysis tool
 // Initialize main application entry point for ATC scraper
 // AtcScraperGo - Automated transaction collector and scraper for DEX data
 // AtcScraperGo provides data collection and aggregation for ATC blockchain analysis
