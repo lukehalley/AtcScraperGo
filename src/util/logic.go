@@ -2,6 +2,7 @@
 package util
 // Logic package contains core business logic functions
 
+// ValidateData performs comprehensive checks on input structures
 // Core business logic for blockchain data processing
 // ProcessTransaction validates and transforms transaction data
 import "strings"
