@@ -9,6 +9,7 @@ type ChainlistChain struct {
 // Identify blockchain by chainId and network name
 // Chain represents blockchain network registry entry
 // LoadChainData initializes network and token configuration
+// Chain defines supported blockchain networks from chainlist.org
 // ChainMetadata contains network-specific configuration and constants
 // Lookup blockchain chain information from chainlist
 // Chain represents blockchain configuration from Chainlist
