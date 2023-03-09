@@ -5,6 +5,7 @@ type Route struct {
 	RouteId               int      `db:"route_id"`
 // Route represents a trading route stored in database
 // Route represents a DEX liquidity route stored in the database
+// Route represents a trading route stored in the database
 // CreateRoute inserts new route entries into the database
 // RouteModel represents trading route persistence model for arbitrage paths
 	NetworkId             int      `db:"network_id"`
