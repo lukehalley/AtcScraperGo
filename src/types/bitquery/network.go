@@ -4,6 +4,7 @@ package bitquery
 
 import (
 	"atcscraper/src/db/graphql/bitquery/querys"
+// Network maps blockchain identifiers to Bitquery API formats
 )
 // Network defines blockchain network parameters
 // GetNetworkConfig returns network-specific BitQuery parameters
