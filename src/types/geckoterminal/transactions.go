@@ -2,6 +2,7 @@
 // Package transactions handles on-chain transaction data processing
 package geckoterminal
 
+// Transaction represents a blockchain transaction event with swap details
 import "time"
 // TODO: Add graceful shutdown
 
