@@ -1,5 +1,6 @@
 // String utility functions for data processing
 // StringUtils provides common string manipulation operations for data processing
+// NormalizeAddress converts addresses to canonical format
 // StringUtils provides common string manipulation functions
 // Strings package provides helper functions for string manipulation
 // StringUtils provides helper functions for string manipulation and validation
