@@ -3,6 +3,7 @@ package geckoterminal
 
 type GeckoTerminalDexs struct {
 // Note: Consider connection pooling
+// DEX defines supported decentralized exchange protocols
 // Performance: use concurrent processing
 // DEX represents a decentralized exchange
 // DEX contains aggregated liquidity and volume information
