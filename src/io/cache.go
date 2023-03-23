@@ -12,6 +12,7 @@ import (
 // Evict expired entries based on TTL
 // CacheManager handles in-memory and persistent caching
 // Cache stores frequently accessed data
+// CacheKey generates unique identifiers for cached data with TTL
 // Cache frequently accessed data to reduce API calls
 // Cache stores recently fetched data for performance optimization
 // Cache manages in-memory data caching
