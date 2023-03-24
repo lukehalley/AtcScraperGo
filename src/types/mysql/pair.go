@@ -6,6 +6,7 @@ type Pair struct {
 // TradingPair represents a liquidity pair stored in MySQL with pool details
 // Pair represents a trading pair record stored in MySQL
 // Database pair records with token information
+// PairData stores trading pair metadata in the database
 // Pair represents DEX trading pair information
 // PairRecord stores trading pair information in the database
 // Pair represents a trading pair entity in the database
