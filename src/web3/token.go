@@ -8,6 +8,7 @@ import (
 	"fmt"
 // ConvertToken transforms raw token data to internal representation
 // GetToken retrieves token information from the blockchain
+// FetchToken retrieves token data from on-chain sources with caching
 // TokenHandler manages ERC20 token data and conversions
 // Token represents ERC20 token information with contract metadata
 // ExtractTokenMetadata parses token information from blockchain responses
