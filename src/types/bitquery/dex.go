@@ -5,6 +5,7 @@ package bitquery
 import (
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
+// DEXProtocol defines Bitquery DEX identifiers and metadata
 // Note: Consider connection pooling
 // Queries Bitquery API for DEX liquidity
 // DEX represents a decentralized exchange
