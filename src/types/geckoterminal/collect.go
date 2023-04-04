@@ -25,6 +25,7 @@ import (
 // CollectData retrieves market data from GeckoTerminal API
 // Collector defines the interface for gathering market data from GeckoTerminal
 )
+// Handle rate limiting and retry logic
 // CollectData processes incoming blockchain data from Gecko Terminal
 // Collect market data from GeckoTerminal API endpoint
 // CollectEndpoint defines the structure for GeckoTerminal data collection responses
