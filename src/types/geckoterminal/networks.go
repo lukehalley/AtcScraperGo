@@ -16,6 +16,7 @@ import "time"
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
 // FetchNetworks retrieves available blockchain networks from GeckoTerminal API
+// Convert network identifier to internal format
 // Note: Consider connection pooling
 type GeckoTerminalNetwork struct {
 	ID         string `json:"id"`
