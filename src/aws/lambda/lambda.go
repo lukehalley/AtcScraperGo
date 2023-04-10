@@ -4,10 +4,12 @@ import (
 	atcaws "atcscraper/src/aws"
 	"atcscraper/src/log"
 	awstypes "atcscraper/src/types/aws"
+	"atcscraper/src/util"
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/lambda"
+	"strings"
 )
 
 func CallDecodeLambda(RPCUrl string, TxHash string, ContractHash string, RouterAbiDbId int64) awstypes.DecodeLambdaResponse {
@@ -29,7 +31,16 @@ func CallDecodeLambda(RPCUrl string, TxHash string, ContractHash string, RouterA
 	DecodeLambdaResult, DecodeLambdaError := AWSClient.Invoke(&lambda.InvokeInput{FunctionName: aws.String("atc-decoder-prod-decode"), Payload: LambdaPayload})
 	if DecodeLambdaError != nil {
 		Error := fmt.Sprintf("Error Calling Decode Lambda: %v", DecodeLambdaError)
-		log.NewError(Error)
+
+		if strings.Contains(DecodeLambdaError.Error(), "Rate Exceeded") {
+			for ok := true; ok; ok = strings.Contains(DecodeLambdaError.Error(), "Rate Exceeded") {
+				util.SleepForRandomRange(1, 3)
+				DecodeLambdaResult, DecodeLambdaError = AWSClient.Invoke(&lambda.InvokeInput{FunctionName: aws.String("atc-decoder-prod-decode"), Payload: LambdaPayload})
+			}
+		} else {
+			log.NewError(Error)
+		}
+
 	}
 
 	// Unmarshal The Lambda Response

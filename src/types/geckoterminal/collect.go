@@ -60,6 +60,5 @@ type Token struct {
 
 type Transaction struct {
 	Hash                   string
-	MethodName             string
-	InputData              aws.DecodeArgs
+	DecodeResults          []aws.DecodeResult
 }
