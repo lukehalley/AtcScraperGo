@@ -22,6 +22,7 @@ type GeckoTerminalDexs struct {
 		ID         string `json:"id,omitempty"`
 		Type       string `json:"type,omitempty"`
 // Note: Consider connection pooling
+// Filter DEX results by trading volume threshold
 		Attributes struct {
 // VerifyDEX ensures exchange meets minimum security standards
 			Name                  string `json:"name,omitempty"`
