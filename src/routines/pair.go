@@ -89,7 +89,7 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 			// Get Results From Channel
 			var CollectedDecodedTxs []geckoterminal_types.Transaction
 			for DecodedTx := range TxDecodeChannel {
-				if DecodedTx.MethodName != "" && len(DecodedTx.InputData.Path) > 0 {
+				if len(DecodedTx.DecodeResults) > 0 {
 					CollectedDecodedTxs = append(CollectedDecodedTxs, DecodedTx)
 				}
 			}
@@ -209,23 +209,27 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 				// Add Pair Routes To DB
 				for _, PairTransaction := range CollectedDecodedTxs {
 
-					// Create A Comma Seperated String For Route
-					var RouteString string
-					for RouteAddressIndex, RouteAddress := range PairTransaction.InputData.Path {
-						if RouteAddressIndex <= 0 {
-							RouteString = fmt.Sprintf("%v", RouteAddress)
-						} else {
-							RouteString = fmt.Sprintf("%v,%v", RouteString, RouteAddress)
+					for _, DecodePairTransaction := range PairTransaction.DecodeResults {
+
+						// Create A Comma Seperated String For Route
+						var RouteString string
+						//for RouteAddressIndex, RouteAddress := range PairTransaction.InputData.Path {
+						//	if RouteAddressIndex <= 0 {
+						//		RouteString = fmt.Sprintf("%v", RouteAddress)
+						//	} else {
+						//		RouteString = fmt.Sprintf("%v,%v", RouteString, RouteAddress)
+						//	}
+						//
+						//}
+
+						// Check If Our Route Is Stored
+						RouteQueryResults := mysql_query.GetRouteFromDB(Network.NetworkDBId, Network.DexDBId, int(PairDBId), PairTransaction.Hash)
+						if len(RouteQueryResults) <= 0 {
+
+							// Add Route To DB
+							mysql_insert.AddRouteToDB(Network.NetworkDBId, Network.DexDBId, PairDBId, RouteString, DecodePairTransaction.FunctionName, PairTransaction.Hash, 0, 1)
+
 						}
-
-					}
-
-					// Check If Our Route Is Stored
-					RouteQueryResults := mysql_query.GetRouteFromDB(Network.NetworkDBId, Network.DexDBId, int(PairDBId), PairTransaction.Hash)
-					if len(RouteQueryResults) <= 0 {
-
-						// Add Route To DB
-						mysql_insert.AddRouteToDB(Network.NetworkDBId, Network.DexDBId, PairDBId, RouteString, PairTransaction.MethodName, PairTransaction.Hash, PairTransaction.InputData.AmountIn, PairTransaction.InputData.AmountOutMin)
 
 					}
 

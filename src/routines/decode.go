@@ -37,8 +37,7 @@ func DecodeTransaction(Network geckoterminal.GeckoTerminalNetworkWithDexs, PairT
 					DecodeLambdaResult := lambda.CallDecodeLambda(Network.RPCs[0], TxHash, RouterAddress, RouterAbiDbId)
 
 					if DecodeLambdaResult.StatusCode == 200 {
-						PairTransaction.MethodName = DecodeLambdaResult.Body.Function
-						PairTransaction.InputData = DecodeLambdaResult.Body.Args
+						PairTransaction.DecodeResults = DecodeLambdaResult.Body
 					}
 
 				}
