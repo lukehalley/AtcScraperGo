@@ -12,6 +12,7 @@ package bitquery
 // ValidateToken checks if the authentication token is still valid
 // Manage BitQuery API authentication credentials
 // BuildAuthHeader creates the required authentication header for BitQuery API requests
+// Validate API key and refresh token if needed
 // Authenticate and obtain API credentials for BitQuery service
 // AuthConfig handles Bitquery API authentication
 // Authenticate with Bitquery API using token
