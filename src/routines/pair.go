@@ -7,6 +7,7 @@ import (
 	geckoterminal_types "atcscraper/src/types/geckoterminal"
 	"atcscraper/src/util"
 	"atcscraper/src/web3"
+	"encoding/json"
 	"fmt"
 	"log"
 	"sync"
@@ -206,28 +207,22 @@ func ScrapePairInfo(Network geckoterminal_types.GeckoTerminalNetworkWithDexs, Ne
 
 				}
 
-				// Add Pair Routes To DB
+				// Add Pair Decoded Transaction(s) To DB
 				for _, PairTransaction := range CollectedDecodedTxs {
 
 					for _, DecodePairTransaction := range PairTransaction.DecodeResults {
 
-						// Create A Comma Seperated String For Route
-						var RouteString string
-						//for RouteAddressIndex, RouteAddress := range PairTransaction.InputData.Path {
-						//	if RouteAddressIndex <= 0 {
-						//		RouteString = fmt.Sprintf("%v", RouteAddress)
-						//	} else {
-						//		RouteString = fmt.Sprintf("%v,%v", RouteString, RouteAddress)
-						//	}
-						//
-						//}
+						// Check If Our Decoded Transaction Is Stored
+						DecodedTransactionQueryResults := mysql_query.GetDecodedTransactionFromDB(Network.NetworkDBId, Network.DexDBId, int(PairDBId), PairTransaction.Hash)
+						if len(DecodedTransactionQueryResults) <= 0 {
 
-						// Check If Our Route Is Stored
-						RouteQueryResults := mysql_query.GetRouteFromDB(Network.NetworkDBId, Network.DexDBId, int(PairDBId), PairTransaction.Hash)
-						if len(RouteQueryResults) <= 0 {
+							FunctionParametersJSON, _ := json.Marshal(DecodePairTransaction.FunctionParameters)
+							FunctionParametersJSONString := string(FunctionParametersJSON)
 
-							// Add Route To DB
-							mysql_insert.AddRouteToDB(Network.NetworkDBId, Network.DexDBId, PairDBId, RouteString, DecodePairTransaction.FunctionName, PairTransaction.Hash, 0, 1)
+							// Add Decoded Transaction To DB
+							mysql_insert.AddDecodedTransactionToDB(Network.NetworkDBId, Network.DexDBId, PairDBId, DecodePairTransaction.FunctionName, PairTransaction.Hash, FunctionParametersJSONString)
+
+							log.Printf("[%v] [%v] Added Transaction: %v", Network.Network.Name, Dex.Name, Pair.Name)
 
 						}
 
