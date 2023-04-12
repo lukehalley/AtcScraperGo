@@ -6,7 +6,7 @@ import (
 )
 
 
-func AddRouteToDB(NetworkId, DexId int, PairId int64, Route, Method, TxHash string, AmountIn int, AmountOut int64) int64 {
+func AddRouteToDB(NetworkId, DexId int, PairId int64, Route, Method, TxHash string, AmountIn int64, AmountOut int) int64 {
 
 	DBKeys := "network_id, dex_id, pair_id, route, method, transaction_hash, amount_in, amount_out"
 	SelectStatement := fmt.Sprintf("(SELECT %d AS network_id, %d AS dex_id, %d AS pair_id, '%v' AS route, '%v' AS method, '%v' AS transaction_hash, %d AS amount_in, %d AS amount_out)", NetworkId, DexId, PairId, Route, Method, TxHash, AmountIn, AmountOut)

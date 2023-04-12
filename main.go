@@ -27,7 +27,7 @@ func main() {
 	WaitTime := 0 * time.Second
 	
 	// Init Vars
-	var NetworksWithDexsAndAbis []geckoterminal_types.GeckoTerminalNetworkWithDexs
+	var CollectedNetworkData []geckoterminal_types.GeckoTerminalNetworkWithDexs
 
 	logging.LogSeparator(false)
 	log.Printf("Collecting Coingecko CoingeckoBuildID")
@@ -55,6 +55,9 @@ func main() {
 
 		// Get All Networks On Geckoterminal
 		Networks := geckoterminal_api.GetGeckoterminalNetworks(CoingeckoBuildID)
+
+		// Lazy
+		// Networks.Networks = Networks.Networks[0:1]
 
 		// Network Count
 		NetworkCount := len(Networks.Networks)
@@ -92,44 +95,9 @@ func main() {
 		close(NetworkCollectionChannel)
 
 		// Get Results From Channel
-		var CollectedNetworkData []geckoterminal_types.GeckoTerminalNetworkWithDexs
 		for CollectedNetwork := range NetworkCollectionChannel {
 			if len(CollectedNetwork.Dexes) > 0 {
 				CollectedNetworkData = append(CollectedNetworkData, CollectedNetwork)
-			}
-		}
-
-		logging.LogSeparator(true)
-
-		////////////////////////////////////////////////////
-		// Get Dex ABIs
-		////////////////////////////////////////////////////
-
-		// Cache Log
-		logging.LogSeparator(false)
-		log.Printf("Loading Dex Abis...")
-		logging.LogSeparator(false)
-
-		// Create Concurrency Objects
-		NetworkABIsWaitGroup := new(sync.WaitGroup	)
-		NetworkABIsWaitGroup.Add(len(CollectedNetworkData))
-		NetworkDexABIsChannel := make(chan geckoterminal_types.GeckoTerminalNetworkWithDexs, len(CollectedNetworkData))
-
-		// Run Network Dexs ABIs
-		for _, Network := range CollectedNetworkData {
-			go routines.CollectNetworkDexsABIs(Network, NetworkABIsWaitGroup, NetworkDexABIsChannel)
-		}
-
-		// Wait For All Networks To Come Back
-		NetworkABIsWaitGroup.Wait()
-
-		// Close The Group Channel
-		close(NetworkDexABIsChannel)
-
-		// Get Results From Channel
-		for CollectedNetworkWithDexAbis := range NetworkDexABIsChannel {
-			if len(CollectedNetworkWithDexAbis.Dexes) > 0 {
-				NetworksWithDexsAndAbis = append(NetworksWithDexsAndAbis, CollectedNetworkWithDexAbis)
 			}
 		}
 
@@ -145,7 +113,7 @@ func main() {
 		logging.LogSeparator(false)
 
 		// Save Data To Local File
-		io.SaveGTDataToCache(NetworksWithDexsAndAbis, "ATCScrapeCache")
+		io.SaveGTDataToCache(CollectedNetworkData, "ATCScrapeCache")
 
 		// Finish Log
 		log.Printf("Data Saved")
@@ -158,10 +126,10 @@ func main() {
 		////////////////////////////////////////////////////
 
 		// Read Local Cache
-		NetworksWithDexsAndAbis = io.ReadGTCacheFile("ATCScrapeCache")
+		CollectedNetworkData = io.ReadGTCacheFile("ATCScrapeCache")
 
 		logging.LogSeparator(false)
-		log.Printf("Read %v Networks(s) From Cache", len(NetworksWithDexsAndAbis))
+		log.Printf("Read %v Networks(s) From Cache", len(CollectedNetworkData))
 		logging.LogSeparator(true)
 
 	}
@@ -169,9 +137,6 @@ func main() {
 	////////////////////////////////////////////////////
 	// Get Dex Pairs
 	////////////////////////////////////////////////////
-
-	// Lazy
-	// NetworksWithDexsAndAbis = NetworksWithDexsAndAbis[0:5]
 
 	// Dex Log
 	logging.LogSeparator(false)
@@ -183,18 +148,20 @@ func main() {
 
 	// Create Concurrency Objects
 	NetworksDexsCollectionWaitGroup := new(sync.WaitGroup)
-	NetworksDexsCollectionWaitGroup.Add(len(NetworksWithDexsAndAbis))
-	NetworkDexsCollectionChannel := make(chan geckoterminal_types.GeckoTerminalNetworkWithDexs, len(NetworksWithDexsAndAbis))
+	NetworksDexsCollectionWaitGroup.Add(len(CollectedNetworkData))
+	NetworkDexsCollectionChannel := make(chan geckoterminal_types.GeckoTerminalNetworkWithDexs, len(CollectedNetworkData))
 
 	// Max Tasks To Run At Once
 	var Semaphore = make(chan int, MaxParallelism)
 
 	// Kick Off Iteration Through Networks Dexs With Semaphore Limit
-	for _, Network := range NetworksWithDexsAndAbis {
+	for _, Network := range CollectedNetworkData {
 		Semaphore <- 1
 		Network := Network
 		go func(){
-			routines.ScrapeNetworkDexs(Network, InvalidDexs, PagesToCollect, TxsToCollect, NetworksDexsCollectionWaitGroup, NetworkDexsCollectionChannel)
+			if len(Network.Stablecoins) > 0 {
+				routines.ScrapeNetworkDexs(Network, InvalidDexs, PagesToCollect, TxsToCollect, NetworksDexsCollectionWaitGroup, NetworkDexsCollectionChannel)
+			}
 			<- Semaphore
 		}()
 	}
@@ -208,7 +175,7 @@ func main() {
 	// Get Results From Channel
 	for CollectedNetwork := range NetworkDexsCollectionChannel {
 		if len(CollectedNetwork.Dexes) > 0 {
-			NetworksWithDexsAndAbis = append(NetworksWithDexsAndAbis, CollectedNetwork)
+			CollectedNetworkData = append(CollectedNetworkData, CollectedNetwork)
 		}
 	}
 

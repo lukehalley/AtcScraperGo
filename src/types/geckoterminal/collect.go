@@ -1,8 +1,8 @@
 package geckoterminal
 
 import (
+	"atcscraper/src/types/aws"
 	"atcscraper/src/types/mysql"
-	"atcscraper/src/types/web3"
 )
 
 type GeckoTerminalNetworkWithDexs struct {
@@ -29,9 +29,11 @@ type Network struct {
 type Dex struct {
 	 Name                  string
 	 FactoryAddress        string
-	 FactoryAbi            mysql.Abi
+	 FactoryAbi            string
+	 FactoryAbiDBId        int64
 	 RouterAddress         string
-	 RouterAbi             mysql.Abi
+	 RouterAbi             string
+	 RouterAbiDBId         int64
 	 Identifier            string
 	 URL                   string
 	 ImageURL              string
@@ -58,6 +60,5 @@ type Token struct {
 
 type Transaction struct {
 	Hash                   string
-	MethodName             string
-	InputData              web3.DecodedTransaction
+	DecodeResults          []aws.DecodeResult
 }
