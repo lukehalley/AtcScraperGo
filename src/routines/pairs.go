@@ -4,7 +4,10 @@ import (
 	geckoterminal_api "atcscraper/src/api/geckoterminal/requests"
 	mysql_insert "atcscraper/src/db/mysql/insert"
 	mysql_query "atcscraper/src/db/mysql/query"
+	"atcscraper/src/io"
 	geckoterminal_types "atcscraper/src/types/geckoterminal"
+	"atcscraper/src/web3"
+	"github.com/ethereum/go-ethereum/core/types"
 	"sync"
 )
 
@@ -12,35 +15,6 @@ func CollectGeckoTerminalDexPairs(Network geckoterminal_types.GeckoTerminalNetwo
 
 	// Schedule The Call To WaitGroup's Done To Tell GoRoutine Is Completed.
 	defer DexCollectionWaitGroup.Done()
-
-	// Dex Is Invalid Dex List
-	// DexIsInvalid, _ := util.CheckIfStringIsInList(InvalidDexs, Dex.Identifier, false)
-	//if !DexIsInvalid {
-	//
-	//}
-
-	// Check If Dex Is Already Stored
-	DexQueryResults := mysql_query.GetDexFromDB(Network.NetworkDBId, Dex.Identifier)
-
-	// Get Dex DB ID
-	DexDBId := 0
-	if len(DexQueryResults) > 0 {
-
-		// Set Dex DB ID
-		DexDBId = DexQueryResults[0].DexId
-
-	} else {
-
-		// Add Dex To DB
-		DexDBId = int(mysql_insert.AddDexToDB(
-			Network.NetworkDBId,
-			Dex.Identifier,
-			Dex.RouterAddress,
-			Dex.FactoryAddress,
-			1,
-		))
-
-	}
 
 	// Get First Page Dexs
 	DexPairs := geckoterminal_api.GetGeckoterminalDexPairs(Network.Network.Identifier, Dex.Identifier, 1)
@@ -65,22 +39,128 @@ func CollectGeckoTerminalDexPairs(Network geckoterminal_types.GeckoTerminalNetwo
 		}
 
 	}
-
-	// Create Concurrency Objects
-	PairCollectionWaitGroup := new(sync.WaitGroup)
-	PairCollectionWaitGroup.Add(len(DexPairs.Data))
-	PairCollectionChannel := make(chan geckoterminal_types.Pair, len(DexPairs.Data))
-
-	// Iterate Through Networks Dexs And Get All Their Pairs
+	
+	// Get Dex Factory & Router Address
+	DexContractsReceived := false
+	RouterAbiObtained := false
+	FactoryAbiObtained := false
 	for _, DexPair := range DexPairs.Data {
-		go ScrapePairInfo(Network, NetworkStablecoins, Dex, DexDBId, DexPair, BlacklistPairAddresses, TxsToCollect, PairCollectionWaitGroup, PairCollectionChannel)
+
+		// Create New Pair Object
+		var Pair geckoterminal_types.Pair
+
+		// Add The Pair Address
+		Pair.Address = DexPair.Attributes.Address
+
+		// Get Current Pair Transactions
+		PairTransactions := geckoterminal_api.GetGeckoterminalPairTransactionsAndTokens(Network.Network.Identifier, Pair.Address, 1)
+
+		// Collect Transactions
+		for _, Transaction := range PairTransactions.Data {
+			var PairTransaction geckoterminal_types.Transaction
+			PairTransaction.Hash = Transaction.Attributes.TxHash
+			Pair.Transactions = append(Pair.Transactions, PairTransaction)
+		}
+
+		// Get Factory Address
+		if Dex.FactoryAddress == "" {
+			Dex.FactoryAddress = web3.GetPairFactoryAddress(DexPair.Attributes.Address, Network.RPCs[0])
+		}
+
+		// Get Router Address
+		var TransactionReceipt *types.Transaction
+		var TransactionReceived bool
+		for _, PairTransaction := range Pair.Transactions {
+			for _, RPCUrl := range Network.RPCs {
+				TransactionReceived, TransactionReceipt = web3.GetTransactionReceipt(RPCUrl, PairTransaction.Hash)
+				if TransactionReceived {
+					Dex.RouterAddress = TransactionReceipt.To().Hex()
+				}
+				if Dex.RouterAddress != "" {
+					break
+				}
+			}
+			if Dex.RouterAddress != "" {
+				break
+			}
+		}
+
+		if Dex.RouterAddress != "" && Dex.FactoryAddress != "" {
+
+			// Check If Dex Is Already Stored
+			DexQueryResults := mysql_query.GetDexFromDB(Network.NetworkDBId, Dex.Identifier)
+
+			// Get Dex DB ID
+			if len(DexQueryResults) > 0 {
+
+				// Set Dex DB ID
+				Network.DexDBId = DexQueryResults[0].DexId
+
+			} else {
+
+				// Add Dex To DB
+				Network.DexDBId = int(mysql_insert.AddDexToDB(
+					Network.NetworkDBId,
+					Dex.Identifier,
+					Dex.RouterAddress,
+					Dex.FactoryAddress,
+					1,
+				))
+
+			}
+
+			if Network.DexDBId > 0 {
+
+				// Check If Router Has Been Stored
+				DBDexRouterABIQuery := mysql_query.GetAbiFromDBByAddress(Network.NetworkDBId, Dex.RouterAddress)
+				RouterABIStored := len(DBDexRouterABIQuery) > 0
+
+				// Get Router Dex ABI
+				if !RouterABIStored {
+					Dex.RouterAbi, RouterAbiObtained = CollectDexsABI(Network, Dex.RouterAddress)
+					if !RouterAbiObtained {
+						Dex.RouterAbi = io.LoadAbiFromFile("IUniswapV2Router02.json")
+					}
+					Dex.RouterAbiDBId = mysql_insert.AddABIToDB(Network.NetworkDBId, Network.DexDBId, "router", Dex.RouterAddress, Dex.RouterAbi, "")
+				} else {
+					Dex.RouterAbi = DBDexRouterABIQuery[0].Abi
+					Dex.RouterAbiDBId = int64(DBDexRouterABIQuery[0].AbiId)
+				}
+
+				// Check If Factory Has Been Stored
+				DBDexFactoryABIQuery := mysql_query.GetAbiFromDBByAddress(Network.NetworkDBId, Dex.FactoryAddress)
+				FactoryABIStored := len(DBDexFactoryABIQuery) > 0
+
+				// Get Factory Dex ABI
+				if !FactoryABIStored {
+					Dex.FactoryAbi, FactoryAbiObtained = CollectDexsABI(Network, Dex.FactoryAddress)
+					if !FactoryAbiObtained {
+						Dex.FactoryAbi = io.LoadAbiFromFile("IUniswapV2Factory.json")
+					}
+					Dex.FactoryAbiDBId = mysql_insert.AddABIToDB(Network.NetworkDBId, Network.DexDBId, "factory", Dex.FactoryAddress, Dex.FactoryAbi, "")
+				} else {
+					Dex.FactoryAbi = DBDexFactoryABIQuery[0].Abi
+					Dex.FactoryAbiDBId = int64(DBDexFactoryABIQuery[0].AbiId)
+				}
+
+				DexContractsReceived = Network.DexDBId > 0 && Dex.RouterAddress != "" && Dex.RouterAbi != "" && Dex.FactoryAddress != "" && Dex.FactoryAbi != ""
+
+				if DexContractsReceived {
+					break
+				}
+
+			}
+
+		}
+		
 	}
 
-	// Wait For All Networks To Come Back
-	PairCollectionWaitGroup.Wait()
-
-	// Close The Group Channel
-	close(PairCollectionChannel)
+	// Iterate Through Networks Dexs And Get All Their Pairs
+	if DexContractsReceived {
+		for _, DexPair := range DexPairs.Data {
+			ScrapePairInfo(Network, NetworkStablecoins, Dex, DexPair, BlacklistPairAddresses, TxsToCollect)
+		}
+	}
 
 	DexCollectionChannel <- Dex
 	

@@ -26,8 +26,6 @@ func CollectGeckoTerminalNetworkWithDexs(Network geckoterminal_types.GeckoTermin
 
 	if !NetworkIsBlacklisted {
 
-		// log.Printf("[%d/%d] [%v] Getting RPCs From Chainlist...", CountIndex, NetworkCount, Network.Attributes.Name)
-
 		// Get Chain RPCs
 		ChainInfo := chainlist.GetChainInfo(Network.Attributes.ChainID, ChainlistBuildID)
 
@@ -128,27 +126,11 @@ func CollectGeckoTerminalNetworkWithDexs(Network geckoterminal_types.GeckoTermin
 			// Add Network Stablecoins
 			NetworkWithDexsAndPairs.Stablecoins = mysql_query.GetNetworkStablecoinsFromDB(Network.Attributes.Identifier)
 
-		} else {
-
-			// Check If Network Is Already Blacklisted
-			BlacklistNetworkQueryResults := mysql_query.GetBlacklistNetwork(Network.Attributes.Name)
-
-			if len(BlacklistNetworkQueryResults) <= 0 {
-
-				// Add Network To Blacklist Table
-				mysql_insert.AddBlacklistNetworkToDB(Network.Attributes.Name, Network.Attributes.ChainID)
-
-			}
-
-			// log.Printf("[%d/%d] [%v] No Available RPCs - Skipping", CountIndex, NetworkCount, Network.Attributes.Name)
-			// logging.LogSeparator(false)
-
 		}
 
 	} else {
 
 		log.Printf("[%v] Network Blacklisted - Skipping", Network.Attributes.Name)
-		// logging.LogSeparator(false)
 
 	}
 

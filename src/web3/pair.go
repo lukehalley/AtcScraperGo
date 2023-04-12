@@ -70,6 +70,7 @@ func GetPairFactoryAddress(PairAddress string, NetworkRPC string) string {
 
 	// Catch Any Call Errors
 	if FactoryAddressError != nil {
+		// fmt.Printf("Factory Address Error: %v", FactoryAddressError.Error())
 		return ""
 	}
 
