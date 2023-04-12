@@ -33,9 +33,12 @@ func CallDecodeLambda(RPCUrl string, TxHash string, ContractHash string, RouterA
 		Error := fmt.Sprintf("Error Calling Decode Lambda: %v", DecodeLambdaError)
 
 		if strings.Contains(DecodeLambdaError.Error(), "Rate Exceeded") {
-			for ok := true; ok; ok = strings.Contains(DecodeLambdaError.Error(), "Rate Exceeded") {
+			for InError := true; InError; InError = strings.Contains(DecodeLambdaError.Error(), "Rate Exceeded") {
 				util.SleepForRandomRange(1, 3)
 				DecodeLambdaResult, DecodeLambdaError = AWSClient.Invoke(&lambda.InvokeInput{FunctionName: aws.String("atc-decoder-prod-decode"), Payload: LambdaPayload})
+				if DecodeLambdaError == nil {
+					break
+				}
 			}
 		} else {
 			log.NewError(Error)

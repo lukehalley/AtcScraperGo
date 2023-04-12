@@ -32,7 +32,7 @@ type DecodeResult struct {
 	FunctionName            string   `json:"FunctionName"`
 	FunctionParametersNames []string `json:"FunctionParametersNames"`
 	FunctionParametersTypes []string `json:"FunctionParametersTypes"`
-	DecodedInput            struct {} `json:"DecodedInput"`
+	DecodedInput            []string `json:"DecodedInput"`
 }
 
 type DecodeArgs struct {
@@ -41,4 +41,12 @@ type DecodeArgs struct {
 	Path         []string `json:"path"`
 	To           string   `json:"to"`
 	Deadline     int      `json:"deadline"`
+}
+
+type DecodedInput struct {
+	AmountIn     float64 `json:"_amountIn"`
+	AmountOutMin float64 `json:"_amountOutMin"`
+	Path         float64 `json:"_path"`
+	To           float64 `json:"_to"`
+	Deadline     float64 `json:"_deadline"`
 }
