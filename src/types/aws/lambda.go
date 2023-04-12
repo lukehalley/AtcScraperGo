@@ -7,15 +7,6 @@ type DecodeLambdaParams struct {
 	ContractAbiDBId int64  `json:"contract_abi_db_id"`
 }
 
-type DecodeLambdaResponseOld struct {
-	StatusCode int    `json:"statusCode"`
-	Msg        string `json:"msg"`
-	Body       struct {
-		Function string     `json:"function"`
-		Args     DecodeArgs `json:"args"`
-	} `json:"body"`
-}
-
 type DecodeLambdaResponse struct {
 	StatusCode int    `json:"statusCode"`
 	Msg        string `json:"msg"`
@@ -28,12 +19,10 @@ type Schema struct {
 	InternalType string `json:"internalType"`
 }
 
-type DecodeResult struct {
-	FunctionName            string   `json:"FunctionName"`
-	FunctionParametersNames []string `json:"FunctionParametersNames"`
-	FunctionParametersTypes []string `json:"FunctionParametersTypes"`
-	DecodedInput            []string `json:"DecodedInput"`
-}
+//type DecodeResult struct {
+//	FunctionName       string                 `json:"functionName"`
+//	FunctionParameters map[string]interface{} `json:"functionParameters"`
+//}
 
 type DecodeArgs struct {
 	AmountIn     int64    `json:"amountIn"`
@@ -49,4 +38,13 @@ type DecodedInput struct {
 	Path         float64 `json:"_path"`
 	To           float64 `json:"_to"`
 	Deadline     float64 `json:"_deadline"`
+}
+
+type DecodeResult struct {
+	FunctionName       string `json:"functionName"`
+	FunctionParameters []struct {
+		Name  string `json:"name"`
+		Type  string `json:"type"`
+		Value string `json:"value"`
+	} `json:"functionParameters"`
 }
