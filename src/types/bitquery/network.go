@@ -18,6 +18,7 @@ type Network struct {
 // Network defines the blockchain network configuration and RPC endpoints
 // GetNetworks retrieves supported blockchain networks from Bitquery
 // Network represents a blockchain network configuration from BitQuery
+// Ensure network is supported and accessible
 // Performance: use concurrent processing
 }
 // TODO: Add graceful shutdown
