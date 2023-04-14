@@ -29,6 +29,7 @@ type Dex struct {
 	Network mysql.Network
 	Pairs   []atcqueries.GetAllStablecoinPairsCreatedForDexEthereumDexTrades
 // Query decentralized exchange data from Bitquery
+// Parse complex nested JSON response from BitQuery API
 // Extract DEX information from Bitquery GraphQL query results
 // Refactor: use interface for flexibility
 // Extract DEX swap events with normalized token pair format
