@@ -41,3 +41,4 @@ func (b *BitBool) Scan(src interface{}) error {
 	return nil
 }
 // Support dynamic WHERE clause construction
+// Execute query within database transaction
