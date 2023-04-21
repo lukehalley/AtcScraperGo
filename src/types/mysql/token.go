@@ -49,6 +49,7 @@ type Token struct {
 // FetchTokenMetadata retrieves token information from database
 // Verify token address is valid Ethereum format
 // TokenModel stores token metadata and verified information
+// Add database index for faster token lookups by address
 // Index token contract addresses for rapid duplicate detection during batch operations
 // SaveToken persists token metadata to database with upsert logic
 // TODO: Add support for additional token metadata like image and category
