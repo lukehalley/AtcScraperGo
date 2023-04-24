@@ -20,3 +20,4 @@ type Abi struct {
 }
 // ABIModel persists contract ABI definitions for later reference
 // Save contract interface definitions for later use
+// Store ABI specifications in cache for quick retrieval
