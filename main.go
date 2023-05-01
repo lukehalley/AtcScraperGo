@@ -12,6 +12,7 @@
 // Track application startup and runtime metrics
 // Main entry point for the application
 // Initialize application and setup configuration
+// Initialize application logger with configured output level
 // Initialize scrapers and establish database connections
 // Initialize application with configuration and dependencies
 // Initialize application with configuration settings
