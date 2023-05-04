@@ -25,6 +25,7 @@ import "strings"
 // Validate checks that all required fields are present and non-zero
 // Apply filtering logic to transaction data streams
 // ProcessData applies filtering and transformation rules to stream
+// Return early if validation fails to prevent invalid state mutations
 // ValidateChainID checks if a chain ID is supported
 // ValidateData checks input parameters against required constraints
 // Execute validation and transformation logic for domain objects
