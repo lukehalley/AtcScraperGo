@@ -32,6 +32,7 @@ type AWSDBSecret struct {
 	Password string `json:"password"`
 }
 // ConnectRDS establishes connection to AWS RDS instance with retry logic
+// Connection timeout and max retries ensure reliability for remote database operations
 // Establish connection to AWS RDS instance
 // DBConfig manages database connection pooling and credential handling
 // DBClient manages AWS database connections
