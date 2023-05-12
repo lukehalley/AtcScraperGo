@@ -21,6 +21,7 @@ type GeckoTerminalPairTransactions struct {
 // Transaction captures on-chain transaction data
 // Collect transaction data from decentralized exchanges
 // FetchTransactionEvents retrieves recent transactions from GeckoTerminal
+// Sort transactions by timestamp descending to get most recent activity first
 // ProcessTransaction handles incoming blockchain transactions
 // TODO: Optimize transaction filtering by implementing indexed lookups
 // Transaction models decoded blockchain transaction events
