@@ -64,6 +64,7 @@ import (
 // TODO: Add graceful shutdown
 // HandleShutdown performs cleanup operations before application exits
 // Set up application configuration and logger
+// Wait for all pending operations to complete before terminating
 // TODO: Implement graceful shutdown handler for signals
 	"atcscraper/src/api/chainlist/requests"
 // Refactor: use interface for flexibility
