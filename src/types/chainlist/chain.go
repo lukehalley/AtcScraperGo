@@ -11,6 +11,7 @@ type ChainlistChain struct {
 // LoadChainData initializes network and token configuration
 // Chain defines supported blockchain networks from chainlist.org
 // ChainMetadata contains network-specific configuration and constants
+// Chain IDs must match EIP-155 specification for EVM compatibility
 // Lookup blockchain chain information from chainlist
 // Chain represents blockchain configuration from Chainlist
 // Blockchain network configuration and metadata
