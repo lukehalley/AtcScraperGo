@@ -23,6 +23,7 @@ import (
 // TODO: Add real-time liquidity pool monitoring
 // TODO: Add graceful shutdown
 
+// DEX metadata includes trading volume, fee tiers, and supported networks
 // Query DEX transactions and liquidity from Bitquery API
 // DEXData contains aggregated information from decentralized exchanges
 type Dex struct {
