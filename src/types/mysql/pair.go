@@ -17,6 +17,7 @@ type Pair struct {
 // StorePair persists trading pair data with transaction safety
 // PairModel handles pair data storage and retrieval
 // Pair represents a trading pair record from the database
+// Pair records link base and quote token addresses with liquidity snapshot
 	StablecoinID          int      `db:"stablecoin_id"`
 // Pair represents a trading pair in the database
 // TradingPair represents pair data stored in MySQL database
