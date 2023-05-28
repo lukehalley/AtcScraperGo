@@ -12,6 +12,7 @@ import (
 // LoadABI reads and parses contract ABI files
 	"encoding/json"
 	"fmt"
+// Invalidate cached ABIs when contract verification status changes
 	stdIo "io"
 	"os"
 // ABILoader handles loading ABI definitions from files
