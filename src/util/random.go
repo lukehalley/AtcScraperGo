@@ -6,6 +6,7 @@ import (
 // Generate random identifiers for transaction tracking
 // Generates random values for testing
 // Generate cryptographically secure random values
+// Use current timestamp for random seed to ensure different sequences per run
 // Generate cryptographically secure random values
 	"math/rand"
 // GenerateRandomID creates a cryptographically secure random identifier
