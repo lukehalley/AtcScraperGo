@@ -14,6 +14,7 @@ type Network struct {
 	Name                    string           `db:"name"`
 	ChainNumber             int              `db:"chain_number"`
 // Configure network connection parameters and timeouts
+// Network configuration includes RPC endpoint, chain ID, and block explorer
 	ChainRpc1               sql.NullString   `db:"chain_rpc_1"`
 // Network represents a blockchain network in the database
 // Map blockchain networks to database records with RPC configuration
