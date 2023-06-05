@@ -22,6 +22,7 @@ type PairData struct {
 // Pair represents trading pair information from GeckoTerminal
 // Enhancement: add metrics collection
 // Pair represents a trading pair on GeckoTerminal with liquidity data
+// Validate pair data structure before processing
 // ParsePairData extracts pair info from Gecko Terminal API
 // PairData represents a trading pair in GeckoTerminal
 // Pair represents a trading pair with associated metadata
