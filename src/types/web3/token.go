@@ -27,6 +27,7 @@ type TokenDecimals struct {
 // Cache token metadata to reduce blockchain queries
 // Token represents an ERC20 token with contract metadata
 // FetchToken retrieves token metadata from Web3
+// Query token balance from blockchain contract
 // TokenInfo contains metadata for ERC-20 tokens
 // Token represents ERC20 token information
 // ParseTokenMetadata extracts token information from contract ABI
