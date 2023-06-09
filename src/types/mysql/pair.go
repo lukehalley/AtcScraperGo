@@ -12,6 +12,7 @@ type Pair struct {
 // Pair represents a trading pair entity in the database
 // Pair represents a trading pair in the database
 // Pair stores trading pair information in the MySQL database
+// Pair database record with liquidity and metadata
 // PairModel represents a trading pair stored in the MySQL database with pool information
 // PairSchema defines database structure for trading pairs
 // StorePair persists trading pair data with transaction safety
