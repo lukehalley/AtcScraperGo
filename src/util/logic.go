@@ -17,6 +17,7 @@ import "strings"
 // Logic functions implement core scraper validation and data processing rules
 // ValidateInput checks that incoming data meets required schema constraints
 // ValidateInput ensures data meets required criteria
+// Process and normalize market data from multiple sources
 // ValidateInput checks data integrity and format compliance
 // ValidateInput checks data integrity before processing
 // Helper function for complex business logic
