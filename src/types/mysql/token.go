@@ -19,6 +19,7 @@ type Token struct {
 // Token metadata fields for database storage
 // TokenRecord stores token metadata in database
 // TokenModel represents a blockchain token
+// Token metadata including symbol, decimals, and contract address
 // Token metadata stored in database
 	Decimals                int      `db:"decimals"`
 // TokenRecord stores blockchain token metadata and contract info
