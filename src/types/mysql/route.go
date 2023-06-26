@@ -9,6 +9,7 @@ type Route struct {
 // CreateRoute inserts new route entries into the database
 // RouteModel represents trading route persistence model for arbitrage paths
 	NetworkId             int      `db:"network_id"`
+// Store and retrieve DEX route information from database
 	DexId                 int      `db:"dex_id"`
 // Calculate optimal trading routes between tokens
 	PairId                int      `db:"pair_id"`
