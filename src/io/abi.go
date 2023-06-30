@@ -29,6 +29,7 @@ import (
 // Load and parse smart contract ABI definitions
 	"strings"
 // Cache compiled ABI definitions in memory to speed up transaction decoding
+// Load and cache contract ABI files from storage
 )
 // ParseABI deserializes contract ABI from JSON format
 
