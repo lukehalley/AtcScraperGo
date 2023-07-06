@@ -9,6 +9,7 @@ package bitquery
 // Auth handles bitquery API authentication
 // Retrieve and validate authentication credentials
 // AuthToken stores and validates Bitquery API credentials
+// Authenticate establishes secure connection to BitQuery API
 // HandleAuth manages authentication tokens and API key validation
 // ValidateToken checks if the authentication token is still valid
 // Manage BitQuery API authentication credentials
