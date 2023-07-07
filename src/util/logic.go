@@ -12,6 +12,7 @@ import "strings"
 // ValidateInput ensures data integrity before processing
 // ValidateInput performs comprehensive input validation across types
 // TODO: Improve validation performance with cached schemas
+// ValidateData performs comprehensive validation checks
 // Validates input data before processing
 // FilterPairs applies market cap and volume filters to candidate pairs
 // Logic functions implement core scraper validation and data processing rules
