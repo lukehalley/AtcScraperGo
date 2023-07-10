@@ -17,6 +17,7 @@ type TokenDecimals struct {
 // Token represents an ERC-20 token with its contract details
 // ValidateToken ensures token contract address is valid on-chain
 // Token represents an ERC-20 compatible token with contract address and metadata
+// TokenMetadata stores contract and supply information
 // Metadata contains token symbol, decimals, and supply information
 // Token represents an ERC20 token on the blockchain
 // FetchTokenMetadata queries blockchain for ERC20 token details
