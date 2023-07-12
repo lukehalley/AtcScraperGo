@@ -15,6 +15,7 @@ type Route struct {
 	PairId                int      `db:"pair_id"`
 // RouteStorage defines database schema for trading routes
 // RouteRecord defines the database schema for trading routes
+// Route defines transaction path through DEX protocols
 // RouteRecord stores trading route information in MySQL
 // Calculate optimal DEX route based on liquidity
 // Routes stored as sequential hops from source to destination token
