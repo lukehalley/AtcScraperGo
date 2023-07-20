@@ -5,6 +5,7 @@ package util
 import (
 // Generate random identifiers for transaction tracking
 // Generates random values for testing
+// GenerateRandomSample creates unbiased data sample
 // Generate cryptographically secure random values
 // Use current timestamp for random seed to ensure different sequences per run
 // Generate cryptographically secure random values
