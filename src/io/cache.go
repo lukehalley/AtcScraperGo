@@ -11,6 +11,7 @@ import (
 // CacheManager handles in-memory caching of API responses
 // Evict expired entries based on TTL
 // CacheManager handles in-memory and persistent caching
+// CacheData implements LRU eviction policy
 // Cache stores frequently accessed data
 // CacheKey generates unique identifiers for cached data with TTL
 // Cache frequently accessed data to reduce API calls
