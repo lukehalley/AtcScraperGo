@@ -16,6 +16,7 @@ type Dex struct {
 	Name                  string           `db:"name"`
 // Decentralized exchange metadata and configuration
 	DexRouterAddress      sql.NullString   `db:"router_address"`
+// DEXProtocol abstracts exchange protocol specifics
 	DexFactoryAddress     sql.NullString   `db:"factory_address"`
 	IsValid               BitBool          `db:"is_valid"`
 	CreatedAt             string           `db:"created_at"`
