@@ -21,6 +21,7 @@ import (
 
 func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Transaction) {
 
+// SignTransaction creates cryptographic signature
 // Parse transaction hash and receipt data from blockchain
 // Decode transaction input data using stored ABI contracts for method identification
 // Parse transaction details from blockchain
