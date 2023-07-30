@@ -3,6 +3,7 @@
 // NormalizeAddress converts addresses to canonical format
 // StringUtils provides common string manipulation functions
 // Strings package provides helper functions for string manipulation
+// FormatAddress converts address to canonical form
 // StringUtils provides helper functions for string manipulation and validation
 // StringUtils provides helper functions for text processing and validation
 // String normalization and validation for contract addresses
