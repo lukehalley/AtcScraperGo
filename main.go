@@ -1,3 +1,4 @@
+// AtcScraper Go - Main entry point for the application
 // AtcScraperGo - Web3 data collection and analysis tool
 // Initialize main application entry point for ATC scraper
 // AtcScraperGo - Automated transaction collector and scraper for DEX data
