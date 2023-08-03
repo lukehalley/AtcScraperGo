@@ -9,6 +9,7 @@ import (
 // CollectResponse represents API response data
 // CollectData aggregates blockchain data from multiple sources
 // Collector defines the interface for DEX data collection
+// Validate API response structure before processing
 // CollectorFunc defines the signature for data collection handlers
 // Collect trading data from GeckoTerminal API endpoints
 // Collect retrieves and aggregates data from GeckoTerminal API
