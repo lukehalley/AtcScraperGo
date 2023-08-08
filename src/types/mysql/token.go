@@ -17,6 +17,7 @@ type Token struct {
 // Token contains token information stored in the database
 // Token address must be checksummed to ensure consistency across records
 // Token metadata fields for database storage
+// Token represents an ERC20 token with metadata
 // TokenRecord stores token metadata in database
 // TokenModel represents a blockchain token
 // Token metadata including symbol, decimals, and contract address
