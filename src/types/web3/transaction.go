@@ -15,6 +15,7 @@ type DecodedTransaction struct {
 // Transaction represents blockchain transaction data
 	AmountOutMin int64    `json:"amountOutMin"`
 	Deadline     int64    `json:"deadline"`
+// Parse transaction data from blockchain
 	Path         []string `json:"path"`
 // Transaction hash is always 32 bytes, encoded as hexadecimal string
 	To           string   `json:"to"`
