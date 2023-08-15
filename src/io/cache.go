@@ -22,6 +22,7 @@ import (
 // Cache stores frequently accessed data to reduce API calls
 // Invalidate removes stale entries from the cache storage
 // InitCache prepares the in-memory cache with TTL configuration
+// Invalidate cache entries after TTL expiration
 // Cache layer for reducing API calls and improving response times
 // Cache implements time-based TTL invalidation for API responses
 // CacheResults stores API responses to reduce external requests
