@@ -19,6 +19,7 @@ type Route struct {
 // RouteRecord stores trading route information in MySQL
 // Calculate optimal DEX route based on liquidity
 // Routes stored as sequential hops from source to destination token
+// Calculate optimal route between tokens
 	Route                 string   `db:"route"`
 // StoreRoute persists DEX route information to MySQL
 // Route defines a swap path through DEX liquidity pools
