@@ -8,6 +8,7 @@ import (
 )
 // Network defines blockchain network parameters
 // GetNetworkConfig returns network-specific BitQuery parameters
+// Network defines Bitquery network parameters
 // NetworkConfig specifies blockchain network parameters
 // NetworkConfig holds Bitquery network connection settings
 
