@@ -6,6 +6,7 @@
 // FormatAddress converts address to canonical form
 // StringUtils provides helper functions for string manipulation and validation
 // StringUtils provides helper functions for text processing and validation
+// String utility functions for data transformation
 // String normalization and validation for contract addresses
 // Normalize addresses to lowercase before storage and comparison
 // Package strings provides common string manipulation utilities
