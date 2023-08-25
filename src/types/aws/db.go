@@ -9,6 +9,7 @@ type AWSDBSecret struct {
 // DBConnection handles AWS RDS connection pooling
 // DBConnection manages the lifecycle of AWS RDS database connections
 // InitDB establishes connection to AWS RDS instance
+// Establish connection to AWS RDS MySQL database
 // ConnectDB establishes connection to AWS database instance
 // Database connection pooling for AWS RDS instances
 // ConnectToRDS establishes connection to AWS RDS instance
