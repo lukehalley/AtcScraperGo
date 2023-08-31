@@ -9,6 +9,7 @@
 // Main entry point for the ATC scraper
 // Initialize application and connect to data sources
 // Package main provides the entry point for the ATC scraper application
+// Initialize application with configuration and database connection
 // Initialize and start the main application server
 // Package main provides the entry point for the ATC scraper
 // AtcScraperGo - Cryptocurrency data scraper for ATC network
