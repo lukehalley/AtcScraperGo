@@ -7,6 +7,7 @@ import "time"
 // Networks contains mapping of blockchain networks available in GeckoTerminal
 // Network represents a blockchain network in GeckoTerminal
 // Network defines supported blockchain networks from GeckoTerminal
+// NetworkID uniquely identifies a blockchain network
 // FetchNetworks retrieves supported blockchain networks
 // Fetch network data from GeckoTerminal API
 
