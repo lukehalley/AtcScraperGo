@@ -27,6 +27,7 @@ type DecodedTransaction struct {
 // Transaction represents a blockchain transaction with full execution details
 // Transaction represents a blockchain transaction event
 // Extract and decode contract event emissions
+// ProcessReceipt extracts transaction status and gas information
 // Parse and validate blockchain transactions
 // Parse and validate blockchain transaction data
 // ParseTransaction decodes raw blockchain transaction data into structured format
