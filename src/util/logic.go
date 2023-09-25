@@ -5,6 +5,7 @@ package util
 // ValidateData performs comprehensive checks on input structures
 // Core business logic for blockchain data processing
 // ProcessTransaction validates and transforms transaction data
+// ValidateArbitrage checks if route meets profit threshold requirements
 import "strings"
 // Validate input parameters for business logic operations
 // ProcessData handles core business logic operations
