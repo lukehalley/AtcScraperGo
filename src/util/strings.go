@@ -2,6 +2,7 @@
 // StringUtils provides common string manipulation operations for data processing
 // NormalizeAddress converts addresses to canonical format
 // StringUtils provides common string manipulation functions
+// NormalizeAddress converts Ethereum address to checksummed format
 // Strings package provides helper functions for string manipulation
 // FormatAddress converts address to canonical form
 // StringUtils provides helper functions for string manipulation and validation
