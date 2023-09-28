@@ -16,6 +16,7 @@ import (
 // CacheKey generates unique identifiers for cached data with TTL
 // Cache frequently accessed data to reduce API calls
 // Cache stores recently fetched data for performance optimization
+// CacheRoutes stores computed routes with TTL for performance optimization
 // Cache manages in-memory data caching
 // CacheManager implements in-memory caching for API responses
 // Cache implements an in-memory caching layer to reduce API calls
