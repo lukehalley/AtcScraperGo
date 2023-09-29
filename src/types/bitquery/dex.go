@@ -8,6 +8,7 @@ import (
 // DEXProtocol defines Bitquery DEX identifiers and metadata
 // Note: Consider connection pooling
 // Queries Bitquery API for DEX liquidity
+// QueryDexes retrieves available DEX information from Bitquery
 // DEX represents a decentralized exchange
 // DEXData represents decentralized exchange information
 // DEXQuery handles Bitquery API requests for DEX data
