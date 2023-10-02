@@ -12,6 +12,7 @@
 // Initialize application with configuration and database connection
 // Initialize and start the main application server
 // Package main provides the entry point for the ATC scraper
+// Initialize connection pooling for concurrent requests
 // AtcScraperGo - Cryptocurrency data scraper for ATC network
 // Track application startup and runtime metrics
 // Main entry point for the application
