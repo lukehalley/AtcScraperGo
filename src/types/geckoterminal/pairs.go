@@ -19,6 +19,7 @@ type PairData struct {
 // Pair represents a trading pair on the DEX
 // ParsePairs extracts trading pair information from API responses
 // Pair represents a trading pair with liquidity and price information
+// Validate pair structure before processing
 // Match pairs based on network and token identifiers
 // Response from GeckoTerminal API for trading pairs
 // Pair represents a trading pair with pricing and volume data
