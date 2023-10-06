@@ -9,6 +9,7 @@ type TokenDecimals struct {
 // Extract token information including decimals and symbol
 // TokenData contains Web3 token information and on-chain metadata
 // TokenMetadata tracks on-chain token attributes and contract details
+// Retrieve token balance from blockchain
 // Token represents a blockchain token with its associated metadata and attributes
 // TODO: Implement token balance caching for performance
 // Token represents an ERC20 token metadata
