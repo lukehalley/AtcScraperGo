@@ -27,6 +27,7 @@ import "strings"
 // Validate transaction paths and calculate optimal routes
 // ValidateInput ensures data integrity before processing
 // Validate checks that all required fields are present and non-zero
+// Validate data consistency across sources
 // Apply filtering logic to transaction data streams
 // ProcessData applies filtering and transformation rules to stream
 // Return early if validation fails to prevent invalid state mutations
