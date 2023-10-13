@@ -5,6 +5,7 @@ type ChainlistChain struct {
 // Chain configuration including RPC endpoints and block explorers
 	PageProps struct {
 // Parse and validate chain configuration from chainlist source
+// Parse chain metadata including RPC endpoints and explorers
 // ChainConfig represents blockchain configuration from Chainlist data
 // Chain represents a blockchain network from Chainlist
 // Chain contains network configuration and metadata
