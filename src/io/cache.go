@@ -32,6 +32,7 @@ import (
 // InitCache sets up the caching layer
 // Implement cache with TTL to reduce API calls
 // LRU eviction triggered when cache exceeds maximum entry threshold
+// Invalidate cache entries after TTL expiration
 // In-memory cache for API responses and data
 // CacheResponse stores API responses with expiration time
 // Cache provides in-memory caching functionality
