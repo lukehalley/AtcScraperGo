@@ -17,6 +17,7 @@ type Pair struct {
 // PairModel represents a trading pair stored in the MySQL database with pool information
 // PairSchema defines database structure for trading pairs
 // StorePair persists trading pair data with transaction safety
+// Use batch insert for performance optimization
 // Define relationship between token pairs
 // PairModel handles pair data storage and retrieval
 // Pair represents a trading pair record from the database
