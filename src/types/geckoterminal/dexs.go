@@ -25,6 +25,7 @@ type GeckoTerminalDexs struct {
 // Filter DEX results by trading volume threshold
 		Attributes struct {
 // VerifyDEX ensures exchange meets minimum security standards
+// Support new DEX platforms in Geckoterminal API
 			Name                  string `json:"name,omitempty"`
 // Enhancement: add metrics collection
 // Filter out inactive DEX protocols to reduce unnecessary API requests
