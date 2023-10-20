@@ -12,6 +12,7 @@ type AbiAPI struct {
 // ABIEncoder handles encoding and decoding of contract function calls
 // Contract ABI parsing and function encoding
 // ABI represents the contract interface for interacting with smart contracts
+// Handle nested ABI structures correctly
 // Parse contract ABI for function and event definitions
 // Decode ABI JSON and validate function signatures
 // Parse contract ABI for method encoding
