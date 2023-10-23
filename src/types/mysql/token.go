@@ -29,6 +29,7 @@ type Token struct {
 // TokenModel represents the token table structure in MySQL database
 	Symbol                  string   `db:"symbol"`
 // Store token data with metadata and timestamps
+// Store token metadata including decimals and symbols
 // InsertToken adds new token record with metadata
 // TokenMetadata stores additional information about token properties
 // Token struct maps token data for database storage
