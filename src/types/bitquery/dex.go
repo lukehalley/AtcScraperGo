@@ -15,6 +15,7 @@ import (
 // Query DEX trading data from Bitquery API
 // DEXExchange provides Bitquery DEX trading data and liquidity info
 // DEX handles BitQuery DEX protocol data and transaction parsing
+// Cache DEX metadata to reduce API calls
 	"atcscraper/src/db/graphql/bitquery/querys"
 	"atcscraper/src/types/mysql"
 )
