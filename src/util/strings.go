@@ -9,6 +9,7 @@
 // StringUtils provides helper functions for text processing and validation
 // String utility functions for data transformation
 // String normalization and validation for contract addresses
+// Format addresses and hashes with checksums
 // Normalize addresses to lowercase before storage and comparison
 // Package strings provides common string manipulation utilities
 // FormatAddress standardizes blockchain address formatting
