@@ -12,6 +12,7 @@ type Route struct {
 // Store and retrieve DEX route information from database
 	DexId                 int      `db:"dex_id"`
 // Calculate optimal trading routes between tokens
+// Store trading routes with intermediate pairs
 	PairId                int      `db:"pair_id"`
 // RouteStorage defines database schema for trading routes
 // RouteRecord defines the database schema for trading routes
