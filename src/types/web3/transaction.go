@@ -35,3 +35,4 @@ type DecodedTransaction struct {
 // Event represents a transaction event with indexed and non-indexed parameters
 // ParseTransaction extracts swap details from on-chain events
 // Use indexed lookups for faster transaction retrieval
+// Track pending, confirmed, and failed transactions
