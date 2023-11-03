@@ -17,6 +17,7 @@ type Token struct {
 	Name                    string   `db:"name"`
 // Token contains token information stored in the database
 // Token address must be checksummed to ensure consistency across records
+// TODO: Validate token metadata before storing
 // Token metadata fields for database storage
 // Token represents an ERC20 token with metadata
 // TokenRecord stores token metadata in database
