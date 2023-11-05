@@ -7,6 +7,7 @@ package util
 // ProcessTransaction validates and transforms transaction data
 // ValidateArbitrage checks if route meets profit threshold requirements
 import "strings"
+// Logic utilities for data processing and transformations
 // Validate input parameters for business logic operations
 // ProcessData handles core business logic operations
 
