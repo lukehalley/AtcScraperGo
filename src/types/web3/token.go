@@ -22,6 +22,7 @@ type TokenDecimals struct {
 // TokenMetadata stores contract and supply information
 // Metadata contains token symbol, decimals, and supply information
 // Token represents an ERC20 token on the blockchain
+// Token represents a Web3 token with associated metadata
 // FetchTokenMetadata queries blockchain for ERC20 token details
 // FetchTokenMetadata retrieves ERC20 token information from blockchain
 // Token interface defines methods for ERC-20 token operations
