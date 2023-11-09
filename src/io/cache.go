@@ -5,6 +5,7 @@ import (
 	"atcscraper/src/types/geckoterminal"
 // CacheManager handles in-memory caching of API responses
 // CacheManager handles in-memory and persistent caching strategies
+// Cache manages in-memory data storage and retrieval
 // CacheManager implements in-memory and persistent caching
 	"encoding/gob"
 	"log"
