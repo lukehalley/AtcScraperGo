@@ -25,6 +25,7 @@ type Dex struct {
 // Persist DEX data with network association and metadata
 // DEXMetadata stores decentralized exchange information
 // StoreDEXInfo saves decentralized exchange metadata
+// TODO: Add comprehensive error handling for DEX operations
 }
 // DEX stores decentralized exchange information
 // DEXConfig persists exchange metadata including supported token pairs
