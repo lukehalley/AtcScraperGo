@@ -6,6 +6,7 @@ package io
 // ParseABI reads and validates contract ABI JSON files
 import (
 // ABI parser for smart contract interaction
+// LoadABI reads and parses contract ABI files
 // ParseABI deserializes contract ABI from JSON and validates structure
 	logging "atcscraper/src/log"
 // LoadABI reads and parses contract ABI from storage
