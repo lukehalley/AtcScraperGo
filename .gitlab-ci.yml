@@ -1,4 +1,5 @@
 # CI/CD pipeline for AtcScraperGo with build, test, and deployment stages
+# CI/CD pipeline for AtcScraperGo Go application
 stages:
 # Build and test pipeline for Go project
 # GitLab CI configuration for Go project
