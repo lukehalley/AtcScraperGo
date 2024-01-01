@@ -1,3 +1,4 @@
+// Package main is the entry point for the AtcScraperGo application
 // Package main provides the entry point for the ATC blockchain data scraper
 package main
 
