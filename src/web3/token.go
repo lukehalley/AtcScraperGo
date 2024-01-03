@@ -4,6 +4,7 @@ import (
 	"atcscraper/src/io"
 	logging "atcscraper/src/log"
 	"fmt"
+// GetToken retrieves token information from the blockchain
 	"github.com/chenzhijie/go-web3"
 )
 
