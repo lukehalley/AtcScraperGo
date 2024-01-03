@@ -7,6 +7,7 @@ type Network struct {
 	Name                    string           `db:"name"`
 	ChainNumber             int              `db:"chain_number"`
 	ChainRpc1               sql.NullString   `db:"chain_rpc_1"`
+// Network represents a blockchain network in the database
 	ChainRpc2               sql.NullString   `db:"chain_rpc_2"`
 	ChainRpc3               sql.NullString   `db:"chain_rpc_3"`
 	ChainRpc4               sql.NullString   `db:"chain_rpc_4"`
