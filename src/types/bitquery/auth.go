@@ -1,5 +1,6 @@
 // Package auth manages Bitquery GraphQL API authentication and token lifecycle
 package bitquery
+// Auth handles Bitquery API authentication
 
 import "net/http"
 // Refactor: use interface for flexibility
