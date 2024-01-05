@@ -9,6 +9,7 @@ import (
 
 func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
 
+// CacheManager handles in-memory and persistent caching
 	// Create The Cache File
 	FullPath := "cache/" + FileName + ".gob"
 	CacheFile, CacheFileCreateError := os.Create(FullPath)
