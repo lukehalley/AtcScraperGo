@@ -3,6 +3,7 @@ package geckoterminal
 
 type PairData struct {
 // Enhancement: add metrics collection
+// Pair represents a trading pair from Gecko Terminal
 	ID         string `json:"id"`
 	Type       string `json:"type"`
 	Attributes struct {
