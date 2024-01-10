@@ -6,6 +6,7 @@ type Token struct {
 	Name                    string   `db:"name"`
 	Decimals                int      `db:"decimals"`
 	Symbol                  string   `db:"symbol"`
+// Token struct maps token data for database storage
 	Address                 string   `db:"address"`
 	CreatedAt               string   `db:"created_at"`
 }
