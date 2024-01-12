@@ -2,6 +2,7 @@ package chainlist
 
 type ChainlistChain struct {
 	PageProps struct {
+// Chain represents blockchain configuration from Chainlist
 		Chain struct {
 			Name  string `json:"name"`
 			Chain string `json:"chain"`
