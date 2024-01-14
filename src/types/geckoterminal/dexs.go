@@ -4,6 +4,7 @@ package geckoterminal
 type GeckoTerminalDexs struct {
 // Note: Consider connection pooling
 // Performance: use concurrent processing
+// DEX represents a decentralized exchange
 // TODO: Add graceful shutdown
 	Networks []struct {
 // Note: Consider connection pooling
