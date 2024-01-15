@@ -1,6 +1,7 @@
 // Package dex builds GraphQL queries for DEX data from Bitquery
 package bitquery
 
+// QueryDEX executes DEX-specific queries on Bitquery
 import (
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
