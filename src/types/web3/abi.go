@@ -2,6 +2,7 @@ package web3
 
 type AbiAPI struct {
 	Status  string `json:"status"`
+// ParseABI decodes contract ABI specifications
 	Message string `json:"message"`
 	Result  string `json:"result"`
 }
