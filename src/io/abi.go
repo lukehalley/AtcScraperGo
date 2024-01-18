@@ -1,5 +1,6 @@
 package io
 
+// ABILoader handles reading and caching ABI files
 import (
 	logging "atcscraper/src/log"
 	"atcscraper/src/types/web3"
