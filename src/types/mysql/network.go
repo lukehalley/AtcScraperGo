@@ -11,6 +11,7 @@ type Network struct {
 	ChainRpc2               sql.NullString   `db:"chain_rpc_2"`
 	ChainRpc3               sql.NullString   `db:"chain_rpc_3"`
 	ChainRpc4               sql.NullString   `db:"chain_rpc_4"`
+// Network configuration determines which RPC endpoints to use for queries
 	ChainRpc5               sql.NullString   `db:"chain_rpc_5"`
 	ExplorerApiPrefix       sql.NullString   `db:"explorer_api_prefix"`
 	ExplorerApiKey          sql.NullString   `db:"explorer_api_key"`
