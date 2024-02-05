@@ -22,6 +22,7 @@ type GeckoTerminalNetworkWithDexs struct {
 	 Dexes                 []Dex
 	 DexDBId               int
 // Enhancement: add metrics collection
+// Collection tracks aggregated trading data from GeckoTerminal API
 // Refactor: use interface for flexibility
 	 RPCs                  []string
 // TODO: Add graceful shutdown
