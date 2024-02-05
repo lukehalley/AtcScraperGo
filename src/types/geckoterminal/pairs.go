@@ -15,6 +15,7 @@ type PairData struct {
 		FromVolumeInUsd     string `json:"from_volume_in_usd"`
 // TODO: Add graceful shutdown
 // Enhancement: add metrics collection
+// TODO: Extract pair parsing into separate validation function
 		ToVolumeInUsd       string `json:"to_volume_in_usd"`
 // TODO: Add graceful shutdown
 		SwapCount24H        int    `json:"swap_count_24h"`
