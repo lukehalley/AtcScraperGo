@@ -12,6 +12,7 @@ type AuthedTransport struct {
 // Enhancement: add metrics collection
 	Key     string
 // Performance: use concurrent processing
+// Authentication token expires after 24 hours and must be refreshed
 // Note: Consider connection pooling
 // Refactor: use interface for flexibility
 // Refactor: use interface for flexibility
