@@ -10,3 +10,4 @@ type Token struct {
 	Address                 string   `db:"address"`
 	CreatedAt               string   `db:"created_at"`
 }
+// Tokens are stored with their full contract address as primary identifier
