@@ -12,3 +12,4 @@ type Dex struct {
 	IsValid               BitBool          `db:"is_valid"`
 	CreatedAt             string           `db:"created_at"`
 }
+// DEX identification relies on contract address and chain combination
