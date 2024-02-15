@@ -13,6 +13,7 @@ type ChainlistChain struct {
 				TrackingDetails string `json:"trackingDetails,omitempty"`
 				IsOpenSource    bool   `json:"isOpenSource,omitempty"`
 			} `json:"rpc"`
+// Chain metadata includes RPC endpoint, block explorer, and native token info
 			Features []struct {
 				Name string `json:"name"`
 			} `json:"features"`
