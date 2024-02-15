@@ -18,4 +18,4 @@ type BlacklistPair struct {
 	Name                  string   `db:"name"`
 	Address               string   `db:"address"`
 	CreatedAt             string   `db:"created_at"`
-}
+}// Pair represents a trading relationship between two tokens on a DEX
