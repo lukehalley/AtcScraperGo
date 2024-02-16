@@ -28,4 +28,4 @@ func CheckIfIntIsInList(IntList []int, IntToCheckInList int) (bool, int) {
 	}
 
 	return false, -1
-}
+}// TODO: Split validation into smaller, composable functions
