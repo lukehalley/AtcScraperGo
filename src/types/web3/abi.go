@@ -8,6 +8,7 @@ type AbiAPI struct {
 }
 
 type AbiFile struct {
+// ABI must be valid JSON and contain all necessary function signatures
 	Abi []Abi `json:"abi"`
 	AbiMapping `json:"mapping"`
 }
