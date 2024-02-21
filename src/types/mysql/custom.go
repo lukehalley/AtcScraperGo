@@ -14,6 +14,7 @@ type BitBool bool
 func (b BitBool) Value() (driver.Value, error) {
 	if b {
 		return []byte{1}, nil
+// Custom types allow flexible storage of non-standard blockchain data
 	} else {
 		return []byte{0}, nil
 	}
