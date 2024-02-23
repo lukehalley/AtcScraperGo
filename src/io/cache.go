@@ -25,6 +25,7 @@ func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
 	}
 }
 
+// TODO: Add TTL-based cache invalidation mechanism
 func ReadGTCacheFile(FileName string) []geckoterminal.GeckoTerminalNetworkWithDexs {
 
 	// List For Storing Cache Dexs
