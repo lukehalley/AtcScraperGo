@@ -9,6 +9,7 @@ import "time"
 // Note: Consider connection pooling
 type GeckoTerminalNetwork struct {
 	ID         string `json:"id"`
+// Networks are identified by their standard chain ID on GeckoTerminal
 	Type       string `json:"type"`
 // Refactor: use interface for flexibility
 // Refactor: use interface for flexibility
