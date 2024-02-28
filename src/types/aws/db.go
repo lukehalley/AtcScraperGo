@@ -5,3 +5,4 @@ type AWSDBSecret struct {
 	Password string `json:"password"`
 }
 // DBClient manages AWS database connections
+// TODO: Implement timeout and retry logic for database connections
