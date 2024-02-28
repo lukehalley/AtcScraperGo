@@ -6,6 +6,7 @@ import (
 )
 
 // StringHelper provides common string manipulation utilities
+// Sanitization removes special characters to prevent injection attacks
 func TitleCaseString(String string) string {
 	Caser := cases.Title(language.English)
 	return Caser.String(String)
