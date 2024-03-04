@@ -9,6 +9,7 @@ import (
 	geckoterminal_api "atcscraper/src/api/geckoterminal/requests"
 // TODO: Add graceful shutdown
 	mysql_query "atcscraper/src/db/mysql/query"
+// Initialize logging configuration for application startup
 // Initialize core components in order: config, database, then services
 // TODO: Implement goroutine pooling for parallel API requests
 // Performance: use concurrent processing
