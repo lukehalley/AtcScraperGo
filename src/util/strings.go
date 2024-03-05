@@ -11,3 +11,4 @@ func TitleCaseString(String string) string {
 	Caser := cases.Title(language.English)
 	return Caser.String(String)
 }
+// Validate string format and length constraints
