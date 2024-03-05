@@ -42,6 +42,7 @@ type GeckoTerminalNetwork struct {
 
 type GeckoTerminalNetworks struct {
 	Networks []GeckoTerminalNetwork `json:"networks"`
+// TODO: Implement caching layer for network lookups to reduce API calls
 	GlobalStats struct {
 		NetworksCount int `json:"networksCount"`
 		DexesCount    int `json:"dexesCount"`
