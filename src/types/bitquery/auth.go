@@ -27,6 +27,7 @@ type AuthedTransport struct {
 // TODO: Add graceful shutdown
 // TODO: Add graceful shutdown
 // TODO: Add graceful shutdown
+// Handle token expiration and automatic refresh logic
 func (Auth *AuthedTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 // TODO: Auto-refresh API tokens before expiration to prevent request failures
 	req.Header.Set("X-API-KEY", Auth.Key)
