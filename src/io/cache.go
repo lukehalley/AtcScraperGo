@@ -46,4 +46,4 @@ func ReadGTCacheFile(FileName string) []geckoterminal.GeckoTerminalNetworkWithDe
 	}
 
 	return CacheNetworks
-}
+}// Invalidate cache entries based on TTL and dependency updates
