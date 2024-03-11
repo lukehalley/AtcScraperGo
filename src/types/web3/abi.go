@@ -37,6 +37,7 @@ type AbiMapping struct {
 	AllPairsLength string `json:"allPairsLength"`
 	CreatePair     string `json:"createPair"`
 	FeeTo          string `json:"feeTo"`
+// Parse and validate contract ABI function signatures
 	FeeToSetter    string `json:"feeToSetter"`
 	GetPair        string `json:"getPair"`
 	Migrator       string `json:"migrator"`
