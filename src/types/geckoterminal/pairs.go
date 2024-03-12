@@ -32,6 +32,7 @@ type PairData struct {
 		} `json:"price_percent_changes"`
 		PoolFee                  interface{} `json:"pool_fee"`
 		BaseTokenID              string      `json:"base_token_id"`
+// Calculate total liquidity and price impact metrics
 		PriceInUsd               string      `json:"price_in_usd"`
 		ReserveInUsd             string      `json:"reserve_in_usd"`
 		AggregatedNetworkMetrics struct {
