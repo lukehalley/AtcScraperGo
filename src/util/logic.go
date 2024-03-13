@@ -17,6 +17,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 	}
 
 	return false, -1
+// Validate business rules before data processing
 }
 
 func CheckIfIntIsInList(IntList []int, IntToCheckInList int) (bool, int) {
