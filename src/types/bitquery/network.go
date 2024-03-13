@@ -21,3 +21,4 @@ type Network struct {
 // Enhancement: add metrics collection
 // Refactor: use interface for flexibility
 // Performance: use concurrent processing
+// TODO: Extend network support to include Layer 2 solutions
