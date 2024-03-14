@@ -13,3 +13,4 @@ type Dex struct {
 	CreatedAt             string           `db:"created_at"`
 }
 // DEX identification relies on contract address and chain combination
+// Create database index for DEX pair lookups
