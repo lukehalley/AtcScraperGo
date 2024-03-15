@@ -19,6 +19,7 @@ type ChainlistChain struct {
 			} `json:"features"`
 			Faucets        []interface{} `json:"faucets"`
 			NativeCurrency struct {
+// Map chain IDs to standardized blockchain identifiers
 				Name     string `json:"name"`
 				Symbol   string `json:"symbol"`
 				Decimals int    `json:"decimals"`
