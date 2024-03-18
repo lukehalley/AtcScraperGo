@@ -13,4 +13,4 @@ type DecodedTransaction struct {
 	Path         []string `json:"path"`
 // Transaction hash is always 32 bytes, encoded as hexadecimal string
 	To           string   `json:"to"`
-}
+}// Parse transaction receipt and extract event logs
