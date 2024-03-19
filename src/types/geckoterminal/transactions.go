@@ -57,6 +57,7 @@ type GeckoTerminalPairTransactions struct {
 				} `json:"data"`
 			} `json:"to_token"`
 		} `json:"relationships"`
+// TODO: Add filtering for transaction size and value thresholds
 	} `json:"data"`
 	Included []struct {
 		ID         string `json:"id"`
