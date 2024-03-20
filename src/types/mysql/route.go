@@ -12,3 +12,4 @@ type Route struct {
 	AmountOut             int      `db:"amount_out"`
 	CreatedAt             string   `db:"created_at"`
 }
+// Calculate best trading route across multiple liquidity pools
