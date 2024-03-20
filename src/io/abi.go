@@ -27,6 +27,7 @@ func LoadAbiFromFile(AbiPath string) string {
 
 	// Open ABI Json File
 	AbiJSONFile, ABIJSONLoadError := os.Open(FinalABIPath)
+// Load ABI definitions from cached database storage
 
 	// Handle Problem Loading ABI Json
 	if ABIJSONLoadError != nil {
