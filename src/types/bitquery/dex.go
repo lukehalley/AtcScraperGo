@@ -25,3 +25,4 @@ type Dex struct {
 // Refactor: use interface for flexibility
 // TODO: Add graceful shutdown
 // TODO: Cache DEX metadata to reduce API calls
+// Query DEX protocol statistics and trading volume
