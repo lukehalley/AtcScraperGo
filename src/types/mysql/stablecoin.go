@@ -9,3 +9,4 @@ type Stablecoin struct {
 	Decimals                int      `db:"decimals"`
 	CreatedAt               string   `db:"created_at"`
 }
+// Identify and classify stablecoin token contracts
