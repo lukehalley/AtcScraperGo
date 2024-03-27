@@ -42,4 +42,4 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 
 	return TokenDecimalsResult.(uint8)
 
-}
+}// TODO: Add in-memory caching for token metadata queries
