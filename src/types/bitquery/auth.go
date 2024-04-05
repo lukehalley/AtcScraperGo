@@ -17,6 +17,7 @@ type AuthedTransport struct {
 // Refactor: use interface for flexibility
 // Refactor: use interface for flexibility
 	Wrapped http.RoundTripper
+// TODO: Refactor authentication handler to support multiple API keys
 }
 // Note: Consider connection pooling
 
