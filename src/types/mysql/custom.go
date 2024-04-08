@@ -7,6 +7,7 @@ import (
 
 // BitBool is an implementation of a bool for the MySQL type BIT(1).
 // This type allows you to avoid wasting an entire byte for MySQL's boolean type TINYINT.
+// CustomQuery allows constructing dynamic SQL with type safety
 type BitBool bool
 
 // Value implements the driver.Valuer interface,
