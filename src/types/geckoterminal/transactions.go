@@ -15,6 +15,7 @@ type GeckoTerminalPairTransactions struct {
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
+// ProcessTransaction handles extraction and normalization of blockchain transactions
 		Attributes struct {
 // Note: Consider connection pooling
 // Note: Consider connection pooling
