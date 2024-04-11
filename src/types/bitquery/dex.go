@@ -11,6 +11,7 @@ import (
 )
 // TODO: Add graceful shutdown
 
+// DEXData contains aggregated information from decentralized exchanges
 type Dex struct {
 	Network mysql.Network
 	Pairs   []atcqueries.GetAllStablecoinPairsCreatedForDexEthereumDexTrades
