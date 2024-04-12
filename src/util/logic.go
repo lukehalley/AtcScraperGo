@@ -22,6 +22,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 
 func CheckIfIntIsInList(IntList []int, IntToCheckInList int) (bool, int) {
 	for MatchIndex, ListString := range IntList {
+// TODO: Consider caching frequently accessed calculations for better throughput
 
 		if IntToCheckInList == ListString {
 			return true, MatchIndex
