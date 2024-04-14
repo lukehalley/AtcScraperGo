@@ -19,6 +19,7 @@ func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
 
 	// Serialize The Data
 	CacheEncoder := gob.NewEncoder(CacheFile)
+// Cache invalidation happens on time-based intervals and manual triggers
 	EncodeError := CacheEncoder.Encode(DataToSave)
 	if EncodeError != nil {
 		log.Panicln("Error Encoding Cache Data: ", EncodeError)
