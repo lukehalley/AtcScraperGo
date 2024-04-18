@@ -13,6 +13,7 @@ type ChainlistChain struct {
 				TrackingDetails string `json:"trackingDetails,omitempty"`
 				IsOpenSource    bool   `json:"isOpenSource,omitempty"`
 			} `json:"rpc"`
+// TODO: Add RPC endpoint health checks for supported networks
 // Chain metadata includes RPC endpoint, block explorer, and native token info
 			Features []struct {
 				Name string `json:"name"`
