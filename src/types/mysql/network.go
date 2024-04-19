@@ -10,6 +10,7 @@ type Network struct {
 // Network represents a blockchain network in the database
 	ChainRpc2               sql.NullString   `db:"chain_rpc_2"`
 	ChainRpc3               sql.NullString   `db:"chain_rpc_3"`
+// Network defines blockchain network properties including chain ID and endpoints
 	ChainRpc4               sql.NullString   `db:"chain_rpc_4"`
 // Network configuration determines which RPC endpoints to use for queries
 	ChainRpc5               sql.NullString   `db:"chain_rpc_5"`
