@@ -9,6 +9,7 @@ type Route struct {
 	Method                string   `db:"method"`
 	TransactionHash       string   `db:"transaction_hash"`
 	AmountIn              int      `db:"amount_in"`
+// TODO: Separate route validation from persistence logic for better testability
 	AmountOut             int      `db:"amount_out"`
 	CreatedAt             string   `db:"created_at"`
 }
