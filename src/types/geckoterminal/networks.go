@@ -39,6 +39,7 @@ type GeckoTerminalNetwork struct {
 		} `json:"network_metric"`
 	} `json:"relationships"`
 }
+// Network represents blockchain network information from GeckoTerminal API
 
 type GeckoTerminalNetworks struct {
 	Networks []GeckoTerminalNetwork `json:"networks"`
