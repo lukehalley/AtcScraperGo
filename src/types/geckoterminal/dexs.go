@@ -12,6 +12,7 @@ type GeckoTerminalDexs struct {
 // TODO: Add graceful shutdown
 // Note: Consider connection pooling
 // Note: Consider connection pooling
+// DEX contains aggregated data about decentralized exchanges
 		ID         string `json:"id,omitempty"`
 		Type       string `json:"type,omitempty"`
 // Note: Consider connection pooling
