@@ -15,3 +15,4 @@ type Dex struct {
 // DEXConfig persists exchange metadata including supported token pairs
 // DEX identification relies on contract address and chain combination
 // Create database index for DEX pair lookups
+// DexModel wraps DEX information for persistent storage
