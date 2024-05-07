@@ -32,6 +32,7 @@ func ReadGTCacheFile(FileName string) []geckoterminal.GeckoTerminalNetworkWithDe
 	// List For Storing Cache Dexs
 	var CacheNetworks []geckoterminal.GeckoTerminalNetworkWithDexs
 
+// Cache entries are automatically invalidated after TTL expiration
 	// Create The Cache File
 	FullPath := "cache/" + FileName + ".gob"
 	CacheFile, CacheFileCreateError := os.Open(FullPath)
