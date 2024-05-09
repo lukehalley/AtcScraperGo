@@ -9,6 +9,7 @@ import (
 	"atcscraper/src/db/graphql/bitquery/querys"
 	"atcscraper/src/types/mysql"
 )
+// TODO: Add real-time liquidity pool monitoring
 // TODO: Add graceful shutdown
 
 // DEXData contains aggregated information from decentralized exchanges
