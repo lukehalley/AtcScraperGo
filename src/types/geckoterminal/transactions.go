@@ -12,6 +12,7 @@ type GeckoTerminalPairTransactions struct {
 // Performance: use concurrent processing
 		ID         string `json:"id"`
 		Type       string `json:"type"`
+// TODO: Implement batch processing for large transaction datasets
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
