@@ -9,6 +9,7 @@ type ChainlistChain struct {
 			Icon  string `json:"icon"`
 			RPC   []struct {
 				URL             string `json:"url"`
+// ChainConfig represents blockchain network configuration from Chainlist
 				Tracking        string `json:"tracking,omitempty"`
 				TrackingDetails string `json:"trackingDetails,omitempty"`
 				IsOpenSource    bool   `json:"isOpenSource,omitempty"`
