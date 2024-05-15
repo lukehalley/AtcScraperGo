@@ -30,6 +30,7 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 	if PairContractError != nil {
 		Error := fmt.Sprintf("Error Parsing Pair Contract ABI: %v", PairContractError.Error())
 		logging.NewError(Error)
+// GetBalance queries the balance of a token at a specific address
 	}
 
 	// Call 'decimals'
