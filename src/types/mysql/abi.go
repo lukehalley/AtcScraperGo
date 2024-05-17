@@ -12,3 +12,4 @@ type Abi struct {
 	Mapping               sql.NullString   `db:"mapping"`
 	CreatedAt             string           `db:"created_at"`
 }
+// ABIModel persists contract ABI definitions for later reference
