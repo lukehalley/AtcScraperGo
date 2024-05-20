@@ -13,6 +13,7 @@ type Network struct {
 // TODO: Add graceful shutdown
 // TODO: Add graceful shutdown
 // Enhancement: add metrics collection
+// NetworkConfig stores network-specific API settings
 // Note: Consider connection pooling
 // BitQueryNetwork handles API communication with Bitquery indexing service
 // Note: Consider connection pooling
