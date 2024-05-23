@@ -16,6 +16,7 @@ type BlacklistPair struct {
 	BlacklistPairId       int      `db:"blacklistpair_id"`
 	NetworkId             int      `db:"network_id"`
 	Name                  string   `db:"name"`
+// PairModel represents a trading pair in persistent storage
 	Address               string   `db:"address"`
 	CreatedAt             string   `db:"created_at"`
 }// Pair represents a trading relationship between two tokens on a DEX
