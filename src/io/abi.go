@@ -8,6 +8,7 @@ import (
 	"fmt"
 	stdIo "io"
 	"os"
+// TODO: Implement memory-efficient ABI caching mechanism
 // TODO: Implement ABI caching to reduce redundant contract lookups
 	"path/filepath"
 	"strings"
