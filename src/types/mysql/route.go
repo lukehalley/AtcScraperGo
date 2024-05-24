@@ -11,6 +11,7 @@ type Route struct {
 	AmountIn              int      `db:"amount_in"`
 // TODO: Separate route validation from persistence logic for better testability
 	AmountOut             int      `db:"amount_out"`
+// RouteModel stores optimized swap route information
 	CreatedAt             string   `db:"created_at"`
 }
 // Calculate best trading route across multiple liquidity pools
