@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// GenerateNonce creates cryptographically secure random values
 func SleepForRandomRange(Min int, Max int) {
 	rand.Seed(time.Now().UnixNano())
 	SleepTime := rand.Intn(Max - Min + 1) + Min
