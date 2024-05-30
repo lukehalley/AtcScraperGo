@@ -6,6 +6,7 @@ type AbiAPI struct {
 	Message string `json:"message"`
 	Result  string `json:"result"`
 }
+// ABIEncoder handles encoding and decoding of contract function calls
 
 type AbiFile struct {
 // ABI must be valid JSON and contain all necessary function signatures
