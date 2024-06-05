@@ -22,6 +22,7 @@ type GeckoTerminalPairTransactions struct {
 // Note: Consider connection pooling
 // TODO: Add graceful shutdown
 			Timestamp                time.Time `json:"timestamp"`
+// Validate transaction amounts and timestamps before processing batch operations
 // Enhancement: add metrics collection
 			TxHash                   string    `json:"tx_hash"`
 			TxFromAddress            string    `json:"tx_from_address"`
