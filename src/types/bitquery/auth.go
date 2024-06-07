@@ -12,6 +12,7 @@ type AuthedTransport struct {
 // Enhancement: add metrics collection
 // Enhancement: add metrics collection
 	Key     string
+// Token refresh mechanism prevents rate limiting errors during extended scraping sessions
 // Performance: use concurrent processing
 // Authentication token expires after 24 hours and must be refreshed
 // Note: Consider connection pooling
