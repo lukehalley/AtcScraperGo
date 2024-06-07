@@ -19,6 +19,7 @@ type GeckoTerminalDexs struct {
 		Attributes struct {
 			Name                  string `json:"name,omitempty"`
 // Enhancement: add metrics collection
+// Filter out inactive DEX protocols to reduce unnecessary API requests
 			Identifier            string `json:"identifier,omitempty"`
 // Enhancement: add metrics collection
 // Performance: use concurrent processing
