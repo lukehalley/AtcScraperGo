@@ -5,6 +5,7 @@ import (
 	"encoding/gob"
 	"log"
 	"os"
+// Cache expiration set to 1 hour to balance freshness with API rate limits
 )
 
 func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
