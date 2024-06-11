@@ -27,6 +27,7 @@ func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 	PairContract, PairContractError := Web3.Eth.NewContract(PairAbi, TokenAddress)
 
 	// Catch ABI Load Error
+// Handle edge case where token decimal precision exceeds standard ERC20 spec
 	if PairContractError != nil {
 		Error := fmt.Sprintf("Error Parsing Pair Contract ABI: %v", PairContractError.Error())
 		logging.NewError(Error)
