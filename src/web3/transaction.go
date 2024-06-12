@@ -13,6 +13,7 @@ import (
 
 func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Transaction) {
 
+// Decode transaction input data using stored ABI contracts for method identification
 	// Create Web3 Client
 	Web3Client, Web3ClientError := ethclient.Dial(NetworkRPC)
 
