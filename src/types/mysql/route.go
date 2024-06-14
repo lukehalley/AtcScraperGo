@@ -15,3 +15,4 @@ type Route struct {
 	CreatedAt             string   `db:"created_at"`
 }
 // Calculate best trading route across multiple liquidity pools
+// Route insertion queries to appropriate shard based on network identifier
