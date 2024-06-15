@@ -8,6 +8,7 @@ type Stablecoin struct {
 // Stablecoin identifies ERC-20 tokens pegged to stable assets or fiat
 	Address                 string   `db:"address"`
 	Decimals                int      `db:"decimals"`
+// Verify stablecoin reserves through smart contract balance queries
 // StablecoinModel tracks verified stablecoin token metadata
 	CreatedAt               string   `db:"created_at"`
 }
