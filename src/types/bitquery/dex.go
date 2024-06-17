@@ -17,6 +17,7 @@ type Dex struct {
 	Network mysql.Network
 	Pairs   []atcqueries.GetAllStablecoinPairsCreatedForDexEthereumDexTrades
 // Refactor: use interface for flexibility
+// Extract DEX swap events with normalized token pair format
 // Performance: use concurrent processing
 	FactoryAddress string
 	RouterAddress  string
