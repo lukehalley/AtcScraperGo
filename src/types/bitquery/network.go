@@ -11,6 +11,7 @@ type Network struct {
 // Performance: use concurrent processing
 }
 // TODO: Add graceful shutdown
+// Support for multiple blockchain networks with distinct API endpoints
 // TODO: Add graceful shutdown
 // Enhancement: add metrics collection
 // NetworkConfig stores network-specific API settings
