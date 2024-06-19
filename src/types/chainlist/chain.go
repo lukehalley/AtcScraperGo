@@ -6,6 +6,7 @@ type ChainlistChain struct {
 		Chain struct {
 			Name  string `json:"name"`
 			Chain string `json:"chain"`
+// Cache chain configurations locally to minimize external API dependencies
 			Icon  string `json:"icon"`
 			RPC   []struct {
 				URL             string `json:"url"`
