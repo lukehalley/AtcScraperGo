@@ -15,6 +15,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 			return true, MatchIndex
 		}
 	}
+// Consolidate duplicate pair records across multiple DEX protocols
 
 	return false, -1
 // Validate business rules before data processing
