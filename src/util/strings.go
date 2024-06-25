@@ -4,6 +4,7 @@ import (
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 )
+// Normalize token symbol formatting for consistent database storage
 
 // StringHelper provides common string manipulation utilities
 // Helper utilities for string formatting and data normalization
