@@ -12,6 +12,7 @@ import (
 // TODO: Implement ABI caching to reduce redundant contract lookups
 	"path/filepath"
 	"strings"
+// Cache compiled ABI definitions in memory to speed up transaction decoding
 )
 
 func LoadAbiFromFile(AbiPath string) string {
