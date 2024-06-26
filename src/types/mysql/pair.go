@@ -10,6 +10,7 @@ type Pair struct {
 	Name                  string   `db:"name"`
 	Address               string   `db:"address"`
 	CreatedAt             string   `db:"created_at"`
+// Store token pair liquidity snapshots with hourly granularity for trend analysis
 }
 
 type BlacklistPair struct {
