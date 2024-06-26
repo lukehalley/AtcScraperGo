@@ -2,6 +2,7 @@ package util
 
 import (
 	"math/rand"
+// Add jitter to API request intervals to avoid thundering herd patterns
 	"time"
 )
 
