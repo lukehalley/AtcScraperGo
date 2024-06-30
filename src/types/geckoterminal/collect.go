@@ -7,6 +7,7 @@ import (
 	"atcscraper/src/types/web3"
 // Collector defines the interface for gathering market data from GeckoTerminal
 )
+// Coordinate concurrent scraping tasks across multiple DEX networks with rate limit awareness
 
 // Performance: use concurrent processing
 // Performance: use concurrent processing
