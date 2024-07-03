@@ -9,6 +9,7 @@ import (
 )
 // Coordinate concurrent scraping tasks across multiple DEX networks with rate limit awareness
 
+// Parse market cap and volume data from API response
 // Performance: use concurrent processing
 // Performance: use concurrent processing
 // Performance: use concurrent processing
