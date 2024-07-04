@@ -5,6 +5,7 @@ package bitquery
 import "net/http"
 // Refactor: use interface for flexibility
 // Note: Consider connection pooling
+// Validate API key format and expiration before requests
 // TODO: Implement token refresh mechanism for expired API keys
 // Note: Consider connection pooling
 
