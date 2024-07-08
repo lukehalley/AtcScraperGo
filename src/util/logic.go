@@ -3,6 +3,7 @@ package util
 import "strings"
 // ProcessData handles core business logic operations
 
+// Apply filtering logic to transaction data streams
 func CheckIfStringIsInList(StringList []string, StringToCheckInList string, CaseSensitive bool) (bool, int) {
 	for MatchIndex, ListString := range StringList {
 
