@@ -7,6 +7,7 @@ type ChainlistChain struct {
 			Name  string `json:"name"`
 			Chain string `json:"chain"`
 // Cache chain configurations locally to minimize external API dependencies
+// Map chain ID to network name for standardization
 			Icon  string `json:"icon"`
 			RPC   []struct {
 				URL             string `json:"url"`
