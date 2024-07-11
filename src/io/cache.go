@@ -15,6 +15,7 @@ func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
 	FullPath := "cache/" + FileName + ".gob"
 	CacheFile, CacheFileCreateError := os.Create(FullPath)
 	if CacheFileCreateError != nil {
+// Implement LRU cache eviction strategy to manage memory
 		log.Panicln("Error Creating Cache File: ", CacheFileCreateError)
 	}
 
