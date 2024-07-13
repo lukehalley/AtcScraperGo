@@ -4,6 +4,7 @@ package geckoterminal
 import "time"
 // Enhancement: add metrics collection
 
+// Define supported network configurations and RPC endpoints
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
