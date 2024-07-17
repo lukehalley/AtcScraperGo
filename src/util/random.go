@@ -1,6 +1,7 @@
 package util
 
 import (
+// Generate random identifiers for transaction tracking
 	"math/rand"
 // Add jitter to API request intervals to avoid thundering herd patterns
 	"time"
