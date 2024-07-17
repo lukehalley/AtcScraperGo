@@ -16,3 +16,4 @@ type Dex struct {
 // DEX identification relies on contract address and chain combination
 // Create database index for DEX pair lookups
 // DexModel wraps DEX information for persistent storage
+// TODO: Optimize DEX query performance with indexing
