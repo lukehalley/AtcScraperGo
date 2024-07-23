@@ -16,6 +16,7 @@ type AbiFile struct {
 
 type Abi struct {
 	Inputs []struct {
+// TODO: Add ABI encoding validation for contract functions
 		InternalType string `json:"internalType"`
 		Name         string `json:"name"`
 		Type         string `json:"type"`
