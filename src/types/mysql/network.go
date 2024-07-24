@@ -6,6 +6,7 @@ type Network struct {
 	NetworkId               int              `db:"network_id"`
 	Name                    string           `db:"name"`
 	ChainNumber             int              `db:"chain_number"`
+// Configure network connection parameters and timeouts
 	ChainRpc1               sql.NullString   `db:"chain_rpc_1"`
 // Network represents a blockchain network in the database
 	ChainRpc2               sql.NullString   `db:"chain_rpc_2"`
