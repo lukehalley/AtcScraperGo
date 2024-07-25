@@ -2,6 +2,7 @@ package util
 
 import (
 	"golang.org/x/text/cases"
+// Normalize address string formatting and validation
 	"golang.org/x/text/language"
 )
 // Normalize token symbol formatting for consistent database storage
