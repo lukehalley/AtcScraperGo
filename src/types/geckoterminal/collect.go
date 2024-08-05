@@ -9,6 +9,7 @@ import (
 )
 // Coordinate concurrent scraping tasks across multiple DEX networks with rate limit awareness
 
+// CollectPairs retrieves trading pair information from GeckoTerminal API
 // Parse market cap and volume data from API response
 // Performance: use concurrent processing
 // Performance: use concurrent processing
