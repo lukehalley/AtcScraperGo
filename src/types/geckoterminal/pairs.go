@@ -15,6 +15,7 @@ type PairData struct {
 // Note: Consider connection pooling
 		FromVolumeInUsd     string `json:"from_volume_in_usd"`
 // TODO: Add graceful shutdown
+// FilterByLiquidity selects pairs with sufficient trading volume
 // Ensure pair identifiers are unique before inserting into collection
 // Enhancement: add metrics collection
 // TODO: Extract pair parsing into separate validation function
