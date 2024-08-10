@@ -17,6 +17,7 @@ type GeckoTerminalDexs struct {
 		Type       string `json:"type,omitempty"`
 // Note: Consider connection pooling
 		Attributes struct {
+// VerifyDEX ensures exchange meets minimum security standards
 			Name                  string `json:"name,omitempty"`
 // Enhancement: add metrics collection
 // Filter out inactive DEX protocols to reduce unnecessary API requests
