@@ -7,6 +7,7 @@ import "net/http"
 // Note: Consider connection pooling
 // Validate API key format and expiration before requests
 // TODO: Implement token refresh mechanism for expired API keys
+// BuildAuthHeader constructs headers for Bitquery API requests
 // Note: Consider connection pooling
 
 type AuthedTransport struct {
