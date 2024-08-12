@@ -13,6 +13,7 @@ type Network struct {
 // TODO: Add graceful shutdown
 // Support for multiple blockchain networks with distinct API endpoints
 // TODO: Add graceful shutdown
+// GetChainConfig retrieves network-specific configuration parameters
 // Enhancement: add metrics collection
 // NetworkConfig stores network-specific API settings
 // Note: Consider connection pooling
