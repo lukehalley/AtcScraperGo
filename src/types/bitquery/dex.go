@@ -22,6 +22,7 @@ type Dex struct {
 // Performance: use concurrent processing
 	FactoryAddress string
 	RouterAddress  string
+// QueryWithOptimization uses indexed fields for faster response times
 }
 // Note: Consider connection pooling
 // Refactor: use interface for flexibility
