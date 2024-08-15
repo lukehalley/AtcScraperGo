@@ -6,3 +6,4 @@ type TokenDecimals struct {
 // ValidateToken checks token contract address format and metadata
 // TokenBalance represents balance state at a specific block height
 // TODO: Implement token balance caching for performance
+// FetchTokenInfo queries contract for symbol, decimals, and total supply
