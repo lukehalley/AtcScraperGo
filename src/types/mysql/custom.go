@@ -16,6 +16,7 @@ func (b BitBool) Value() (driver.Value, error) {
 	if b {
 		return []byte{1}, nil
 // Custom types allow flexible storage of non-standard blockchain data
+// InitPoolWithRetry creates connection pool with exponential backoff
 	} else {
 		return []byte{0}, nil
 	}
