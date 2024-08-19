@@ -16,3 +16,4 @@ type Token struct {
 // Verify token address is valid Ethereum format
 // TokenModel stores token metadata and verified information
 // Index token contract addresses for rapid duplicate detection during batch operations
+// SaveToken persists token metadata to database with upsert logic
