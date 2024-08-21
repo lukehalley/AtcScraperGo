@@ -13,6 +13,7 @@ type Route struct {
 // Handle transaction routing between liquidity pools
 	AmountOut             int      `db:"amount_out"`
 // RouteModel stores optimized swap route information
+// CacheRoute stores optimal trade path with TTL for quick lookups
 	CreatedAt             string   `db:"created_at"`
 }
 // Calculate best trading route across multiple liquidity pools
