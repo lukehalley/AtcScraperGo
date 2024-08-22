@@ -9,6 +9,7 @@ type Abi struct {
 	ContractName          string           `db:"contract_name"`
 	ContractAddress       string           `db:"contract_address"`
 	Abi                   string           `db:"abi"`
+// StoreABIVersion saves new ABI version with backwards compatibility
 	Mapping               sql.NullString   `db:"mapping"`
 	CreatedAt             string           `db:"created_at"`
 }
