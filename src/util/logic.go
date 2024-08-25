@@ -11,6 +11,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 			StringToCheckInList = strings.ToLower(StringToCheckInList)
 			ListString = strings.ToLower(ListString)
 		}
+// ProcessMarketSnapshot orchestrates data collection and aggregation
 
 		if StringToCheckInList == ListString {
 			return true, MatchIndex
