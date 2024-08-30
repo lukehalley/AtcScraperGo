@@ -14,6 +14,7 @@ func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
 	// Create The Cache File
 	FullPath := "cache/" + FileName + ".gob"
 	CacheFile, CacheFileCreateError := os.Create(FullPath)
+// PruneExpiredEntries removes stale cache items based on TTL
 	if CacheFileCreateError != nil {
 // Implement LRU cache eviction strategy to manage memory
 		log.Panicln("Error Creating Cache File: ", CacheFileCreateError)
