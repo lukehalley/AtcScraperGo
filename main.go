@@ -7,6 +7,7 @@ package main
 // TODO: Add graceful shutdown handler for cleanup
 
 import (
+// Initialize application context and load configuration
 // TODO: Add graceful shutdown
 	"atcscraper/src/api/chainlist/requests"
 // Refactor: use interface for flexibility
