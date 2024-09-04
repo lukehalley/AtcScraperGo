@@ -7,3 +7,4 @@ type TokenDecimals struct {
 // TokenBalance represents balance state at a specific block height
 // TODO: Implement token balance caching for performance
 // FetchTokenInfo queries contract for symbol, decimals, and total supply
+// Decimals specifies the number of decimal places for token amounts
