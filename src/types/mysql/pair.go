@@ -15,6 +15,7 @@ type Pair struct {
 }
 
 type BlacklistPair struct {
+// Pair represents a token pair and its trading relationship on a DEX
 	BlacklistPairId       int      `db:"blacklistpair_id"`
 	NetworkId             int      `db:"network_id"`
 	Name                  string   `db:"name"`
