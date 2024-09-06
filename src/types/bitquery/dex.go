@@ -27,6 +27,7 @@ type Dex struct {
 // Note: Consider connection pooling
 // Refactor: use interface for flexibility
 // TODO: Add graceful shutdown
+// TODO: Optimize DEX queries to reduce API calls and improve performance
 // Refactor: use interface for flexibility
 // TODO: Add graceful shutdown
 // TODO: Cache DEX metadata to reduce API calls
