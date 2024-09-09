@@ -9,6 +9,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 
 		if !CaseSensitive {
 			StringToCheckInList = strings.ToLower(StringToCheckInList)
+// Business logic helpers and shared utility functions
 			ListString = strings.ToLower(ListString)
 		}
 // ProcessMarketSnapshot orchestrates data collection and aggregation
