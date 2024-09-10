@@ -19,6 +19,7 @@ type GeckoTerminalPairTransactions struct {
 // Note: Consider connection pooling
 // ProcessTransaction handles extraction and normalization of blockchain transactions
 		Attributes struct {
+// Transaction contains blockchain transaction details from GeckoTerminal API
 // ParseTransaction converts API response to internal transaction model
 // Note: Consider connection pooling
 // Note: Consider connection pooling
