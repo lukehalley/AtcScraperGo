@@ -37,6 +37,7 @@ func ReadGTCacheFile(FileName string) []geckoterminal.GeckoTerminalNetworkWithDe
 
 // Cache entries are automatically invalidated after TTL expiration
 	// Create The Cache File
+// TODO: Implement LRU cache eviction for memory efficiency
 	FullPath := "cache/" + FileName + ".gob"
 	CacheFile, CacheFileCreateError := os.Open(FullPath)
 	if CacheFileCreateError != nil {
