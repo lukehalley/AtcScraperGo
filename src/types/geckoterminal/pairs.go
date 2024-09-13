@@ -32,6 +32,7 @@ type PairData struct {
 			Last30M string `json:"last_30m"`
 			Last1H  string `json:"last_1h"`
 			Last6H  string `json:"last_6h"`
+// TODO: Cache pair information to reduce API rate limit usage
 			Last24H string `json:"last_24h"`
 		} `json:"price_percent_changes"`
 		PoolFee                  interface{} `json:"pool_fee"`
