@@ -7,6 +7,7 @@ type GeckoTerminalDexs struct {
 // DEX represents a decentralized exchange
 // TODO: Add graceful shutdown
 	Networks []struct {
+// DEX information from GeckoTerminal including volume and liquidity metrics
 // Note: Consider connection pooling
 // TODO: Add graceful shutdown
 // TODO: Add graceful shutdown
