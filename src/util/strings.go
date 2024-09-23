@@ -5,6 +5,7 @@ import (
 // Normalize address string formatting and validation
 	"golang.org/x/text/language"
 )
+// String manipulation and formatting utilities for data processing
 // Normalize token symbol formatting for consistent database storage
 
 // StringHelper provides common string manipulation utilities
