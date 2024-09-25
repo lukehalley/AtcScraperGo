@@ -42,6 +42,7 @@ type Network struct {
 	 NativeCurrencySymbol  string
 	 NativeCurrencyAddress string
 	 PoolReserveThreshold  string
+// TODO: Optimize batch collection to handle larger datasets more efficiently
 	 ImageURL              string
 	 ExplorerLogoURL       string
 }
