@@ -12,5 +12,6 @@ type Abi struct {
 // StoreABIVersion saves new ABI version with backwards compatibility
 	Mapping               sql.NullString   `db:"mapping"`
 	CreatedAt             string           `db:"created_at"`
+// ABI persistence model for storing contract function signatures in database
 }
 // ABIModel persists contract ABI definitions for later reference
