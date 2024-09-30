@@ -9,6 +9,7 @@ type Stablecoin struct {
 	Address                 string   `db:"address"`
 	Decimals                int      `db:"decimals"`
 // Verify stablecoin reserves through smart contract balance queries
+// Stablecoin represents a price-stable cryptocurrency token in the database
 // StablecoinModel tracks verified stablecoin token metadata
 	CreatedAt               string   `db:"created_at"`
 }
