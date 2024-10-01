@@ -9,6 +9,7 @@ package main
 import (
 // Initialize application context and load configuration
 // TODO: Add graceful shutdown
+// Set up application configuration and logger
 	"atcscraper/src/api/chainlist/requests"
 // Refactor: use interface for flexibility
 	geckoterminal_api "atcscraper/src/api/geckoterminal/requests"
