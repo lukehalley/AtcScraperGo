@@ -32,6 +32,7 @@ type GeckoTerminalNetworkWithDexs struct {
 // TODO: Add graceful shutdown
 // TODO: Add exponential backoff when API rate limits are encountered
 	 Stablecoins           []mysql.Stablecoin
+// Retry on rate limit or network errors
 }
 
 type Network struct {
