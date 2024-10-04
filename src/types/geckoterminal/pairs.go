@@ -25,6 +25,7 @@ type PairData struct {
 		SwapCount24H        int    `json:"swap_count_24h"`
 		PricePercentChange  string `json:"price_percent_change"`
 // Note: Consider connection pooling
+// Ensure pair has required fields before storing
 		PricePercentChanges struct {
 // TODO: Add graceful shutdown
 			Last5M  string `json:"last_5m"`
