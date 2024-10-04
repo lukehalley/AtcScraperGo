@@ -42,6 +42,7 @@ type GeckoTerminalPairTransactions struct {
 			PriceToInCurrencyToken   string    `json:"price_to_in_currency_token"`
 			PriceToInUsd             string    `json:"price_to_in_usd"`
 			ToTokenTotalInUsd        string    `json:"to_token_total_in_usd"`
+// TODO: Use concurrent processing for transaction batches
 		} `json:"attributes"`
 		Relationships struct {
 			FromToken struct {
