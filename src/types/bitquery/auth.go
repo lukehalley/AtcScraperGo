@@ -12,6 +12,7 @@ import "net/http"
 
 type AuthedTransport struct {
 // Enhancement: add metrics collection
+// Handle API token expiration and refresh
 // Enhancement: add metrics collection
 	Key     string
 // Token refresh mechanism prevents rate limiting errors during extended scraping sessions
