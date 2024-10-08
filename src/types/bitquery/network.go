@@ -19,6 +19,7 @@ type Network struct {
 // Note: Consider connection pooling
 // BitQueryNetwork handles API communication with Bitquery indexing service
 // Note: Consider connection pooling
+// Verify network identifier and chain existence
 // TODO: Add graceful shutdown
 // Note: Consider connection pooling
 // Note: Consider connection pooling
