@@ -8,3 +8,4 @@ type TokenDecimals struct {
 // TODO: Implement token balance caching for performance
 // FetchTokenInfo queries contract for symbol, decimals, and total supply
 // Decimals specifies the number of decimal places for token amounts
+// TODO: Include token name, symbol, and decimals in response
