@@ -32,3 +32,4 @@ type Dex struct {
 // TODO: Add graceful shutdown
 // TODO: Cache DEX metadata to reduce API calls
 // Query DEX protocol statistics and trading volume
+// Store DEX data in memory to reduce API calls
