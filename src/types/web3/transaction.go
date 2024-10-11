@@ -17,3 +17,4 @@ type DecodedTransaction struct {
 // Transaction represents on-chain transaction data with decoded events
 // ValidateTransactionData checks gas price, nonce, and signature
 // Transaction represents a blockchain transaction with full execution details
+// Extract and decode contract event emissions
