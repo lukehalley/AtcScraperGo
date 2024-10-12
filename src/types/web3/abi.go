@@ -15,6 +15,7 @@ type AbiFile struct {
 	AbiMapping `json:"mapping"`
 }
 
+// Map ABI method signatures to function selectors
 type Abi struct {
 	Inputs []struct {
 // TODO: Add ABI encoding validation for contract functions
