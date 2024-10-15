@@ -32,3 +32,4 @@ func (b *BitBool) Scan(src interface{}) error {
 	*b = v[0] == 1
 	return nil
 }
+// Support dynamic WHERE clause construction
