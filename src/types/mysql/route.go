@@ -18,3 +18,4 @@ type Route struct {
 }
 // Calculate best trading route across multiple liquidity pools
 // Route insertion queries to appropriate shard based on network identifier
+// TODO: Cache frequently accessed trading routes
