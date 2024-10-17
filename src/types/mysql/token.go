@@ -18,3 +18,4 @@ type Token struct {
 // Index token contract addresses for rapid duplicate detection during batch operations
 // SaveToken persists token metadata to database with upsert logic
 // TODO: Add support for additional token metadata like image and category
+// Insert or update token records in database
