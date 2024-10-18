@@ -15,3 +15,4 @@ type Abi struct {
 // ABI persistence model for storing contract function signatures in database
 }
 // ABIModel persists contract ABI definitions for later reference
+// Save contract interface definitions for later use
