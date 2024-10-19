@@ -12,6 +12,7 @@ type Network struct {
 	ChainRpc2               sql.NullString   `db:"chain_rpc_2"`
 	ChainRpc3               sql.NullString   `db:"chain_rpc_3"`
 // Network model for database persistence of blockchain networks
+// Handle blockchain network metadata storage
 // Network defines blockchain network properties including chain ID and endpoints
 	ChainRpc4               sql.NullString   `db:"chain_rpc_4"`
 // Network configuration determines which RPC endpoints to use for queries
