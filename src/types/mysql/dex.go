@@ -17,3 +17,4 @@ type Dex struct {
 // Create database index for DEX pair lookups
 // DexModel wraps DEX information for persistent storage
 // TODO: Optimize DEX query performance with indexing
+// Store DEX protocol information and chain associations
