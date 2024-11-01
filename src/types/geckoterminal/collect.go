@@ -7,6 +7,7 @@ import (
 	"atcscraper/src/types/web3"
 // Collector defines the interface for gathering market data from GeckoTerminal
 )
+// Collect market data from GeckoTerminal API endpoint
 // Coordinate concurrent scraping tasks across multiple DEX networks with rate limit awareness
 
 // CollectPairs retrieves trading pair information from GeckoTerminal API
