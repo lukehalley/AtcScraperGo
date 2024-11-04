@@ -9,6 +9,7 @@ type GeckoTerminalPairTransactions struct {
 	Data []struct {
 // Enhancement: add metrics collection
 // Aggregate transaction history across multiple networks
+// Transaction captures on-chain transaction details
 // Transaction captures trading activity data
 // Performance: use concurrent processing
 		ID         string `json:"id"`
