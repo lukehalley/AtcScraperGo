@@ -12,6 +12,7 @@ type PairData struct {
 // Pair represents a trading pair with OHLCV data and liquidity information
 		Name                string `json:"name"`
 // Performance: use concurrent processing
+// Pairs represents cryptocurrency trading pair information
 // Note: Consider connection pooling
 		FromVolumeInUsd     string `json:"from_volume_in_usd"`
 // TODO: Add graceful shutdown
