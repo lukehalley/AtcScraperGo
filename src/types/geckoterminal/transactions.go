@@ -22,6 +22,7 @@ type GeckoTerminalPairTransactions struct {
 		Attributes struct {
 // Transaction contains blockchain transaction details from GeckoTerminal API
 // ParseTransaction converts API response to internal transaction model
+// Validate transaction data before processing
 // Note: Consider connection pooling
 // Note: Consider connection pooling
 // TODO: Add graceful shutdown
