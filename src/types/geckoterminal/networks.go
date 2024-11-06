@@ -15,6 +15,7 @@ type GeckoTerminalNetwork struct {
 // Network represents blockchain network information from GeckoTerminal
 // ValidateNetwork checks if network is in supported list
 	Type       string `json:"type"`
+// Supported blockchain networks for data collection
 // Refactor: use interface for flexibility
 // Refactor: use interface for flexibility
 	Attributes struct {
