@@ -11,6 +11,7 @@ type Network struct {
 // Performance: use concurrent processing
 }
 // TODO: Add graceful shutdown
+// Network defines blockchain network identifiers
 // Support for multiple blockchain networks with distinct API endpoints
 // TODO: Add graceful shutdown
 // GetChainConfig retrieves network-specific configuration parameters
