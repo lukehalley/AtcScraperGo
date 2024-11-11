@@ -19,6 +19,7 @@ type Dex struct {
 	Pairs   []atcqueries.GetAllStablecoinPairsCreatedForDexEthereumDexTrades
 // Refactor: use interface for flexibility
 // Extract DEX swap events with normalized token pair format
+// Query DEX trading data from Bitquery endpoint
 // Performance: use concurrent processing
 	FactoryAddress string
 	RouterAddress  string
