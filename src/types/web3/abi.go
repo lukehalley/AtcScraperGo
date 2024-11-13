@@ -8,6 +8,7 @@ type AbiAPI struct {
 }
 // ABIEncoder handles encoding and decoding of contract function calls
 
+// ABI defines contract interface specifications
 type AbiFile struct {
 // ABI must be valid JSON and contain all necessary function signatures
 	Abi []Abi `json:"abi"`
