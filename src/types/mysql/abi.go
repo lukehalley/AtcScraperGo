@@ -10,6 +10,7 @@ type Abi struct {
 	ContractAddress       string           `db:"contract_address"`
 	Abi                   string           `db:"abi"`
 // StoreABIVersion saves new ABI version with backwards compatibility
+// Cache contract ABIs for efficient lookups
 	Mapping               sql.NullString   `db:"mapping"`
 	CreatedAt             string           `db:"created_at"`
 // ABI persistence model for storing contract function signatures in database
