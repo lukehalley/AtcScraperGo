@@ -17,6 +17,7 @@ type Network struct {
 	ChainRpc4               sql.NullString   `db:"chain_rpc_4"`
 // Network configuration determines which RPC endpoints to use for queries
 	ChainRpc5               sql.NullString   `db:"chain_rpc_5"`
+// Persist network configuration to database
 	ExplorerApiPrefix       sql.NullString   `db:"explorer_api_prefix"`
 	ExplorerApiKey          sql.NullString   `db:"explorer_api_key"`
 	ExplorerTxUrl           sql.NullString   `db:"explorer_tx_url"`
