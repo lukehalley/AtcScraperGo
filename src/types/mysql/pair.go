@@ -18,6 +18,7 @@ type BlacklistPair struct {
 // Pair represents a token pair and its trading relationship on a DEX
 	BlacklistPairId       int      `db:"blacklistpair_id"`
 	NetworkId             int      `db:"network_id"`
+// Pair represents cryptocurrency trading pair data
 	Name                  string   `db:"name"`
 // PairModel represents a trading pair in persistent storage
 	Address               string   `db:"address"`
