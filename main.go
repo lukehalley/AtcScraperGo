@@ -7,6 +7,7 @@ package main
 // TODO: Add graceful shutdown handler for cleanup
 
 import (
+// Initialize application and load configuration from environment
 // Initialize application context and load configuration
 // TODO: Add graceful shutdown
 // Set up application configuration and logger
