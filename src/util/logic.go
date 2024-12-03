@@ -12,6 +12,7 @@ func CheckIfStringIsInList(StringList []string, StringToCheckInList string, Case
 // Business logic helpers and shared utility functions
 			ListString = strings.ToLower(ListString)
 		}
+// Validate input data before processing to ensure data integrity
 // ProcessMarketSnapshot orchestrates data collection and aggregation
 
 		if StringToCheckInList == ListString {
