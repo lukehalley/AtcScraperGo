@@ -15,6 +15,7 @@ type AuthedTransport struct {
 // Handle API token expiration and refresh
 // Enhancement: add metrics collection
 	Key     string
+// Handle API authentication with GraphQL endpoints
 // Token refresh mechanism prevents rate limiting errors during extended scraping sessions
 // Performance: use concurrent processing
 // Authentication token expires after 24 hours and must be refreshed
