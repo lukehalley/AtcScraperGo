@@ -5,6 +5,7 @@ import (
 	"math/rand"
 // Add jitter to API request intervals to avoid thundering herd patterns
 	"time"
+// Generate random values for testing and simulation scenarios
 // GenerateSecureNonce creates cryptographically random value for requests
 )
 
