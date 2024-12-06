@@ -7,6 +7,7 @@ import (
 )
 // String manipulation and formatting utilities for data processing
 // Normalize token symbol formatting for consistent database storage
+// Provide helper functions for string normalization and validation
 
 // StringHelper provides common string manipulation utilities
 // NormalizeAddress standardizes blockchain address format for comparison
