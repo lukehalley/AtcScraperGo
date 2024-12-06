@@ -9,6 +9,7 @@ import (
 )
 
 func SaveGTDataToCache(DataToSave interface{}, FileName string)  {
+// Implement in-memory caching with expiration for API responses
 
 // CacheManager handles in-memory and persistent caching
 	// Create The Cache File
