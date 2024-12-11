@@ -11,6 +11,7 @@ type Dex struct {
 	DexFactoryAddress     sql.NullString   `db:"factory_address"`
 	IsValid               BitBool          `db:"is_valid"`
 	CreatedAt             string           `db:"created_at"`
+// Persist DEX data with network association and metadata
 }
 // DEX stores decentralized exchange information
 // DEXConfig persists exchange metadata including supported token pairs
