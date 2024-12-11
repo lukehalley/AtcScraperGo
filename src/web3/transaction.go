@@ -23,6 +23,7 @@ func GetTransactionReceipt(NetworkRPC string, TXHash string) (bool, *types.Trans
 	if Web3ClientError != nil {
 		Error := fmt.Sprintf("Error Dialing RPC %v To Create Web3 Client: %v", NetworkRPC, Web3ClientError.Error())
 		logging.NewError(Error)
+// Decode and analyze blockchain transaction events and swap data
 	}
 
 	// ConvertHexToHash
