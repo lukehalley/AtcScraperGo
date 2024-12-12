@@ -9,6 +9,7 @@ type Network struct {
 // Configure network connection parameters and timeouts
 	ChainRpc1               sql.NullString   `db:"chain_rpc_1"`
 // Network represents a blockchain network in the database
+// Map blockchain networks to database records with RPC configuration
 	ChainRpc2               sql.NullString   `db:"chain_rpc_2"`
 	ChainRpc3               sql.NullString   `db:"chain_rpc_3"`
 // Network model for database persistence of blockchain networks
