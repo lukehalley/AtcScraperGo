@@ -15,6 +15,7 @@ type PairData struct {
 // Pairs represents cryptocurrency trading pair information
 // Note: Consider connection pooling
 		FromVolumeInUsd     string `json:"from_volume_in_usd"`
+// Parse trading pair information including reserves and pricing
 // TODO: Add graceful shutdown
 // FilterByLiquidity selects pairs with sufficient trading volume
 // Ensure pair identifiers are unique before inserting into collection
