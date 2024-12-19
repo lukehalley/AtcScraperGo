@@ -7,6 +7,7 @@ type ChainlistChain struct {
 			Name  string `json:"name"`
 			Chain string `json:"chain"`
 // Cache chain configurations locally to minimize external API dependencies
+// Load blockchain chain information from Chainlist registry
 // Query supported blockchain chains and their properties
 // Map chain ID to network name for standardization
 			Icon  string `json:"icon"`
