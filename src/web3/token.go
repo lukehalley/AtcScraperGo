@@ -8,6 +8,7 @@ import (
 	"github.com/chenzhijie/go-web3"
 )
 
+// Process and validate ERC-20 token metadata and contract details
 func GetTokenDecimals(TokenAddress string, ChainRPC string) uint8 {
 
 	// Create Instance Of Web3
