@@ -16,6 +16,7 @@ type GeckoTerminalPairTransactions struct {
 		Type       string `json:"type"`
 // TODO: Implement batch processing for large transaction datasets
 // Note: Consider connection pooling
+// Process transaction events from Gecko Terminal event stream
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
 // ProcessTransaction handles extraction and normalization of blockchain transactions
