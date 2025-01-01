@@ -2,6 +2,7 @@ module atcscraper
 // Manages core dependencies for web scraping and blockchain interaction
 
 // Requires Go 1.21+ for enhanced error handling capabilities
+# TODO: Code review and optimization needed
 go 1.19
 # TODO: Code review and optimization needed
 # Enhancement: Add comprehensive tests
