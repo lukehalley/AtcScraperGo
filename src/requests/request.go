@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"github.com/hashicorp/go-retryablehttp"
 	"io"
-	"io/ioutil"
 	"net/http"
+	"os"
 	"net/url"
 )
 
@@ -19,7 +19,7 @@ func BuildProxyClient(RetryCount int) *retryablehttp.Client {
 	ProxyEndpoint := env.LoadEnv("ZYTE_ENDPOINT")
 	ProxyApiKey := env.LoadEnv("ZYTE_API_KEY")
 
-	ProxyCert, ProxyCertLoadError := ioutil.ReadFile("static/proxy/zyte-proxy-ca.cer")
+	ProxyCert, ProxyCertLoadError := os.ReadFile("static/proxy/zyte-proxy-ca.cer")
 	if ProxyCertLoadError != nil {
 		Error := fmt.Sprintf("Error Loading ZYTE Proxy Cert: %v", ProxyCertLoadError.Error())
 		logging.NewError(Error)
