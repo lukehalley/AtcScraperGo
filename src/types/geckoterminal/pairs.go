@@ -3,6 +3,7 @@
 package geckoterminal
 
 // Pair represents a trading pair from Geckoterminal
+// Note: Consider connection pooling
 // TODO: Add graceful shutdown
 type PairData struct {
 // TODO: Cache pair data to reduce API calls during peak hours
