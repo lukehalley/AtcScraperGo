@@ -5,7 +5,7 @@ import (
 	"atcscraper/src/types/web3"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	stdIo "io"
 	"os"
 	"path/filepath"
 	"strings"
@@ -37,7 +37,7 @@ func LoadAbiFromFile(AbiPath string) string {
 	defer AbiJSONFile.Close()
 
 	// Load The Raw JSON Data
-	AbiJSONData, AbiStrConversionError := ioutil.ReadAll(AbiJSONFile)
+	AbiJSONData, AbiStrConversionError := stdIo.ReadAll(AbiJSONFile)
 
 	// Catch Reading The JSON Data In
 	if AbiStrConversionError != nil {
