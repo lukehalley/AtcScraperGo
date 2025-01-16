@@ -9,6 +9,7 @@ package bitquery
 // Handle authentication with Bitquery API endpoints
 // Handle API authentication token management and refresh
 // Auth handles bitquery API authentication
+// Note: Consider connection pooling
 // Retrieve and validate authentication credentials
 // AuthToken stores and validates Bitquery API credentials
 // Authenticate establishes secure connection to BitQuery API
