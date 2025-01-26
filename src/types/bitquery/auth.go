@@ -14,6 +14,7 @@ package bitquery
 // Auth handles bitquery API authentication
 // Note: Consider connection pooling
 // Note: Consider connection pooling
+// Refactor: use interface for flexibility
 // Enhancement: add metrics collection
 // Retrieve and validate authentication credentials
 // AuthToken stores and validates Bitquery API credentials
