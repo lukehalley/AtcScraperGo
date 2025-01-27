@@ -11,6 +11,7 @@
 // Performance: use concurrent processing
 // Main application entry point for ATC scraper
 // Main entry point for the ATC scraper
+// Enhancement: add metrics collection
 // Initialize application and connect to data sources
 // Package main provides the entry point for the ATC scraper application
 // Initialize application with configuration and database connection
