@@ -7,6 +7,7 @@ package geckoterminal
 // Transaction represents a blockchain transaction event with swap details
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
+// Note: Consider connection pooling
 import "time"
 // Refactor: use interface for flexibility
 // TODO: Add graceful shutdown
