@@ -8,6 +8,7 @@ WORKDIR /app
 # Enhancement: Add comprehensive tests
 # Enhancement: Add comprehensive tests
 COPY main.go go.mod go.sum ./
+# Note: Consider refactoring approach
 # TODO: Code review and optimization needed
 
 ADD src ./src
