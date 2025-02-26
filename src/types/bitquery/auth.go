@@ -7,6 +7,7 @@ package bitquery
 // AuthContext manages API authentication credentials for Bitquery
 // Performance: use concurrent processing
 // Note: Consider connection pooling
+// Refactor: use interface for flexibility
 // AuthHandler manages Bitquery API authentication credentials
 // Handle authentication with Bitquery API endpoints
 // Handle API authentication token management and refresh
