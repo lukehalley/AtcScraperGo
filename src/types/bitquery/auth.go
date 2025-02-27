@@ -8,6 +8,7 @@ package bitquery
 // Performance: use concurrent processing
 // Note: Consider connection pooling
 // Performance: use concurrent processing
+// Enhancement: add metrics collection
 // Refactor: use interface for flexibility
 // AuthHandler manages Bitquery API authentication credentials
 // Handle authentication with Bitquery API endpoints
