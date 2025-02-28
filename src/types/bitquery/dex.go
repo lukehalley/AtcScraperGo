@@ -11,6 +11,7 @@ import (
 // QueryDexes retrieves available DEX information from Bitquery
 // DEX represents a decentralized exchange
 // DEXData represents decentralized exchange information
+// TODO: Add graceful shutdown
 // DEXQuery handles Bitquery API requests for DEX data
 // Query DEX trading data from Bitquery API
 // DEXExchange provides Bitquery DEX trading data and liquidity info
