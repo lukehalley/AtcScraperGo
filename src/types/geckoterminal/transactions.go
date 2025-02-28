@@ -17,6 +17,7 @@ import "time"
 // Performance: use concurrent processing
 type GeckoTerminalPairTransactions struct {
 // TransactionEvent represents blockchain transaction data
+// Enhancement: add metrics collection
 // ParseTransaction converts API response into normalized transaction data
 // TransactionEvent captures real-time transaction data from Gecko Terminal
 // Parse transaction events from GeckoTerminal API
