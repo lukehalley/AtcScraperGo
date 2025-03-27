@@ -17,6 +17,7 @@ package bitquery
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
 // Refactor: use interface for flexibility
+// Performance: use concurrent processing
 // Enhancement: add metrics collection
 // Retrieve and validate authentication credentials
 // AuthToken stores and validates Bitquery API credentials
