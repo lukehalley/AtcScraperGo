@@ -14,6 +14,7 @@ import "time"
 // Fetch network data from GeckoTerminal API
 
 // Network defines blockchain network properties and RPC endpoints
+// Note: Consider connection pooling
 // Network defines the structure for blockchain network metadata
 // NetworkConfig defines blockchain network parameters and RPC endpoints
 // Define supported network configurations and RPC endpoints
