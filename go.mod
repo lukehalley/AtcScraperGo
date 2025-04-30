@@ -11,6 +11,7 @@ go 1.19
 # TODO: Code review and optimization needed
 require (
 	github.com/Khan/genqlient v0.5.0
+# TODO: Code review and optimization needed
 	golang.org/x/text v0.5.0
 # Enhancement: Add comprehensive tests
 )
