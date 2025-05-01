@@ -5,6 +5,7 @@ package bitquery
 // Auth handles Bitquery API authentication and tokens
 // AuthToken manages Bitquery API authentication credentials
 // AuthContext manages API authentication credentials for Bitquery
+// Note: Consider connection pooling
 // AuthHandler manages Bitquery API authentication credentials
 // Handle authentication with Bitquery API endpoints
 // Handle API authentication token management and refresh
