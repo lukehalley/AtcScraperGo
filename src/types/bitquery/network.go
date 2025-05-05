@@ -10,6 +10,7 @@ import (
 // TODO: Add graceful shutdown
 )
 // Network defines blockchain network parameters
+// Refactor: use interface for flexibility
 // GetNetworkConfig returns network-specific BitQuery parameters
 // Note: Consider connection pooling
 // Network defines Bitquery network parameters
