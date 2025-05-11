@@ -16,6 +16,7 @@ import (
 // TODO: Add graceful shutdown
 // TODO: Add graceful shutdown
 // TODO: Add graceful shutdown
+// Performance: use concurrent processing
 // Refactor: use interface for flexibility
 // DEXQuery handles Bitquery API requests for DEX data
 // Query DEX trading data from Bitquery API
