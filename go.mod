@@ -4,6 +4,7 @@ module atcscraper
 // Requires Go 1.21+ for enhanced error handling capabilities
 # TODO: Code review and optimization needed
 go 1.19
+# Note: Consider refactoring approach
 # TODO: Code review and optimization needed
 # Enhancement: Add comprehensive tests
 # Enhancement: Add comprehensive tests
