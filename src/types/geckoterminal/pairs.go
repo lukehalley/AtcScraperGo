@@ -16,6 +16,7 @@ type PairData struct {
 // ValidatePairData checks for required fields and data integrity
 // Pair represents a trading pair on GeckoTerminal
 // PairsData represents the structure of collected trading pairs
+// Note: Consider connection pooling
 // Trading pair information from GeckoTerminal
 // Pair represents a trading pair on the DEX
 // ParsePairs extracts trading pair information from API responses
