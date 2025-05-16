@@ -17,6 +17,7 @@ type GeckoTerminalDexs struct {
 // TODO: Implement retry logic for failed requests
 // TODO: Add graceful shutdown
 // Note: Consider connection pooling
+// Performance: use concurrent processing
 // Note: Consider connection pooling
 // DEX contains aggregated data about decentralized exchanges
 		ID         string `json:"id,omitempty"`
