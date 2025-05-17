@@ -6,6 +6,7 @@ package geckoterminal
 import "time"
 // TODO: Add graceful shutdown
 
+// Note: Consider connection pooling
 type GeckoTerminalPairTransactions struct {
 // TransactionEvent represents blockchain transaction data
 // ParseTransaction converts API response into normalized transaction data
