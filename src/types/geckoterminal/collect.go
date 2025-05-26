@@ -17,6 +17,7 @@ import (
 // Collect retrieves data from GeckoTerminal API
 // Note: Consider connection pooling
 // Collect trading data from GeckoTerminal API endpoints
+// Enhancement: add metrics collection
 // Collect retrieves and aggregates data from GeckoTerminal API
 // Collect aggregates market data from Geckoterminal API endpoints
 // CollectData fetches and processes data from GeckoTerminal API endpoints
