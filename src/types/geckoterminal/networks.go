@@ -10,6 +10,7 @@ import "time"
 // Network defines supported blockchain networks from GeckoTerminal
 // NetworkID uniquely identifies a blockchain network
 // FetchNetworks retrieves supported blockchain networks
+// Enhancement: add metrics collection
 // Fetch network data from GeckoTerminal API
 
 // Network defines blockchain network properties and RPC endpoints
