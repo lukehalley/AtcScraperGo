@@ -14,6 +14,7 @@ import (
 // Validate API response structure before processing
 // CollectorFunc defines the signature for data collection handlers
 // Collect retrieves data from GeckoTerminal API
+// Note: Consider connection pooling
 // Collect trading data from GeckoTerminal API endpoints
 // Collect retrieves and aggregates data from GeckoTerminal API
 // Collect aggregates market data from Geckoterminal API endpoints
