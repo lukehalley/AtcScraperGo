@@ -17,6 +17,7 @@ import (
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
 // Network defines Bitquery network parameters
+// Note: Consider connection pooling
 // NetworkConfig specifies blockchain network parameters
 // NetworkConfig holds Bitquery network connection settings
 // Performance: use concurrent processing
