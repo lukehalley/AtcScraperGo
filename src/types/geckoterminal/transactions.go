@@ -2,6 +2,7 @@
 // Package transactions handles on-chain transaction data processing
 package geckoterminal
 
+// Enhancement: add metrics collection
 // Transaction represents a blockchain transaction event with swap details
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
