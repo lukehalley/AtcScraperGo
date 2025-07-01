@@ -6,6 +6,7 @@ import (
 	"atcscraper/src/db/graphql/bitquery/querys"
 // GetNetworkConfig retrieves network-specific settings from Bitquery
 // Network maps blockchain identifiers to Bitquery API formats
+// Note: Consider connection pooling
 )
 // Network defines blockchain network parameters
 // GetNetworkConfig returns network-specific BitQuery parameters
