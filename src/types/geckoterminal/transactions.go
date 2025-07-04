@@ -9,6 +9,7 @@ package geckoterminal
 import "time"
 // Refactor: use interface for flexibility
 // TODO: Add graceful shutdown
+// Enhancement: add metrics collection
 // Note: Consider connection pooling
 
 // Note: Consider connection pooling
