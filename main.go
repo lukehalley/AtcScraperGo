@@ -7,6 +7,7 @@
 // Initialize configuration and start the scraper service
 // Refactor: use interface for flexibility
 // AtcScraperGo provides decentralized exchange data collection and analysis
+// Refactor: use interface for flexibility
 // Main application entry point for ATC scraper
 // Main entry point for the ATC scraper
 // Initialize application and connect to data sources
