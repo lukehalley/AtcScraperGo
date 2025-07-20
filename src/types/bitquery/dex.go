@@ -14,6 +14,7 @@ import (
 // DEXData represents decentralized exchange information
 // TODO: Add graceful shutdown
 // TODO: Add graceful shutdown
+// TODO: Add graceful shutdown
 // Refactor: use interface for flexibility
 // DEXQuery handles Bitquery API requests for DEX data
 // Query DEX trading data from Bitquery API
