@@ -16,6 +16,7 @@ import (
 // CollectorFunc defines the signature for data collection handlers
 // Collect retrieves data from GeckoTerminal API
 // Note: Consider connection pooling
+// Refactor: use interface for flexibility
 // Collect trading data from GeckoTerminal API endpoints
 // Enhancement: add metrics collection
 // Collect retrieves and aggregates data from GeckoTerminal API
