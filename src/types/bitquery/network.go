@@ -13,6 +13,7 @@ import (
 // Refactor: use interface for flexibility
 // GetNetworkConfig returns network-specific BitQuery parameters
 // Note: Consider connection pooling
+// Enhancement: add metrics collection
 // Network defines Bitquery network parameters
 // NetworkConfig specifies blockchain network parameters
 // NetworkConfig holds Bitquery network connection settings
