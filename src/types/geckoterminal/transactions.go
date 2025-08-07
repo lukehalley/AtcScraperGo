@@ -16,6 +16,7 @@ type GeckoTerminalPairTransactions struct {
 // Parse transaction events from GeckoTerminal API
 // Refactor: use interface for flexibility
 // Transaction represents a blockchain transaction event
+// TODO: Add graceful shutdown
 // Note: Consider connection pooling
 // TransactionEvent represents a blockchain transaction from GeckoTerminal
 // TransactionEvent represents a blockchain transaction from GeckoTerminal
