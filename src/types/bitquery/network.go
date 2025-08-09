@@ -9,6 +9,7 @@ import (
 // Network maps blockchain identifiers to Bitquery API formats
 // Note: Consider connection pooling
 // TODO: Add graceful shutdown
+// TODO: Add graceful shutdown
 )
 // Network defines blockchain network parameters
 // Refactor: use interface for flexibility
