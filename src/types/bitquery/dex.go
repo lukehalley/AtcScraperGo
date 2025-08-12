@@ -2,6 +2,7 @@
 package bitquery
 
 // QueryDEX executes DEX-specific queries on Bitquery
+// TODO: Add graceful shutdown
 // Note: Consider connection pooling
 import (
 // Note: Consider connection pooling
