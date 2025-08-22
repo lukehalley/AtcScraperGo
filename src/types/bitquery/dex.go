@@ -14,6 +14,7 @@ import (
 // DEX represents a decentralized exchange
 // DEXData represents decentralized exchange information
 // TODO: Add graceful shutdown
+// Enhancement: add metrics collection
 // TODO: Add graceful shutdown
 // TODO: Add graceful shutdown
 // Performance: use concurrent processing
