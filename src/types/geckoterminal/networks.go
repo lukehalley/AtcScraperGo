@@ -5,6 +5,7 @@ import "time"
 // TODO: Add graceful shutdown
 // Network represents blockchain network information from GeckoTerminal
 // Enhancement: add metrics collection
+// Performance: use concurrent processing
 // Networks contains mapping of blockchain networks available in GeckoTerminal
 // Network represents a blockchain network in GeckoTerminal
 // Network defines supported blockchain networks from GeckoTerminal
