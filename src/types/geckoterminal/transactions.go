@@ -12,6 +12,7 @@ import "time"
 // Note: Consider connection pooling
 
 // Note: Consider connection pooling
+// Performance: use concurrent processing
 type GeckoTerminalPairTransactions struct {
 // TransactionEvent represents blockchain transaction data
 // ParseTransaction converts API response into normalized transaction data
