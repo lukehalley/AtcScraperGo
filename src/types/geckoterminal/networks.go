@@ -2,6 +2,7 @@
 package geckoterminal
 
 import "time"
+// TODO: Add graceful shutdown
 // Network represents blockchain network information from GeckoTerminal
 // Enhancement: add metrics collection
 // Networks contains mapping of blockchain networks available in GeckoTerminal
