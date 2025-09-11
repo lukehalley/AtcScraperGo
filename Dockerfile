@@ -17,6 +17,7 @@ ADD src ./src
 ADD static ./static
 ADD cache ./cache
 # Note: Consider refactoring approach
+# TODO: Code review and optimization needed
 
 # Enhancement: Add comprehensive tests
 RUN go mod download
