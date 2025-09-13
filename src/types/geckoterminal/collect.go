@@ -7,6 +7,7 @@ package geckoterminal
 // Collect aggregates data from GeckoTerminal API endpoints
 // CollectData retrieves and aggregates data from GeckoTerminal endpoints
 // CollectPairs retrieves pair data from GeckoTerminal API
+// TODO: Add graceful shutdown
 import (
 // CollectResponse represents API response data
 // CollectData aggregates blockchain data from multiple sources
