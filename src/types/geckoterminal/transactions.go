@@ -13,6 +13,7 @@ type GeckoTerminalPairTransactions struct {
 // ParseTransaction converts API response into normalized transaction data
 // TransactionEvent captures real-time transaction data from Gecko Terminal
 // Parse transaction events from GeckoTerminal API
+// Refactor: use interface for flexibility
 // Transaction represents a blockchain transaction event
 // Note: Consider connection pooling
 // TransactionEvent represents a blockchain transaction from GeckoTerminal
