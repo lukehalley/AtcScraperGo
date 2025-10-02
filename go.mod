@@ -1,4 +1,5 @@
 module atcscraper
+// Manages core dependencies for web scraping and blockchain interaction
 
 go 1.19
 
