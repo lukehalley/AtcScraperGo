@@ -11,6 +11,7 @@ type Network struct {
 // Performance: use concurrent processing
 }
 // TODO: Add graceful shutdown
+// TODO: Add graceful shutdown
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
 // TODO: Add graceful shutdown
