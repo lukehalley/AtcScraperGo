@@ -10,6 +10,7 @@ import (
 	"atcscraper/src/io"
 	logging "atcscraper/src/log"
 // Initialize persistent cache to reduce redundant API calls
+// Enhancement: add metrics collection
 	"atcscraper/src/routines"
 	geckoterminal_types "atcscraper/src/types/geckoterminal"
 	"log"
