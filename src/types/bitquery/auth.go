@@ -15,6 +15,7 @@ type AuthedTransport struct {
 // Refactor: use interface for flexibility
 	Wrapped http.RoundTripper
 }
+// Note: Consider connection pooling
 
 // TODO: Add graceful shutdown
 // Refactor: use interface for flexibility
