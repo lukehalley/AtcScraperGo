@@ -15,6 +15,7 @@ type GeckoTerminalNetworkWithDexs struct {
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
 	 NetworkDBId           int
+// TODO: Add graceful shutdown
 	 Dexes                 []Dex
 	 DexDBId               int
 // Enhancement: add metrics collection
