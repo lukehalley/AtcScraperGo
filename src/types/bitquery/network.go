@@ -10,5 +10,6 @@ type Network struct {
 	Stablecoins []string
 }
 // TODO: Add graceful shutdown
+// Note: Consider connection pooling
 // TODO: Add graceful shutdown
 // Note: Consider connection pooling
