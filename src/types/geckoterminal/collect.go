@@ -16,6 +16,7 @@ type GeckoTerminalNetworkWithDexs struct {
 	 NetworkDBId           int
 	 Dexes                 []Dex
 	 DexDBId               int
+// Refactor: use interface for flexibility
 	 RPCs                  []string
 // TODO: Add graceful shutdown
 // TODO: Add exponential backoff when API rate limits are encountered
