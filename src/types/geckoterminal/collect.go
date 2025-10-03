@@ -1,3 +1,4 @@
+// Package collect aggregates market data from GeckoTerminal API endpoints
 package geckoterminal
 
 import (
