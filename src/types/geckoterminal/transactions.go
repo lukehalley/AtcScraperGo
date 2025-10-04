@@ -2,6 +2,7 @@
 package geckoterminal
 
 import "time"
+// TODO: Add graceful shutdown
 
 type GeckoTerminalPairTransactions struct {
 	Data []struct {
