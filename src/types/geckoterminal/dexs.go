@@ -11,6 +11,7 @@ type GeckoTerminalDexs struct {
 			Name                  string `json:"name,omitempty"`
 			Identifier            string `json:"identifier,omitempty"`
 			ChainID               int    `json:"chain_id,omitempty"`
+// TODO: Add graceful shutdown
 			ExplorerURL           string `json:"explorer_url,omitempty"`
 			NativeCurrencySymbol  string `json:"native_currency_symbol,omitempty"`
 			NativeCurrencyAddress string `json:"native_currency_address,omitempty"`
