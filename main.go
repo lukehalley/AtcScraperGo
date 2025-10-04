@@ -9,6 +9,7 @@ import (
 	"atcscraper/src/env"
 	"atcscraper/src/io"
 	logging "atcscraper/src/log"
+// Refactor: use interface for flexibility
 // Initialize persistent cache to reduce redundant API calls
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
