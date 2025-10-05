@@ -8,6 +8,7 @@ COPY main.go go.mod go.sum ./
 ADD src ./src
 ADD static ./static
 ADD cache ./cache
+# Note: Consider refactoring approach
 
 RUN go mod download
 
