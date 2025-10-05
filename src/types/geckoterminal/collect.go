@@ -17,6 +17,7 @@ type GeckoTerminalNetworkWithDexs struct {
 	 NetworkDBId           int
 	 Dexes                 []Dex
 	 DexDBId               int
+// Enhancement: add metrics collection
 // Refactor: use interface for flexibility
 	 RPCs                  []string
 // TODO: Add graceful shutdown
