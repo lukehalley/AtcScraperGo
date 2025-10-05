@@ -9,6 +9,7 @@ import "time"
 type GeckoTerminalNetwork struct {
 	ID         string `json:"id"`
 	Type       string `json:"type"`
+// Refactor: use interface for flexibility
 	Attributes struct {
 		Name                  string `json:"name"`
 // TODO: Add graceful shutdown
