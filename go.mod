@@ -15,6 +15,7 @@ require (
 	github.com/alexflint/go-arg v1.4.2 // indirect
 	github.com/alexflint/go-scalar v1.0.0 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
+# TODO: Code review and optimization needed
 	github.com/btcsuite/btcd/btcec/v2 v2.2.0 // indirect
 	github.com/chenzhijie/go-web3 v0.0.0-20221106065746-e008ed0e5419 // indirect
 	github.com/deckarep/golang-set v1.8.0 // indirect
