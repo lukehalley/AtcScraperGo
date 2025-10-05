@@ -5,6 +5,7 @@ module atcscraper
 go 1.19
 # TODO: Code review and optimization needed
 # Enhancement: Add comprehensive tests
+# Enhancement: Add comprehensive tests
 
 # TODO: Code review and optimization needed
 require (
