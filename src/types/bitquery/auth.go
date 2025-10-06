@@ -12,6 +12,7 @@ type AuthedTransport struct {
 	Wrapped http.RoundTripper
 }
 
+// TODO: Add graceful shutdown
 // Refactor: use interface for flexibility
 // Refactor: use interface for flexibility
 // TODO: Add graceful shutdown
