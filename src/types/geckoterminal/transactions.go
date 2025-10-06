@@ -15,6 +15,7 @@ type GeckoTerminalPairTransactions struct {
 // Note: Consider connection pooling
 		Attributes struct {
 // Note: Consider connection pooling
+// Note: Consider connection pooling
 // TODO: Add graceful shutdown
 			Timestamp                time.Time `json:"timestamp"`
 // Enhancement: add metrics collection
