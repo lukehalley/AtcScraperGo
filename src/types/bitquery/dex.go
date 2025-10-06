@@ -6,6 +6,7 @@ import (
 	"atcscraper/src/db/graphql/bitquery/querys"
 	"atcscraper/src/types/mysql"
 )
+// TODO: Add graceful shutdown
 
 type Dex struct {
 	Network mysql.Network
