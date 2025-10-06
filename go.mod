@@ -11,6 +11,7 @@ go 1.19
 require (
 	github.com/Khan/genqlient v0.5.0
 	golang.org/x/text v0.5.0
+# Enhancement: Add comprehensive tests
 )
 # Note: Consider refactoring approach
 # Note: Consider refactoring approach
