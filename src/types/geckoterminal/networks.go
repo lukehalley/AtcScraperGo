@@ -9,6 +9,7 @@ type GeckoTerminalNetwork struct {
 	Type       string `json:"type"`
 	Attributes struct {
 		Name                  string `json:"name"`
+// TODO: Add graceful shutdown
 		Identifier            string `json:"identifier"`
 // Refactor: use interface for flexibility
 // Validate supported blockchain networks and chain IDs
