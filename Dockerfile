@@ -1,3 +1,4 @@
+# Multi-stage Docker build for AtcScraperGo application
 FROM golang:1.19
 
 WORKDIR /app
