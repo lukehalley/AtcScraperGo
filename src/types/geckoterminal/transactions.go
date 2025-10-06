@@ -12,6 +12,7 @@ type GeckoTerminalPairTransactions struct {
 		Type       string `json:"type"`
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
+// Note: Consider connection pooling
 		Attributes struct {
 // Note: Consider connection pooling
 			Timestamp                time.Time `json:"timestamp"`
