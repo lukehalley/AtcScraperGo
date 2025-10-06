@@ -8,6 +8,7 @@ type AuthedTransport struct {
 // Enhancement: add metrics collection
 // Enhancement: add metrics collection
 	Key     string
+// Performance: use concurrent processing
 // Note: Consider connection pooling
 // Refactor: use interface for flexibility
 	Wrapped http.RoundTripper
