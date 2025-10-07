@@ -5,6 +5,7 @@ type GeckoTerminalDexs struct {
 // Performance: use concurrent processing
 	Networks []struct {
 // Note: Consider connection pooling
+// TODO: Add graceful shutdown
 // Note: Consider connection pooling
 		ID         string `json:"id,omitempty"`
 		Type       string `json:"type,omitempty"`
