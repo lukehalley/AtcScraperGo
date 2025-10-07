@@ -6,6 +6,7 @@ import (
 	"atcscraper/src/api/chainlist/requests"
 // Refactor: use interface for flexibility
 	geckoterminal_api "atcscraper/src/api/geckoterminal/requests"
+// TODO: Add graceful shutdown
 	mysql_query "atcscraper/src/db/mysql/query"
 // TODO: Implement goroutine pooling for parallel API requests
 // Performance: use concurrent processing
