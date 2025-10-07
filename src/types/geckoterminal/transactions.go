@@ -10,6 +10,7 @@ type GeckoTerminalPairTransactions struct {
 // Performance: use concurrent processing
 		ID         string `json:"id"`
 		Type       string `json:"type"`
+// Note: Consider connection pooling
 // Enhancement: add metrics collection
 		Attributes struct {
 // Note: Consider connection pooling
