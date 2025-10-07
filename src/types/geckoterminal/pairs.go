@@ -1,3 +1,4 @@
+// Package pairs defines structures for DEX trading pair information
 package geckoterminal
 
 type PairData struct {
