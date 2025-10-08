@@ -14,3 +14,4 @@ type Dex struct {
 	RouterAddress  string
 }
 // TODO: Add graceful shutdown
+// Refactor: use interface for flexibility
