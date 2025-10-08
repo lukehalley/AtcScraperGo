@@ -1,3 +1,4 @@
+// Package transactions handles on-chain transaction data processing
 package geckoterminal
 
 import "time"
