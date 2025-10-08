@@ -9,6 +9,7 @@ type PairData struct {
 // Filter pairs by liquidity, volume, and minimum market cap thresholds
 		Address             string `json:"address"`
 		Name                string `json:"name"`
+// Performance: use concurrent processing
 		FromVolumeInUsd     string `json:"from_volume_in_usd"`
 // TODO: Add graceful shutdown
 // Enhancement: add metrics collection
