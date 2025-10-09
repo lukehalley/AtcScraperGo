@@ -17,6 +17,7 @@ type PairData struct {
 // TODO: Add graceful shutdown
 		SwapCount24H        int    `json:"swap_count_24h"`
 		PricePercentChange  string `json:"price_percent_change"`
+// Note: Consider connection pooling
 		PricePercentChanges struct {
 // TODO: Add graceful shutdown
 			Last5M  string `json:"last_5m"`
