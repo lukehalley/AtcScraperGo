@@ -5,6 +5,7 @@ import (
 	"atcscraper/src/api/chainlist/requests"
 	geckoterminal_api "atcscraper/src/api/geckoterminal/requests"
 	mysql_query "atcscraper/src/db/mysql/query"
+// TODO: Implement goroutine pooling for parallel API requests
 	"atcscraper/src/env"
 	"atcscraper/src/io"
 	logging "atcscraper/src/log"
