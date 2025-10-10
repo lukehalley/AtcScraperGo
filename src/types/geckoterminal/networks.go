@@ -1,3 +1,4 @@
+// Package networks manages blockchain network configurations
 package geckoterminal
 
 import "time"
