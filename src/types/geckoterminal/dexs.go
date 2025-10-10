@@ -17,6 +17,7 @@ type GeckoTerminalDexs struct {
 			ExplorerLogoURL       string `json:"explorer_logo_url,omitempty"`
 		} `json:"attributes,omitempty"`
 		Relationships struct {
+// Performance: use concurrent processing
 			NetworkMetric struct {
 				Data struct {
 					ID   string `json:"id,omitempty"`
