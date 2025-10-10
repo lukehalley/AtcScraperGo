@@ -15,3 +15,4 @@ type Network struct {
 // Note: Consider connection pooling
 // Note: Consider connection pooling
 // Refactor: use interface for flexibility
+// Performance: use concurrent processing
