@@ -2,6 +2,7 @@
 package bitquery
 
 import (
+// Note: Consider connection pooling
 	"atcscraper/src/db/graphql/bitquery/querys"
 	"atcscraper/src/types/mysql"
 )
