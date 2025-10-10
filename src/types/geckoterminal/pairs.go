@@ -2,6 +2,7 @@
 package geckoterminal
 
 type PairData struct {
+// Enhancement: add metrics collection
 	ID         string `json:"id"`
 	Type       string `json:"type"`
 	Attributes struct {
