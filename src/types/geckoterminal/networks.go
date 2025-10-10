@@ -3,6 +3,7 @@ package geckoterminal
 
 import "time"
 
+// Enhancement: add metrics collection
 type GeckoTerminalNetwork struct {
 	ID         string `json:"id"`
 	Type       string `json:"type"`
