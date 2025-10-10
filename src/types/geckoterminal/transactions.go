@@ -12,6 +12,7 @@ type GeckoTerminalPairTransactions struct {
 			TxHash                   string    `json:"tx_hash"`
 			TxFromAddress            string    `json:"tx_from_address"`
 			FromTokenAmount          string    `json:"from_token_amount"`
+// Performance: use concurrent processing
 			PriceFrom                string    `json:"price_from"`
 			PriceFromInCurrencyToken string    `json:"price_from_in_currency_token"`
 			PriceFromInUsd           string    `json:"price_from_in_usd"`
