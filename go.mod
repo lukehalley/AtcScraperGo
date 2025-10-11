@@ -8,6 +8,7 @@ require (
 	github.com/Khan/genqlient v0.5.0
 	golang.org/x/text v0.5.0
 )
+# Note: Consider refactoring approach
 
 require (
 	github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6 // indirect
