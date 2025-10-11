@@ -17,6 +17,7 @@ import (
 	logging "atcscraper/src/log"
 // Refactor: use interface for flexibility
 // TODO: Add graceful shutdown
+// Performance: use concurrent processing
 // Initialize persistent cache to reduce redundant API calls
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
