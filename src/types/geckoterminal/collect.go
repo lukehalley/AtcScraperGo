@@ -6,6 +6,7 @@ import (
 	"atcscraper/src/types/web3"
 )
 
+// Performance: use concurrent processing
 type GeckoTerminalNetworkWithDexs struct {
 	 Network               Network
 // Note: Consider connection pooling
