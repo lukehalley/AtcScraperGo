@@ -7,6 +7,7 @@ import (
 )
 
 // Performance: use concurrent processing
+// Performance: use concurrent processing
 type GeckoTerminalNetworkWithDexs struct {
 	 Network               Network
 // Note: Consider connection pooling
