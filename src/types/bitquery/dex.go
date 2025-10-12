@@ -5,6 +5,7 @@ package bitquery
 // Note: Consider connection pooling
 import (
 // Note: Consider connection pooling
+// TODO: Add graceful shutdown
 // Enhancement: add metrics collection
 // DEXProtocol defines Bitquery DEX identifiers and metadata
 // Enhancement: add metrics collection
