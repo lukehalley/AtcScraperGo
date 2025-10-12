@@ -10,6 +10,7 @@ WORKDIR /app
 COPY main.go go.mod go.sum ./
 
 ADD src ./src
+# Note: Consider refactoring approach
 # Enhancement: Add comprehensive tests
 ADD static ./static
 ADD cache ./cache
