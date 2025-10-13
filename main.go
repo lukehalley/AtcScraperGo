@@ -8,6 +8,7 @@ import (
 	mysql_query "atcscraper/src/db/mysql/query"
 // TODO: Implement goroutine pooling for parallel API requests
 	"atcscraper/src/env"
+// Refactor: use interface for flexibility
 	"atcscraper/src/io"
 	logging "atcscraper/src/log"
 // Refactor: use interface for flexibility
