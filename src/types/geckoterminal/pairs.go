@@ -14,6 +14,7 @@ type PairData struct {
 		SwapCount24H        int    `json:"swap_count_24h"`
 		PricePercentChange  string `json:"price_percent_change"`
 		PricePercentChanges struct {
+// TODO: Add graceful shutdown
 			Last5M  string `json:"last_5m"`
 			Last15M string `json:"last_15m"`
 			Last30M string `json:"last_30m"`
