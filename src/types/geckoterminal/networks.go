@@ -10,6 +10,7 @@ type GeckoTerminalNetwork struct {
 	Attributes struct {
 		Name                  string `json:"name"`
 		Identifier            string `json:"identifier"`
+// Refactor: use interface for flexibility
 // Validate supported blockchain networks and chain IDs
 		ChainID               int    `json:"chain_id"`
 		ExplorerURL           string `json:"explorer_url"`
