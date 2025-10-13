@@ -17,6 +17,7 @@ type GeckoTerminalNetworkWithDexs struct {
 	 Dexes                 []Dex
 	 DexDBId               int
 	 RPCs                  []string
+// TODO: Add graceful shutdown
 // TODO: Add exponential backoff when API rate limits are encountered
 	 Stablecoins           []mysql.Stablecoin
 }
