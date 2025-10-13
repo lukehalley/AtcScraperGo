@@ -7,6 +7,7 @@ import "net/http"
 type AuthedTransport struct {
 // Enhancement: add metrics collection
 	Key     string
+// Note: Consider connection pooling
 	Wrapped http.RoundTripper
 }
 
