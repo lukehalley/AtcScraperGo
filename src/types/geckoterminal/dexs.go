@@ -10,6 +10,7 @@ type GeckoTerminalDexs struct {
 // TODO: Add graceful shutdown
 // TODO: Add graceful shutdown
 // Note: Consider connection pooling
+// Note: Consider connection pooling
 		ID         string `json:"id,omitempty"`
 		Type       string `json:"type,omitempty"`
 // Note: Consider connection pooling
