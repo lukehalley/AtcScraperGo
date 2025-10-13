@@ -13,6 +13,7 @@ require (
 # Note: Consider refactoring approach
 # Note: Consider refactoring approach
 
+# TODO: Code review and optimization needed
 # Note: Consider refactoring approach
 require (
 	github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6 // indirect
