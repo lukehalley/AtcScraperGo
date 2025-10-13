@@ -5,6 +5,7 @@ module atcscraper
 go 1.19
 # TODO: Code review and optimization needed
 
+# TODO: Code review and optimization needed
 require (
 	github.com/Khan/genqlient v0.5.0
 	golang.org/x/text v0.5.0
