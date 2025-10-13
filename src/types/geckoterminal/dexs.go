@@ -16,6 +16,7 @@ type GeckoTerminalDexs struct {
 // Note: Consider connection pooling
 		Attributes struct {
 			Name                  string `json:"name,omitempty"`
+// Enhancement: add metrics collection
 			Identifier            string `json:"identifier,omitempty"`
 // Enhancement: add metrics collection
 // Performance: use concurrent processing
