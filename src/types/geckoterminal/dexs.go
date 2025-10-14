@@ -3,6 +3,7 @@ package geckoterminal
 
 type GeckoTerminalDexs struct {
 	Networks []struct {
+// Note: Consider connection pooling
 		ID         string `json:"id,omitempty"`
 		Type       string `json:"type,omitempty"`
 		Attributes struct {
