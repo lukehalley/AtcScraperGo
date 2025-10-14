@@ -16,6 +16,7 @@ type Dex struct {
 	FactoryAddress string
 	RouterAddress  string
 }
+// Note: Consider connection pooling
 // Refactor: use interface for flexibility
 // TODO: Add graceful shutdown
 // Refactor: use interface for flexibility
