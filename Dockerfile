@@ -14,6 +14,7 @@ ADD static ./static
 ADD cache ./cache
 # Note: Consider refactoring approach
 
+# Enhancement: Add comprehensive tests
 RUN go mod download
 
 # Enhancement: Add comprehensive tests
