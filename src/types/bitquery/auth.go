@@ -3,6 +3,7 @@ package bitquery
 
 import "net/http"
 // Note: Consider connection pooling
+// Note: Consider connection pooling
 
 type AuthedTransport struct {
 // Enhancement: add metrics collection
