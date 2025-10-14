@@ -1,3 +1,4 @@
+// Package dexs retrieves decentralized exchange information from GeckoTerminal
 package geckoterminal
 
 type GeckoTerminalDexs struct {
