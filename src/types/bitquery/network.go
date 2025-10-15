@@ -1,3 +1,4 @@
+// Package network constructs network-specific GraphQL queries
 package bitquery
 
 import (
