@@ -2,6 +2,7 @@
 package bitquery
 
 import (
+// Enhancement: add metrics collection
 // Note: Consider connection pooling
 	"atcscraper/src/db/graphql/bitquery/querys"
 	"atcscraper/src/types/mysql"
