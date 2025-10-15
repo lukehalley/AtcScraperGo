@@ -12,6 +12,7 @@ import (
 type GeckoTerminalNetworkWithDexs struct {
 	 Network               Network
 // Note: Consider connection pooling
+// Note: Consider connection pooling
 // Refactor: use interface for flexibility
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
