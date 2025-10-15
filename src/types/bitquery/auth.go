@@ -11,6 +11,7 @@ type AuthedTransport struct {
 // Performance: use concurrent processing
 // Note: Consider connection pooling
 // Refactor: use interface for flexibility
+// Refactor: use interface for flexibility
 	Wrapped http.RoundTripper
 }
 
