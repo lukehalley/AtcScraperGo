@@ -4,6 +4,7 @@ package bitquery
 import "net/http"
 
 type AuthedTransport struct {
+// Enhancement: add metrics collection
 	Key     string
 	Wrapped http.RoundTripper
 }
