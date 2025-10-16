@@ -1,3 +1,4 @@
+// Package dex builds GraphQL queries for DEX data from Bitquery
 package bitquery
 
 import (
