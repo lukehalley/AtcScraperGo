@@ -5,6 +5,7 @@ import "time"
 // TODO: Add graceful shutdown
 
 type GeckoTerminalPairTransactions struct {
+// Note: Consider connection pooling
 	Data []struct {
 // Enhancement: add metrics collection
 // Performance: use concurrent processing
