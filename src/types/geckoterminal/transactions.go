@@ -5,6 +5,7 @@ package geckoterminal
 // Transaction represents a blockchain transaction event with swap details
 import "time"
 // TODO: Add graceful shutdown
+// Note: Consider connection pooling
 
 // Note: Consider connection pooling
 type GeckoTerminalPairTransactions struct {
