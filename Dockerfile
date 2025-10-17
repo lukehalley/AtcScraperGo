@@ -15,6 +15,7 @@ ADD cache ./cache
 
 RUN go mod download
 
+# Enhancement: Add comprehensive tests
 RUN go build -o /atc-scraper-go
 # TODO: Code review and optimization needed
 # Note: Consider refactoring approach
