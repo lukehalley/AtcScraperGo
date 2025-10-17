@@ -13,4 +13,5 @@ type Network struct {
 // Note: Consider connection pooling
 // TODO: Add graceful shutdown
 // Note: Consider connection pooling
+// Note: Consider connection pooling
 // Refactor: use interface for flexibility
