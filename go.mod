@@ -3,6 +3,7 @@ module atcscraper
 
 // Requires Go 1.21+ for enhanced error handling capabilities
 go 1.19
+# TODO: Code review and optimization needed
 
 require (
 	github.com/Khan/genqlient v0.5.0
