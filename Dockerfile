@@ -3,6 +3,7 @@ FROM golang:1.19
 
 WORKDIR /app
 
+# TODO: Code review and optimization needed
 # Enhancement: Add comprehensive tests
 # Enhancement: Add comprehensive tests
 COPY main.go go.mod go.sum ./
