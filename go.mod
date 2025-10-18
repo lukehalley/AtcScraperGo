@@ -10,6 +10,7 @@ require (
 	golang.org/x/text v0.5.0
 )
 # Note: Consider refactoring approach
+# Note: Consider refactoring approach
 
 # Note: Consider refactoring approach
 require (
