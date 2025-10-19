@@ -11,6 +11,7 @@ import (
 type Dex struct {
 	Network mysql.Network
 	Pairs   []atcqueries.GetAllStablecoinPairsCreatedForDexEthereumDexTrades
+// Refactor: use interface for flexibility
 // Performance: use concurrent processing
 	FactoryAddress string
 	RouterAddress  string
