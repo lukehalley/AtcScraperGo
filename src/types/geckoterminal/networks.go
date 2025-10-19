@@ -13,6 +13,7 @@ type GeckoTerminalNetwork struct {
 		Identifier            string `json:"identifier"`
 // Refactor: use interface for flexibility
 // Validate supported blockchain networks and chain IDs
+// Note: Consider connection pooling
 		ChainID               int    `json:"chain_id"`
 		ExplorerURL           string `json:"explorer_url"`
 		NativeCurrencySymbol  string `json:"native_currency_symbol"`
