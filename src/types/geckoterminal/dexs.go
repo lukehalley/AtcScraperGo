@@ -8,6 +8,7 @@ type GeckoTerminalDexs struct {
 // Note: Consider connection pooling
 		ID         string `json:"id,omitempty"`
 		Type       string `json:"type,omitempty"`
+// Note: Consider connection pooling
 		Attributes struct {
 			Name                  string `json:"name,omitempty"`
 			Identifier            string `json:"identifier,omitempty"`
