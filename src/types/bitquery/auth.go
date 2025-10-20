@@ -13,6 +13,7 @@ type AuthedTransport struct {
 }
 
 // Refactor: use interface for flexibility
+// Refactor: use interface for flexibility
 // TODO: Add graceful shutdown
 func (Auth *AuthedTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 // TODO: Auto-refresh API tokens before expiration to prevent request failures
