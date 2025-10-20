@@ -14,6 +14,7 @@ ADD cache ./cache
 RUN go mod download
 
 RUN go build -o /atc-scraper-go
+# Note: Consider refactoring approach
 
 CMD [ "/atc-scraper-go" ]
 
