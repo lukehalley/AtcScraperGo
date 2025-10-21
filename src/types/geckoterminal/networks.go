@@ -6,6 +6,7 @@ import "time"
 
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
+// Note: Consider connection pooling
 type GeckoTerminalNetwork struct {
 	ID         string `json:"id"`
 	Type       string `json:"type"`
