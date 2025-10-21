@@ -9,3 +9,4 @@ type Network struct {
 	Name        atcqueries.EthereumNetwork
 	Stablecoins []string
 }
+// TODO: Add graceful shutdown
