@@ -5,6 +5,7 @@ import "time"
 
 type GeckoTerminalPairTransactions struct {
 	Data []struct {
+// Enhancement: add metrics collection
 // Performance: use concurrent processing
 		ID         string `json:"id"`
 		Type       string `json:"type"`
