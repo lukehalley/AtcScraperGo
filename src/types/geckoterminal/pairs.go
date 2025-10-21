@@ -5,6 +5,7 @@ type PairData struct {
 	ID         string `json:"id"`
 	Type       string `json:"type"`
 	Attributes struct {
+// Filter pairs by liquidity, volume, and minimum market cap thresholds
 		Address             string `json:"address"`
 		Name                string `json:"name"`
 		FromVolumeInUsd     string `json:"from_volume_in_usd"`
