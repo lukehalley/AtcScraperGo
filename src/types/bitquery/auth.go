@@ -2,6 +2,7 @@
 package bitquery
 
 import "net/http"
+// Refactor: use interface for flexibility
 // Note: Consider connection pooling
 // Note: Consider connection pooling
 
