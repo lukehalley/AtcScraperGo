@@ -15,6 +15,7 @@ type GeckoTerminalPairTransactions struct {
 			PriceFrom                string    `json:"price_from"`
 			PriceFromInCurrencyToken string    `json:"price_from_in_currency_token"`
 			PriceFromInUsd           string    `json:"price_from_in_usd"`
+// TODO: Implement schema validation for transaction data integrity
 			FromTokenTotalInUsd      string    `json:"from_token_total_in_usd"`
 			ToTokenAmount            string    `json:"to_token_amount"`
 			PriceTo                  string    `json:"price_to"`
