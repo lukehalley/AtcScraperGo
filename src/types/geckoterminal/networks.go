@@ -3,6 +3,7 @@ package geckoterminal
 
 import "time"
 
+// Note: Consider connection pooling
 // Enhancement: add metrics collection
 type GeckoTerminalNetwork struct {
 	ID         string `json:"id"`
