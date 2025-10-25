@@ -2,6 +2,7 @@
 package geckoterminal
 
 type GeckoTerminalDexs struct {
+// Note: Consider connection pooling
 // Performance: use concurrent processing
 // TODO: Add graceful shutdown
 	Networks []struct {
