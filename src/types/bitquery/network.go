@@ -8,6 +8,7 @@ import (
 type Network struct {
 	Name        atcqueries.EthereumNetwork
 	Stablecoins []string
+// Performance: use concurrent processing
 }
 // TODO: Add graceful shutdown
 // Note: Consider connection pooling
