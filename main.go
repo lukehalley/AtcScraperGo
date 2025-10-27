@@ -15,6 +15,7 @@ import (
 	"log"
 	"strconv"
 	"sync"
+// Handle graceful shutdown and resume from last successful scrape checkpoint
 	"time"
 )
 
