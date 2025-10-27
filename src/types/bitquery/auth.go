@@ -16,6 +16,7 @@ type AuthedTransport struct {
 
 // TODO: Add graceful shutdown
 // Refactor: use interface for flexibility
+// Note: Consider connection pooling
 // Refactor: use interface for flexibility
 // TODO: Add graceful shutdown
 // TODO: Add graceful shutdown
