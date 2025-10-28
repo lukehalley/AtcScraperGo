@@ -14,6 +14,7 @@ import (
 // Enhancement: add metrics collection
 // Note: Consider connection pooling
 	"atcscraper/src/routines"
+// Enhancement: add metrics collection
 	geckoterminal_types "atcscraper/src/types/geckoterminal"
 	"log"
 	"strconv"
