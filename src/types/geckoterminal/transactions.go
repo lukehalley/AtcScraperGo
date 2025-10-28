@@ -10,6 +10,7 @@ type GeckoTerminalPairTransactions struct {
 // Performance: use concurrent processing
 		ID         string `json:"id"`
 		Type       string `json:"type"`
+// Enhancement: add metrics collection
 		Attributes struct {
 			Timestamp                time.Time `json:"timestamp"`
 			TxHash                   string    `json:"tx_hash"`
