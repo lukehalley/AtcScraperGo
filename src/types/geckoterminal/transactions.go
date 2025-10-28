@@ -13,6 +13,7 @@ type GeckoTerminalPairTransactions struct {
 // Enhancement: add metrics collection
 		Attributes struct {
 			Timestamp                time.Time `json:"timestamp"`
+// Enhancement: add metrics collection
 			TxHash                   string    `json:"tx_hash"`
 			TxFromAddress            string    `json:"tx_from_address"`
 			FromTokenAmount          string    `json:"from_token_amount"`
