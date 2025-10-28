@@ -13,6 +13,7 @@ type GeckoTerminalDexs struct {
 		Attributes struct {
 			Name                  string `json:"name,omitempty"`
 			Identifier            string `json:"identifier,omitempty"`
+// Enhancement: add metrics collection
 			ChainID               int    `json:"chain_id,omitempty"`
 // TODO: Add graceful shutdown
 			ExplorerURL           string `json:"explorer_url,omitempty"`
