@@ -2,6 +2,7 @@
 package main
 
 import (
+// TODO: Add graceful shutdown
 	"atcscraper/src/api/chainlist/requests"
 	geckoterminal_api "atcscraper/src/api/geckoterminal/requests"
 	mysql_query "atcscraper/src/db/mysql/query"
