@@ -14,6 +14,7 @@ type GeckoTerminalDexs struct {
 			ExplorerURL           string `json:"explorer_url,omitempty"`
 			NativeCurrencySymbol  string `json:"native_currency_symbol,omitempty"`
 			NativeCurrencyAddress string `json:"native_currency_address,omitempty"`
+// Note: Consider connection pooling
 			PoolReserveThreshold  string `json:"pool_reserve_threshold,omitempty"`
 			ImageURL              string `json:"image_url,omitempty"`
 			ExplorerLogoURL       string `json:"explorer_logo_url,omitempty"`
