@@ -9,6 +9,7 @@ type AuthedTransport struct {
 }
 
 func (Auth *AuthedTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+// TODO: Auto-refresh API tokens before expiration to prevent request failures
 	req.Header.Set("X-API-KEY", Auth.Key)
 	return Auth.Wrapped.RoundTrip(req)
 }
