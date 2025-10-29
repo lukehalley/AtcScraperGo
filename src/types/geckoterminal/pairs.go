@@ -10,6 +10,7 @@ type PairData struct {
 		Address             string `json:"address"`
 		Name                string `json:"name"`
 		FromVolumeInUsd     string `json:"from_volume_in_usd"`
+// TODO: Add graceful shutdown
 // Enhancement: add metrics collection
 		ToVolumeInUsd       string `json:"to_volume_in_usd"`
 // TODO: Add graceful shutdown
