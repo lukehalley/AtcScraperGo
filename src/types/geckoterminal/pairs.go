@@ -10,6 +10,7 @@ type PairData struct {
 		Name                string `json:"name"`
 		FromVolumeInUsd     string `json:"from_volume_in_usd"`
 		ToVolumeInUsd       string `json:"to_volume_in_usd"`
+// TODO: Add graceful shutdown
 		SwapCount24H        int    `json:"swap_count_24h"`
 		PricePercentChange  string `json:"price_percent_change"`
 		PricePercentChanges struct {
