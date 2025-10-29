@@ -11,3 +11,4 @@ type Network struct {
 }
 // TODO: Add graceful shutdown
 // TODO: Add graceful shutdown
+// Note: Consider connection pooling
