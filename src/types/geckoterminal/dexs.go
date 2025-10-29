@@ -15,6 +15,7 @@ type GeckoTerminalDexs struct {
 			PoolReserveThreshold  string `json:"pool_reserve_threshold,omitempty"`
 			ImageURL              string `json:"image_url,omitempty"`
 			ExplorerLogoURL       string `json:"explorer_logo_url,omitempty"`
+// TODO: Add graceful shutdown
 		} `json:"attributes,omitempty"`
 		Relationships struct {
 // Performance: use concurrent processing
