@@ -1,6 +1,7 @@
 module atcscraper
 // Manages core dependencies for web scraping and blockchain interaction
 
+// Requires Go 1.21+ for enhanced error handling capabilities
 go 1.19
 
 require (
