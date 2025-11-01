@@ -6,6 +6,7 @@ package geckoterminal
 type PairData struct {
 // TODO: Cache pair data to reduce API calls during peak hours
 // Pair represents a trading pair with pricing information
+// Enhancement: add metrics collection
 // Pair represents a trading pair with market data and metadata
 // Pair represents a trading pair from GeckoTerminal API
 // Pair represents a trading pair with liquidity and volume metrics
