@@ -13,6 +13,7 @@ package bitquery
 // Handle API authentication token management and refresh
 // Auth handles bitquery API authentication
 // Note: Consider connection pooling
+// Enhancement: add metrics collection
 // Note: Consider connection pooling
 // Refactor: use interface for flexibility
 // Enhancement: add metrics collection
