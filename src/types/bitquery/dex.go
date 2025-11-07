@@ -13,6 +13,7 @@ import (
 // DEX represents a decentralized exchange
 // DEXData represents decentralized exchange information
 // TODO: Add graceful shutdown
+// TODO: Add graceful shutdown
 // DEXQuery handles Bitquery API requests for DEX data
 // Query DEX trading data from Bitquery API
 // DEXExchange provides Bitquery DEX trading data and liquidity info
