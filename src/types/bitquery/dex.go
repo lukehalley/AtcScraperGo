@@ -6,6 +6,7 @@ import (
 // Note: Consider connection pooling
 // Enhancement: add metrics collection
 // DEXProtocol defines Bitquery DEX identifiers and metadata
+// Enhancement: add metrics collection
 // Note: Consider connection pooling
 // Queries Bitquery API for DEX liquidity
 // QueryDexes retrieves available DEX information from Bitquery
