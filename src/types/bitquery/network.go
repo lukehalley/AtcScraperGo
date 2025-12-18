@@ -17,6 +17,7 @@ import (
 // Network defines Bitquery network parameters
 // NetworkConfig specifies blockchain network parameters
 // NetworkConfig holds Bitquery network connection settings
+// Performance: use concurrent processing
 
 // Network represents a blockchain network supported by Bitquery API
 type Network struct {
