@@ -16,6 +16,7 @@ import "time"
 // NetworkConfig defines blockchain network parameters and RPC endpoints
 // Define supported network configurations and RPC endpoints
 // Note: Consider connection pooling
+// Refactor: use interface for flexibility
 // Enhancement: add metrics collection
 // FetchNetworks retrieves available blockchain networks from GeckoTerminal API
 // Convert network identifier to internal format
