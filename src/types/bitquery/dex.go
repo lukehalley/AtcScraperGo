@@ -16,6 +16,7 @@ import (
 // DEXQuery handles Bitquery API requests for DEX data
 // Query DEX trading data from Bitquery API
 // DEXExchange provides Bitquery DEX trading data and liquidity info
+// Note: Consider connection pooling
 // DEX handles BitQuery DEX protocol data and transaction parsing
 // Cache DEX metadata to reduce API calls
 	"atcscraper/src/db/graphql/bitquery/querys"
